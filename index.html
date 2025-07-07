@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kelly Williams Realty</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+
+    <!-- NAVBAR START
+     ------------------------------------- -->
+    <header data-bs-theme="dark">
+        <nav class="navbar navbar-expand-xl navbar-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="index.html" id="siteheader">Kelly Williams Realty</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                  <a class="nav-link"  href="Agents.html">AGENTS</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Buying.html">BUYING</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Mortgage.html">RENTING</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Selling.html">SELLING</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="Faq.html">FAQs</a>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+          <!-- NAVBAR END
+     ------------------------------------- -->
+     
+
+
+      <main>
+      <body>
+        <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+          <div class="carousel-indicators" id="indicators">
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="bd-placeholder-img" src="slide 1.jpeg" width="100%" height="100%"  aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%">
+              <div class="container">
+                <div class="carousel-caption text-start">
+                  <h1>Browse Our Listings</h1>
+                  <p class="opacity-75">Find your dream home today!</p>
+                  <p><a class="btn btn-lg  btn-outline-success" href="Buying.html">Browse Now</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img class="bd-placeholder-img" src="slide 2.jpeg" width="100%" height="100%"  aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%">
+              <div class="container">
+                <div class="carousel-caption">
+                  <h1>Our Financing Options</h1>
+                  <p class="opacity-75">Offering competitive interest rates and loan terms that meet market standards.</p>
+                  <p><a class="btn btn-lg btn-outline-success" href="Mortgage.html">Learn more</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img class="bd-placeholder-img" src="agents.jpg" width="100%" height="100%"  aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%">
+              <div class="container">
+                <div class="carousel-caption text-start">
+                  <h1>Get In Touch With Us Today!</h1>
+                  <p class="opacity-75">Local Real Estate Agents</p>
+                  <p><a class="btn btn-lg btn-outline-success" href="Agents.html">Contact Agent</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+         <!-- Home Finder -->
+          <div id="searchbar-wrapper">
+          <div id="homefindercontainer" style="position: relative; display: flex; justify-content: center; top: 14em;">
+        <button style="width: 7em; background-color: rgba(47, 100, 47, 0.459);border: none; color: white;">For Sale</button>
+        <input class="homefinder" type="search" placeholder="Place, Neighborhood or Agent" style="width: 30em; text-align: left; border: none; height: 2.5em;">
+        <button style="width: 3em; background-color:rgba(47, 100, 47, 0.459);border: none;"></button>
+          </div>
+            </div>
+         <!-- Home Finder end-->
+
+         
+
+
+          
+          <!-- FEATURED HOMES -->
+          <style>
+            .card-img-top {
+              height: 150px; /* Smaller image height */
+              object-fit: cover;
+            }
+            .card {
+              width: 18rem; /* Smaller card width */
+            }
+            .card-body {
+              padding: 8px; /* Less padding for a compact look */
+            }
+            .list-group-item {
+              padding: 2px 10px; /* Tighter padding for list items */
+            }
+            .btn {
+              font-size: 0.8rem; /* Smaller button text */
+            }
+          </style>
+      
+        <div class="container mt-5" id="slider1">
+        <h1 id="featured-homes">Featured Homes</h1>
+          <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators" id="listingicon">
+              <button type="button" data-bs-target="#propertyCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#propertyCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            </div>
+            <div class="carousel-inner">
+              <!-- First slide -->
+              <div class="carousel-item active">
+                <div class="row">
+                  <!-- Card 1 -->
+                  <div class="col-md-3">
+                    <div class="card">
+                      <a href="Untitled-1.html"><img src="featurette 2.jpeg" class="card-img-top" alt="House Image"></a>
+                      <div class="card-body">
+                        <h6 class="card-title">$750,000</h6>
+                        <p class="card-text">1234 Elm Street, Loomis, CA</p>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">3 Beds • 2 Baths</li>
+                          <li class="list-group-item">2,500 Sq Ft</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Card 2 -->
+                  <div class="col-md-3">
+                    <div class="card">
+                      <img src="featurette 2.jpeg" class="card-img-top" alt="House Image">
+                      <div class="card-body">
+                        <h6 class="card-title">$850,000</h6>
+                        <p class="card-text">456 Oak Street, Loomis, CA</p>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">4 Beds • 3 Baths</li>
+                          <li class="list-group-item">3,000 Sq Ft</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Card 3 -->
+
+                  <!-- Card 4 -->
+                  <div class="col-md-3">
+                    <div class="card">
+                      <img src="featurette 2.jpeg" class="card-img-top" alt="House Image">
+                      <div class="card-body">
+                        <h6 class="card-title">$900,000</h6>
+                        <p class="card-text">101 Cear Street, Loomis, CA</p>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">5 Beds • 4 Baths</li>
+                          <li class="list-group-item">4,200 Sq Ft</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        
+              <!-- Second slide -->
+              <div class="carousel-item">
+                <div class="row">
+                  <!-- Card 5 -->
+                  <div class="col-md-3">
+                    <div class="card">
+                      <img src="featurette 2.jpeg" class="card-img-top" alt="House Image">
+                      <div class="card-body">
+                        <h6 class="card-title">$780,000</h6>
+                        <p class="card-text">202 Birch Street, Loomis, CA</p>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">3 Beds • 3 Baths</li>
+                          <li class="list-group-item">2,900 Sq Ft</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Card 6 -->
+                  <div class="col-md-3">
+                    <div class="card">
+                      <img src="featurette 2.jpeg" class="card-img-top" alt="House Image">
+                      <div class="card-body">
+                        <h6 class="card-title">$825,000</h6>
+                        <p class="card-text">303 Mile Street, Loomis, CA</p>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">4 Beds • 2 Baths</li>
+                          <li class="list-group-item">2,600 Sq Ft</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Card 7 -->
+                  <div class="col-md-3">
+                    <div class="card">
+                      <img src="featurette 2.jpeg" class="card-img-top" alt="House Image">
+                      <div class="card-body">
+                        <h6 class="card-title">$695,000</h6>
+                        <p class="card-text">404 Fir Street, Loomis, CA</p>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">2 Beds • 1 Bath</li>
+                          <li class="list-group-item">1,500 Sq Ft</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Card 8 -->
+                  <div class="col-md-3">
+                    <div class="card">
+                      <img src="featurette 2.jpeg" class="card-img-top" alt="House Image">
+                      <div class="card-body">
+                        <h6 class="card-title">$930,000</h6>
+                        <p class="card-text">505 Sace Street, Loomis, CA</p>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">4 Beds • 3 Baths</li>
+                          <li class="list-group-item">3,000 Sq Ft</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <style>
+              #slide1icon{
+                color: black;
+              }
+            </style>
+            <div>
+            <button class="carousel-control-prevs" id="slide1button" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" id="slide1icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-nexts"  id="slide2button" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" id="slide2icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+            </div>
+          </div>
+        </div>
+
+        <!--Start Of Second Carousel-->
+        <div class="container mt-1" id="slider1" class="otherPropertyCarousel">
+            <div id="otherPropertyCarousel" class="carousel slide" data-bs-ride="carousel">          
+              <h1>Recent Listings</h1>
+              <div class="carousel-indicators" id="listingicon">
+                <button type="button" data-bs-target="#otherPropertyCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#otherPropertyCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              </div>
+              <div class="carousel-inner">
+                <!-- First slide -->
+                <div class="carousel-item active">
+                  <div class="row">
+                    <!-- Card 1 -->
+                    <div class="col-md-3">
+                      <div class="card">
+                        <a href="Untitled-1.html"><img src="featurette 2.jpeg" class="card-img-top" alt="House Image"></a>
+                        <div class="card-body">
+                          <h6 class="card-title">$750,000</h6>
+                          <p class="card-text">1234 Elm Street, Loomis, CA</p>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item">3 Beds • 2 Baths</li>
+                            <li class="list-group-item">2,500 Sq Ft</li>
+                          </ul>
+                          <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="col-md-3">
+                      <div class="card">
+                        <img src="featurette 2.jpeg" class="card-img-top" alt="House Image">
+                        <div class="card-body">
+                          <h6 class="card-title">$850,000</h6>
+                          <p class="card-text">456 Oak Street, Loomis, CA</p>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item">4 Beds • 3 Baths</li>
+                            <li class="list-group-item">3,000 Sq Ft</li>
+                          </ul>
+                          <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="col-md-3">
+                      <div class="card">
+                        <img src="featurette 2.jpeg" class="card-img-top" alt="House Image">
+                        <div class="card-body">
+                          <h6 class="card-title">$675,000</h6>
+                          <p class="card-text">789 Pine Street, Loomis, CA</p>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item">2 Beds • 2 Baths</li>
+                            <li class="list-group-item">1,800 Sq Ft</li>
+                          </ul>
+                          <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="col-md-3">
+                      <div class="card">
+                        <img src="featurette 2.jpeg" class="card-img-top" alt="House Image">
+                        <div class="card-body">
+                          <h6 class="card-title">$900,000</h6>
+                          <p class="card-text">101 Cear Street, Loomis, CA</p>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item">5 Beds • 4 Baths</li>
+                            <li class="list-group-item">4,200 Sq Ft</li>
+                          </ul>
+                          <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          
+                <!-- Second slide -->
+                <div class="carousel-item">
+                  <div class="row">
+                    <!-- Card 5 -->
+                    <div class="col-md-3">
+                      <div class="card">
+                        <img src="featurette 2.jpeg" class="card-img-top" alt="House Image">
+                        <div class="card-body">
+                          <h6 class="card-title">$780,000</h6>
+                          <p class="card-text">202 Birch Street, Loomis, CA</p>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item">3 Beds • 3 Baths</li>
+                            <li class="list-group-item">2,900 Sq Ft</li>
+                          </ul>
+                          <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="col-md-3">
+                      <div class="card">
+                        <img src="featurette 2.jpeg" class="card-img-top" alt="House Image">
+                        <div class="card-body">
+                          <h6 class="card-title">$825,000</h6>
+                          <p class="card-text">303 Mile Street, Loomis, CA</p>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item">4 Beds • 2 Baths</li>
+                            <li class="list-group-item">2,600 Sq Ft</li>
+                          </ul>
+                          <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Card 7 -->
+                    <div class="col-md-3">
+                      <div class="card">
+                        <img src="featurette 2.jpeg" class="card-img-top" alt="House Image">
+                        <div class="card-body">
+                          <h6 class="card-title">$695,000</h6>
+                          <p class="card-text">404 Fir Street, Loomis, CA</p>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item">2 Beds • 1 Bath</li>
+                            <li class="list-group-item">1,500 Sq Ft</li>
+                          </ul>
+                          <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Card 8 -->
+                    <div class="col-md-3">
+                      <div class="card">
+                        <img src="featurette 2.jpeg" class="card-img-top" alt="House Image">
+                        <div class="card-body">
+                          <h6 class="card-title">$930,000</h6>
+                          <p class="card-text">505 Sace Street, Loomis, CA</p>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item">4 Beds • 3 Baths</li>
+                            <li class="list-group-item">3,000 Sq Ft</li>
+                          </ul>
+                          <a href="#" class="btn btn-primary btn-sm mt-2">Schedule Tour</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        <!-- Carousel Controls -->
+
+        <button class="carousel-control-prevs" id="slide3button" type="button" data-bs-target="#otherPropertyCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" id="slide3icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-nexts"  id="slide4button" type="button" data-bs-target="#otherPropertyCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" id="slide4icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+
+
+
+
+
+
+
+
+
+      
+       <!-- Marketing messaging and featurettes
+        ================================================== -->
+        <!-- Wrap the rest of the page in another container to center all the content. -->
+
+
+
+        <div class="container marketing" id="agent-featurette">
+          <div class="row" id="agentdirector">
+            <div class="col-lg-4">
+                <img src="business-headshot-photographer-professional-headshots-3.jpg" width="140" height="140" style="border-radius: 50%;">
+              <h2 class="fw-normal">Heather Jones</h2>
+              <p>Mortgage Loans</p>
+              <p><a class="btn btn-outline-success" href="#">View details &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <img src="e37e0e25686c2139b281a57a5b4906f2.jpg" width="140" height="140" style="border-radius: 50%;">              
+                <h2 class="fw-normal">Sam Williams</h2>
+              <p>Local Real Estate</p>
+              <p><a class="btn btn-outline-success" href="#">View details &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <img src="business-headshot-photographer-professional-headshots-8.jpg" width="140" height="140" style="border-radius: 50%;">              
+                <h2 class="fw-normal">Rose Smith</h2>
+              <p>Social Media/Marketing</p>
+              <p><a class="btn btn-outline-success" href="#">View details &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+          </div><!-- /.row -->
+          <!-- START THE FEATURETTES -->
+      
+          <hr class="featurette-divider">
+      
+          <div class="row featurette" id="buying-featurette">
+            <div class="col-md-7">
+              <h2 class="featurette-heading fw-normal lh-1">Find Your Dream Home With Us! <span class="text-body-secondary">You'll Love Our Listings</span></h2>
+              <p class="lead">Local listings in Mclennan County and surrounding ares.</p>
+            </div>
+            <div class="col-md-5">
+              <a class="buyinglink" href="Buying.html"><img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="featurette 1.jpeg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false" ></a><rect width="100%" height="100%" >
+            </div>
+          </div>
+      
+          <hr class="featurette-divider">
+      
+          <div class="row featurette" id="loan-featurette">
+            <div class="col-md-7 order-md-2">
+              <h2 class="featurette-heading fw-normal lh-1">Have Questions About Intrest Rates? <span class="text-body-secondary">Mortgage Loans & Financing</span></h2>
+              <p class="lead">Clear communication about rates, fees, terms and conditions.Offering competitive interest rates and loan terms that meet market standards.</p>
+            </div>
+            <div class="col-md-5 order-md-1">
+              <a class="loanlink" href="Mortgage.html"><img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="AdobeStock_816174783.jpeg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"></a><rect width="100%" height="100%" >
+            </div>
+          </div>
+      
+          <hr class="featurette-divider">
+      
+          <div class="row featurette" id="selling-featurette">
+            <div class="col-md-7">
+              <h2 class="featurette-heading fw-normal lh-1">Looking To Sell Your Home? <span class="text-body-secondary">Contact one of our trusted agents to guide you through!</span></h2>
+              <p class="lead">Any questions about current intrest rates and fees, feel free to contact one of our many agents to answer all concerns.</p>
+            </div>
+            <div class="col-md-5">
+              <a class="sellinglink" href="Selling.html"><img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="featurette 2.jpeg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"></a><rect width="100%" height="100%" >
+            </div>
+          </div>
+      
+          <hr class="featurette-divider">
+      
+          <!-- /END THE FEATURETTES -->
+      
+        </div>
+      
+        <!-- Contact Form -->
+
+
+        <!-- Contact Form End -->
+
+
+
+        <!-- FOOTER -->
+        <div class="container">
+          <footer class="py-5">
+            <div class="row">
+              <div class="col-6 col-md-2 mb-3">
+                <h5>Links</h5>
+                <ul class="nav flex-column">
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Financing</a></li>
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Contact Us</a></li>
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Loans</a></li>
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                </ul>
+              </div>
+        
+              <div class="col-6 col-md-2 mb-3">
+                <h5>Links</h5>
+                <ul class="nav flex-column">
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Apartment</a></li>
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Condo</a></li>
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Rental</a></li>
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Commercial</a></li>
+                </ul>
+              </div>
+        
+            
+        
+              <div class="col-md-5 offset-md-1 mb-3">
+                <form>
+                  <h5>Subscribe to our newsletter</h5>
+                  <p>Monthly digest of what's new and exciting from us.</p>
+                  <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                    <label for="newsletter1" class="visually-hidden">Email address</label>
+                    <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                    <button class="btn btn-primary" type="button">Subscribe</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+        
+            <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+              <p>&copy; 2024 Company, Inc. All rights reserved.</p>
+              <ul class="list-unstyled d-flex">
+                <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+                <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+                <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+              </ul>
+            </div>
+          </footer>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="fw.js"></script>
+    </main>
+  
+  </body>
+</html>

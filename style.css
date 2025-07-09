@@ -96,3 +96,6 @@ footer a:hover {
 .btn:hover {
 }
 
+.addressbutton{
+  font-size: 0.75rem !important; /* Smaller font size for the button */
+}

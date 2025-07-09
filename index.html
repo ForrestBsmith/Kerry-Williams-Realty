@@ -63,26 +63,40 @@
 
         <div class="container my-5">
   <!-- SIMPLE SEARCH -->
-  <form class="row g-3 p-4 bg-light rounded shadow-sm">
-    <div class="col-md-6">
-      <input type="text" class="form-control" placeholder="Enter address or ZIP">
+  <form class="row g-5 p-4 bg-light rounded shadow-sm">
+    <h2 class="col-12 text-center">Find Your Dream Home Today!</h2>
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-8 ">
+      <form class="p-4 bg-light rounded shadow-sm" id="property-search-form">
+        <div class="input-group">
+          <input 
+            type="text" 
+            id="location-input" 
+            class="form-control" 
+            placeholder="Address, City, or ZIP" 
+            autocomplete="off"
+            aria-label="Search by address, city, or ZIP"
+            aria-describedby="current-location-button"
+          >
+          <button type="button" class="btn" onclick="useCurrentLocation()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+</svg></button>
+  <!-- Search button -->
+          <button 
+            type="submit" 
+            class="btn"
+            id="search-button"
+          >
+            Search
+          </button>
+        </div>
+      </form>
     </div>
-    <div class="col-md-4">
-      <select class="form-select">
-        <option selected>Property Type</option>
-        <option>House</option>
-        <option>Apartment</option>
-        <option>Condo</option>
-        <option>Land</option>
-      </select>
-    </div>
-    <div class="col-md-2">
-      <button type="submit" class="btn btn-success w-100">Search</button>
-    </div>
+  </div>
 
     <!-- Advanced Search Toggle -->
     <div class="col-12 text-end">
-      <a class="text-primary" data-bs-toggle="collapse" href="#advancedSearch" role="button" aria-expanded="false" aria-controls="advancedSearch">
+      <a class="" data-bs-toggle="collapse" href="#advancedSearch" role="button" aria-expanded="false" aria-controls="advancedSearch">
         Advanced Search ▼
       </a>
     </div>
@@ -108,14 +122,6 @@
             <option>4+</option>
           </select>
         </div>
-        <div class="col-md-4">
-          <select class="form-select" id="bathrooms">
-            <option selected>Bathrooms</option>
-            <option>1+</option>
-            <option>2+</option>
-            <option>3+</option>
-          </select>
-        </div>
       </div>
     </div>
   </form>
@@ -131,13 +137,13 @@
           </div>
           <div class="col-md-4 mb-4">
             <img src="featurette 2.jpeg" class="w-100 img-fluid mx-auto d-block" alt="Our Vision">
-            <h2 class="fw-normal mt-3">Our Vision</h2>
+            <h2 class="fw-normal mt-3">Featured Homes</h2>
             <p>To be the leading real estate agency in our community, known for our expertise, innovation, and dedication to our clients.</p>
             <a class="btn btn-outline-success" href="#">Learn more &raquo;</a>
           </div>
           <div class="col-md-4 mb-4">
-            <img src="featurette 1.jpeg" class="w-100 img-fluid mx-auto d-block" width="140" height="140" alt="Our Values">
-            <h2 class="fw-normal mt-3">Our Values</h2>
+            <img src="loans-6.jpg" class="w-100 img-fluid mx-auto d-block" width="140" height="140" alt="Our Values">
+            <h2 class="fw-normal mt-3">Financing Your Future</h2>
             <p>Integrity, Excellence, Client Focus, Innovation, and Community Engagement.</p>
             <a class="btn btn-outline-success" href="#">Learn more &raquo;</a>
           </div>
@@ -177,7 +183,7 @@
               <p>Monthly digest of what's new and exciting from us.</p>
               <form class="d-flex flex-column flex-sm-row gap-2">
                 <input type="email" class="form-control" placeholder="Email address">
-                <button class="btn btn-primary" type="submit">Subscribe</button>
+                <button class="btn" type="submit">Subscribe</button>
               </form>
             </div>
           </div>

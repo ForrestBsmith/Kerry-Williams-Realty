@@ -99,3 +99,20 @@ footer a:hover {
 .addressbutton{
   font-size: 0.75rem !important; /* Smaller font size for the button */
 }
+
+.btn-light i {
+  font-size: 1.2rem;
+}
+
+.btn-outline-secondary {
+  white-space: nowrap;
+}
+
+.housebutton{
+  border: none !important;
+}
+
+.housebutton:hover {
+  border: #17181a 1.5px solid !important; /* Add border on hover */
+  box-shadow: none !important; /* Remove any box shadow on hover */
+}

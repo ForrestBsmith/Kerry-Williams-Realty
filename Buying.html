@@ -9,7 +9,6 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
-  <body>
 <!-- NAVBAR START -->
 <header>
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
@@ -28,525 +27,192 @@
     </div>
   </div>
 </nav>
-
 </header>
 <!-- NAVBAR END -->
-
-
-    <main>
-      <!--Filters for homes-->
-      <!-- CAROUSEL -->
-      <div id="myCarousel" class="carousel slide mt-1 mb-2" data-bs-ride="carousel">      
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="agents.jpg" class="d-block w-100 sliderimages" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="slide 2.jpeg" class="d-block w-100 sliderimages" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="Slide 2.jpeg" class="d-block w-100 sliderimages" alt="...">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel
-" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel
-" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-
-      <div class="container my-5">
+  <body>
+    <div class="container my-5">
   <h2 class="text-center">Find a Property Near You</h2>
   <p class="text-center">Search by address, city, or ZIP code.</p>
 
-  <div class="row justify-content-center mt-4">
-    <div class="col-md-8">
-      <form class="p-4 bg-light rounded shadow-sm" id="property-search-form">
-        <div class="input-group">
-          <input 
-            type="text" 
-            id="location-input" 
-            class="form-control" 
-            placeholder="Search by address, city, or ZIP" 
-            autocomplete="off"
-            aria-label="Search by address, city, or ZIP"
-            aria-describedby="current-location-button"
-          >
-          <button type="button" class="btn" onclick="useCurrentLocation()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
-</svg></button>
-        </div>
-      </form>
+  <form class="row g-3 justify-content-center" id="property-search-form">
+    <div class="col-md-4">
+      <input type="text" id="location-input" class="form-control" placeholder="City, ZIP, or Address">
     </div>
-  </div>
-</div>
-
-
-   
-
-              </div>
-              <div class="col-md-6">
-                <select class="form-select" id="propertyType">
-                  <option selected>Property Type</option>
-                  <option>House</option>
-                  <option>Condo</option>
-                  <option>Apartment</option>
-                </select>
-              </div>
-              <div class="col-md-4">
-                <select class="form-select" id="bedrooms">
-                  <option selected>Bedrooms</option>
-                  <option>1+</option>
-                  <option>2+</option>
-                  <option>3+</option>
-                  <option>4+</option>
-                </select>
-              </div>
-              <div class="col-md-4">
-                <select class="form-select" id="bathrooms">
-                  <option selected>Bathrooms</option>
-                  <option>1+</option>
-                  <option>2+</option>
-                  <option>3+</option>
-                  <option>4+</option>
-                </select>
-              </div>
-              <div class="col-md-4">
-                <input type="number" class="form-control" placeholder="Max Price" min="0">
-              </div>
-              <div class="col-12 text-center">
-                <button type="submit" class="btn">Search</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      </div>
-      <hr class="featurette-divider">
-      <div class="container my-5">
-        <h2 class="text-center mb-4">Featured Listings</h2>
-        <!-- 🏡 Property Listings -->
-  <div class="container">
-    <div class="row" id="property-list">
-
-      <!-- 🔁 Repeat this card for each property -->
-             <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card shadow-sm">
-          <div id="carousel-1" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="featurette 2.jpeg" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="featurette 2.jpeg" class="d-block w-100" alt="...">
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-1" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-1" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </button>
-          </div>
-
-        <div class="card-body">
-  <h5 class="card-title fw-bold">$450,000 - 3 Bed / 2 Bath</h5>
-  <p class="card-text text-muted mb-1">123 Main St, Sacramento, CA</p>
-
-
-  <!-- Action Buttons (Contact, Schedule, Map) -->
-  <div class="d-flex flex-wrap gap-2">
-  <button class="btn housebutton text-center" data-bs-toggle="modal" data-bs-target="#modal-1">
-    📸 View Photos
-  </button>
-    <button class="btn housebutton flex-fill" onclick="window.location.href='https://www.example.com/schedule-viewing'">
-      🗓️ Schedule
-    </button>
-  </div>
-
-  <!-- Bottom Bar: Save, Share, Virtual Tour, More -->
-  <div class="d-flex justify-content-between align-items-center">
-    <!-- Heart Icon (Save) -->
-    <button class="btn btn-light p-2 housebutton" onclick="toggleSave(this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Save Property">
-      <i class="bi bi-heart" id="save-icon"></i>
-    </button>
-
-    <!-- Share Icon -->
-    <button class="btn btn-light p-2 housebutton" onclick="shareProperty('123 Main St')" data-bs-toggle="tooltip" data-bs-placement="top" title="Share Property">
-      <i class="bi bi-share"></i>
-    </button>
-
-    <!-- More Details -->
-    <button class="btn housebutton" onclick="window.location.href='https://www.example.com/more-details'">
-      📄 Details
-    </button>
-
-    <!-- Listing Info -->
-  
-    <small class="text-muted ms-auto">Listed 2 days ago</small>
-  </div>
-</div>
-        </div>
-      </div>  
-      <!-- Repeat for more properties -->
-             <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card shadow-sm">
-          <div id="carousel-1" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="featurette 2.jpeg" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="featurette 2.jpeg" class="d-block w-100" alt="...">
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-1" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-1" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </button>
-          </div>
-
-        <div class="card-body">
-  <h5 class="card-title fw-bold">$450,000 - 3 Bed / 2 Bath</h5>
-  <p class="card-text text-muted mb-1">123 Main St, Sacramento, CA</p>
-
-
-  <!-- Action Buttons (Contact, Schedule, Map) -->
-  <div class="d-flex flex-wrap gap-2">
-  <button class="btn housebutton text-center" data-bs-toggle="modal" data-bs-target="#modal-1">
-    📸 View Photos
-  </button>
-    <button class="btn housebutton flex-fill" onclick="window.location.href='https://www.example.com/schedule-viewing'">
-      🗓️ Schedule
-    </button>
-  </div>
-
-  <!-- Bottom Bar: Save, Share, Virtual Tour, More -->
-  <div class="d-flex justify-content-between align-items-center">
-    <!-- Heart Icon (Save) -->
-    <button class="btn btn-light p-2 housebutton" onclick="toggleSave(this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Save Property">
-      <i class="bi bi-heart" id="save-icon"></i>
-    </button>
-
-    <!-- Share Icon -->
-    <button class="btn btn-light p-2 housebutton" onclick="shareProperty('123 Main St')" data-bs-toggle="tooltip" data-bs-placement="top" title="Share Property">
-      <i class="bi bi-share"></i>
-    </button>
-
-    <!-- More Details -->
-    <button class="btn housebutton" onclick="window.location.href='https://www.example.com/more-details'">
-      📄 Details
-    </button>
-
-    <!-- Listing Info -->
-  
-    <small class="text-muted ms-auto">Listed 2 days ago</small>
-  </div>
-</div>
-   </div>
-      </div>  
-            <!-- Repeat for more properties -->
-             <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card shadow-sm">
-          <div id="carousel-1" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="featurette 2.jpeg" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="featurette 2.jpeg" class="d-block w-100" alt="...">
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-1" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-1" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </button>
-          </div>
-
-        <div class="card-body">
-  <h5 class="card-title fw-bold">$450,000 - 3 Bed / 2 Bath</h5>
-  <p class="card-text text-muted mb-1">123 Main St, Sacramento, CA</p>
-
-
-  <!-- Action Buttons (Contact, Schedule, Map) -->
-  <div class="d-flex flex-wrap gap-2">
-  <button class="btn housebutton text-center" data-bs-toggle="modal" data-bs-target="#modal-1">
-    📸 View Photos
-  </button>
-    <button class="btn housebutton flex-fill" onclick="window.location.href='https://www.example.com/schedule-viewing'">
-      🗓️ Schedule
-    </button>
-  </div>
-
-  <!-- Bottom Bar: Save, Share, Virtual Tour, More -->
-  <div class="d-flex justify-content-between align-items-center">
-    <!-- Heart Icon (Save) -->
-    <button class="btn btn-light p-2 housebutton" onclick="toggleSave(this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Save Property">
-      <i class="bi bi-heart" id="save-icon"></i>
-    </button>
-
-    <!-- Share Icon -->
-    <button class="btn btn-light p-2 housebutton" onclick="shareProperty('123 Main St')" data-bs-toggle="tooltip" data-bs-placement="top" title="Share Property">
-      <i class="bi bi-share"></i>
-    </button>
-
-    <!-- More Details -->
-    <button class="btn housebutton" onclick="window.location.href='https://www.example.com/more-details'">
-      📄 Details
-    </button>
-
-    <!-- Listing Info -->
-  
-    <small class="text-muted ms-auto">Listed 2 days ago</small>
-  </div>
-</div>
-   </div>
-      </div>  
-        <!-- Repeat for more properties -->
-             <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card shadow-sm">
-          <div id="carousel-1" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="featurette 2.jpeg" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="featurette 2.jpeg" class="d-block w-100" alt="...">
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-1" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-1" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </button>
-          </div>
-
-        <div class="card-body">
-  <h5 class="card-title fw-bold">$450,000 - 3 Bed / 2 Bath</h5>
-  <p class="card-text text-muted mb-1">123 Main St, Sacramento, CA</p>
-
-
-  <!-- Action Buttons (Contact, Schedule, Map) -->
-  <div class="d-flex flex-wrap gap-2">
-  <button class="btn housebutton text-center" data-bs-toggle="modal" data-bs-target="#modal-1">
-    📸 View Photos
-  </button>
-    <button class="btn housebutton flex-fill" onclick="window.location.href='https://www.example.com/schedule-viewing'">
-      🗓️ Schedule
-    </button>
-  </div>
-
-  <!-- Bottom Bar: Save, Share, Virtual Tour, More -->
-  <div class="d-flex justify-content-between align-items-center">
-    <!-- Heart Icon (Save) -->
-    <button class="btn btn-light p-2 housebutton" onclick="toggleSave(this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Save Property">
-      <i class="bi bi-heart" id="save-icon"></i>
-    </button>
-
-    <!-- Share Icon -->
-    <button class="btn btn-light p-2 housebutton" onclick="shareProperty('123 Main St')" data-bs-toggle="tooltip" data-bs-placement="top" title="Share Property">
-      <i class="bi bi-share"></i>
-    </button>
-
-    <!-- More Details -->
-    <button class="btn housebutton" onclick="window.location.href='https://www.example.com/more-details'">
-      📄 Details
-    </button>
-
-    <!-- Listing Info -->
-  
-    <small class="text-muted ms-auto">Listed 2 days ago</small>
-  </div>
-</div>
-   </div>
-      </div>  
-        <!-- Repeat for more properties -->
-             <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card shadow-sm">
-          <div id="carousel-1" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="featurette 2.jpeg" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="featurette 2.jpeg" class="d-block w-100" alt="...">
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-1" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-1" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </button>
-          </div>
-
-        <div class="card-body">
-  <h5 class="card-title fw-bold">$450,000 - 3 Bed / 2 Bath</h5>
-  <p class="card-text text-muted mb-1">123 Main St, Sacramento, CA</p>
-
-
-  <!-- Action Buttons (Contact, Schedule, Map) -->
-  <div class="d-flex flex-wrap gap-2">
-  <button class="btn housebutton text-center" data-bs-toggle="modal" data-bs-target="#modal-1">
-    📸 View Photos
-  </button>
-    <button class="btn housebutton flex-fill" onclick="window.location.href='https://www.example.com/schedule-viewing'">
-      🗓️ Schedule
-    </button>
-  </div>
-
-  <!-- Bottom Bar: Save, Share, Virtual Tour, More -->
-  <div class="d-flex justify-content-between align-items-center">
-    <!-- Heart Icon (Save) -->
-    <button class="btn btn-light p-2 housebutton" onclick="toggleSave(this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Save Property">
-      <i class="bi bi-heart" id="save-icon"></i>
-    </button>
-
-    <!-- Share Icon -->
-    <button class="btn btn-light p-2 housebutton" onclick="shareProperty('123 Main St')" data-bs-toggle="tooltip" data-bs-placement="top" title="Share Property">
-      <i class="bi bi-share"></i>
-    </button>
-
-    <!-- More Details -->
-    <button class="btn housebutton" onclick="window.location.href='https://www.example.com/more-details'">
-      📄 Details
-    </button>
-
-    <!-- Listing Info -->
-  
-    <small class="text-muted ms-auto">Listed 2 days ago</small>
-  </div>
-</div>
-   </div>
-      </div>  
-        <!-- Repeat for more properties -->
-             <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card shadow-sm">
-          <div id="carousel-1" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="featurette 2.jpeg" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="featurette 2.jpeg" class="d-block w-100" alt="...">
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-1" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-1" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </button>
-          </div>
-
-        <div class="card-body">
-  <h5 class="card-title fw-bold">$450,000 - 3 Bed / 2 Bath</h5>
-  <p class="card-text text-muted mb-1">123 Main St, Sacramento, CA</p>
-
-
-  <!-- Action Buttons (Contact, Schedule, Map) -->
-  <div class="d-flex flex-wrap gap-2">
-  <button class="btn housebutton text-center" data-bs-toggle="modal" data-bs-target="#modal-1">
-    📸 View Photos
-  </button>
-    <button class="btn housebutton flex-fill" onclick="window.location.href='https://www.example.com/schedule-viewing'">
-      🗓️ Schedule
-    </button>
-  </div>
-
-  <!-- Bottom Bar: Save, Share, Virtual Tour, More -->
-  <div class="d-flex justify-content-between align-items-center">
-    <!-- Heart Icon (Save) -->
-    <button class="btn btn-light p-2 housebutton" onclick="toggleSave(this)" data-bs-toggle="tooltip" data-bs-placement="top" title="Save Property">
-      <i class="bi bi-heart" id="save-icon"></i>
-    </button>
-
-    <!-- Share Icon -->
-    <button class="btn btn-light p-2 housebutton" onclick="shareProperty('123 Main St')" data-bs-toggle="tooltip" data-bs-placement="top" title="Share Property">
-      <i class="bi bi-share"></i>
-    </button>
-
-    <!-- More Details -->
-    <button class="btn housebutton" onclick="window.location.href='https://www.example.com/more-details'">
-      📄 Details
-    </button>
-
-    <!-- Listing Info -->
-  
-    <small class="text-muted ms-auto">Listed 2 days ago</small>
-  </div>
-</div>
-   </div>
-      </div>  
-  
-
-  <!-- 🖼️ Modal for Full Photo Gallery -->
-  <div class="modal fade" id="modal-1" tabindex="-1" aria-labelledby="modalLabel1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">123 Main St - Photo Gallery</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Carousel inside modal -->
-          <div id="modal-carousel-1" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="https://via.placeholder.com/800x400" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="https://via.placeholder.com/800x400/cccccc" class="d-block w-100" alt="...">
-              </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#modal-carousel-1" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#modal-carousel-1" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </button>
-          </div>
-        </div>
-      </div>
+    <div class="col-md-2">
+      <select class="form-select" id="propertyType">
+        <option value="">Property Type</option>
+        <option>House</option>
+        <option>Condo</option>
+        <option>Apartment</option>
+      </select>
     </div>
-  </div>
+    <div class="col-md-2">
+      <select class="form-select" id="bedrooms">
+        <option value="">Bedrooms</option>
+        <option value="1">1+</option>
+        <option value="2">2+</option>
+        <option value="3">3+</option>
+        <option value="4">4+</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <input type="number" id="maxPrice" class="form-control" placeholder="Max Price">
+    </div>
+    <div class="col-md-1 text-end">
+      <button type="submit" class="btn w-100">Search</button>
+    </div>
+    <div class="col-md-2">
+  <select class="form-select" id="sortPrice">
+    <option value="">Sort by Price</option>
+    <option value="asc">Price: Low to High</option>
+    <option value="desc">Price: High to Low</option>
+  </select>
+</div>
+
+  </form>
+</div>
+
+<hr>
+
+<div class="container">
+  <div class="row" id="property-list"></div>
+</div>
+
 <script>
-  function toggleSave(btn) {
-    const icon = btn.querySelector("i");
-    icon.classList.toggle("bi-heart");
-    icon.classList.toggle("bi-heart-fill");
-    btn.classList.toggle("text-danger"); // Makes it red when filled
+  const properties = [
+    {
+      address: "123 Main St",
+      city: "China Spring",
+      zip: "95814",
+      price: 450000,
+      bedrooms: 3,
+      bathrooms: 2,
+      type: "House",
+      image: "featurette 2.jpeg",
+      listedDaysAgo: 5
+    },
+    {
+      address: "456 Oak Ave",
+      city: "Hewitt",
+      zip: "95650",
+      price: 350000,
+      bedrooms: 2,
+      bathrooms: 1,
+      type: "Condo",
+      image: "featurette 2.jpeg",
+      listedDaysAgo: 60
+    },
+    {
+      address: "789 Pine Ln",
+      city: "Robinson",
+      zip: "95678",
+      price: 600000,
+      bedrooms: 4,
+      bathrooms: 3,
+      type: "House",
+      image: "featurette 2.jpeg",
+      listedDaysAgo: 30
+    },
+    {
+      address: "131 Dime Ave",
+      city: "Waco",
+      zip: "99556",
+      price: 250000,
+      bedrooms: 2,
+      bathrooms: 2,
+      type: "Condo",
+      image: "featurette 2.jpeg",
+      listedDaysAgo: 12
+    }
+  ];
+
+  function renderProperties(propertyArray) {
+    const container = document.getElementById('property-list');
+    container.innerHTML = '';
+
+    if (propertyArray.length === 0) {
+      container.innerHTML = `<p class="text-center">No properties match your search.</p>`;
+      return;
+    }
+
+    propertyArray.forEach((prop, index) => {
+      const card = `
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card shadow-sm property-card"
+               data-address="${prop.address}"
+               data-city="${prop.city}"
+               data-zip="${prop.zip}"
+               data-price="${prop.price}"
+               data-bedrooms="${prop.bedrooms}"
+               data-bathrooms="${prop.bathrooms}"
+               data-type="${prop.type}">
+
+            <img src="${prop.image}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">$${prop.price.toLocaleString()} - ${prop.bedrooms} Bed / ${prop.bathrooms} Bath</h5>
+              <p class="card-text text-muted">${prop.address}, ${prop.city}, TX</p>
+              <div class="d-flex flex-wrap gap-2">
+                <button class="btn housebutton">📸 View Photos</button>
+                <button class="btn housebutton">🗓️ Schedule</button>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <button class="btn btn-light p-2 housebutton"><i class="bi bi-heart"></i></button>
+                <button class="btn btn-light p-2 housebutton"><i class="bi bi-share"></i></button>
+                <button class="btn housebutton">📄 Details</button>
+                <small class="text-muted ms-auto">Listed ${prop.listedDaysAgo} days ago</small>
+              </div>
+            </div>
+          </div>
+        </div>`;
+      container.insertAdjacentHTML('beforeend', card);
+    });
   }
 
-  function shareProperty(address) {
-    const url = window.location.href + "?property=" + encodeURIComponent(address);
-    navigator.clipboard.writeText(url);
-    alert("Link copied to clipboard!");
+  document.getElementById('property-search-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const location = document.getElementById('location-input').value.trim().toLowerCase();
+  const type = document.getElementById('propertyType').value.trim().toLowerCase();
+  const bedrooms = parseInt(document.getElementById('bedrooms').value) || 0;
+  const maxPrice = parseInt(document.getElementById('maxPrice').value) || Infinity;
+  const sortOrder = document.getElementById('sortPrice').value;
+
+  let filtered = properties.filter(p => {
+    const matchesLocation = location === "" ||
+      p.address.toLowerCase().includes(location) ||
+      p.city.toLowerCase().includes(location) ||
+      p.zip.includes(location);
+
+    const matchesType = type === "" || p.type.toLowerCase() === type;
+    const matchesBedrooms = p.bedrooms >= bedrooms;
+    const matchesPrice = p.price <= maxPrice;
+
+    return matchesLocation && matchesType && matchesBedrooms && matchesPrice;
+  });
+
+  // Sort by price
+  if (sortOrder === "asc") {
+    filtered.sort((a, b) => a.price - b.price);
+  } else if (sortOrder === "desc") {
+    filtered.sort((a, b) => b.price - a.price);
   }
+
+  renderProperties(filtered);
+});
+
+  // Initial load
+  renderProperties(properties);
 </script>
 
+  </body>
+
+   
+ 
 
 
 
-    </main>
-  <footer class="text-center py-4">
-    <p>&copy; 2023 Kelly Williams Realty. All rights reserved.</p>
-  </footer>
-
-
+  <p>&copy; 2023 Kelly Williams Realty. All rights reserved.</p>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="fw.js"></script>
-  </main>
 
 </body>
 </html>

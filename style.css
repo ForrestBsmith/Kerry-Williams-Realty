@@ -116,3 +116,14 @@ footer a:hover {
   border: #17181a 1.5px solid !important; /* Add border on hover */
   box-shadow: none !important; /* Remove any box shadow on hover */
 }
+
+
+
+
+/* AGENTS SECTION */
+
+.agent-card img {
+  width: 100%;           /* Ensures it spans full card width */
+  height: 300px;         /* Set your desired height */
+  object-fit: cotain;     /* Crops to fill the box */
+}

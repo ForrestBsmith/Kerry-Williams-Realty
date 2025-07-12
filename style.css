@@ -88,12 +88,15 @@ footer a:hover {
   font-family: 'Poppins', sans-serif !important; /* Consistent font family */
   font-size: 1rem !important; /* Consistent font size */
   padding: 0.5rem 1rem !important; /* Consistent padding */
-  border: rgba(0, 0, 0, 0.195) 1.5px solid !important; /* Consistent border */
+  border: rgba(0, 0, 0, 0.195) 2.5px solid !important; /* Consistent border */
   border-radius: 0.25rem !important; /* Consistent border radius */
   transition: background-color 0.3s ease !important; /* Smooth transition for background color */
 }
-
-.btn:hover {
+.p-2{
+  border: none !important;
+}
+.btn-sm {
+  border: none !important;
 }
 
 .addressbutton{
@@ -126,4 +129,13 @@ footer a:hover {
   width: 100%;           /* Ensures it spans full card width */
   height: 300px;         /* Set your desired height */
   object-fit: cotain;     /* Crops to fill the box */
+}
+
+p{
+  margin: 0em !important;
+}
+
+.agent-card:hover {
+  transform: scale(1.02);
+  transition: all 0.2s ease-in-out;
 }

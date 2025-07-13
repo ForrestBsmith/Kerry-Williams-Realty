@@ -1,0 +1,42 @@
+[
+  {
+    "address": "123 Main St",
+    "city": "China Spring",
+    "zip": "95814",
+    "price": 450000,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "type": "House",
+    "image": "featurette 2.jpeg",
+    "listedDaysAgo": 5,
+    "lat": 31.6131,
+    "lng": -97.3295
+  },
+  {
+    "address": "456 Oak Ave",
+    "city": "Hewitt",
+    "zip": "95650",
+    "price": 350000,
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "type": "Condo",
+    "image": "featurette 2.jpeg",
+    "listedDaysAgo": 60,
+    "lat": 31.4496,
+    "lng": -97.1920
+  },
+  {
+    "address": "456 Oak Ave",
+    "city": "Hewitt",
+    "zip": "95650",
+    "price": 350000,
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "type": "Condo",
+    "image": "featurette 2.jpeg",
+    "listedDaysAgo": 60,
+    "lat": 31.4496,
+    "lng": -97.2920
+  }
+]
+

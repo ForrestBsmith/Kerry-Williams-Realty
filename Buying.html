@@ -78,6 +78,46 @@
       </form>
 <div id="property-map" style="height: 400px; margin-top: 3em;"></div>
 
+<!-- Photos Modal -->
+<div class="modal fade" id="photosModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Photos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="photosModalBody"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Schedule Modal -->
+<div class="modal fade" id="scheduleModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Schedule a Viewing</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="scheduleModalBody"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Details Modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Property Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="detailsModalBody"></div>
+    </div>
+  </div>
+</div>
+
+
 <script>
   let map;
 
@@ -146,32 +186,139 @@
   });
 }
 
+// Reuse same modal for all properties
+document.addEventListener("click", (e) => {
+  const index = e.target.getAttribute("data-index");
+  if (index === null) return;
 
-        propertyArray.forEach((prop) => {
-          const card = `
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="card shadow-sm">
-                <img src="${prop.image}" class="card-img-top" alt="${prop.address}">
-                <div class="card-body">
-                  <h5 class="card-title fw-bold">
-                    $${prop.price.toLocaleString()} - ${prop.bedrooms} Bed / ${prop.bathrooms} Bath
-                  </h5>
-                  <p class="card-text text-muted">${prop.address}, ${prop.city}, TX ${prop.zip}</p>
-                  <div class="d-flex flex-wrap gap-2">
-                    <button class="btn btn-sm">📸 View Photos</button>
-                    <button class="btn btn-sm">🗓️ Schedule</button>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center mt-2">
-                    <button class="btn p-2"><i class="bi bi-heart"></i></button>
-                    <button class="btn p-2"><i class="bi bi-share"></i></button>
-                    <button class="btn btn-sm">📄 Details</button>
-                    <small class="text-muted ms-auto">Listed ${prop.listedDaysAgo} days ago</small>
-                  </div>
-                </div>
+  const prop = propertyArray[index];
+
+  // View Photos
+  if (e.target.classList.contains("btn-photos")) {
+    document.querySelector("#photosModal .modal-title").textContent = ` Home Address - ${prop.address}`;
+    document.querySelector("#photosModalBody").innerHTML = `
+      <div id="carousel-${index}" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          ${(prop.images || [prop.image]).map((img, i) => `
+            <div class="carousel-item photoscarousel ${i === 0 ? 'active' : ''}">
+              <img src="${img}" class="d-block w-100" alt="Photo ${i + 1}">
               </div>
-            </div>`;
-          container.insertAdjacentHTML('beforeend', card);
-        });
+          `).join("")}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${index}" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" style="margin-bottom: 200px ;"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel-${index}" data-bs-slide="next">
+          <span class="carousel-control-next-icon"  style="margin-bottom: 200px ;"></span>
+        </button>
+      </div>
+    `;
+  }
+
+  // Schedule Form
+  if (e.target.classList.contains("btn-schedule")) {
+    document.querySelector("#scheduleModal .modal-title").textContent = `Schedule a Viewing - ${prop.address}`;
+    document.querySelector("#scheduleModalBody").innerHTML = `
+      <form>
+        <div class="mb-3">
+          <label class="form-label">Your Name</label>
+          <input type="text" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Preferred Date</label>
+          <input type="date" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" required>
+        </div>
+        <button type="submit" class="btn w-100">Submit Request</button>
+      </form>
+    `;
+  }
+
+  // Details
+if (e.target.classList.contains("btn-details")) {
+  document.querySelector("#detailsModal .modal-title").textContent = `Property Details - ${prop.address}`;
+  
+  const detailsHTML = `
+    <p><strong>Address:</strong> ${prop.address}, ${prop.city}, TX ${prop.zip}</p>
+    <p><strong>Price:</strong> $${prop.price.toLocaleString()}</p>
+    <p><strong>Bedrooms:</strong> ${prop.bedrooms}</p>
+    <p><strong>Bathrooms:</strong> ${prop.bathrooms}</p>
+    <p><strong>Type:</strong> ${prop.type}</p>
+    <p><strong>Square Feet:</strong> ${prop.squareFeet?.toLocaleString() || 'N/A'} sqft</p>
+    <p><strong>Year Built:</strong> ${prop.yearBuilt || 'N/A'}</p>
+    <p><strong>Lot Size:</strong> ${prop.lotSize ? `${prop.lotSize} acres` : 'N/A'}</p>
+    <p><strong>Garage:</strong> ${prop.garage || 'N/A'}</p>
+    <p><strong>HOA Fees:</strong> ${prop.hoaFees ? `$${prop.hoaFees}/mo` : 'None'}</p>
+    <p><strong>School District:</strong> ${prop.schoolDistrict || 'N/A'}</p>
+    <p><strong>Heating:</strong> ${prop.heating || 'N/A'}</p>
+    <p><strong>Cooling:</strong> ${prop.cooling || 'N/A'}</p>
+    <p><strong>Flooring:</strong> ${prop.flooring || 'N/A'}</p>
+    <p><strong>Roof:</strong> ${prop.roof || 'N/A'}</p>
+    <p><strong>Exterior:</strong> ${prop.exterior || 'N/A'}</p>
+
+    ${prop.description ? `<p><strong>Description:</strong> ${prop.description}</p>` : ""}
+
+    ${prop.interiorFeatures?.length ? `
+      <p><strong>Interior Features:</strong></p>
+      <ul>${prop.interiorFeatures.map(f => `<li>${f}</li>`).join("")}</ul>
+    ` : ""}
+
+    ${prop.exteriorFeatures?.length ? `
+      <p><strong>Exterior Features:</strong></p>
+      <ul>${prop.exteriorFeatures.map(f => `<li>${f}</li>`).join("")}</ul>
+    ` : ""}
+
+    ${prop.energyFeatures?.length ? `
+      <p><strong>Energy Efficiency:</strong></p>
+      <ul>${prop.energyFeatures.map(f => `<li>${f}</li>`).join("")}</ul>
+    ` : ""}
+  `;
+
+  document.querySelector("#detailsModalBody").innerHTML = detailsHTML;
+}
+
+});
+
+
+propertyArray.forEach((prop, index) => {
+  const card = `
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card shadow-sm">
+        <img src="${prop.image}" class="card-img-top" alt="${prop.address}">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">
+            $${prop.price.toLocaleString()} - ${prop.bedrooms} Bed / ${prop.bathrooms} Bath
+          </h5>
+          <p class="card-text text-muted">${prop.address}, ${prop.city}, TX ${prop.zip}</p>
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-sm btn-photos" 
+              data-index="${index}" 
+              data-bs-toggle="modal" 
+              data-bs-target="#photosModal">📸 View Photos</button>
+            <button class="btn btn-sm btn-schedule" 
+              data-index="${index}" 
+              data-bs-toggle="modal" 
+              data-bs-target="#scheduleModal">🗓️ Schedule</button>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-2">
+            <button class="btn p-2"><i class="bi bi-heart"></i></button>
+            <button class="btn p-2"><i class="bi bi-share"></i></button>
+            <button class="btn btn-sm btn-details" 
+              data-index="${index}" 
+              data-bs-toggle="modal" 
+              data-bs-target="#detailsModal">📄 Details</button>
+            <small class="text-muted ms-auto">Listed ${prop.listedDaysAgo} days ago</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  container.insertAdjacentHTML('beforeend', card);
+});
+
       }
 
       document.getElementById('property-search-form').addEventListener('submit', function (e) {

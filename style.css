@@ -57,11 +57,7 @@ body, html {
  height: 200px !important; /* Set a fixed height for carousel items */
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+
 /* Fix for images in the footer */
 
 .sliderimages {
@@ -139,3 +135,14 @@ p{
   transform: scale(1.02);
   transition: all 0.2s ease-in-out;
 }
+
+
+/* modal body*/
+
+
+.modal-content{
+  height: 400px !important;
+}
+
+.photoscarousel{
+  height: 500px !important}

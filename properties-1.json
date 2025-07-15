@@ -1,17 +1,52 @@
 [
-  {
-    "address": "123 Main St",
-    "city": "China Spring",
-    "zip": "95814",
-    "price": 450000,
-    "bedrooms": 3,
-    "bathrooms": 2,
-    "type": "House",
-    "image": "featurette 2.jpeg",
-    "listedDaysAgo": 5,
-    "lat": 31.6131,
-    "lng": -97.3295
-  },
+{
+  "address": "123 Main St",
+  "city": "China Spring",
+  "zip": "95814",
+  "price": 450000,
+  "bedrooms": 3,
+  "bathrooms": 2,
+  "type": "House",
+  "squareFeet": 1920,
+  "yearBuilt": 2015,
+  "lotSize": 0.25,
+  "garage": "2-car attached",
+  "hoaFees": 125,
+  "schoolDistrict": "China Spring ISD",
+  "heating": "Central Electric",
+  "cooling": "Central Air",
+  "flooring": "Laminate, Tile",
+  "roof": "Composition Shingle",
+  "exterior": "Brick",
+  "interiorFeatures": [
+    "Open Floor Plan",
+    "Granite Countertops",
+    "Walk-in Closets",
+    "Recessed Lighting",
+    "Stainless Steel Appliances"
+  ],
+  "exteriorFeatures": [
+    "Covered Patio",
+    "Fenced Backyard",
+    "Sprinkler System"
+  ],
+  "energyFeatures": [
+    "Double Pane Windows",
+    "Energy Star Appliances",
+    "Ceiling Fans"
+  ],
+  "image": "featurette 2.jpeg",
+  "listedDaysAgo": 5,
+  "lat": 31.6131,
+  "lng": -97.3295,
+  "images": [
+    "featurette 2.jpeg",
+    "featurette 2.jpeg"
+  ],
+  "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
+}
+,
+
   {
     "address": "456 Oak Ave",
     "city": "Hewitt",
@@ -37,6 +72,45 @@
     "listedDaysAgo": 60,
     "lat": 31.4496,
     "lng": -97.2920
+  },
+    {
+    "address": "123 Main St",
+    "city": "China Spring",
+    "zip": "95814",
+    "price": 450000,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "type": "House",
+    "image": "featurette 2.jpeg",
+    "listedDaysAgo": 5,
+    "lat": 31.6131,
+    "lng": -97.5295
+  },
+  {
+    "address": "456 Oak Ave",
+    "city": "Hewitt",
+    "zip": "95650",
+    "price": 350000,
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "type": "Condo",
+    "image": "featurette 2.jpeg",
+    "listedDaysAgo": 60,
+    "lat": 31.4497,
+    "lng": -97.490
+  },
+  {
+    "address": "456 Oak Ave",
+    "city": "Hewitt",
+    "zip": "95650",
+    "price": 350000,
+    "bedrooms": 2,
+    "bathrooms": 1,
+    "type": "Condo",
+    "image": "featurette 2.jpeg",
+    "listedDaysAgo": 60,
+    "lat": 31.4996,
+    "lng": -97.3990
   }
 ]
 

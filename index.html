@@ -10,16 +10,16 @@
   <body>
 <!-- NAVBAR START -->
 <header>
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
+<nav class="navbar navbar-expand-sm">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.html">Kelly Williams Realty</a>
     <button class="navbar-toggler bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav text-center mt-3">
         <li class="nav-item"><a class="nav-link" href="Agents.html">AGENTS</a></li>
-        <li class="nav-item"><a class="nav-link" href="Buying.html">BUYING/RENTING</a></li>
+        <li class="nav-item"><a class="nav-link" href="Buying.html">BUYING</a></li>
         <li class="nav-item"><a class="nav-link" href="Selling.html">SELLING</a></li>
         <li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
       </ul>
@@ -42,7 +42,7 @@
             <img src="slide 2.jpeg" class="d-block w-100 sliderimages" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="Slide 2.jpeg" class="d-block w-100 sliderimages" alt="...">
+            <img src="Slide 1.jpeg" class="d-block w-100 sliderimages" alt="...">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
@@ -61,70 +61,103 @@
         <p class="lead text-center">Your trusted partner in real estate, dedicated to helping you find your dream home or sell your property with confidence.</p>
         <hr class="featurette-divider">
 
-        <div class="container my-5">
-  <!-- SIMPLE SEARCH -->
-  <form class="g-0 p-4 bg-light rounded shadow-sm">
-    <h2 class="col-12 text-center">Find Your Dream Home Today!</h2>
-    <span class="text-end text-muted" style="text-decoration: underline;"><a href="Sign-In.html">Sign In</a></span>
+<!-- SIMPLE SEARCH -->
+<form class="g-0 p-4 rounded" id="property-search-form" onsubmit="handleSearchSubmit(event)">
+  <h2 class="col-12 text-center">Find Your Dream Home Today!</h2>
   <div class="row justify-content-center mt-4">
     <div class="col-md-8">
-      <form class="p-4 bg-light rounded shadow-sm" id="property-search-form">
-        <div class="input-group addressbar">
-          <input 
-            type="text" 
-            id="location-input" 
-            class="form-control" 
-            placeholder="Address, City, or ZIP" 
-            autocomplete="off"
-            aria-label="Search by address, city, or ZIP"
-            aria-describedby="current-location-button"
-          >
-          <button type="button" class="btn" onclick="useCurrentLocation()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
-</svg></button>
-        </div>
-      </form>
-    </div>
-  </div>
+      <div class="input-group addressbar">
+        <input 
+          type="text" 
+          id="location-input" 
+          class="form-control" 
+          placeholder="Address, City, or ZIP" 
+          autocomplete="off"
+          aria-label="Search by address, city, or ZIP"
+          aria-describedby="current-location-button"
+        >
 
-    <!-- Advanced Search Toggle -->
-    <div class="col-12 text-end">
-      <a class="" data-bs-toggle="collapse" href="#advancedSearch" role="button" aria-expanded="false" aria-controls="advancedSearch">
-        Advanced Search ▼
-      </a>
-    </div>
 
-    <!-- ADVANCED SEARCH (collapsible) -->
-    <div class="collapse mt-3" id="advancedSearch">
-      <div class="row g-3">
-        <div class="col-md-4">
-          <select class="form-select" id="priceRange">
-            <option selected>Price Range</option>
-            <option>$100k - $200k</option>
-            <option>$200k - $400k</option>
-            <option>$400k - $600k</option>
-            <option>$600k+</option>
-          </select>
-        </div>
-        <div class="col-md-4">
-          <select class="form-select" id="bedrooms">
-            <option selected>Bedrooms</option>
-            <option>1+</option>
-            <option>2+</option>
-            <option>3+</option>
-            <option>4+</option>
-          </select>
-        </div>
+      <button type="button" class="btn" onclick="useCurrentLocation()" aria-label="Use current location">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+  </svg>
+</button>
+
       </div>
     </div>
-  </form>
+  </div>
+</form>
+<script>
+  function handleSearchSubmit(event) {
+    if (event) event.preventDefault();
+    const query = document.getElementById('location-input').value.trim();
+    if (query) {
+      window.location.href = `buying.html?search=${encodeURIComponent(query)}`;
+    }
+  }
+
+  function useCurrentLocation() {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser.");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async position => {
+        const { latitude, longitude } = position.coords;
+        console.log("Latitude:", latitude, "Longitude:", longitude);
+
+        try {
+          const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
+          const data = await response.json();
+          console.log("Reverse geocode result:", data);
+
+          const city = data.address.city || data.address.town || data.address.village || "";
+          const zip = data.address.postcode || "";
+          const locationText = `${city} ${zip}`.trim();
+
+          if (locationText) {
+            document.getElementById('location-input').value = locationText;
+            handleSearchSubmit();
+          } else {
+            alert("Could not determine city or ZIP from your location.");
+          }
+        } catch (error) {
+          console.error("Reverse geocoding failed:", error);
+          alert("Unable to retrieve address from your location.");
+        }
+      },
+      error => {
+        console.error("Geolocation error:", error);
+        alert("Location access denied or unavailable.");
+      }
+    );
+  }
+</script>
+
+<script>
+  function handleSearchSubmit(event) {
+    event.preventDefault();
+    const query = document.getElementById('location-input').value.trim();
+    if (query) {
+      window.location.href = `buying.html?search=${encodeURIComponent(query)}`;
+    }
+  }
+</script>
+
+<div id="sign-in" class="text-muted">
+  <span class="text-end text-muted" style="text-decoration: underline;">
+    <a href="Sign-In.html">Sign In</a>
+  </span>
 </div>
+
       <hr class="featurette-divider"> 
         <!-- THREE COLUMNS -->
         <div class="row text-center">
           <div class="col-md-4 mb-4">
-            <img src="family.jpeg" class="w-100 img-fluid mx-auto d-block" alt="Our Mission">
-            <h2 class="fw-normal mt-3">Our Mission</h2>
+            <img src="commercial.jpg" class="w-100 img-fluid mx-auto d-block" alt="Our Mission">
+            <h2 class="fw-normal mt-3">Commercial</h2>
             <p>To provide exceptional real estate services with integrity, professionalism, and a commitment to client satisfaction.</p>
             <a class="btn btn-outline-success" href="#">Learn more &raquo;</a>
           </div>
@@ -148,7 +181,7 @@
       
 
       <!-- FOOTER -->
-      <footer class="bg-light text-muted py-5">
+      <footer class="text-muted py-5">
         <div class="container">
           <div class="row">
             <div class="col-6 col-md-3 mb-3">
@@ -171,11 +204,11 @@
                 <li><a href="#">Commercial</a></li>
               </ul>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 text-center">
               <h5>Subscribe to Our Newsletter</h5>
-              <p>Monthly digest of what's new and exciting from us.</p>
+              <p class="mb-4">Monthly digest of what's new and exciting from us.</p>
               <form class="d-flex flex-column flex-sm-row gap-2">
-                <input type="email" class="form-control" placeholder="Email address">
+                <input type="email" class="form-control text-center" placeholder="Email address">
                 <button class="btn" type="submit">Subscribe</button>
               </form>
             </div>

@@ -146,3 +146,68 @@ p{
 
 .photoscarousel{
   height: 500px !important}
+
+  h5{
+    font-size: 19px !important;
+    text-align: center;
+  }
+
+
+  /*proeprty cards*/
+  .property-card img {
+  object-fit: cover;
+  width: 100%;
+}
+.property-card .card-body {
+  padding: 1rem;
+}
+.property-card .btn i {
+  vertical-align: middle;
+}
+
+/*filter modal*/
+/* Make modal background cover the full modal */
+/* Full background modal content */
+.modal-content {
+  background-color: #f9f9f9; /* Full background color */
+  border-radius: 0.5rem;
+  padding: 0;
+  border: none;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+  min-height: 525px !important;
+}
+
+/* Modal header and footer with unified background */
+.modal-header,
+.modal-footer {
+  background-color: #f9f9f9;
+  padding: 1rem 1.5rem;
+  border: none;
+}
+
+/* Modal body padding */
+.modal-body {
+  padding: 1.5rem;
+}
+
+/* Optional: Button consistency */
+.modal-footer .btn {
+  min-width: 120px;
+}
+
+
+@media (max-width: 768px) {
+  .modal-dialog {
+    max-width: 100%;
+    margin: 0;
+  }
+  .modal-content {
+    height: 100vh;
+    border-radius: 0;
+  }
+}
+@media (max-width: 768px) {
+  #property-map {
+    height: 400px;
+  }
+}

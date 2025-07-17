@@ -1,79 +1,5 @@
 [
-{
-  "address": "123 Main St",
-  "city": "China Spring",
-  "zip": "95814",
-  "price": 450000,
-  "bedrooms": 3,
-  "bathrooms": 2,
-  "type": "House",
-  "squareFeet": 1920,
-  "yearBuilt": 2015,
-  "lotSize": 0.25,
-  "garage": "2-car attached",
-  "hoaFees": 125,
-  "schoolDistrict": "China Spring ISD",
-  "heating": "Central Electric",
-  "cooling": "Central Air",
-  "flooring": "Laminate, Tile",
-  "roof": "Composition Shingle",
-  "exterior": "Brick",
-  "interiorFeatures": [
-    "Open Floor Plan",
-    "Granite Countertops",
-    "Walk-in Closets",
-    "Recessed Lighting",
-    "Stainless Steel Appliances"
-  ],
-  "exteriorFeatures": [
-    "Covered Patio",
-    "Fenced Backyard",
-    "Sprinkler System"
-  ],
-  "energyFeatures": [
-    "Double Pane Windows",
-    "Energy Star Appliances",
-    "Ceiling Fans"
-  ],
-  "image": "featurette 2.jpeg",
-  "listedDaysAgo": 5,
-  "lat": 31.6131,
-  "lng": -97.3295,
-  "images": [
-    "featurette 2.jpeg",
-    "featurette 2.jpeg"
-  ],
-  "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
-}
-,
-
   {
-    "address": "456 Oak Ave",
-    "city": "Hewitt",
-    "zip": "95650",
-    "price": 350000,
-    "bedrooms": 2,
-    "bathrooms": 1,
-    "type": "Condo",
-    "image": "featurette 2.jpeg",
-    "listedDaysAgo": 60,
-    "lat": 31.4496,
-    "lng": -97.1920
-  },
-  {
-    "address": "456 Oak Ave",
-    "city": "Hewitt",
-    "zip": "95650",
-    "price": 350000,
-    "bedrooms": 2,
-    "bathrooms": 1,
-    "type": "Condo",
-    "image": "featurette 2.jpeg",
-    "listedDaysAgo": 60,
-    "lat": 31.4496,
-    "lng": -97.2920
-  },
-    {
     "address": "123 Main St",
     "city": "China Spring",
     "zip": "95814",
@@ -81,36 +7,263 @@
     "bedrooms": 3,
     "bathrooms": 2,
     "type": "House",
+    "squareFeet": 1920,
+    "yearBuilt": 2015,
+    "lotSize": 0.25,
+    "garage": "2-car attached",
+    "hoaFees": 125,
+    "schoolDistrict": "China Spring ISD",
+    "heating": "Central Electric",
+    "cooling": "Central Air",
+    "flooring": "Laminate, Tile",
+    "roof": "Composition Shingle",
+    "exterior": "Brick",
+    "interiorFeatures": [
+      "Open Floor Plan",
+      "Granite Countertops",
+      "Walk-in Closets",
+      "Recessed Lighting",
+      "Stainless Steel Appliances"
+    ],
+    "exteriorFeatures": [
+      "Covered Patio",
+      "Fenced Backyard",
+      "Sprinkler System"
+    ],
+    "energyFeatures": [
+      "Double Pane Windows",
+      "Energy Star Appliances",
+      "Ceiling Fans"
+    ],
     "image": "featurette 2.jpeg",
     "listedDaysAgo": 5,
     "lat": 31.6131,
-    "lng": -97.5295
+    "lng": -97.1295,
+    "images": [
+      "featurette 2.jpeg",
+      "featurette 2.jpeg"
+    ],
+    "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
   },
   {
     "address": "456 Oak Ave",
-    "city": "Hewitt",
-    "zip": "95650",
-    "price": 350000,
-    "bedrooms": 2,
-    "bathrooms": 1,
-    "type": "Condo",
+    "city": "China Spring",
+    "zip": "95814",
+    "price": 475000,
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "type": "House",
+    "squareFeet": 2200,
+    "yearBuilt": 2017,
+    "lotSize": 0.30,
+    "garage": "2-car attached",
+    "hoaFees": 130,
+    "schoolDistrict": "China Spring ISD",
+    "heating": "Central Electric",
+    "cooling": "Central Air",
+    "flooring": "Hardwood, Tile",
+    "roof": "Composition Shingle",
+    "exterior": "Brick",
+    "interiorFeatures": [
+      "Open Floor Plan",
+      "Granite Countertops",
+      "Fireplace",
+      "Walk-in Closets",
+      "Stainless Steel Appliances"
+    ],
+    "exteriorFeatures": [
+      "Covered Porch",
+      "Fenced Backyard",
+      "Sprinkler System"
+    ],
+    "energyFeatures": [
+      "Double Pane Windows",
+      "Energy Star Appliances",
+      "Ceiling Fans"
+    ],
     "image": "featurette 2.jpeg",
-    "listedDaysAgo": 60,
-    "lat": 31.4497,
-    "lng": -97.490
+    "listedDaysAgo": 10,
+    "lat": 31.4150,
+    "lng": -97.2300,
+    "images": [
+      "featurette 3.jpeg",
+      "featurette 3.jpeg"
+    ],
+        "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
   },
   {
-    "address": "456 Oak Ave",
-    "city": "Hewitt",
-    "zip": "95650",
-    "price": 350000,
-    "bedrooms": 2,
-    "bathrooms": 1,
-    "type": "Condo",
+    "address": "789 Pine Rd",
+    "city": "China Spring",
+    "zip": "95814",
+    "price": 420000,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "type": "House",
+    "squareFeet": 1800,
+    "yearBuilt": 2012,
+    "lotSize": 0.20,
+    "garage": "1-car attached",
+    "hoaFees": 115,
+    "schoolDistrict": "China Spring ISD",
+    "heating": "Central Electric",
+    "cooling": "Central Air",
+    "flooring": "Laminate, Carpet",
+    "roof": "Composition Shingle",
+    "exterior": "Vinyl",
+    "interiorFeatures": [
+      "Open Floor Plan",
+      "Granite Countertops",
+      "Walk-in Closets",
+      "Recessed Lighting"
+    ],
+    "exteriorFeatures": [
+      "Covered Patio",
+      "Fenced Backyard"
+    ],
+    "energyFeatures": [
+      "Double Pane Windows",
+      "Ceiling Fans"
+    ],
     "image": "featurette 2.jpeg",
-    "listedDaysAgo": 60,
-    "lat": 31.4996,
-    "lng": -97.3990
+    "listedDaysAgo": 15,
+    "lat": 31.6120,
+    "lng": -97.5280,
+    "images": [
+      "featurette 4.jpeg",
+      "featurette 4.jpeg"
+    ],
+        "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
+  },
+  {
+    "address": "101 Maple Ln",
+    "city": "China Spring",
+    "zip": "95814",
+    "price": 460000,
+    "bedrooms": 4,
+    "bathrooms": 2.5,
+    "type": "House",
+    "squareFeet": 2100,
+    "yearBuilt": 2014,
+    "lotSize": 0.28,
+    "garage": "2-car attached",
+    "hoaFees": 120,
+    "schoolDistrict": "China Spring ISD",
+    "heating": "Central Electric",
+    "cooling": "Central Air",
+    "flooring": "Hardwood",
+    "roof": "Composition Shingle",
+    "exterior": "Brick",
+    "interiorFeatures": [
+      "Granite Countertops",
+      "Fireplace",
+      "Walk-in Closets",
+      "Recessed Lighting"
+    ],
+    "exteriorFeatures": [
+      "Covered Porch",
+      "Fenced Backyard",
+      "Sprinkler System"
+    ],
+    "energyFeatures": [
+      "Double Pane Windows",
+      "Energy Star Appliances",
+      "Ceiling Fans"
+    ],
+    "image": "featurette 2.jpeg",
+    "listedDaysAgo": 8,
+    "lat": 31.4440,
+    "lng": -97.5310,
+    "images": [
+      "featurette 5.jpeg",
+      "featurette 5.jpeg"
+    ],
+     "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
+  },
+  {
+    "address": "202 Birch St",
+    "city": "China Spring",
+    "zip": "95814",
+    "price": 430000,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "type": "House",
+    "squareFeet": 1850,
+    "yearBuilt": 2013,
+    "lotSize": 0.22,
+    "garage": "2-car attached",
+    "hoaFees": 110,
+    "schoolDistrict": "China Spring ISD",
+    "heating": "Central Electric",
+    "cooling": "Central Air",
+    "flooring": "Laminate",
+    "roof": "Composition Shingle",
+    "exterior": "Vinyl",
+    "interiorFeatures": [
+      "Open Floor Plan",
+      "Granite Countertops",
+      "Walk-in Closets"
+    ],
+    "exteriorFeatures": [
+      "Covered Patio",
+      "Fenced Backyard"
+    ],
+    "energyFeatures": [
+      "Double Pane Windows",
+      "Ceiling Fans"
+    ],
+    "image": "featurette 2.jpeg",
+    "listedDaysAgo": 12,
+    "lat": 31.6110,
+    "lng": -97.2200,
+    "images": [
+      "featurette 6.jpeg",
+      "featurette 6.jpeg"
+    ],
+    "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
+  },
+  {
+    "address": "303 Cedar Ct",
+    "city": "China Spring",
+    "zip": "95814",
+    "price": 440000,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "type": "House",
+    "squareFeet": 1900,
+    "yearBuilt": 2016,
+    "lotSize": 0.27,
+    "garage": "2-car attached",
+    "hoaFees": 115,
+    "schoolDistrict": "China Spring ISD",
+    "heating": "Central Electric",
+    "cooling": "Central Air",
+    "flooring": "Hardwood, Tile",
+    "roof": "Composition Shingle",
+    "exterior": "Brick",
+    "interiorFeatures": [
+      "Open Floor Plan",
+      "Granite Countertops",
+      "Walk-in Closets",
+      "Recessed Lighting"
+    ],
+    "exteriorFeatures": [
+      "Covered Patio",
+      "Fenced Backyard",
+      "Sprinkler System"
+    ],
+    "energyFeatures": [
+      "Double Pane Windows",
+      "Energy Star Appliances",
+      "Ceiling Fans"
+    ],
+    "image": "featurette 2.jpeg",
+    "listedDaysAgo": 7,
+    "lat": 31.3160,
+    "lng": -97.3720,
+    "images": [
+      "featurette 7.jpeg",
+      "featurette 7.jpeg"
+    ],
+        "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
   }
 ]
-

@@ -142,14 +142,15 @@ p{
 
 .modal-content{
   height: 400px !important;
-}
+} 
 
 .photoscarousel{
   height: 500px !important}
 
   h5{
-    font-size: 19px !important;
-    text-align: center;
+    font-size: 15.5px !important;
+    font-weight: 800;
+    text-align:start;
   }
 
 

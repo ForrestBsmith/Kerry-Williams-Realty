@@ -35,14 +35,14 @@
       "Energy Star Appliances",
       "Ceiling Fans"
     ],
-    "image": "featurette 2.jpeg",
+    "image": "img/featurette 2.jpeg",
     "listedDaysAgo": 5,
     "lat": 31.6131,
     "lng": -97.1295,
     "images": [
-      "featurette 2.jpeg",
-      "featurette 2.jpeg"
-    ],
+      "img/featurette 2.jpeg",
+      "slide 2.jpeg"
+],
     "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
   },
   {
@@ -81,13 +81,13 @@
       "Energy Star Appliances",
       "Ceiling Fans"
     ],
-    "image": "featurette 2.jpeg",
+    "image": "img/featurette 2.jpeg",
     "listedDaysAgo": 10,
     "lat": 31.4150,
     "lng": -97.2300,
     "images": [
-      "featurette 3.jpeg",
-      "featurette 3.jpeg"
+      "img/featurette 2.jpeg",
+      "img/featurette 2.jpeg"
     ],
         "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
   },
@@ -124,13 +124,13 @@
       "Double Pane Windows",
       "Ceiling Fans"
     ],
-    "image": "featurette 2.jpeg",
+    "image": "img/featurette 2.jpeg",
     "listedDaysAgo": 15,
     "lat": 31.6120,
     "lng": -97.5280,
     "images": [
-      "featurette 4.jpeg",
-      "featurette 4.jpeg"
+      "img/featurette 2.jpeg",
+      "img/featurette 2.jpeg"
     ],
         "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
   },
@@ -169,13 +169,13 @@
       "Energy Star Appliances",
       "Ceiling Fans"
     ],
-    "image": "featurette 2.jpeg",
+    "image": "img/featurette 2.jpeg",
     "listedDaysAgo": 8,
     "lat": 31.4440,
     "lng": -97.5310,
     "images": [
-      "featurette 5.jpeg",
-      "featurette 5.jpeg"
+      "img/featurette 2.jpeg",
+      "img/featurette 2.jpeg"
     ],
      "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
   },
@@ -211,13 +211,13 @@
       "Double Pane Windows",
       "Ceiling Fans"
     ],
-    "image": "featurette 2.jpeg",
+    "image": "img/featurette 2.jpeg",
     "listedDaysAgo": 12,
     "lat": 31.6110,
     "lng": -97.2200,
     "images": [
-      "featurette 6.jpeg",
-      "featurette 6.jpeg"
+      "img/featurette 2.jpeg",
+      "img/featurette 2.jpeg"
     ],
     "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
   },
@@ -256,13 +256,13 @@
       "Energy Star Appliances",
       "Ceiling Fans"
     ],
-    "image": "featurette 2.jpeg",
+    "image": "img/featurette 2.jpeg",
     "listedDaysAgo": 7,
     "lat": 31.3160,
     "lng": -97.3720,
     "images": [
-      "featurette 7.jpeg",
-      "featurette 7.jpeg"
+      "img/featurette 2.jpeg",
+      "img/featurette 2.jpeg"
     ],
         "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
   }

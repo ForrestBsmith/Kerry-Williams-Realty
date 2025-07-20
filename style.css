@@ -91,6 +91,7 @@ footer a:hover {
 }
 .btn-sm {
   border: none !important;
+  font-size: 15px !important;
 }
 
 .addressbutton{
@@ -114,13 +115,12 @@ footer a:hover {
   box-shadow: none !important; 
 }
 
+/* random fixes might delete soon*/
 
 
 
 /* AGENTS SECTION */
-a:hover{
-  color: white !important;
-}
+
 
 p{
   margin: 0em !important;

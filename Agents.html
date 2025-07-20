@@ -13,14 +13,14 @@
 <header>
 <nav class="navbar navbar-expand-sm">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">Kelly Williams Realty</a>
+    <a class="navbar-brand" href="index.html"><h2>Kelly Williams Realty</h2></a>
     <button class="navbar-toggler bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav text-center mt-3">
         <li class="nav-item"><a class="nav-link" href="Agents.html">AGENTS</a></li>
-        <li class="nav-item"><a class="nav-link" href="Buying.html">BUYING/RENTING</a></li>
+        <li class="nav-item"><a class="nav-link" href="Buying.html">BUYING</a></li>
         <li class="nav-item"><a class="nav-link" href="Selling.html">SELLING</a></li>
         <li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
       </ul>
@@ -49,26 +49,34 @@
   // Example data (replace with your real data source)
   const realtorData = [
     {
-      name: "Jane Doe",
+      name: "Mark Smith",
       lic: "LIC #123456",
       phone: "(123) 456-7890",
-      email: "jane@example.com",
-      image: "business-headshot-photographer-professional-headshots-8.jpg",
+      email: "KW@example.com",
+      image: "realtor.jpg",
       profileUrl: "/agent/jane-doe"
     },
     {
       name: "John Smith",
       lic: "LIC #654321",
       phone: "(987) 654-3210",
-      email: "john@example.com",
-      image: "business-headshot-photographer-professional-headshots-3.jpg",
+      email: "KW@example.com",
+      image: "realtor-1.jpg",
       profileUrl: "/agent/john-smith"
     },
         {
-      name: "John Smith",
+      name: "Janet Smith",
       lic: "LIC #654321",
       phone: "(987) 654-3210",
-      email: "john@example.com",
+      email: "KW@example.com",
+      image: "business-headshot-photographer-professional-headshots-3.jpg",
+      profileUrl: "/agent/john-smith"
+    },
+            {
+      name: "Janet Smith",
+      lic: "LIC #654321",
+      phone: "(987) 654-3210",
+      email: "KW@example.com",
       image: "business-headshot-photographer-professional-headshots-8.jpg",
       profileUrl: "/agent/john-smith"
     }
@@ -80,13 +88,13 @@
     const card = document.createElement("div");
     card.className = "col-md-3 mb-4";
   card.innerHTML = `
-  <div class="card agent-card shadow-sm p-3">
-    <div class="row g-3 align-items-center">
+  <div class="card agent-card shadow-sm p-0">
+    <div class="row g-4 align-items-center">
       <!-- Realtor Photo (Smaller & Rounded) -->
-      <div class="col-3 d-flex justify-content-center">
+      <div class="col-3 d-flex justify-content-center" style="padding: 0em;">
         <img src="${prop.image}" alt="${prop.name}" 
-             class="img-fluid" 
-             style="max-width: 80px; height: 120px; object-fit: fill;">
+             class="img-fluid mb-1" 
+             style="width:100px ; height: 130px; margin-left: 1.5em; margin-top: 1em; object-fit: fill;">
       </div>
 
       <!-- Realtor Info -->
@@ -96,7 +104,7 @@
             <h6 class="card-title mb-1 fw-semibold" style="font-size: 0.95rem;">${prop.name}</h6>
             <p class="text-muted mb-0" style="font-size: 0.85rem;">${prop.lic}</p>
           </div>
-          <div class="col-6 text-end">
+          <div class=" text-muted col-6">
             <p class="mb-1" style="font-size: 0.85rem;">📞 ${prop.phone}</p>
             <p class="mb-0" style="font-size: 0.75rem;">✉️ ${prop.email}</p>
           </div>
@@ -104,8 +112,8 @@
       </div>
 
        <!-- View Listings Button -->
-        <div class="col-12 mt-2">
-          <a href="agent.html?agent=${encodeURIComponent(prop.name)}" class="btn btn-sm w-100">View Listings</a>
+        <div class="col-12 listingbutton">
+          <a href="agent.html?agent=${encodeURIComponent(prop.name)}" class="btn btn-sm w-100 pt-0">View Listings</a>
         </div>
     </div>
   </div>

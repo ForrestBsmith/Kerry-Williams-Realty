@@ -67,26 +67,24 @@ body, html {
 
 a{
   text-decoration: none !important;
-  color: inherit !important; /* Inherit color from parent */
+  color: inherit !important; 
 }
-/* Ensure links in the footer have a consistent color */
 footer a {
-  color: #6c757d !important; /* Bootstrap's secondary color */
+  color: #6c757d !important; 
 }
-/* Ensure links in the footer have a consistent color on hover */
 footer a:hover {
-  color: #17181a !important; /* Darker shade for hover effect */
+  color: #17181a !important; 
 }
 
 .btn{
-  color: #222222 !important; /* Darker text color for contrast */
-  font-weight: 500 !important; /* Consistent font weight */
-  font-family: 'Poppins', sans-serif !important; /* Consistent font family */
-  font-size: 1rem !important; /* Consistent font size */
-  padding: 0.5rem 1rem !important; /* Consistent padding */
-  border: rgba(0, 0, 0, 0.195) 2.5px solid !important; /* Consistent border */
-  border-radius: 0.25rem !important; /* Consistent border radius */
-  transition: background-color 0.3s ease !important; /* Smooth transition for background color */
+  color: #222222 !important; 
+  font-weight: 500 !important; 
+  font-family: 'Poppins', sans-serif !important; 
+  font-size: 1rem !important; 
+  padding: 0.5rem 1rem !important; 
+  border: rgba(0, 0, 0, 0.195) 2.5px solid !important; 
+  border-radius: 0.25rem !important; 
+  transition: background-color 0.3s ease !important; 
 }
 .p-2{
   border: none !important;
@@ -96,7 +94,7 @@ footer a:hover {
 }
 
 .addressbutton{
-  font-size: 0.75rem !important; /* Smaller font size for the button */
+  font-size: 0.75rem !important; 
 }
 
 .btn-light i {
@@ -112,19 +110,16 @@ footer a:hover {
 }
 
 .housebutton:hover {
-  border: #17181a 1.5px solid !important; /* Add border on hover */
-  box-shadow: none !important; /* Remove any box shadow on hover */
+  border: #17181a 1.5px solid !important; 
+  box-shadow: none !important; 
 }
 
 
 
 
 /* AGENTS SECTION */
-
-.agent-card img {
-  width: 100%;           /* Ensures it spans full card width */
-  height: 300px;         /* Set your desired height */
-  object-fit: cotain;     /* Crops to fill the box */
+a:hover{
+  color: white !important;
 }
 
 p{
@@ -135,6 +130,23 @@ p{
   transform: scale(1.02);
   transition: all 0.2s ease-in-out;
 }
+
+a.btn-sm{
+  background-color: rgba(106, 142, 35, 0.454);
+  border: solid .25px black !important;
+}
+
+
+.listingbutton{
+  padding-top: 0em !important; 
+  margin-top: 0em !important;
+}
+
+h6{
+  background-color: rgba(106, 142, 35, 0.454);
+}
+
+
 
 
 /* modal body*/

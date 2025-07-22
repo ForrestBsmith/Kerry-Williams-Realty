@@ -134,18 +134,13 @@ p{
 a.btn-sm{
   background-color: rgba(106, 142, 35, 0.454);
   border: solid .25px black !important;
-}
-
-
-.listingbutton{
-  padding-top: 0em !important; 
-  margin-top: 0em !important;
+  padding-bottom: .1em !important;
+  padding-top: .1em !important;
 }
 
 h6{
   background-color: rgba(106, 142, 35, 0.454);
 }
-
 
 
 

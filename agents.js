@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
               <!-- View Listings Button -->
               <div class="col-12 listingbutton">
-                <a href="agent.html?agent=${encodeURIComponent(agent.id)}" class="btn btn-sm w-100 pt-0">View Listings</a>
+                <a href="agent.html?agent=${encodeURIComponent(agent.id)}" class="btn btn-sm w-100">View Listings</a>
               </div>
             </div>
           </div>

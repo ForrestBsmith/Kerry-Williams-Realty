@@ -1,269 +1,120 @@
-[
-  {
-    "address": "123 Main St",
-    "city": "China Spring",
-    "zip": "95814",
-    "price": 450000,
-    "bedrooms": 3,
-    "bathrooms": 2,
-    "type": "House",
-    "squareFeet": 1920,
-    "yearBuilt": 2015,
-    "lotSize": 0.25,
-    "garage": "2-car attached",
-    "hoaFees": 125,
-    "schoolDistrict": "China Spring ISD",
-    "heating": "Central Electric",
-    "cooling": "Central Air",
-    "flooring": "Laminate, Tile",
-    "roof": "Composition Shingle",
-    "exterior": "Brick",
-    "interiorFeatures": [
-      "Open Floor Plan",
-      "Granite Countertops",
-      "Walk-in Closets",
-      "Recessed Lighting",
-      "Stainless Steel Appliances"
-    ],
-    "exteriorFeatures": [
-      "Covered Patio",
-      "Fenced Backyard",
-      "Sprinkler System"
-    ],
-    "energyFeatures": [
-      "Double Pane Windows",
-      "Energy Star Appliances",
-      "Ceiling Fans"
-    ],
-    "image": "img/featurette 2.jpeg",
-    "listedDaysAgo": 5,
-    "lat": 31.6131,
-    "lng": -97.1295,
-    "images": [
-      "img/featurette 2.jpeg",
-      "slide 2.jpeg"
-],
-    "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
-  },
-  {
-    "address": "456 Oak Ave",
-    "city": "China Spring",
-    "zip": "95814",
-    "price": 475000,
-    "bedrooms": 4,
-    "bathrooms": 3,
-    "type": "House",
-    "squareFeet": 2200,
-    "yearBuilt": 2017,
-    "lotSize": 0.30,
-    "garage": "2-car attached",
-    "hoaFees": 130,
-    "schoolDistrict": "China Spring ISD",
-    "heating": "Central Electric",
-    "cooling": "Central Air",
-    "flooring": "Hardwood, Tile",
-    "roof": "Composition Shingle",
-    "exterior": "Brick",
-    "interiorFeatures": [
-      "Open Floor Plan",
-      "Granite Countertops",
-      "Fireplace",
-      "Walk-in Closets",
-      "Stainless Steel Appliances"
-    ],
-    "exteriorFeatures": [
-      "Covered Porch",
-      "Fenced Backyard",
-      "Sprinkler System"
-    ],
-    "energyFeatures": [
-      "Double Pane Windows",
-      "Energy Star Appliances",
-      "Ceiling Fans"
-    ],
-    "image": "img/featurette 2.jpeg",
-    "listedDaysAgo": 10,
-    "lat": 31.4150,
-    "lng": -97.2300,
-    "images": [
-      "img/featurette 2.jpeg",
-      "img/featurette 2.jpeg"
-    ],
-        "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
-  },
-  {
-    "address": "789 Pine Rd",
-    "city": "China Spring",
-    "zip": "95814",
-    "price": 420000,
-    "bedrooms": 3,
-    "bathrooms": 2,
-    "type": "House",
-    "squareFeet": 1800,
-    "yearBuilt": 2012,
-    "lotSize": 0.20,
-    "garage": "1-car attached",
-    "hoaFees": 115,
-    "schoolDistrict": "China Spring ISD",
-    "heating": "Central Electric",
-    "cooling": "Central Air",
-    "flooring": "Laminate, Carpet",
-    "roof": "Composition Shingle",
-    "exterior": "Vinyl",
-    "interiorFeatures": [
-      "Open Floor Plan",
-      "Granite Countertops",
-      "Walk-in Closets",
-      "Recessed Lighting"
-    ],
-    "exteriorFeatures": [
-      "Covered Patio",
-      "Fenced Backyard"
-    ],
-    "energyFeatures": [
-      "Double Pane Windows",
-      "Ceiling Fans"
-    ],
-    "image": "img/featurette 2.jpeg",
-    "listedDaysAgo": 15,
-    "lat": 31.6120,
-    "lng": -97.5280,
-    "images": [
-      "img/featurette 2.jpeg",
-      "img/featurette 2.jpeg"
-    ],
-        "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
-  },
-  {
-    "address": "101 Maple Ln",
-    "city": "China Spring",
-    "zip": "95814",
-    "price": 460000,
-    "bedrooms": 4,
-    "bathrooms": 2.5,
-    "type": "House",
-    "squareFeet": 2100,
-    "yearBuilt": 2014,
-    "lotSize": 0.28,
-    "garage": "2-car attached",
-    "hoaFees": 120,
-    "schoolDistrict": "China Spring ISD",
-    "heating": "Central Electric",
-    "cooling": "Central Air",
-    "flooring": "Hardwood",
-    "roof": "Composition Shingle",
-    "exterior": "Brick",
-    "interiorFeatures": [
-      "Granite Countertops",
-      "Fireplace",
-      "Walk-in Closets",
-      "Recessed Lighting"
-    ],
-    "exteriorFeatures": [
-      "Covered Porch",
-      "Fenced Backyard",
-      "Sprinkler System"
-    ],
-    "energyFeatures": [
-      "Double Pane Windows",
-      "Energy Star Appliances",
-      "Ceiling Fans"
-    ],
-    "image": "img/featurette 2.jpeg",
-    "listedDaysAgo": 8,
-    "lat": 31.4440,
-    "lng": -97.5310,
-    "images": [
-      "img/featurette 2.jpeg",
-      "img/featurette 2.jpeg"
-    ],
-     "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
-  },
-  {
-    "address": "202 Birch St",
-    "city": "China Spring",
-    "zip": "95814",
-    "price": 430000,
-    "bedrooms": 3,
-    "bathrooms": 2,
-    "type": "House",
-    "squareFeet": 1850,
-    "yearBuilt": 2013,
-    "lotSize": 0.22,
-    "garage": "2-car attached",
-    "hoaFees": 110,
-    "schoolDistrict": "China Spring ISD",
-    "heating": "Central Electric",
-    "cooling": "Central Air",
-    "flooring": "Laminate",
-    "roof": "Composition Shingle",
-    "exterior": "Vinyl",
-    "interiorFeatures": [
-      "Open Floor Plan",
-      "Granite Countertops",
-      "Walk-in Closets"
-    ],
-    "exteriorFeatures": [
-      "Covered Patio",
-      "Fenced Backyard"
-    ],
-    "energyFeatures": [
-      "Double Pane Windows",
-      "Ceiling Fans"
-    ],
-    "image": "img/featurette 2.jpeg",
-    "listedDaysAgo": 12,
-    "lat": 31.6110,
-    "lng": -97.2200,
-    "images": [
-      "img/featurette 2.jpeg",
-      "img/featurette 2.jpeg"
-    ],
-    "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
-  },
-  {
-    "address": "303 Cedar Ct",
-    "city": "China Spring",
-    "zip": "95814",
-    "price": 440000,
-    "bedrooms": 3,
-    "bathrooms": 2,
-    "type": "House",
-    "squareFeet": 1900,
-    "yearBuilt": 2016,
-    "lotSize": 0.27,
-    "garage": "2-car attached",
-    "hoaFees": 115,
-    "schoolDistrict": "China Spring ISD",
-    "heating": "Central Electric",
-    "cooling": "Central Air",
-    "flooring": "Hardwood, Tile",
-    "roof": "Composition Shingle",
-    "exterior": "Brick",
-    "interiorFeatures": [
-      "Open Floor Plan",
-      "Granite Countertops",
-      "Walk-in Closets",
-      "Recessed Lighting"
-    ],
-    "exteriorFeatures": [
-      "Covered Patio",
-      "Fenced Backyard",
-      "Sprinkler System"
-    ],
-    "energyFeatures": [
-      "Double Pane Windows",
-      "Energy Star Appliances",
-      "Ceiling Fans"
-    ],
-    "image": "img/featurette 2.jpeg",
-    "listedDaysAgo": 7,
-    "lat": 31.3160,
-    "lng": -97.3720,
-    "images": [
-      "img/featurette 2.jpeg",
-      "img/featurette 2.jpeg"
-    ],
-        "description": "A beautiful 3-bedroom home with modern features, nestled in the desirable China Spring area. Featuring open living spaces, modern finishes, and a spacious backyard perfect for entertaining."
-  }
-]
+[{
+  "agents": [
+    {
+      "id": "mark-smith",
+      "name": "Mark Smith",
+      "lic": "LIC #123456",
+      "phone": "(123) 456-7890",
+      "email": "KW@example.com",
+      "image": "realtor.jpg",
+      "profileUrl": "/agent/mark-smith",
+      "numberofproperties": "4",
+      "propertiessold": "10",
+      "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction."
+    },
+        {
+      "id": "Janet-smith",
+      "name": "Janet Smith",
+      "lic": "LIC #123456",
+      "phone": "(123) 456-7890",
+      "email": "KW@example.com",
+      "image": "realtor-2.jpg",
+      "profileUrl": "/agent/Janet-smith",
+      "numberofproperties": "1",
+      "propertiessold": "10",
+      "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction."
+    }
+  ],
+  "properties": [
+    {
+      "agentId": "Janet-smith",
+      "address": "123 Main St",
+      "city": "China Spring",
+      "zip": "95814",
+      "price": 475000,
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "type": "House",
+      "squareFeet": 2200,
+      "yearBuilt": 2017,
+      "lotSize": 0.30,
+      "garage": "2-car attached",
+      "hoaFees": 130,
+      "schoolDistrict": "China Spring ISD",
+      "heating": "Central Electric",
+      "cooling": "Central Air",
+      "flooring": "Hardwood, Tile",
+      "roof": "Composition Shingle",
+      "exterior": "Brick",
+      "interiorFeatures": [
+        "Open Floor Plan",
+        "Granite Countertops",
+        "Fireplace",
+        "Walk-in Closets",
+        "Stainless Steel Appliances"
+      ],
+      "exteriorFeatures": [
+        "Covered Porch",
+        "Fenced Backyard",
+        "Sprinkler System"
+      ],
+      "energyFeatures": [
+        "Double Pane Windows",
+        "Energy Star Appliances",
+        "Ceiling Fans"
+      ],
+      "image": "img/featurette 2.jpeg",
+      "listedDaysAgo": 10,
+      "lat": 31.4150,
+      "lng": -97.2300,
+      "images": [
+        "img/featurette 2.jpeg",
+        "img/featurette 2.jpeg"
+      ],
+      "description": "Spacious and stylish 4-bedroom family home with modern updates and a great location. Includes beautiful hardwood floors, a large fenced yard, and smart energy-saving features."
+    },
+    {
+      "agentId": "mark-smith",
+      "address": "789 Elm St",
+      "city": "China Spring",
+      "zip": "95815",
+      "price": 385000,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "type": "Single Family",
+      "squareFeet": 1800,
+      "yearBuilt": 2015,
+      "lotSize": 0.25,
+      "garage": "2-car attached",
+      "hoaFees": 100,
+      "schoolDistrict": "China Spring ISD",
+      "heating": "Central Gas",
+      "cooling": "Central Air",
+      "flooring": "Carpet, Tile",
+      "roof": "Asphalt Shingle",
+      "exterior": "Stucco",
+      "interiorFeatures": [
+        "Vaulted Ceilings",
+        "Breakfast Bar",
+        "Walk-in Pantry"
+      ],
+      "exteriorFeatures": [
+        "Covered Patio",
+        "Garden Area"
+      ],
+      "energyFeatures": [
+        "Solar Panels",
+        "Insulated Windows"
+      ],
+      "image": "img/featurette 2.jpeg",
+      "listedDaysAgo": 3,
+      "lat": 31.4165,
+      "lng": -97.2350,
+      "images": [
+        "img/featurette 2.jpeg",
+        "img/featurette 2.jpeg"
+      ],
+      "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
+    }
+  ]
+}]

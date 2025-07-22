@@ -13,15 +13,27 @@
       "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction."
     },
         {
-      "id": "Janet-smith",
+      "id": "janet-smith",
       "name": "Janet Smith",
       "lic": "LIC #123456",
       "phone": "(123) 456-7890",
       "email": "KW@example.com",
       "image": "realtor-2.jpg",
-      "profileUrl": "/agent/Janet-smith",
+      "profileUrl": "/agent/janet-smith",
       "numberofproperties": "1",
       "propertiessold": "10",
+      "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction."
+    },
+    {
+      "id": "Lance-smith",
+      "name": "Lance Smith",
+      "lic": "LIC #123456",
+      "phone": "(123) 456-7890",
+      "email": "KW@example.com",
+      "image": "realtor-1.jpg",
+      "profileUrl": "/agent/Lance-smith",
+      "numberofproperties": "3",
+      "propertiessold": "75",
       "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction."
     }
   ],

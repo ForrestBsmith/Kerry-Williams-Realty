@@ -84,7 +84,7 @@ footer a:hover {
   padding: 0.5rem 1rem !important; 
   border: rgba(0, 0, 0, 0.195) 2.5px solid !important; 
   border-radius: 0.25rem !important; 
-  transition: background-color 0.3s ease !important; 
+  transition:background-color 0.3s ease !important; 
 }
 .p-2{
   border: none !important;

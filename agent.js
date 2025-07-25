@@ -40,17 +40,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (bioContainer) {
         const bioSection = `
-          <div class="card agent-card shadow-sm p-0 mb-4">
-            <div class="row g-4 align-items-center">
+          <div class="card agent-card shadow-sm p-3 mb-4">
+            <div class="row g-2 align-items-center">
               <div class="d-flex" style="padding: 0em;">
                 <img src="${agent.image || 'placeholder.jpg'}" alt="${agent.name || 'Featured Agent'}" 
                      class="img-fluid mb-1" 
-                     style="width: 150px; height: 200px; margin-left: 1.5em; margin-top: 1em; object-fit: cover;">
+                     style="width: 100px; height: auto; margin-left: 1.5em; margin-top: 1em; object-fit: cover; margin-right:3em;">
                 <div class="text-end text-muted col-6 mt-5">
-                  <p class="mb-1 mt-0" style="font-size: 0.9rem;">📞 ${agent.phone || 'N/A'}</p>
-                  <p class="mb-1" style="font-size: 0.9rem;">✉️ ${agent.email || 'N/A'}</p>
-                  <p class="mb-0 mt-5" style="font-size: 0.9rem;">Properties Listed: ${agent.numberofproperties || 'N/A'}</p>
-                  <p class="mb-0" style="font-size: 0.9rem;">Properties Sold: ${agent.propertiessold || 'N/A'}</p>
+                  <p class="mb-1 mt-0" style="font-size: 1rem;">📞 ${agent.phone || 'N/A'}</p>
+                  <p class="mb-1" style="font-size: 1rem;">✉️ ${agent.email || 'N/A'}</p>
+                  <p class="mb-0 mt-5" style="font-size: 1rem;">Properties Listed: ${agent.numberofproperties || 'N/A'}</p>
+                  <p class="mb-0" style="font-size: 1rem;">Properties Sold: ${agent.propertiessold || 'N/A'}</p>
                 </div>
               </div>
               <div>

@@ -1,43 +1,59 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Get agent ID from URL query parameter (matches agents.js 'agent' parameter)
+  // Get agent ID from URL query parameter
   const urlParams = new URLSearchParams(window.location.search);
-  const agentId = urlParams.get("agent");
+  const agentId = urlParams.get("agent")?.toLowerCase();
 
+  // DOM elements
+  const container = document.getElementById("property-list");
+  const nameHeader = document.getElementById("agent-name");
+  const bioContainer = document.getElementById("agent-bio");
+
+  // Validate critical DOM elements
+  if (!container || !nameHeader) {
+    console.error("Critical DOM elements missing:", { container, nameHeader });
+    if (container) {
+      container.innerHTML = `<div class="col-12 text-danger">Error: Page elements not found. Please try again later.</div>`;
+    }
+    return;
+  }
+
+  if (!bioContainer) {
+    console.warn("bioContainer (agent-bio) not found; skipping agent bio rendering");
+  }
+
+  // Fetch properties data
   fetch("properties-1.json")
     .then(res => {
-      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
       return res.json();
     })
     .then(data => {
       console.log("Fetched JSON data:", data);
 
-      const container = document.getElementById("property-list");
-      const nameHeader = document.getElementById("agent-name");
-      const bioContainer = document.getElementById("agent-bio");
-
-      if (!container || !nameHeader) {
-        console.error("Critical DOM elements missing:", { container, nameHeader });
-        return;
+      // Validate JSON structure
+      const jsonData = Array.isArray(data) && data.length > 0 ? data[0] : null;
+      if (!jsonData || !Array.isArray(jsonData.agents) || !Array.isArray(jsonData.properties)) {
+        throw new Error("Invalid JSON structure: Expected an array with agents and properties");
       }
 
-      if (!bioContainer) {
-        console.warn("bioContainer (agent-bio) not found; skipping agent bio rendering");
-      }
+      const agentsArray = jsonData.agents;
+      const properties = jsonData.properties;
 
-      const jsonData = Array.isArray(data) && data.length > 0 ? data[0] : {};
-      const agentsArray = Array.isArray(jsonData.agents) ? jsonData.agents : [];
-      const properties = Array.isArray(jsonData.properties) ? jsonData.properties : [];
-
-      const agent = agentsArray.find(agent => agent.id.toLowerCase() === agentId?.toLowerCase());
-      if (!agent) {
+      // Find agent by ID
+      const agent = agentsArray.find(agent => String(agent.id).toLowerCase() === agentId);
+      if (!agentId || !agent) {
         console.error("Agent not found for ID:", agentId);
         container.innerHTML = `<div class="col-12 text-danger">Agent not found.</div>`;
         nameHeader.textContent = "Agent Profile";
         return;
       }
 
-      nameHeader.textContent = "Agents Listings";
+      // Update header
+      nameHeader.textContent = `${agent.name || "Agent"}'s Listings`;
 
+      // Render agent bio if container exists
       if (bioContainer) {
         const bioSection = `
           <div class="card agent-card shadow-sm p-3 mb-4">
@@ -69,8 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Filter and render agent's properties
-      const agentProperties = properties.filter(prop => prop.agentId.toLowerCase() === agent.id.toLowerCase());
-
+      const agentProperties = properties.filter(prop => String(prop.agentId).toLowerCase() === agentId);
       console.log(`Properties for agent ${agent.name || "Unknown"}:`, agentProperties);
 
       if (agentProperties.length === 0) {
@@ -110,84 +125,114 @@ document.addEventListener("DOMContentLoaded", () => {
           `;
           container.insertAdjacentHTML("beforeend", card);
         });
-
-        // 🔁 Now that cards are rendered, attach event listeners to buttons
-
-        document.querySelectorAll('.btn-photos').forEach(button => {
-          button.addEventListener('click', () => {
-            const index = button.getAttribute('data-index');
-            const prop = agentProperties[index];
-            document.getElementById("photosModal").innerHTML = `
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">Photos - ${prop.address}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-                  <div class="modal-body text-center">
-                    <img src="${prop.image}" class="img-fluid" alt="Property photo">
-                  </div>
-                </div>
-              </div>
-            `;
-          });
-        });
-
-        document.querySelectorAll('.btn-schedule').forEach(button => {
-          button.addEventListener('click', () => {
-            const index = button.getAttribute('data-index');
-            const prop = agentProperties[index];
-            document.getElementById("scheduleModal").innerHTML = `
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">Schedule Visit - ${prop.address}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-                  <div class="modal-body">
-                    <p>Please contact the agent to schedule a viewing.</p>
-                    <p><strong>Agent:</strong> ${agent.name}</p>
-                    <p><strong>Phone:</strong> ${agent.phone}</p>
-                    <p><strong>Email:</strong> ${agent.email}</p>
-                  </div>
-                </div>
-              </div>
-            `;
-          });
-        });
-
-        document.querySelectorAll('.btn-details').forEach(button => {
-          button.addEventListener('click', () => {
-            const index = button.getAttribute('data-index');
-            const prop = agentProperties[index];
-            document.getElementById("detailsModal").innerHTML = `
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">${prop.address}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-                  <div class="modal-body">
-                    <ul>
-                      <li><strong>Price:</strong> $${Number(prop.price).toLocaleString()}</li>
-                      <li><strong>Beds:</strong> ${prop.bedrooms}</li>
-                      <li><strong>Baths:</strong> ${prop.bathrooms}</li>
-                      <li><strong>SqFt:</strong> ${prop.squareFeet}</li>
-                      <li><strong>Description:</strong> ${prop.description}</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            `;
-          });
-        });
       }
+
+      // Modal Event Delegation
+      document.addEventListener('click', (e) => {
+        const index = e.target.getAttribute('data-index');
+        if (index === null) return;
+
+        const prop = agentProperties[index];
+        if (!prop) return;
+
+        // View Photos
+        if (e.target.classList.contains('btn-photos')) {
+          const photosModal = document.querySelector('#photosModal');
+          if (photosModal) {
+            document.querySelector('#photosModal .modal-title').textContent = `Home Address - ${prop.address || 'Property'}`;
+            document.querySelector('#photosModalBody').innerHTML = `
+              <div id="carousel-${index}" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  ${(prop.images || [prop.image || 'placeholder.jpg']).map(
+                    (img, i) => `
+                      <div class="carousel-item photoscarousel ${i === 0 ? 'active' : ''}">
+                        <img src="${img}" class="d-block w-100" alt="Photo ${i + 1}">
+                      </div>
+                    `
+                  ).join('')}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${index}" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" style="margin-bottom: 200px;"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-${index}" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" style="margin-bottom: 200px;"></span>
+                </button>
+              </div>
+            `;
+          } else {
+            console.error("Photos modal (#photosModal) not found in DOM");
+          }
+        }
+
+        // Schedule Form
+        if (e.target.classList.contains('btn-schedule')) {
+          const scheduleModal = document.querySelector('#scheduleModal');
+          if (scheduleModal) {
+            document.querySelector('#scheduleModal .modal-title').textContent = `Schedule a Viewing - ${prop.address || 'Property'}`;
+            document.querySelector('#scheduleModalBody').innerHTML = `
+              <form>
+                <div class="mb-3">
+                  <label class="form-label">Your Name</label>
+                  <input type="text" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Preferred Date</label>
+                  <input type="date" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" required>
+                </div>
+                <button type="submit" class="btn w-100">Submit Request</button>
+              </form>
+            `;
+          } else {
+            console.error("Schedule modal (#scheduleModal) not found in DOM");
+          }
+        }
+
+        // Property Details
+        if (e.target.classList.contains('btn-details')) {
+          const detailsModal = document.querySelector('#detailsModal');
+          if (detailsModal) {
+            document.querySelector('#detailsModal .modal-title').textContent = `Property Details - ${prop.address || 'Property'}`;
+            const detailsHTML = `
+              <p><strong>Address:</strong> ${prop.address || 'N/A'}, ${prop.city || 'N/A'}, TX ${prop.zip || 'N/A'}</p>
+              <p><strong>Price:</strong> $${Number(prop.price || 0).toLocaleString()}</p>
+              <p><strong>Bedrooms:</strong> ${prop.bedrooms || 'N/A'}</p>
+              <p><strong>Bathrooms:</strong> ${prop.bathrooms || 'N/A'}</p>
+              <p><strong>Type:</strong> ${prop.type || 'N/A'}</p>
+              <p><strong>Square Feet:</strong> ${prop.squareFeet ? prop.squareFeet.toLocaleString() : 'N/A'} sqft</p>
+              <p><strong>Year Built:</strong> ${prop.yearBuilt || 'N/A'}</p>
+              <p><strong>Lot Size:</strong> ${prop.lotSize ? `${prop.lotSize} acres` : 'N/A'}</p>
+              <p><strong>Garage:</strong> ${prop.garage || 'N/A'}</p>
+              <p><strong>HOA Fees:</strong> ${prop.hoaFees ? `$${prop.hoaFees}/mo` : 'None'}</p>
+              <p><strong>School District:</strong> ${prop.schoolDistrict || 'N/A'}</p>
+              <p><strong>Heating:</strong> ${prop.heating || 'N/A'}</p>
+              <p><strong>Cooling:</strong> ${prop.cooling || 'N/A'}</p>
+              <p><strong>Flooring:</strong> ${prop.flooring || 'N/A'}</p>
+              <p><strong>Roof:</strong> ${prop.roof || 'N/A'}</p>
+              <p><strong>Exterior:</strong> ${prop.exterior || 'N/A'}</p>
+              ${prop.description ? `<p><strong>Description:</strong> ${prop.description}</p>` : ''}
+              ${prop.interiorFeatures?.length ? `<p><strong>Interior Features:</strong></p><ul>${prop.interiorFeatures
+                .map(f => `<li>${f}</li>`)
+                .join('')}</ul>` : ''}
+              ${prop.exteriorFeatures?.length ? `<p><strong>Exterior Features:</strong></p><ul>${prop.exteriorFeatures
+                .map(f => `<li>${f}</li>`)
+                .join('')}</ul>` : ''}
+              ${prop.energyFeatures?.length ? `<p><strong>Energy Efficiency:</strong></p><ul>${prop.energyFeatures
+                .map(f => `<li>${f}</li>`)
+                .join('')}</ul>` : ''}
+            `;
+            document.querySelector('#detailsModalBody').innerHTML = detailsHTML;
+          } else {
+            console.error("Details modal (#detailsModal) not found in DOM");
+          }
+        }
+      });
     })
     .catch(err => {
       console.error("Error loading data:", err);
-      const container = document.getElementById("property-list");
-      if (container) {
-        container.innerHTML = `<div class="col-12 text-danger">Failed to load properties: ${err.message}</div>`;
-      }
+      container.innerHTML = `<div class="col-12 text-danger">Failed to load properties: ${err.message}. Please try refreshing the page.</div>`;
     });
 });

@@ -35,38 +35,49 @@
     <div id="agent-bio" class=""></div>
     <div id="property-list" class="row"></div>
 
-    <!-- Photos Modal -->
-<div class="modal fade" id="photosModal" tabindex="-1" aria-hidden="true">
+<!-- Photos Modal -->
+<div class="modal fade" id="photosModal" tabindex="-1" aria-labelledby="photosModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
-    <div class="modal-content" id="photosModalContent"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="photosModalLabel">Home Address</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="photosModalBody">
+        <!-- Carousel will be injected here -->
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- Schedule Modal -->
- <div class="modal fade" id="btn-schedule" tabindex="-1" aria-hidden="true">
-      <form>
-        <div class="mb-3" id="scheduleModalBody">
-          <label class="form-label"></label>
-          <input type="text" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label"></label>
-          <input type="date" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label"></label>
-          <input type="email" class="form-control" required>
-        </div>
-        <button type="submit" class="btn w-100"></button>
-      </form>
- </div>
-
-<!-- Details Modal -->
-<div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content" id="detailsModalContent"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="scheduleModalLabel">Schedule a Viewing</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="scheduleModalBody">
+        <!-- Form will be injected here -->
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- Details Modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailsModalLabel">Property Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="detailsModalBody">
+        <!-- Details will be injected here -->
+      </div>
+    </div>
+  </div>
 
   </main>
 

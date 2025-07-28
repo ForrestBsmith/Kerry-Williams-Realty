@@ -64,15 +64,19 @@ function renderProperties(propertyArray) {
     const card = `
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="card property-card border-0 shadow-sm h-100">
-          <!-- Property Image -->
-          <div class="position-relative">
-            <img src="${prop.image || 'placeholder.jpg'}" class="card-img-top object-fit-cover" alt="${
-      prop.address || 'Property'
-    }" style="height: 220px; border-top-left-radius: .5rem; border-top-right-radius: .5rem;">
-            <button class="btn position-absolute top-0 end-0 m-2 rounded-circle p-2">
-              <i class="bi bi-heart text-danger fs-5"></i>
-            </button>
-          </div>
+        <!-- Property Image (Clickable) -->
+<div class="position-relative">
+  <img 
+    src="${prop.image || 'placeholder.jpg'}" 
+    class="card-img-top object-fit-cover property-click" 
+    data-index="${index}"
+    style="height: 220px; cursor: pointer; border-top-left-radius: .5rem; border-top-right-radius: .5rem;"
+    alt="${prop.address || 'Property'}"
+  >
+  <button class="btn position-absolute top-0 end-0 m-2 rounded-circle p-2">
+    <i class="bi bi-heart text-danger fs-5"></i>
+  </button>
+</div>
           <div class="card-body">
             <!-- Price -->
             <h5 class="card-title fw-bold mb-2">$${Number(prop.price || 0).toLocaleString()}</h5>
@@ -114,6 +118,16 @@ document.addEventListener('click', (e) => {
 
   const prop = allProperties[index];
   if (!prop) return;
+
+  // Clicking on property image redirects to full page
+if (e.target.classList.contains('property-click')) {
+  const idx = e.target.getAttribute('data-index');
+  const prop = allProperties[idx];
+  const encodedAddress = encodeURIComponent(prop.address || '');
+  window.location.href = `property.html?id=${idx}&address=${encodedAddress}`;
+  return;
+}
+
 
   // View Photos
   if (e.target.classList.contains('btn-photos')) {

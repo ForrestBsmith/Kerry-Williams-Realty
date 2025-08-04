@@ -25,6 +25,26 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>${prop.description || 'No description provided.'}</p>
       `;
 
+      // Render property features
+      document.getElementById('property-features').innerHTML = `
+        <h3 class="mt-4 mb-4">Features</h3>
+          <p class="mb-2"><i class="bi-dash me-1"></i><strong>Year Built :</strong> ${prop.yearBuilt}</p>
+        <p class="mb-2"><i class="bi-dash me-1"></i><strong>Lot Size:</strong> ${prop.lotSize}</p>
+        <p class="mb-2"><i class="bi-dash me-1"></i><strong>Garage type:</strong> ${prop.garage}</p>
+        <p class="mb-2"><i class="bi-dash me-1"></i><strong>HOA Fees:</strong> ${prop.hoaFees}</p>
+        <p class="mb-2"><i class="bi-dash me-1"></i><strong>School District:</strong> ${prop.schoolDistrict}</p>
+        <p class="mb-2"><i class="bi-dash me-1"></i><strong>Heating:</strong> ${prop.heating}</p>
+        <p class="mb-2"><i class="bi-dash me-1"></i><strong>Flooring:</strong> ${prop.flooring}</p>
+        <p class="mb-2"><i class="bi-dash me-1"></i><strong>Exterior:</strong> ${prop.exterior}</p>
+        <p class="mb-2"><i class="bi-dash me-1"></i><strong>Interior Features:</strong> ${prop. interiorFeatures}</p>
+        <p class="mb-2"><i class="bi-dash me-1"></i><strong>Exterior Features:</strong> ${prop. exteriorFeatures}</p>
+
+
+    
+        
+      `;
+
+
       // Generate Fancybox-compatible image gallery
       const imageHtml = prop.images?.length
         ? `

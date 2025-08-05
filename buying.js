@@ -234,20 +234,19 @@ document.getElementById('property-search-form').addEventListener('submit', funct
     const matchesBedrooms = p.bedrooms >= bedrooms;
     const matchesBathrooms = p.bathrooms >= bathrooms;
 
-    let matchesLotSize = true;
-    if (lotSize) {
-      const lotSizeAcres = parseFloat(lotSize);
-      if (lotSize === 'under5000') matchesLotSize = p.lotSize < 5000 / 43560; // Convert sq.ft to acres
-      else if (lotSize === '5000-10000') matchesLotSize = p.lotSize >= 5000 / 43560 && p.lotSize <= 10000 / 43560;
-      else if (lotSize === 'over10000') matchesLotSize = p.lotSize > 10000 / 43560;
-    }
+let matchesLotSize = true;
+if (lotSize) {
+  const [minLot, maxLot] = lotSize.split('-').map(Number);
+  const lotInSqft = p.lotSize * 43560; // Convert acres to sq.ft
+  matchesLotSize = lotInSqft >= minLot && lotInSqft <= maxLot;
+}
 
-    let matchesSquareFeet = true;
-    if (squareFeet) {
-      if (squareFeet === 'under1000') matchesSquareFeet = p.squareFeet < 1000;
-      else if (squareFeet === '1000-2000') matchesSquareFeet = p.squareFeet >= 1000 && p.squareFeet <= 2000;
-      else if (squareFeet === 'over2000') matchesSquareFeet = p.squareFeet > 2000;
-    }
+
+let matchesSquareFeet = true;
+if (squareFeet) {
+  const [minSqft, maxSqft] = squareFeet.split('-').map(Number);
+  matchesSquareFeet = p.squareFeet >= minSqft && p.squareFeet <= maxSqft;
+}
 
     const matchesPrice = p.price <= maxPrice;
 

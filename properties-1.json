@@ -39,11 +39,11 @@
   ],
   "properties": [
     {
-      "agentId": "Janet-smith",
-      "address": "123 Main St",
-      "city": "China Spring",
-      "zip": "95814",
-      "price": 475000,
+      "agentId": "janet-smith",
+      "address": "789 Elm Ave",
+      "city": "Waco",
+      "zip": "76701",
+      "price": 275000,
       "bedrooms": 4,
       "bathrooms": 3,
       "type": "House",
@@ -75,33 +75,34 @@
         "Energy Star Appliances",
         "Ceiling Fans"
       ],
-      "image": "img/featurette 2.jpeg",
+      "image": "img/janetpropertyimg-1.webp",
       "listedDaysAgo": 10,
-      "lat": 31.4150,
-      "lng": -97.2300,
+      "lat": 31.568854,
+      "lng": -97.121261,
       "images": [
-        "img/featurette 2.jpeg",
-        "img/featurette 2.jpeg",
-        "img/featurette 2.jpeg"
+        "img/janetpropertyimg-1.webp",
+        "img/janetfloorplan-1.avif",
+        "img/janetlivingroom-1.jpg",
+        "img/janetbackyard-1.jpg"
         
       ],
       "description": "Spacious and stylish 4-bedroom family home with modern updates and a great location. Includes beautiful hardwood floors, a large fenced yard, and smart energy-saving features."
     },
     {
       "agentId": "mark-smith",
-      "address": "789 Elm St",
-      "city": "China Spring",
-      "zip": "95815",
-      "price": 385000,
+      "address": "1111 N 11th St",
+      "city": "Waco",
+      "zip": "76701",
+      "price": 195000,
       "bedrooms": 3,
       "bathrooms": 2,
       "type": "Single Family",
-      "squareFeet": 1800,
+      "squareFeet": 1500,
       "yearBuilt": 2015,
-      "lotSize": 0.25,
+      "lotSize": 0.22,
       "garage": "2-car attached",
       "hoaFees": 100,
-      "schoolDistrict": "China Spring ISD",
+      "schoolDistrict": "Waco ISD",
       "heating": "Central Gas",
       "cooling": "Central Air",
       "flooring": "Carpet, Tile",
@@ -120,13 +121,109 @@
         "Solar Panels",
         "Insulated Windows"
       ],
-      "image": "img/featurette 2.jpeg",
+      "image": "img/marksmithproperty-1.jpg",
       "listedDaysAgo": 3,
-      "lat": 31.4165,
-      "lng": -97.2350,
+      "lat": 31.558970,
+      "lng": -97.145020,
+      "images": [
+        "img/marksmithproperty-1.jpg",
+        "img/marksmithkitchen-1.jpg",
+        "img/marksmithlivingroom-1.jpg",
+        "img/marksmithbackyard-1.jpg"
+      ],
+      "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
+    },
+    {
+      "agentId": "Lance-smith",
+      "address": "707 S 9th St",
+      "city": "Waco",
+      "zip": "76706",
+      "price": 875000,
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "type": "House",
+      "squareFeet": 2200,
+      "yearBuilt": 2020,
+      "lotSize": 0.30,
+      "garage": "2-car attached",
+      "hoaFees": 0,
+      "schoolDistrict": "Waco ISD",
+      "heating": "Central Electric",
+      "cooling": "Central Air",
+      "flooring": "Hardwood, Tile",
+      "roof": "Composition Shingle",
+      "exterior": "Brick",
+      "interiorFeatures": [
+        "Open Floor Plan",
+        "Granite Countertops",
+        "Fireplace",
+        "Walk-in Closets",
+        "Stainless Steel Appliances"
+      ],
+      "exteriorFeatures": [
+        "Covered Porch",
+        "Fenced Backyard",
+        "Sprinkler System"
+      ],
+      "energyFeatures": [
+        "Double Pane Windows",
+        "Energy Star Appliances",
+        "Ceiling Fans"
+      ],
+      "image": "img/featurette 2.jpeg",
+      "listedDaysAgo": 10,
+      "lat":  31.548288,
+      "lng": -97.129509,
       "images": [
         "img/featurette 2.jpeg",
+        "img/featurette 2.jpeg",
         "img/featurette 2.jpeg"
+        
+      ],
+      "description": "Spacious and stylish 4-bedroom family home with modern updates and a great location. Includes beautiful hardwood floors, a large fenced yard, and smart energy-saving features."
+    },
+    {
+      "agentId": "janet-smith",
+      "address": "2612 Fort Ave",
+      "city": "Waco",
+      "zip": "76707",
+      "price": 243000,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "type": "Single Family",
+      "squareFeet": 1290,
+      "yearBuilt": 2015,
+      "lotSize": 0.25,
+      "garage": "2-car attached",
+      "hoaFees": 0,
+      "schoolDistrict": "Waco ISD",
+      "heating": "Central Gas",
+      "cooling": "Central Air",
+      "flooring": "Carpet, Tile",
+      "roof": "Asphalt Shingle",
+      "exterior": "Stucco",
+      "interiorFeatures": [
+        "Vaulted Ceilings",
+        "Breakfast Bar",
+        "Walk-in Pantry"
+      ],
+      "exteriorFeatures": [
+        "Covered Patio",
+        "Garden Area"
+      ],
+      "energyFeatures": [
+        "Solar Panels",
+        "Insulated Windows"
+      ],
+      "image": "img/janetpropertyimg-2.jpg",
+      "listedDaysAgo": 3,
+      "lat": 31.542699,
+      "lng": -97.155711,
+      "images": [
+        "img/janetfloorplan-1.avif",
+        "img/janetpropertyimg-2.jpg",
+        "img/janetlivingroom-2.jpg",
+        "img/janetbackyard-2.jpg"
       ],
       "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
     }

@@ -279,3 +279,6 @@ fetch('properties-1.json')
     const container = document.getElementById('property-list');
     container.innerHTML = `<div class="col-12 text-danger">Failed to load properties: ${err.message}</div>`;
   });
+
+
+  

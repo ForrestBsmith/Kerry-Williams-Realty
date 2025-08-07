@@ -40,6 +40,7 @@
   "properties": [
     {
       "agentId": "janet-smith",
+      "id": "janet-smith-property-1",
       "address": "789 Elm Ave",
       "city": "Waco",
       "zip": "76701",
@@ -52,7 +53,7 @@
       "lotSize": 0.30,
       "garage": "2-car attached",
       "hoaFees": 130,
-      "schoolDistrict": "China Spring ISD",
+      "schoolDistrict": "Waco ISD",
       "heating": "Central Electric",
       "cooling": "Central Air",
       "flooring": "Hardwood, Tile",
@@ -90,8 +91,9 @@
     },
     {
       "agentId": "mark-smith",
+      "id": "mark-smith-property-1",
       "address": "1111 N 11th St",
-      "city": "Waco",
+      "city": "dallas",
       "zip": "76701",
       "price": 195000,
       "bedrooms": 3,
@@ -135,6 +137,7 @@
     },
     {
       "agentId": "Lance-smith",
+      "id": "Lance-smith-property-1",
       "address": "707 S 9th St",
       "city": "Waco",
       "zip": "76706",
@@ -184,6 +187,7 @@
     },
     {
       "agentId": "janet-smith",
+      "id": "janet-smith-property-2",
       "address": "2612 Fort Ave",
       "city": "Waco",
       "zip": "76707",

@@ -148,9 +148,8 @@ if (e.target.classList.contains('property-click')) {
   const prop = agentProperties[idx];
   if (!prop) return;
 
-  const encodedAddress = encodeURIComponent(prop.address || '');
-  window.location.href = `property.html?id=${idx}&address=${encodedAddress}`;
-  return;
+  // Redirect using the property's unique id
+  window.location.href = `property.html?id=${encodeURIComponent(prop.id)}`;
 }
 
 

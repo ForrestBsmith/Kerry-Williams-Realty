@@ -82,7 +82,7 @@ footer a:hover {
   font-family: 'Poppins', sans-serif !important; 
   font-size: 1rem !important; 
   padding: 0.5rem 1rem !important; 
-  border: rgba(0, 0, 0, 0.195) 2.5px solid !important; 
+  border: rgba(0, 0, 0, 0.195) .5px solid !important; 
   border-radius: 0.25rem !important; 
   transition:background-color 0.3s ease !important; 
 }
@@ -130,6 +130,7 @@ p{
   transform: scale(1.02);
   transition: all 0.2s ease-in-out;
 }
+
 
 a.btn-sm{
   background-color: rgba(106, 142, 35, 0.454);

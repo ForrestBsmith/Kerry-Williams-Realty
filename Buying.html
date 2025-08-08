@@ -40,29 +40,20 @@
     <!-- NAVBAR END -->
 
    <!-- Filter Button -->
-<div class="container my-5 text-center">
-  <h2>Find a Property Near You</h2>
-  <p class="mb-4">Search by address, city, or ZIP code.</p>
-    <div class="col-md-8">
-      <div class="input-group addressbar">
-        <input 
-          type="text" 
-          id="location-input" 
-          class="form-control" 
-          placeholder="Address, City, or ZIP" 
-          autocomplete="off"
-          aria-label="Search by address, city, or ZIP"
-          aria-describedby="current-location-button"
-        >
-
-
-      <button type="button" class="btn" onclick="useCurrentLocation()" aria-label="Use current location">
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+      <section class="py-5">
+    <div class="container text-center">
+      <h2>Find a Propery Near You</h2>
+      <p class="lead">Search by address, city, or ZIP code.</p>
+      <form id="property-search-form" class="d-flex justify-content-center mt-3">
+        <input id="location-input" type="text" class="form-control w-100" placeholder="Enter address, city, or ZIP code">
+        <button type="submit" class="btn ms-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
-  </svg>
-</button>
-      </div>
+  </svg></button>
+      </form>
     </div>
+  </section>
+</div>
+
 
  <div class="container my-4">
   <!-- Filter + Tabs Bar -->

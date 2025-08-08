@@ -264,15 +264,41 @@ if (squareFeet) {
 });
 
 /* === Initial Load: Fetch Properties JSON and Render === */
+// Helper to get URL param by name
+function getURLParam(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}
+
 fetch('properties-1.json')
   .then(res => {
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     return res.json();
   })
   .then(data => {
-    allProperties = data[0].properties || []; // Extract properties array from JSON
-    renderProperties(allProperties);
-    renderMapMarkers(allProperties);
+    allProperties = data[0].properties || [];
+
+    // Check URL for location param
+    const locationParam = getURLParam('location')?.toLowerCase() || '';
+
+    // Set location input to URL param value
+    if (locationParam) {
+      const locInput = document.getElementById('location-input');
+      if (locInput) locInput.value = locationParam;
+    }
+
+    // Filter by location if provided, else show all
+    let initialFiltered = allProperties;
+    if (locationParam) {
+      initialFiltered = allProperties.filter(p =>
+        p.address.toLowerCase().includes(locationParam) ||
+        p.city.toLowerCase().includes(locationParam) ||
+        p.zip.includes(locationParam)
+      );
+    }
+
+    renderProperties(initialFiltered);
+    renderMapMarkers(initialFiltered);
   })
   .catch(err => {
     console.error('Failed to load properties:', err);

@@ -77,65 +77,108 @@
       </div>
 
       <!-- Question 4 -->
-      <button class="form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
-        <p class="text-center mt-1 mb-0">Home Loan Calculator</p>
-      </button>
-      <div class="collapse" id="faq4">
-        <div class="card card-body">
-  <!-- Loan Amount -->
-  <div class="mb-3">
-    <label for="loanAmount" class="form-label">Home Price ($)</label>
-    <input type="number" class="form-control" id="loanAmount" placeholder="300000">
-  </div>
+     <!-- Home Loan Calculator -->
+<button class="form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+  <p class="text-center mt-1 mb-0">Home Loan Calculator</p>
+</button>
 
-  <!-- Down Payment -->
-  <div class="mb-3">
-    <label for="downPayment" class="form-label">Down Payment ($)</label>
-    <input type="number" class="form-control" id="downPayment" placeholder="60000">
-  </div>
+<div class="collapse" id="faq4">
+  <div class="card card-body">
+    <!-- Loan Amount -->
+    <div class="mb-3">
+      <label for="loanAmount" class="form-label">Home Price ($)</label>
+      <input type="number" class="form-control" id="loanAmount" placeholder="300000">
+    </div>
 
-  <!-- Interest Rate -->
-  <div class="mb-3">
-    <label for="interestRate" class="form-label">Annual Interest Rate (%)</label>
-    <input type="number" class="form-control" id="interestRate" placeholder="6.5">
-  </div>
+    <!-- Down Payment -->
+    <div class="mb-3">
+      <label for="downPayment" class="form-label">Down Payment ($)</label>
+      <input type="number" class="form-control" id="downPayment" placeholder="60000">
+    </div>
 
-  <!-- Loan Term -->
-  <div class="mb-3">
-    <label for="loanTerm" class="form-label">Loan Term (Years)</label>
-    <input type="number" class="form-control" id="loanTerm" placeholder="30">
-  </div>
+    <!-- Interest Rate -->
+    <div class="mb-3">
+      <label for="interestRate" class="form-label">Annual Interest Rate (%)</label>
+      <input type="number" class="form-control" id="interestRate" placeholder="6.5">
+    </div>
 
-  <!-- Property Taxes -->
-  <div class="mb-3">
-    <label for="propertyTax" class="form-label">Annual Property Taxes ($)</label>
-    <input type="number" class="form-control" id="propertyTax" placeholder="4500">
-  </div>
+    <!-- Loan Term -->
+    <div class="mb-3">
+      <label for="loanTerm" class="form-label">Loan Term (Years)</label>
+      <input type="number" class="form-control" id="loanTerm" placeholder="30">
+    </div>
 
-  <!-- Home Insurance -->
-  <div class="mb-3">
-    <label for="homeInsurance" class="form-label">Annual Homeowners Insurance ($)</label>
-    <input type="number" class="form-control" id="homeInsurance" placeholder="1200">
-  </div>
+    <!-- Property Taxes -->
+    <div class="mb-3">
+      <label for="propertyTax" class="form-label">Annual Property Taxes ($)</label>
+      <input type="number" class="form-control" id="propertyTax" placeholder="4500">
+    </div>
 
-  <!-- HOA Fees -->
-  <div class="mb-3">
-    <label for="hoaFees" class="form-label">Monthly HOA Fees ($)</label>
-    <input type="number" class="form-control" id="hoaFees" placeholder="150">
-  </div>
-   <!-- Button -->
-  <button class="btn w-100" onclick="calculateAdvancedLoan()">Calculate Monthly Payment</button>
+    <!-- Home Insurance -->
+    <div class="mb-3">
+      <label for="homeInsurance" class="form-label">Annual Homeowners Insurance ($)</label>
+      <input type="number" class="form-control" id="homeInsurance" placeholder="1200">
+    </div>
 
-  <!-- Results -->
-  <div class="mt-4 text-center">
-    <h5 id="totalMonthly" class="text-success"></h5>
-    <div id="breakdown" class="mt-3 text-muted small"></div>
-  </div>
+    <!-- HOA Fees -->
+    <div class="mb-3">
+      <label for="hoaFees" class="form-label">Monthly HOA Fees ($)</label>
+      <input type="number" class="form-control" id="hoaFees" placeholder="150">
+    </div>
 
+    <!-- Button -->
+    <button class="btn w-100" onclick="calculateAdvancedLoan()">Calculate Monthly Payment</button>
+
+    <!-- Results -->
+    <div class="mt-4 text-center">
+      <h5 id="totalMonthly" class="text-success"></h5>
+      <div id="breakdown" class="mt-3 text-muted small"></div>
+    </div>
+  </div>
 </div>
 
-        </div>
-      </div>
+<script>
+function calculateAdvancedLoan() {
+  const price = parseFloat(document.getElementById('loanAmount').value);
+  const down = parseFloat(document.getElementById('downPayment').value);
+  const rate = parseFloat(document.getElementById('interestRate').value) / 100;
+  const years = parseFloat(document.getElementById('loanTerm').value);
+  const taxes = parseFloat(document.getElementById('propertyTax').value);
+  const insurance = parseFloat(document.getElementById('homeInsurance').value);
+  const hoa = parseFloat(document.getElementById('hoaFees').value);
+
+  if (isNaN(price) || isNaN(down) || isNaN(rate) || isNaN(years)) {
+    document.getElementById('totalMonthly').textContent = 'Please fill in all required fields.';
+    document.getElementById('breakdown').innerHTML = '';
+    return;
+  }
+
+  const loanAmount = price - down;
+  const monthlyRate = rate / 12;
+  const totalPayments = years * 12;
+
+  const principalInterest = 
+    (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -totalPayments));
+
+  const monthlyTaxes = (isNaN(taxes) ? 0 : taxes) / 12;
+  const monthlyInsurance = (isNaN(insurance) ? 0 : insurance) / 12;
+  const monthlyHOA = isNaN(hoa) ? 0 : hoa;
+
+  const totalMonthly = principalInterest + monthlyTaxes + monthlyInsurance + monthlyHOA;
+
+  document.getElementById('totalMonthly').textContent = 
+    `Estimated Monthly Payment: $${totalMonthly.toFixed(2)}`;
+
+  document.getElementById('breakdown').innerHTML = `
+    <strong>Breakdown:</strong><br>
+    Principal & Interest: $${principalInterest.toFixed(2)}<br>
+    Property Taxes: $${monthlyTaxes.toFixed(2)}<br>
+    Insurance: $${monthlyInsurance.toFixed(2)}<br>
+    HOA Fees: $${monthlyHOA.toFixed(2)}
+  `;
+}
+</script>
+
 
       <!-- Question 5 -->
       <button class="form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">

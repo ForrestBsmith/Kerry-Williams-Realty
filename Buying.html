@@ -80,7 +80,7 @@
 <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
-      <form id="property-search-form">
+      <form id="property-filter-form">
         <div class="modal-header">
           <h5 class="modal-title" id="filterModalLabel">Search Filters</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -90,66 +90,66 @@
   <div class="row g-3">
 
 
-    <div class="col-md-6">
-      <select class="form-select" id="propertyType">
-        <option value="">Property Type</option>
-        <option>House</option>
-        <option>Condo</option>
-        <option>Apartment</option>
-      </select>
-    </div>
-
-    <div class="col-md-6">
-      <select class="form-select" id="bedrooms">
-        <option value="">Bedrooms</option>
-        <option value="1">1+</option>
-        <option value="2">2+</option>
-        <option value="3">3+</option>
-        <option value="4">4+</option>
-      </select>
-    </div>
-
-    <div class="col-md-6">
-      <select class="form-select" id="bathrooms">
-        <option value="">Bathrooms</option>
-        <option value="1">1+</option>
-        <option value="2">2+</option>
-        <option value="3">3+</option>
-        <option value="4">4+</option>
-      </select>
-    </div>
-
-    <div class="col-md-6">
-  <select class="form-select" id="lotSize">
-    <option value="">Lot Size</option>
-<option value="0-6000">Under 6,000 sq.ft</option>
-<option value="6001-12000">6,001 – 12,000 sq.ft</option>
-<option value="12001-20000">12,001 – 20,000 sq.ft</option>
-<option value="20001-999999">Over 20,000 sq.ft</option>
+<div class="col-md-6">
+  <select class="form-select" id="propertyType" name="propertyType">
+    <option value="">Property Type</option>
+    <option value="House">House</option>
+    <option value="Condo">Condo</option>
+    <option value="Apartment">Apartment</option>
   </select>
 </div>
 
-    <div class="col-md-6">
-      <select class="form-select" id="squareFeet">
-        <option value="">Square Footage</option>
-        <option value="0-1200">Under 1,200 sq.ft</option>
-        <option value="1201-1800">1,201 – 1,800 sq.ft</option>
-        <option value="1801-2500">1,801 – 2,500 sq.ft</option>
-        <option value="2501-99999">Over 2,500 sq.ft</option>
-      </select>
-    </div>
+<div class="col-md-6">
+  <select class="form-select" id="bedrooms" name="bedrooms">
+    <option value="">Bedrooms</option>
+    <option value="1">1+</option>
+    <option value="2">2+</option>
+    <option value="3">3+</option>
+    <option value="4">4+</option>
+  </select>
+</div>
 
-    <div class="col-md-6">
-      <input type="number" id="maxPrice" class="form-control" placeholder="Max Price">
-    </div>
+<div class="col-md-6">
+  <select class="form-select" id="bathrooms" name="bathrooms">
+    <option value="">Bathrooms</option>
+    <option value="1">1+</option>
+    <option value="2">2+</option>
+    <option value="3">3+</option>
+    <option value="4">4+</option>
+  </select>
+</div>
 
-    <div class="col-md-6">
-      <select class="form-select" id="sortPrice">
-        <option value="">Sort by Price</option>
-        <option value="asc">Price: Low to High</option>
-        <option value="desc">Price: High to Low</option>
-      </select>
-    </div>
+<div class="col-md-6">
+  <select class="form-select" id="lotSize" name="lotSize">
+    <option value="">Lot Size</option>
+    <option value="0-6000">Under 6,000 sq.ft</option>
+    <option value="6001-12000">6,001 – 12,000 sq.ft</option>
+    <option value="12001-20000">12,001 – 20,000 sq.ft</option>
+    <option value="20001-999999">Over 20,000 sq.ft</option>
+  </select>
+</div>
+
+<div class="col-md-6">
+  <select class="form-select" id="squareFeet" name="squareFeet">
+    <option value="">Square Footage</option>
+    <option value="0-1200">Under 1,200 sq.ft</option>
+    <option value="1201-1800">1,201 – 1,800 sq.ft</option>
+    <option value="1801-2500">1,801 – 2,500 sq.ft</option>
+    <option value="2501-99999">Over 2,500 sq.ft</option>
+  </select>
+</div>
+
+<div class="col-md-6">
+  <input type="number" id="maxPrice" name="maxPrice" class="form-control" placeholder="Max Price">
+</div>
+
+<div class="col-md-6">
+  <select class="form-select" id="sortPrice" name="sortPrice">
+    <option value="">Sort by Price</option>
+    <option value="asc">Price: Low to High</option>
+    <option value="desc">Price: High to Low</option>
+  </select>
+</div>
   </div>
 </div>
 
@@ -221,18 +221,59 @@
 </div>
 
 <div id="property-results" class="container mt-5"></div>
-    <hr>
     <div class="container">
       <div class="row" id="property-list"></div>
     </div>
-
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
-    <footer class="text-center mt-5 mb-3">
-      <p>&copy; 2023 Kelly Williams Realty. All rights reserved.</p>
-    </footer>
+
+     <!-- FOOTER -->
+      <footer class="text-muted py-5">
+        <div class="container">
+          <hr>
+          <div class="row">
+            <div class="col-6 col-md-3 mb-3">
+              <h5>Services</h5>
+              <ul class="list-unstyled">
+                <li><a href="FAQ.html">Financing</a></li>
+                <li><a href="FAQ.html">Contact Us</a></li>
+                <li><a href="FAQ.html">Loans</a></li>
+                <li><a href="FAQ.html">FAQs</a></li>
+                <li><a href="FAQ.html">About</a></li>
+              </ul>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+              <h5>Properties</h5>
+              <ul class="list-unstyled">
+                <li><a href="Buying.html">Home</a></li>
+                <li><a href="Buying.html">Apartment</a></li>
+                <li><a href="Buying.html">Condo</a></li>
+                <li><a href="Buying.html">Rental</a></li>
+                <li><a href="Buying.html">Commercial</a></li>
+              </ul>
+            </div>
+            <div class="col-md-6 text-center">
+              <h5 class="text-center">Subscribe to Our Newsletter</h5>
+              <p class="mb-4">Monthly digest of what's new and exciting from us.</p>
+              <form class="d-flex flex-column flex-sm-row gap-2">
+                <input type="email" class="form-control text-center" placeholder="Email address">
+                <button class="btn" type="submit">Subscribe</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column flex-sm-row justify-content-between py-4 mt-4 border-top">
+            <p>&copy; 2024 Kelly Williams Realty. All rights reserved.</p>
+            <ul class="list-unstyled d-flex">
+              <li class="ms-3"><a href="#"><i class="bi bi-twitter"></i></a></li>
+              <li class="ms-3"><a href="#"><i class="bi bi-instagram"></i></a></li>
+              <li class="ms-3"><a href="#"><i class="bi bi-facebook"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+
     <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 

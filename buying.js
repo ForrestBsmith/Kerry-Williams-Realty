@@ -16,7 +16,9 @@ function renderMapMarkers(properties) {
     if (prop.lat && prop.lng) {
       L.marker([prop.lat, prop.lng])
         .addTo(map)
-        .bindPopup(`<strong>${prop.address}</strong><br>$${prop.price.toLocaleString()}<br>${prop.city || ''}`);
+        .bindPopup(
+          `<strong>${prop.address}</strong><br>$${prop.price.toLocaleString()}<br>${prop.city || ''}`
+        );
     }
   });
 
@@ -64,27 +66,23 @@ function renderProperties(propertyArray) {
     const card = `
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="card property-card border-0 shadow-sm h-100">
-        <!-- Property Image (Clickable) -->
-<div class="position-relative">
-  <img 
-    src="${prop.image || 'placeholder.jpg'}" 
-    class="card-img-top object-fit-cover property-click" 
-    data-index="${index}"
-    style="height: 220px; cursor: pointer; border-top-left-radius: .5rem; border-top-right-radius: .5rem;"
-    alt="${prop.address || 'Property'}"
-  >
-  <button class="btn position-absolute top-0 end-0 m-2 rounded-circle p-2">
-    <i class="bi bi-heart text-danger fs-5"></i>
-  </button>
-</div>
+          <div class="position-relative">
+            <img 
+              src="${prop.image || 'placeholder.jpg'}" 
+              class="card-img-top object-fit-cover property-click" 
+              data-index="${index}"
+              style="height: 220px; cursor: pointer; border-top-left-radius: .5rem; border-top-right-radius: .5rem;"
+              alt="${prop.address || 'Property'}"
+            >
+            <button class="btn position-absolute top-0 end-0 m-2 rounded-circle p-2">
+              <i class="bi bi-heart text-danger fs-5"></i>
+            </button>
+          </div>
           <div class="card-body">
-            <!-- Price -->
             <h5 class="card-title fw-bold mb-2">$${Number(prop.price || 0).toLocaleString()}</h5>
-            <!-- Address -->
             <p class="text-muted small mb-2">${prop.address || 'N/A'}, ${prop.city || 'N/A'}, TX ${
       prop.zip || 'N/A'
     }</p>
-            <!-- Specs Row -->
             <div class="d-flex justify-content-between text-secondary small mb-2">
               <div><i class="bi bi-house-door"></i> ${prop.bedrooms || 'N/A'} Beds</div>
               <div><i class="bi bi-bucket"></i> ${prop.bathrooms || 'N/A'} Baths</div>
@@ -93,7 +91,6 @@ function renderProperties(propertyArray) {
               } SqFt</div>
             </div>
             <div class="text-muted" style="font-size:13px;">${prop.description || 'No description available.'}</div>
-            <!-- CTA Buttons -->
             <div class="d-flex gap-2 mt-1">
               <button class="btn btn-sm text-muted btn-photos" data-index="${index}" data-bs-toggle="modal" data-bs-target="#photosModal">View Photos</button>
               <button class="btn btn-sm text-muted btn-schedule" data-index="${index}" data-bs-toggle="modal" data-bs-target="#scheduleModal">Schedule</button>
@@ -101,7 +98,9 @@ function renderProperties(propertyArray) {
             </div>
           </div>
           <div class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center small text-muted">
-            <div><i class="bi bi-share me-1"></i> Share</div>
+            <div class="btn-share" data-index="${index}">
+              <i class="bi bi-share me-1"></i> Share
+            </div>
             <div>Listed ${prop.listedDaysAgo || 'N/A'} days ago</div>
           </div>
         </div>
@@ -111,33 +110,50 @@ function renderProperties(propertyArray) {
   });
 }
 
+/* === Share Link Logic === */
+document.addEventListener('click', (e) => {
+  const shareBtn = e.target.closest('.btn-share');
+  if (shareBtn) {
+    const index = shareBtn.getAttribute('data-index');
+    if (!index) return;
+    const prop = allProperties[index];
+    if (!prop) return;
+
+    const shareUrl = `${window.location.origin}/property.html?id=${encodeURIComponent(prop.id)}`;
+    navigator.clipboard.writeText(shareUrl)
+      .then(() => alert('Link copied to clipboard!'))
+      .catch(() => alert('Failed to copy link.'));
+  }
+});
+
 /* === Modal Event Delegation === */
 document.addEventListener('click', (e) => {
-  const index = e.target.getAttribute('data-index');
+  // Find clicked element with data-index
+  const clickedWithIndex = e.target.closest('[data-index]');
+  if (!clickedWithIndex) return;
+
+  const index = clickedWithIndex.getAttribute('data-index');
   if (index === null) return;
 
   const prop = allProperties[index];
   if (!prop) return;
 
-  // Clicking on property image redirects to full page
-if (e.target.classList.contains('property-click')) {
-  const idx = e.target.getAttribute('data-index');
-  const prop = allProperties[idx];
-  const encodedAddress = encodeURIComponent(prop.address || '');
-  window.location.href = `property.html?id=${prop.id}&address=${encodedAddress}`;
-  return;
-}
+  // Clicking on property image redirects to property page
+  if (e.target.closest('.property-click')) {
+    const encodedAddress = encodeURIComponent(prop.address || '');
+    window.location.href = `property.html?id=${encodeURIComponent(prop.id)}&address=${encodedAddress}`;
+    return;
+  }
 
-
-  // View Photos
-  if (e.target.classList.contains('btn-photos')) {
+  // View Photos Modal
+  if (e.target.closest('.btn-photos')) {
     document.querySelector('#photosModal .modal-title').textContent = `Home Address - ${prop.address}`;
     document.querySelector('#photosModalBody').innerHTML = `
       <div id="carousel-${index}" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           ${(prop.images || [prop.image]).map(
             (img, i) => `
-              <div class="carousel-item photoscarousel ${i === 0 ? 'active' : ''}">
+              <div class="carousel-item ${i === 0 ? 'active' : ''}">
                 <img src="${img}" class="d-block w-100" alt="Photo ${i + 1}">
               </div>
             `
@@ -151,10 +167,11 @@ if (e.target.classList.contains('property-click')) {
         </button>
       </div>
     `;
+    return;
   }
 
-  // Schedule Form
-  if (e.target.classList.contains('btn-schedule')) {
+  // Schedule Modal
+  if (e.target.closest('.btn-schedule')) {
     document.querySelector('#scheduleModal .modal-title').textContent = `Schedule a Viewing - ${prop.address}`;
     document.querySelector('#scheduleModalBody').innerHTML = `
       <form>
@@ -173,10 +190,11 @@ if (e.target.classList.contains('property-click')) {
         <button type="submit" class="btn w-100">Submit Request</button>
       </form>
     `;
+    return;
   }
 
-  // Property Details
-  if (e.target.classList.contains('btn-details')) {
+  // Details Modal
+  if (e.target.closest('.btn-details')) {
     document.querySelector('#detailsModal .modal-title').textContent = `Property Details - ${prop.address}`;
     const detailsHTML = `
       <p><strong>Address:</strong> ${prop.address}, ${prop.city}, TX ${prop.zip}</p>
@@ -186,7 +204,7 @@ if (e.target.classList.contains('property-click')) {
       <p><strong>Type:</strong> ${prop.type}</p>
       <p><strong>Square Feet:</strong> ${prop.squareFeet?.toLocaleString() || 'N/A'} sqft</p>
       <p><strong>Year Built:</strong> ${prop.yearBuilt || 'N/A'}</p>
-      <p><strong>Lot Size:</strong> ${prop.lotSize ? `${prop.lotSize} acres` : 'N/A'}</p>
+      <p><strong>Lot Size:</strong> ${prop.lotSize ? prop.lotSize + ' acres' : 'N/A'}</p>
       <p><strong>Garage:</strong> ${prop.garage || 'N/A'}</p>
       <p><strong>HOA Fees:</strong> ${prop.hoaFees ? `$${prop.hoaFees}/mo` : 'None'}</p>
       <p><strong>School District:</strong> ${prop.schoolDistrict || 'N/A'}</p>
@@ -196,22 +214,17 @@ if (e.target.classList.contains('property-click')) {
       <p><strong>Roof:</strong> ${prop.roof || 'N/A'}</p>
       <p><strong>Exterior:</strong> ${prop.exterior || 'N/A'}</p>
       ${prop.description ? `<p><strong>Description:</strong> ${prop.description}</p>` : ''}
-      ${prop.interiorFeatures?.length ? `<p><strong>Interior Features:</strong></p><ul>${prop.interiorFeatures
-        .map(f => `<li>${f}</li>`)
-        .join('')}</ul>` : ''}
-      ${prop.exteriorFeatures?.length ? `<p><strong>Exterior Features:</strong></p><ul>${prop.exteriorFeatures
-        .map(f => `<li>${f}</li>`)
-        .join('')}</ul>` : ''}
-      ${prop.energyFeatures?.length ? `<p><strong>Energy Efficiency:</strong></p><ul>${prop.energyFeatures
-        .map(f => `<li>${f}</li>`)
-        .join('')}</ul>` : ''}
+      ${prop.interiorFeatures?.length ? `<p><strong>Interior Features:</strong></p><ul>${prop.interiorFeatures.map(f => `<li>${f}</li>`).join('')}</ul>` : ''}
+      ${prop.exteriorFeatures?.length ? `<p><strong>Exterior Features:</strong></p><ul>${prop.exteriorFeatures.map(f => `<li>${f}</li>`).join('')}</ul>` : ''}
+      ${prop.energyFeatures?.length ? `<p><strong>Energy Efficiency:</strong></p><ul>${prop.energyFeatures.map(f => `<li>${f}</li>`).join('')}</ul>` : ''}
     `;
     document.querySelector('#detailsModalBody').innerHTML = detailsHTML;
+    return;
   }
 });
 
 /* === Property Search Form === */
-document.getElementById('property-search-form').addEventListener('submit', function (e) {
+document.getElementById('property-filter-form').addEventListener('submit', function (e) {
   e.preventDefault();
 
   const location = document.getElementById('location-input').value.trim().toLowerCase();
@@ -226,27 +239,26 @@ document.getElementById('property-search-form').addEventListener('submit', funct
   let filtered = allProperties.filter(p => {
     const matchesLocation =
       location === '' ||
-      p.address.toLowerCase().includes(location) ||
-      p.city.toLowerCase().includes(location) ||
-      p.zip.includes(location);
+      (p.address && p.address.toLowerCase().includes(location)) ||
+      (p.city && p.city.toLowerCase().includes(location)) ||
+      (p.zip && p.zip.includes(location));
 
-    const matchesType = type === '' || p.type.toLowerCase() === type;
+    const matchesType = type === '' || (p.type && p.type.toLowerCase() === type);
     const matchesBedrooms = p.bedrooms >= bedrooms;
     const matchesBathrooms = p.bathrooms >= bathrooms;
 
-let matchesLotSize = true;
-if (lotSize) {
-  const [minLot, maxLot] = lotSize.split('-').map(Number);
-  const lotInSqft = p.lotSize * 43560; // Convert acres to sq.ft
-  matchesLotSize = lotInSqft >= minLot && lotInSqft <= maxLot;
-}
+    let matchesLotSize = true;
+    if (lotSize) {
+      const [minLot, maxLot] = lotSize.split('-').map(Number);
+      const lotInSqft = p.lotSize * 43560;
+      matchesLotSize = lotInSqft >= minLot && lotInSqft <= maxLot;
+    }
 
-
-let matchesSquareFeet = true;
-if (squareFeet) {
-  const [minSqft, maxSqft] = squareFeet.split('-').map(Number);
-  matchesSquareFeet = p.squareFeet >= minSqft && p.squareFeet <= maxSqft;
-}
+    let matchesSquareFeet = true;
+    if (squareFeet) {
+      const [minSqft, maxSqft] = squareFeet.split('-').map(Number);
+      matchesSquareFeet = p.squareFeet >= minSqft && p.squareFeet <= maxSqft;
+    }
 
     const matchesPrice = p.price <= maxPrice;
 
@@ -264,7 +276,6 @@ if (squareFeet) {
 });
 
 /* === Initial Load: Fetch Properties JSON and Render === */
-// Helper to get URL param by name
 function getURLParam(name) {
   const params = new URLSearchParams(window.location.search);
   return params.get(name);
@@ -278,22 +289,19 @@ fetch('properties-1.json')
   .then(data => {
     allProperties = data[0].properties || [];
 
-    // Check URL for location param
     const locationParam = getURLParam('location')?.toLowerCase() || '';
 
-    // Set location input to URL param value
     if (locationParam) {
       const locInput = document.getElementById('location-input');
       if (locInput) locInput.value = locationParam;
     }
 
-    // Filter by location if provided, else show all
     let initialFiltered = allProperties;
     if (locationParam) {
       initialFiltered = allProperties.filter(p =>
-        p.address.toLowerCase().includes(locationParam) ||
-        p.city.toLowerCase().includes(locationParam) ||
-        p.zip.includes(locationParam)
+        (p.address && p.address.toLowerCase().includes(locationParam)) ||
+        (p.city && p.city.toLowerCase().includes(locationParam)) ||
+        (p.zip && p.zip.includes(locationParam))
       );
     }
 
@@ -305,6 +313,3 @@ fetch('properties-1.json')
     const container = document.getElementById('property-list');
     container.innerHTML = `<div class="col-12 text-danger">Failed to load properties: ${err.message}</div>`;
   });
-
-
-  

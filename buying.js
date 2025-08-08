@@ -124,7 +124,7 @@ if (e.target.classList.contains('property-click')) {
   const idx = e.target.getAttribute('data-index');
   const prop = allProperties[idx];
   const encodedAddress = encodeURIComponent(prop.address || '');
-  window.location.href = `property.html?id=${idx}&address=${encodedAddress}`;
+  window.location.href = `property.html?id=${prop.id}&address=${encodedAddress}`;
   return;
 }
 

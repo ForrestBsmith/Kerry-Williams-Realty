@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                     <h4 class="mt-4" style="font-size: 1.2rem;">About Us</h4>
                     <p class="text-muted mb-2" style="font-size: .95rem;">${agent.sectionbio || 'No bio available for this agent.'}</p>
-                    <p class="mb-2 mt-3" style="font-size: .95rem;">Experience: ${agent.specialties || 'N/A'}</p>                  
+                    <p class="mb-2 mt-3" style="font-size: .95rem;">Specialty: ${agent.specialties || 'N/A'}</p>                  
                     <p class="mb-2" style="font-size: .95rem;">Years of experience: ${agent.exp}</p>
                     <p class="mb-2" style="font-size: .95rem;">Languages spoken: ${agent.languages || 'N/A'}</p>
                     </div>  

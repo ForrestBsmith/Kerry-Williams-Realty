@@ -59,14 +59,14 @@ function animateValueThousands(el, start, end, duration, prefix = "", suffix = "
     entries.forEach(entry => {
       if (entry.isIntersecting && !hasAnimated) {
   hasAnimated = true;
-animateValue(soldElem, 0, 125, 1500);                     // Normal count
-animateValueThousands(avgPriceElem, 0, 350000, 2000, "$"); // Shows "$350.0K"
+animateValue(soldElem, 0, 1250, 1500);                     // Normal count
+animateValueThousands(avgPriceElem, 0, 450000, 2000, "$"); // Shows "$350.0K"
 animateValueMillions(totalValueElem, 0, 43750000, 2500);   // Shows "43.8M"
   observer.disconnect();
 }
 
     });
-  }, { threshold: 0.3 });
+  }, { threshold: 0.3});
 
   observer.observe(tickerSection);
 });

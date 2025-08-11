@@ -27,12 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
         card.className = "col-md-3 mb-4";
         card.innerHTML = `
           <div class="card agent-card shadow-sm p-0">
-            <div class="row g-3 align-items-center">
+            <div class="row g-2 align-items-center">
               <!-- Realtor Photo -->
               <div class="col-3 d-flex justify-content-center" style="padding: 0em;">
                 <img src="${image}" alt="${name}" 
                      class="img-fluid mb-0" 
-                     style="width:90px; height:140px; margin-top:.75em; object-fit: fill; margin-left:.5em;">
+                     style="width:90px; height:140px; margin-top:.75em; object-fit: fill; margin-left:1em;">
               </div>
               <div class="col-9">
               <p class="p-1">About Us</p>
@@ -41,9 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
               <!-- Realtor Info -->
               <div>
-                <div class="row p-1">
+                <div class="row p-1" mt-0>
                   <div class="col-6">
-                    <h6 class="card-title mb-1 p-1 fw-semibold" style="font-size: 0.95rem;">${name}</h6>
+                    <h6 class="card-title mb-1 p-1 ml-1 fw-semibold" style="font-size: 0.95rem;">${name}</h6>
                     <p class="text-muted mb-0" style="font-size: 0.85rem;">${lic}</p>                    
                     <p class="mb-0 mt-3" style="font-size: 0.80rem;">📞 ${phone}</p>
                     <p class="mb-0" style="font-size: 0.80rem;">✉️ ${email}</p>
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
               </div>
 
               <!-- View Listings Button -->
-              <div class="col-12 listingbutton">
+              <div class="col-12 listingbutton mt-0">
                 <a href="agent.html?agent=${encodeURIComponent(agent.id)}" class="btn btn-sm w-100">View Listings</a>
               </div>
             </div>

@@ -50,32 +50,28 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Update header
-      nameHeader.textContent = `${agent.name || "Agent"}'s Listings`;
 
       // Render agent bio if container exists
       if (bioContainer) {
         const bioSection = `
-          <div class="card agent-card shadow-sm p-3 mb-4">
-            <div class="row g-2 align-items-center">
+          <div class="card agent-card shadow-sm p-1 mb-4">
+            <div class="row g-0 align-items-center">
               <div class="d-flex" style="padding: 0em;">
                 <img src="${agent.image || 'placeholder.jpg'}" alt="${agent.name || 'Featured Agent'}" 
-                     class="img-fluid mb-1" 
-                     style="width: 100px; height: auto; margin-left: 1.5em; margin-top: 1em; object-fit: cover; margin-right:3em;">
-                <div class="text-end text-muted col-6 mt-5">
-                  <p class="mb-1 mt-0" style="font-size: 1rem;">📞 ${agent.phone || 'N/A'}</p>
-                  <p class="mb-1" style="font-size: 1rem;">✉️ ${agent.email || 'N/A'}</p>
-                  <p class="mb-0 mt-5" style="font-size: 1rem;">Properties Listed: ${agent.numberofproperties || 'N/A'}</p>
-                  <p class="mb-0" style="font-size: 1rem;">Properties Sold: ${agent.propertiessold || 'N/A'}</p>
-                </div>
+                     class="img-fluid mb-1 w-100" 
+                     style="height: 325px !important; object-fit: fill; border-radius: 0.25em;">
+                     </div>
               </div>
-              <div>
+              <
+
                 <div class="row">
                   <div class="col-9">
-                    <h6 class="card-title mb-1 fw-semibold" style="font-size: 1.1rem;">${agent.name || 'Featured Agent'}</h6>
-                    <p class="text-muted mb-1" style="font-size: 0.9rem;">${agent.lic || 'N/A'}</p>
-                    <p class="text-muted mb-4" style="font-size: 0.9rem;">${agent.bio || 'No bio available for this agent.'}</p>
-                  </div>
+                    <h6 class="card-title mb-1 fw-semibold" style="font-size: 1.5rem;">${agent.name || 'Featured Agent'}</h6>
+                    <p class="text-muted mb-1" style="font-size: 1rem;">${agent.lic || 'N/A'}</p>
+                    <h4 class="mt-4" style="font-size: 1.2rem;">About Us</h4>
+                    <p class="text-muted mb-1" style="font-size: .95rem;">${agent.bio || 'No bio available for this agent.'}</p>
+                  </div>  
+                
                 </div>
               </div>
             </div>

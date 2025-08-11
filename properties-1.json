@@ -10,6 +10,8 @@
       "profileUrl": "/agent/mark-smith",
       "numberofproperties": "4",
       "propertiessold": "10",
+      "averageprice": "250k",
+      "totalvalue": "5M",
       "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction."
     },
         {
@@ -22,7 +24,9 @@
       "profileUrl": "/agent/janet-smith",
       "numberofproperties": "1",
       "propertiessold": "10",
-      "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction."
+      "averageprice": "250k",
+      "totalvalue": "2.5M",
+      "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction."
     },
     {
       "id": "Lance-smith",
@@ -34,6 +38,8 @@
       "profileUrl": "/agent/Lance-smith",
       "numberofproperties": "3",
       "propertiessold": "75",
+      "averageprice": "250k",
+      "totalvalue": "1M",
       "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction."
     }
   ],

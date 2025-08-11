@@ -15,31 +15,45 @@ document.addEventListener("DOMContentLoaded", () => {
           phone = "",
           email = "",
           image = "default.jpg",
-          profileUrl = "#"
+          profileUrl = "#",
+          numberofproperties = "0",
+          propertiessold = "0",
+          averageprice = "N/A",
+          totalvalue = "N/A",
+          bio = "No bio available"
         } = agent;
 
         const card = document.createElement("div");
         card.className = "col-md-3 mb-4";
         card.innerHTML = `
           <div class="card agent-card shadow-sm p-0">
-            <div class="row g-4 align-items-center">
+            <div class="row g-3 align-items-center">
               <!-- Realtor Photo -->
               <div class="col-3 d-flex justify-content-center" style="padding: 0em;">
                 <img src="${image}" alt="${name}" 
-                     class="img-fluid mb-1" 
-                     style="width:100px; height:130px; margin-left:1.5em; margin-top:1em; object-fit: fill;">
+                     class="img-fluid mb-0" 
+                     style="width:90px; height:140px; margin-top:.75em; object-fit: fill; margin-left:.5em;">
+              </div>
+              <div class="col-9">
+              <p class="text-muted p-1 mb-0" style="font-size: 0.85rem;">${bio}</p>
               </div>
 
               <!-- Realtor Info -->
-              <div class="col-9">
-                <div class="row">
+              <div>
+                <div class="row p-1">
                   <div class="col-6">
-                    <h6 class="card-title mb-1 fw-semibold" style="font-size: 0.95rem;">${name}</h6>
-                    <p class="text-muted mb-0" style="font-size: 0.85rem;">${lic}</p>
+                    <h6 class="card-title mb-1 p-1 fw-semibold" style="font-size: 0.95rem;">${name}</h6>
+                    <p class="text-muted mb-0" style="font-size: 0.85rem;">${lic}</p>                    
+                    <p class="mb-0 mt-3" style="font-size: 0.80rem;">📞 ${phone}</p>
+                    <p class="mb-0" style="font-size: 0.80rem;">✉️ ${email}</p>
+                
+
                   </div>
-                  <div class="text-muted col-6">
-                    <p class="mb-1" style="font-size: 0.85rem;">📞 ${phone}</p>
-                    <p class="mb-0" style="font-size: 0.75rem;">✉️ ${email}</p>
+                  <div class=" col-6">
+                    <p class="mb-0 mt-0" style="font-size: 0.80em;">Available properties:${numberofproperties}</p>
+                    <p class="mb-3" style="font-size: 0.80em;">Properties sold:${propertiessold}</p>
+                    <p class="mb-0" style="font-size: 0.80rem;">Average Price: ${averageprice}</p>
+                    <p class="mb-0" style="font-size: 0.80rem;">Total Value: ${totalvalue}</p>
                   </div>
                 </div>
               </div>

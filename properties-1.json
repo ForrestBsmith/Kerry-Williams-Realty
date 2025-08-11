@@ -9,10 +9,14 @@
       "image": "realtor.jpg",
       "profileUrl": "/agent/mark-smith",
       "numberofproperties": "4",
-      "propertiessold": "10",
+      "propertiessold": "120",
       "averageprice": "250k",
       "totalvalue": "5M",
-      "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction."
+      "exp": "12 Years",
+      "languages": ["English", "Spanish"],
+      "specialties": ["Residential", "Commercial"],
+      "bio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
+      "sectionbio":"With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction"
     },
         {
       "id": "janet-smith",
@@ -26,7 +30,11 @@
       "propertiessold": "10",
       "averageprice": "250k",
       "totalvalue": "2.5M",
-      "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction."
+      "exp": "5 Years",
+      "languages": ["English", "Spanish"],
+      "specialties": ["Residential", "Commercial"],
+      "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
+      "sectionbio":"With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction"
     },
     {
       "id": "Lance-smith",
@@ -40,7 +48,11 @@
       "propertiessold": "75",
       "averageprice": "250k",
       "totalvalue": "1M",
-      "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction."
+      "exp": "3 Years",
+      "languages": ["English", "Spanish"],
+      "specialties": ["Residential", "Commercial"],
+      "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
+      "sectionbio":"With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction"
     }
   ],
   "properties": [
@@ -98,9 +110,9 @@
     {
       "agentId": "mark-smith",
       "id": "mark-smith-property-1",
-      "address": "1111 N 11th St",
+      "address": "17736 Windflower Way",
       "city": "dallas",
-      "zip": "76801",
+      "zip": "75252",
       "price": 195000,
       "bedrooms": 3,
       "bathrooms": 2,
@@ -131,8 +143,8 @@
       ],
       "image": "img/marksmithproperty-1.jpg",
       "listedDaysAgo": 3,
-      "lat": 31.558970,
-      "lng": -97.145020,
+      "lat": 32.994675,
+      "lng": -96.801930,
       "images": [
         "img/marksmithproperty-1.jpg",
         "img/marksmithkitchen-1.jpg",

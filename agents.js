@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
                      style="width:90px; height:140px; margin-top:.75em; object-fit: fill; margin-left:.5em;">
               </div>
               <div class="col-9">
+              <p class="p-1">About Us</p>
               <p class="text-muted p-1 mb-0" style="font-size: 0.85rem;">${bio}</p>
               </div>
 
@@ -50,8 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                   </div>
                   <div class=" col-6">
-                    <p class="mb-0 mt-0" style="font-size: 0.80em;">Available properties:${numberofproperties}</p>
-                    <p class="mb-3" style="font-size: 0.80em;">Properties sold:${propertiessold}</p>
+                    <p class="mb-0 mt-4" style="font-size: 0.80em;">Available properties:${numberofproperties}</p>
+                    <p class="mb-2" style="font-size: 0.80em;">Properties sold:${propertiessold}</p>
                     <p class="mb-0" style="font-size: 0.80rem;">Average Price: ${averageprice}</p>
                     <p class="mb-0" style="font-size: 0.80rem;">Total Value: ${totalvalue}</p>
                   </div>

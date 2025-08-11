@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const nameHeader = document.getElementById("agent-name");
   const bioContainer = document.getElementById("agent-bio");
 
+
   // Validate critical DOM elements
   if (!container || !nameHeader) {
     console.error("Critical DOM elements missing:", { container, nameHeader });
@@ -59,19 +60,45 @@ document.addEventListener("DOMContentLoaded", () => {
               <div class="d-flex" style="padding: 0em;">
                 <img src="${agent.image || 'placeholder.jpg'}" alt="${agent.name || 'Featured Agent'}" 
                      class="img-fluid mb-1 w-100" 
-                     style="height: 325px !important; object-fit: fill; border-radius: 0.25em;">
+                     style="  height: 350px!important; border-radius: 0.25em;">
                      </div>
               </div>
-              <
-
-                <div class="row">
+                <div class="row p-1">
                   <div class="col-9">
                     <h6 class="card-title mb-1 fw-semibold" style="font-size: 1.5rem;">${agent.name || 'Featured Agent'}</h6>
                     <p class="text-muted mb-1" style="font-size: 1rem;">${agent.lic || 'N/A'}</p>
+                    </div>
+                    <div class=" gap-0 col-4">
+                    <p class="text-center mt-1" style="font-size: 1.25em;">${agent.totalvalue}</p>
+                    <p class="text-center mb-0" style="font-size: .85em;">Total Value</p>
+                    </div>
+                    <div class="gap-0 col-4">
+                    <p class="text-center mt-1" style="font-size: 1.25em;">${agent.propertiessold}</p>
+                    <p class="text-center mb-0" style="font-size: .85em;">Properties Sold</p>
+                    </div>
+                    <div class="gap-0 col-4">
+                    <p class="text-center mt-1" style="font-size: 1.25em;">${agent.averageprice}</p>
+                    <p class="text-center mb-0" style="font-size: .85em;">Average Price</p>
+                    </div>
                     <h4 class="mt-4" style="font-size: 1.2rem;">About Us</h4>
-                    <p class="text-muted mb-1" style="font-size: .95rem;">${agent.bio || 'No bio available for this agent.'}</p>
-                  </div>  
-                
+                    <p class="text-muted mb-2" style="font-size: .95rem;">${agent.sectionbio || 'No bio available for this agent.'}</p>
+                    <p class="mb-2 mt-3" style="font-size: .95rem;">Experience: ${agent.specialties || 'N/A'}</p>                  
+                    <p class="mb-2" style="font-size: .95rem;">Years of experience: ${agent.exp}</p>
+                    <p class="mb-2" style="font-size: .95rem;">Languages spoken: ${agent.languages || 'N/A'}</p>
+                    </div>  
+                    <!-- Social Links -->
+                    <div class="col-12 d-flex justify-content-center mt-3">
+              <div class="d-flex gap-5">
+
+                <a href="${agent.facebook || '#'}" class="text-decoration-none text-secondary" target="_blank">
+                  <i class="bi bi-facebook fs-4"></i> 
+                </a>
+                <a href="${agent.instagram || '#'}" class="text-decoration-none text-secondary" target="_blank">
+                  <i class="bi bi-instagram fs-4"></i>        
+                </a>        
+                <a href="${agent.twitter || '#'}" class="text-decoration-none text-secondary" target="_blank">   
+                  <i class="bi bi-twitter fs-4"></i>
+                </a>
                 </div>
               </div>
             </div>

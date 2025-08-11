@@ -51,6 +51,35 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
       }
 
+      
+      // Render map 
+      // Render map if coordinates exist
+if (prop.lat && prop.lng) {
+  const map = L.map('property-map').setView([prop.lat, prop.lng], 15);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  L.marker([prop.lat, prop.lng])
+    .addTo(map)
+    .bindPopup(`${prop.address}<br>${prop.city}, TX ${prop.zip}`)
+    .openPopup();
+} else {
+  const mapContainer = document.getElementById('property-map');
+  if (mapContainer) {
+    mapContainer.innerHTML = '<p class="text-muted">No map available for this property.</p>';
+  }
+}
+
+document.querySelector('#property-map').insertAdjacentHTML(
+  'beforebegin',
+  `<h3 class="mb-3">Location: ${prop.address}, ${prop.city}</h3>`
+);
+
+
+
+      
       // Generate Fancybox-compatible image gallery
       const extra = document.getElementById('property-extra');
       if (extra) {
@@ -85,3 +114,4 @@ document.addEventListener('DOMContentLoaded', () => {
       if (details) details.innerHTML = `<p class="text-danger">Failed to load property: ${err.message}</p>`;
     });
 });
+

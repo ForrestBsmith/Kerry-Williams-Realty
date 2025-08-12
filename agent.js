@@ -2,16 +2,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // Get agent ID from URL query parameter
   const urlParams = new URLSearchParams(window.location.search);
   const agentId = urlParams.get("agent")?.toLowerCase();
+  
 
   // DOM elements
   const container = document.getElementById("property-list");
   const nameHeader = document.getElementById("agent-name");
   const bioContainer = document.getElementById("agent-bio");
-          // Ticker elements
-  const soldElem = document.getElementById('properties-sold');
-  const avgPriceElem = document.getElementById('average-price');
-  const totalValueElem = document.getElementById('total-value');
-  const tickerSection = document.getElementById('data-ticker');
+
 
   // Validate critical DOM elements
   if (!container || !nameHeader) {
@@ -36,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(data => {
       console.log("Fetched JSON data:", data);
+ 
 
       // Validate JSON structure
       const jsonData = Array.isArray(data) && data.length > 0 ? data[0] : null;
@@ -112,46 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         `;
         bioContainer.insertAdjacentHTML("beforeend", bioSection);
-
-
-
-  // Animation helpers
-  function animateValue(el, start, end, duration, prefix = "", suffix = "") {
-    let startTime = null;
-    function step(timestamp) {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      const value = Math.floor(progress * (end - start) + start);
-      el.textContent = `${prefix}${value.toLocaleString()}${suffix}`;
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  function animateValueThousands(el, start, end, duration, prefix = "", suffix = "K") {
-    let startTime = null;
-    function step(timestamp) {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      const value = (progress * (end - start) + start) / 1000;
-      el.textContent = `${prefix}${value.toFixed(1)}${suffix}`;
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  function animateValueMillions(el, start, end, duration, prefix = "", suffix = "M") {
-    let startTime = null;
-    function step(timestamp) {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      const value = (progress * (end - start) + start) / 1_000_000;
-      el.textContent = `${prefix}${value.toFixed(1)}${suffix}`;
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
       }
 
       // Filter and render agent's properties
@@ -200,6 +158,35 @@ document.addEventListener("DOMContentLoaded", () => {
           `;
           container.insertAdjacentHTML("beforeend", card);
         });
+      }
+
+     // *** MAP RENDERING ***
+      const mapContainer = document.getElementById("property-map");
+      if (mapContainer) {
+        // Initialize map centered roughly on Texas
+        const map = L.map(mapContainer).setView([31.5, -97.3], 10);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        const markersLatLngs = [];
+
+        // Use agentProperties (filtered list)
+        agentProperties.forEach(prop => {
+          if (prop.lat && prop.lng) {
+            const marker = L.marker([prop.lat, prop.lng]).addTo(map);
+            marker.bindPopup(`
+              <strong>${prop.address || "No address"}</strong><br>
+              $${Number(prop.price || 0).toLocaleString()}
+            `);
+            markersLatLngs.push(marker.getLatLng());
+          }
+        });
+
+        if (markersLatLngs.length) {
+          map.fitBounds(markersLatLngs, { padding: [50, 50] });
+        }
       }
 
       // Modal Event Delegation

@@ -209,19 +209,33 @@ h6{
   min-width: 120px;
 }
 
+/* Typography and spacing common styles */
+.text-large {
+  font-size: 1.5rem;
+}
 
-@media (max-width: 768px) {
-  .modal-dialog {
-    max-width: 100%;
-    margin: 0;
+.word-spacing-medium {
+  word-spacing: 0.5em;
+}
+
+/* Responsive scaling */
+@media (min-width: 768px) {
+  .text-large {
+    font-size: 2rem;
   }
-  .modal-content {
-    height: 100vh;
-    border-radius: 0;
+
+  .word-spacing-medium {
+    word-spacing: 0.7em;
   }
 }
-@media (max-width: 768px) {
-  #property-map {
-    height: 400px;
+
+@media (min-width: 1024px) {
+
+  .word-spacing-medium {
+    word-spacing: .1em;
+    font-size: 2em;
   }
+
+  
 }
+

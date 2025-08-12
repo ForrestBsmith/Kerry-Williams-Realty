@@ -59,7 +59,9 @@ body, html {
 .carousel-item  {
  height: 200px !important; /* Set a fixed height for carousel items */
 }
-
+ h6{
+  word-spacing: 1.95px;
+ }
 
 /* Fix for images in the footer */
 

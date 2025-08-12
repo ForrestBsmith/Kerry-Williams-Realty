@@ -7,7 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("property-list");
   const nameHeader = document.getElementById("agent-name");
   const bioContainer = document.getElementById("agent-bio");
-
+          // Ticker elements
+  const soldElem = document.getElementById('properties-sold');
+  const avgPriceElem = document.getElementById('average-price');
+  const totalValueElem = document.getElementById('total-value');
+  const tickerSection = document.getElementById('data-ticker');
 
   // Validate critical DOM elements
   if (!container || !nameHeader) {
@@ -51,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-
+   
       // Render agent bio if container exists
       if (bioContainer) {
         const bioSection = `
@@ -63,11 +67,12 @@ document.addEventListener("DOMContentLoaded", () => {
                      style="  height: 350px!important; border-radius: 0.25em;">
                      </div>
               </div>
-                <div class="row p-1">
-                  <div class="col-9">
+                <div class="row p-0">
+                  <div class="col-10">
                     <h6 class="card-title mb-1 fw-semibold" style="font-size: 1.5rem;">${agent.name || 'Featured Agent'}</h6>
                     <p class="text-muted mb-1" style="font-size: 1rem;">${agent.lic || 'N/A'}</p>
                     </div>
+                    <div class="row col-12">
                     <div class=" gap-0 col-4">
                     <p class="text-center mt-1" style="font-size: 1.25em;">${agent.totalvalue}</p>
                     <p class="text-center mb-0" style="font-size: .85em;">Total Value</p>
@@ -80,6 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="text-center mt-1" style="font-size: 1.25em;">${agent.averageprice}</p>
                     <p class="text-center mb-0" style="font-size: .85em;">Average Price</p>
                     </div>
+                    </div>
+
                     <h4 class="mt-4" style="font-size: 1.2rem;">About Us</h4>
                     <p class="text-muted mb-2" style="font-size: .95rem;">${agent.sectionbio || 'No bio available for this agent.'}</p>
                     <p class="mb-2 mt-3" style="font-size: .95rem;">Specialty: ${agent.specialties || 'N/A'}</p>                  
@@ -105,6 +112,46 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         `;
         bioContainer.insertAdjacentHTML("beforeend", bioSection);
+
+
+
+  // Animation helpers
+  function animateValue(el, start, end, duration, prefix = "", suffix = "") {
+    let startTime = null;
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const value = Math.floor(progress * (end - start) + start);
+      el.textContent = `${prefix}${value.toLocaleString()}${suffix}`;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function animateValueThousands(el, start, end, duration, prefix = "", suffix = "K") {
+    let startTime = null;
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const value = (progress * (end - start) + start) / 1000;
+      el.textContent = `${prefix}${value.toFixed(1)}${suffix}`;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function animateValueMillions(el, start, end, duration, prefix = "", suffix = "M") {
+    let startTime = null;
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const value = (progress * (end - start) + start) / 1_000_000;
+      el.textContent = `${prefix}${value.toFixed(1)}${suffix}`;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
       }
 
       // Filter and render agent's properties

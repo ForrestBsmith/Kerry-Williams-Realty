@@ -90,6 +90,209 @@
   </div>
 
 
+<div id="agent-details"></div>
+
+<!-- Floating Contact Button -->
+<div id="floating-contact">
+  <button id="contact-btn">📞 Contact Agent</button>
+</div>
+
+<!-- Contact Panel -->
+<div id="contact-panel">
+  <span id="close-panel">×</span>
+  <h4 id="agent-name"></h4>
+  <p id="agent-phone"></p>
+  <p id="agent-email"></p>
+</div>
+
+<style>
+/* Floating button */
+#floating-contact-btn {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 999999 !important;
+  background: linear-gradient(135deg,  rgba(106, 142, 35, 0.754), #075308) !important;
+  color: #fff !important;
+  padding: 12px 18px !important;
+  border: none !important;
+  border-radius: 25px !important;
+  cursor: pointer !important;
+  font-size: 16px !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
+}
+
+#floating-contact-btn:hover {
+  background: linear-gradient(135deg, #feb47b, #ff7e5f) !important;
+}
+
+/* Overlay */
+#contact-popup-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000000;
+}
+
+/* Popup box */
+#contact-popup {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+#contact-popup h2 {
+  margin-top: 0;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Contact rows */
+.contact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f8f8;
+  padding: 8px 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  font-size: 0.85rem !important;
+}
+
+.contact-row span {
+  word-break: break-word;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #5d666f;
+  font-size: .75rem !important;
+  display: flex;
+  align-items: center;
+}
+
+.copy-btn:hover {
+  text-decoration: underline;
+}
+
+#close-popup {
+  margin-top: 15px;
+  display: block;
+  width: 100%;
+  background: #56595c;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#close-popup:hover {
+  background: #0056b3;
+}
+</style>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Get agent ID from URL parameter, e.g. ?agent=mark-smith
+  const urlParams = new URLSearchParams(window.location.search);
+  const agentId = urlParams.get("agent")?.toLowerCase();
+
+  // Create floating button
+  const contactBtn = document.createElement("button");
+  contactBtn.id = "floating-contact-btn";
+  contactBtn.innerHTML = "📞 Contact Agent";
+  document.body.appendChild(contactBtn);
+
+  // Create popup overlay but empty for now
+  const overlay = document.createElement("div");
+  overlay.id = "contact-popup-overlay";
+  overlay.style.display = "none"; // hidden initially
+  document.body.appendChild(overlay);
+
+  // Fetch JSON and get agents array
+  fetch("properties-1.json")
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to load JSON");
+      return res.json();
+    })
+    .then(data => {
+      const agents = data[0].agents; // Your JSON is an array with one object containing agents
+      const agent = agents.find(a => a.id.toLowerCase() === agentId);
+
+      if (!agent) {
+        contactBtn.disabled = true;
+        contactBtn.textContent = "Agent not found";
+        return;
+      }
+
+      // On click, fill popup content dynamically and show it
+      contactBtn.addEventListener("click", () => {
+        overlay.innerHTML = `
+          <div id="contact-popup" style="background:#fff; padding:20px; max-width:300px; margin:auto; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.25);">
+            <h2>${agent.name}</h2>
+            <div class="contact-row" style="margin-bottom:10px;">
+              <strong>Email:</strong> <span>${agent.email}</span>
+              <button class="copy-btn" data-copy="${agent.email}" style="margin-left:10px;">📋 Copy</button>
+            </div>
+            <div class="contact-row" style="margin-bottom:10px;">
+              <strong>Phone:</strong> <span>${agent.phone}</span>
+              <button class="copy-btn" data-copy="${agent.phone}" style="margin-left:10px;">📋 Copy</button>
+            </div>
+            <button id="close-popup" style="margin-top:15px;">Close</button>
+          </div>
+        `;
+        overlay.style.display = "flex";
+        overlay.style.position = "fixed";
+        overlay.style.top = "0";
+        overlay.style.left = "0";
+        overlay.style.width = "100%";
+        overlay.style.height = "100%";
+        overlay.style.justifyContent = "center";
+        overlay.style.alignItems = "center";
+        overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
+      });
+
+      // Close popup when clicking outside or Close button
+      overlay.addEventListener("click", (e) => {
+        if (e.target.id === "contact-popup-overlay" || e.target.id === "close-popup") {
+          overlay.style.display = "none";
+        }
+      });
+
+      // Copy to clipboard
+      overlay.addEventListener("click", (e) => {
+        if (e.target.classList.contains("copy-btn")) {
+          const textToCopy = e.target.getAttribute("data-copy");
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            e.target.textContent = "✅ Copied!";
+            setTimeout(() => {
+              e.target.textContent = "📋 Copy";
+            }, 1500);
+          });
+        }
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      contactBtn.disabled = true;
+      contactBtn.textContent = "Failed to load agent info";
+    });
+});
+</script>
+
 
   </main>
 

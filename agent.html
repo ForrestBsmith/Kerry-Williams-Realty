@@ -106,21 +106,23 @@
 </div>
 
 <style>
-/* Floating button */
+  /* Force floating contact button to be visible on all devices */
 #floating-contact-btn {
-  position: fixed !important;
-  bottom: 20px !important;
-  right: 20px !important;
-  z-index: 999999 !important;
+  display: block !important; 
   background: linear-gradient(135deg,  rgba(106, 142, 35, 0.754), #075308) !important;
   color: #fff !important;
-  padding: 12px 18px !important;
-  border: none !important;
-  border-radius: 25px !important;
-  cursor: pointer !important;
-  font-size: 16px !important;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
+  position: fixed !important; 
+  cursor: pointer !important;
+  font-size: 16px !important; 
+  border-radius: 25px !important;
+  bottom: calc(20px + env(safe-area-inset-bottom)) !important;
+  right: 20px !important;
+  z-index: 999999 !important;
+  padding: 12px 18px !important; /* restore if overwritten */
+  border: none !important;
 }
+
 
 #floating-contact-btn:hover {
   background: linear-gradient(135deg, #feb47b, #ff7e5f) !important;

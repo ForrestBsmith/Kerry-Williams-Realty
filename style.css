@@ -224,10 +224,78 @@ h6{
     font-size: 2rem;
   }
 
-  .word-spacing-medium {
-    word-spacing: 0.7em;
+  h1{
+    font-size: 1.75em !important;
   }
+  h2{
+    font-size: 2.25em !important;
+  }
+  h3{
+    font-size: 2.75em !important;
+  }
+
+  p{
+    font-size: 1.75em;
+  }
+
+a.btn{
+  font-size: large !important;
 }
+
+  .word-spacing-medium {
+    word-spacing: .75em;
+  }
+
+  body{
+      letter-spacing: .085em;
+  }
+
+/* THREE COLUMNS - Centered stack */
+.three-columns {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center the whole block */
+  gap: 2rem; /* space between each column */
+}
+
+.three-columns > .col-md-4 {
+  text-align: center; /* center text under the image */
+  width: 100%;
+  max-width: 500px; /* keep it from being too wide on big screens */
+}
+
+/* Make images scale nicely and center */
+.three-columns > .col-md-4 img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto; /* center image horizontally */
+  padding: 0 1rem; /* extra spacing from sides of column */
+}
+
+
+/* Make the text take remaining space */
+.three-columns > .col-md-4 h2,
+.three-columns > .col-md-4 p,
+.three-columns > .col-md-4 a {
+  flex: 1;
+}
+
+/* Optional: better vertical spacing inside the text block */
+.three-columns > .col-md-4 h2 {
+  margin-bottom: 0.5rem;
+}
+.three-columns > .col-md-4 p {
+  margin-bottom: 0.75rem;
+}
+
+}
+
+
+
+
+
+
 
 @media (min-width: 1024px) {
 

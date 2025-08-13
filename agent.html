@@ -9,13 +9,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 <body>
     <!-- NAVBAR START -->
     <header>
       <nav class="navbar navbar-expand-sm">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.html"><h2>Kelly Williams Realty</h2></a>
+          <a class="navbar-brand" href="index.html"><h1>Kelly Williams Realty</h1></a>
           <button class="navbar-toggler bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -35,14 +37,22 @@
   <main class="container mt-4">
     <h1 id="agent-name" class="text-center mb-4"></h1>
     <div id="agent-bio" class=""></div>    <!-- Features get inserted here -->
-<div class="col-md-12 mt-4 mb-5">
-  <h3>Available Listings</h3>
-  <div id="property-map" style="height: 400px;"></div>
-</div>
-    </div>
+
+
+<div class="col-md-12 mt-4 mb-5">      
+  
+  <div>
+  <h3 style="top: 13.5em; position: relative;">Available Listings</h3>
   </div>
+ <div id="property-map" style="height: 400px;"></div>
+</div>
+
+
     <div id="property-list" class="row"></div>
-    
+</div>
+<button id="floating-contact-btn">📞 Contact Agent</button>
+
+
 
 
 <!-- Photos Modal -->
@@ -94,7 +104,7 @@
 
 <!-- Floating Contact Button -->
 <div id="floating-contact">
-  <button id="contact-btn">📞 Contact Agent</button>
+  <button id="floating-contact-btn">📞 Contact Agent</button>
 </div>
 
 <!-- Contact Panel -->
@@ -206,94 +216,162 @@
 
 
 
+<!-- Chart.js CDN -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // Get agent ID from URL parameter, e.g. ?agent=mark-smith
   const urlParams = new URLSearchParams(window.location.search);
   const agentId = urlParams.get("agent")?.toLowerCase();
 
-  // Create floating button
-  const contactBtn = document.createElement("button");
-  contactBtn.id = "floating-contact-btn";
-  contactBtn.innerHTML = "📞 Contact Agent";
-  document.body.appendChild(contactBtn);
+  const contactBtn = document.getElementById("floating-contact-btn");
 
-  // Create popup overlay but empty for now
-  const overlay = document.createElement("div");
-  overlay.id = "contact-popup-overlay";
-  overlay.style.display = "none"; // hidden initially
-  document.body.appendChild(overlay);
+  // Ensure overlay exists
+  let overlay = document.getElementById("contact-popup-overlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.id = "contact-popup-overlay";
+    document.body.appendChild(overlay);
+  }
 
-  // Fetch JSON and get agents array
   fetch("properties-1.json")
-    .then(res => {
-      if (!res.ok) throw new Error("Failed to load JSON");
-      return res.json();
-    })
+    .then(res => res.json())
     .then(data => {
-      const agents = data[0].agents; // Your JSON is an array with one object containing agents
+      const agents = data[0].agents;
+      const properties = data[0].properties;
       const agent = agents.find(a => a.id.toLowerCase() === agentId);
+      if (!agent) return;
 
-      if (!agent) {
-        contactBtn.disabled = true;
-        contactBtn.textContent = "Agent not found";
-        return;
+      // ==== Insert Sales History Section Above Map ====
+      const historySection = document.createElement("div");
+      historySection.id = "history-section";
+      historySection.className = "card shadow-sm p-3 mb-5";
+      historySection.innerHTML = `
+        <h4 class="fw-bold mb-3">Recent Sales History</h4>
+        <div class="row mb-3">
+          <div class="col text-center">
+            <h5 id="history-total-sales">$0</h5>
+            <p class="mb-0 text-muted">Total Sales</p>
+          </div>
+          <div class="col text-center">
+            <h5 id="history-total-listings">0</h5>
+            <p class="mb-0 text-muted">Total Sold</p>
+          </div>
+          <div class="col text-center">
+            <h5 id="history-average-price">$0</h5>
+            <p class="mb-0 text-muted">Average Price</p>
+          </div>
+        </div>
+        <canvas id="history-chart" height="120"></canvas>
+      `;
+
+      const mapElement = document.getElementById("property-map");
+      if (mapElement) mapElement.parentNode.insertBefore(historySection, mapElement);
+
+      // ==== Render Agent Sales History ====
+      function renderAgentSalesHistory(agentId, properties) {
+        const soldProperties = properties.filter(
+          p => String(p.agentId).toLowerCase() === agentId && p.status === "sold"
+        );
+
+        const totalSoldValue = soldProperties.reduce((sum, p) => sum + (p.price || 0), 0);
+        const totalSoldCount = soldProperties.length;
+        const avgSoldPrice = totalSoldCount > 0 ? totalSoldValue / totalSoldCount : 0;
+
+        document.getElementById("history-total-sales").textContent = `$${totalSoldValue.toLocaleString()}`;
+        document.getElementById("history-total-listings").textContent = totalSoldCount;
+        document.getElementById("history-average-price").textContent = `$${avgSoldPrice.toLocaleString()}`;
+
+        // Chart data per month
+        const monthlyData = {};
+        soldProperties.forEach(p => {
+          if (!p.soldDate) return;
+          const date = new Date(p.soldDate);
+          const monthYear = `${date.toLocaleString("default", { month: "short" })} ${date.getFullYear()}`;
+          monthlyData[monthYear] = (monthlyData[monthYear] || 0) + (p.price || 0);
+        });
+
+        const ctx = document.getElementById("history-chart").getContext("2d");
+        if (window.historyChart) window.historyChart.destroy();
+        window.historyChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: Object.keys(monthlyData),
+            datasets: [{
+              label: "Total Sold Value ($)",
+              data: Object.values(monthlyData),
+              borderColor: "#007bff",
+              backgroundColor: "rgba(0, 123, 255, 0.2)",
+              fill: false,
+              tension: 0.3
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: true } },
+            scales: { y: { beginAtZero: true } }
+          }
+        });
       }
 
-      // On click, fill popup content dynamically and show it
-      contactBtn.addEventListener("click", () => {
-        overlay.innerHTML = `
-          <div id="contact-popup" style="background:#fff; padding:20px; max-width:300px; margin:auto; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.25);">
-            <h2>${agent.name}</h2>
-            <div class="contact-row" style="margin-bottom:10px;">
-              <strong>Email:</strong> <span>${agent.email}</span>
-              <button class="copy-btn" data-copy="${agent.email}" style="margin-left:10px;">📋 Copy</button>
-            </div>
-            <div class="contact-row" style="margin-bottom:10px;">
-              <strong>Phone:</strong> <span>${agent.phone}</span>
-              <button class="copy-btn" data-copy="${agent.phone}" style="margin-left:10px;">📋 Copy</button>
-            </div>
-            <button id="close-popup" style="margin-top:15px;">Close</button>
-          </div>
-        `;
-        overlay.style.display = "flex";
-        overlay.style.position = "fixed";
-        overlay.style.top = "0";
-        overlay.style.left = "0";
-        overlay.style.width = "100%";
-        overlay.style.height = "100%";
-        overlay.style.justifyContent = "center";
-        overlay.style.alignItems = "center";
-        overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
-      });
+      renderAgentSalesHistory(agentId, properties);
 
-      // Close popup when clicking outside or Close button
-      overlay.addEventListener("click", (e) => {
-        if (e.target.id === "contact-popup-overlay" || e.target.id === "close-popup") {
-          overlay.style.display = "none";
-        }
-      });
+      // ==== CONTACT BUTTON POPUP ====
+      if (contactBtn) {
+        contactBtn.addEventListener("click", () => {
+          overlay.innerHTML = `
+            <div id="contact-popup" style="background:#fff; padding:20px; max-width:300px; margin:auto; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.25);">
+              <h2>${agent.name}</h2>
+              <div class="contact-row" style="margin-bottom:10px;">
+                <strong>Email:</strong> <span>${agent.email}</span>
+                <button class="copy-btn" data-copy="${agent.email}" style="margin-left:10px;">📋 Copy</button>
+              </div>
+              <div class="contact-row" style="margin-bottom:10px;">
+                <strong>Phone:</strong> <span>${agent.phone}</span>
+                <button class="copy-btn" data-copy="${agent.phone}" style="margin-left:10px;">📋 Copy</button>
+              </div>
+              <button id="close-popup" style="margin-top:15px;">Close</button>
+            </div>
+          `;
+          overlay.style.display = "flex";
+          overlay.style.position = "fixed";
+          overlay.style.top = "0";
+          overlay.style.left = "0";
+          overlay.style.width = "100%";
+          overlay.style.height = "100%";
+          overlay.style.justifyContent = "center";
+          overlay.style.alignItems = "center";
+          overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
+        });
 
-      // Copy to clipboard
-      overlay.addEventListener("click", (e) => {
-        if (e.target.classList.contains("copy-btn")) {
-          const textToCopy = e.target.getAttribute("data-copy");
-          navigator.clipboard.writeText(textToCopy).then(() => {
-            e.target.textContent = "✅ Copied!";
-            setTimeout(() => {
-              e.target.textContent = "📋 Copy";
-            }, 1500);
-          });
-        }
-      });
+        // Close popup
+        overlay.addEventListener("click", (e) => {
+          if (e.target.id === "contact-popup-overlay" || e.target.id === "close-popup") {
+            overlay.style.display = "none";
+          }
+        });
+
+        // Copy to clipboard
+        overlay.addEventListener("click", (e) => {
+          if (e.target.classList.contains("copy-btn")) {
+            const textToCopy = e.target.getAttribute("data-copy");
+            navigator.clipboard.writeText(textToCopy).then(() => {
+              e.target.textContent = "✅ Copied!";
+              setTimeout(() => { e.target.textContent = "📋 Copy"; }, 1500);
+            });
+          }
+        });
+      }
+
     })
     .catch(err => {
       console.error(err);
-      contactBtn.disabled = true;
-      contactBtn.textContent = "Failed to load agent info";
+      if (contactBtn) {
+        contactBtn.disabled = true;
+        contactBtn.textContent = "Failed to load agent info";
+      }
     });
 });
 </script>
+
 
 
   </main>

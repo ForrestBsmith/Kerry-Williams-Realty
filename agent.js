@@ -112,6 +112,13 @@ document.addEventListener("DOMContentLoaded", () => {
         bioContainer.insertAdjacentHTML("beforeend", bioSection);
       }
 
+      const nameHeader = "Available Listings";
+const container = document.getElementById("property-list"); // your container
+
+// Insert a constant header at the top
+container.innerHTML = `<h2 class="mb-4 text-center">${nameHeader}</h2>`;
+
+
       // Filter and render agent's properties
       const agentProperties = properties.filter(prop => String(prop.agentId).toLowerCase() === agentId);
       console.log(`Properties for agent ${agent.name || "Unknown"}:`, agentProperties);

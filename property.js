@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <p><i class="bi bi-house-door-fill me-2"></i><strong>Bedrooms:</strong> ${prop.bedrooms || 'N/A'}</p>
           <p><i class="bi bi-droplet me-2"></i><strong>Bathrooms:</strong> ${prop.bathrooms || 'N/A'}</p>
           <p class="mb-5"><i class="bi bi-rulers me-2"></i><strong>Square Feet:</strong> ${prop.squareFeet?.toLocaleString() || 'N/A'}</p>
-          <p>${prop.description || 'No description provided.'}</p>
+          <p class="property-bio">${prop.description || 'No description provided.'}</p>
         `;
       }
 

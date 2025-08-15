@@ -57,58 +57,72 @@ document.addEventListener("DOMContentLoaded", () => {
       // Render agent bio if container exists
       if (bioContainer) {
         const bioSection = `
-          <div class="card agent-card shadow-sm p-1 mb-4">
-            <div class="row g-0 align-items-center">
-              <div class="d-flex" style="padding: 0em;">
-                <img src="${agent.image || 'placeholder.jpg'}" alt="${agent.name || 'Featured Agent'}" 
-                     class="img-fluid mb-1 w-100" 
-                     style="  height: 350px!important; border-radius: 0.25em;">
-                     </div>
-              </div>
-                <div class="row p-0">
-                  <div class="col-10">
-                    <h6 class="card-title mb-1 fw-semibold" style="font-size: 1.5rem;">${agent.name || 'Featured Agent'}</h6>
-                    <p class="text-muted mb-1" style="font-size: 1rem;">${agent.lic || 'N/A'}</p>
-                    </div>
-                    <div class="row col-12">
-                    <div class=" gap-0 col-4">
-                    <p class="text-center mt-1" style="font-size: 1.25em;">${agent.totalvalue}</p>
-                    <p class="text-center mb-0" style="font-size: .85em;">Total Value</p>
-                    </div>
-                    <div class="gap-0 col-4">
-                    <p class="text-center mt-1" style="font-size: 1.25em;">${agent.propertiessold}</p>
-                    <p class="text-center mb-0" style="font-size: .85em;">Properties Sold</p>
-                    </div>
-                    <div class="gap-0 col-4">
-                    <p class="text-center mt-1" style="font-size: 1.25em;">${agent.averageprice}</p>
-                    <p class="text-center mb-0" style="font-size: .85em;">Average Price</p>
-                    </div>
-                    </div>
+       <div class="card agent-card shadow-sm p-1 mb-4">
+  <div class="row g-0 align-items-center">
+    <div class="d-flex no-padding">
+      <img src="${agent.image || 'placeholder.jpg'}" 
+           alt="${agent.name || 'Featured Agent'}" 
+           class="img-fluid mb-1 w-100 agent-headshot">
+    </div>
+  </div>
 
-                    <h4 class="mt-4" style="font-size: 1.2rem;">About Us</h4>
-                    <p class="text-muted mb-2" style="font-size: .95rem;">${agent.sectionbio || 'No bio available for this agent.'}</p>
-                    <p class="mb-2 mt-3" style="font-size: .95rem;">Specialty: ${agent.specialties || 'N/A'}</p>                  
-                    <p class="mb-2" style="font-size: .95rem;">Years of experience: ${agent.exp}</p>
-                    <p class="mb-2" style="font-size: .95rem;">Languages spoken: ${agent.languages || 'N/A'}</p>
-                    </div>  
-                    <!-- Social Links -->
-                    <div class="col-12 d-flex justify-content-center mt-3">
-              <div class="d-flex gap-5">
+<div class="row p-0">
+  <div class="col-10">
+    <h6 class="card-title mb-1 fw-semibold agent-name">
+      ${agent.name || 'Featured Agent'}
+    </h6>
+    <p class="text-muted mb-1 agent-lic">
+      ${agent.lic || 'N/A'}
+    </p>
+  </div>
 
-                <a href="${agent.facebook || '#'}" class="text-decoration-none text-secondary" target="_blank">
-                  <i class="bi bi-facebook fs-4"></i> 
-                </a>
-                <a href="${agent.instagram || '#'}" class="text-decoration-none text-secondary" target="_blank">
-                  <i class="bi bi-instagram fs-4"></i>        
-                </a>        
-                <a href="${agent.twitter || '#'}" class="text-decoration-none text-secondary" target="_blank">   
-                  <i class="bi bi-twitter fs-4"></i>
-                </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
+  <div class="row col-12">
+    <div class="gap-0 col-4">
+      <p class="text-center mt-1 agent-stat-value">${agent.totalvalue}</p>
+      <p class="text-center mb-0 agent-stat-label">Total Value</p>
+    </div>
+    <div class="gap-0 col-4">
+      <p class="text-center mt-1 agent-stat-value">${agent.propertiessold}</p>
+      <p class="text-center mb-0 agent-stat-label">Properties Sold</p>
+    </div>
+    <div class="gap-0 col-4">
+      <p class="text-center mt-1 agent-stat-value">${agent.averageprice}</p>
+      <p class="text-center mb-0 agent-stat-label">Average Price</p>
+    </div>
+  </div>
+
+  <h4 class="mt-4 agent-about-heading">About Us</h4>
+  <p class="text-muted mb-2 agent-bio">
+    ${agent.sectionbio || 'No bio available for this agent.'}
+  </p>
+  <p class="mb-2 mt-3 agent-detail">
+    Specialty: ${agent.specialties || 'N/A'}
+  </p>                  
+  <p class="mb-2 agent-detail">
+    Years of experience: ${agent.exp}
+  </p>
+  <p class="mb-2 agent-detail">
+    Languages spoken: ${agent.languages || 'N/A'}
+  </p>
+</div>
+ 
+
+  <!-- Social Links -->
+  <div class="col-12 d-flex justify-content-center mt-3">
+    <div class="d-flex gap-5">
+      <a href="${agent.facebook || '#'}" class="text-decoration-none text-secondary" target="_blank">
+        <i class="bi bi-facebook fs-4"></i> 
+      </a>
+      <a href="${agent.instagram || '#'}" class="text-decoration-none text-secondary" target="_blank">
+        <i class="bi bi-instagram fs-4"></i>        
+      </a>        
+      <a href="${agent.twitter || '#'}" class="text-decoration-none text-secondary" target="_blank">   
+        <i class="bi bi-twitter fs-4"></i>
+      </a>
+    </div>
+  </div>
+</div>
+`;
         bioContainer.insertAdjacentHTML("beforeend", bioSection);
       }
 
@@ -128,40 +142,51 @@ container.innerHTML = `<h2 class="mb-4 text-center">${nameHeader}</h2>`;
       } else {
         agentProperties.forEach((prop, index) => {
           const card = `
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="card property-card border-0 shadow-sm h-100">
-                <div class="position-relative">
-                <img 
-  src="${prop.image || 'placeholder.jpg'}" 
-  class="card-img-top object-fit-cover property-click" 
-  data-index="${index}" 
-  alt="${prop.address || 'Property'}" 
-  style="height: 220px; border-top-left-radius: .5rem; border-top-right-radius: .5rem; cursor: pointer;">
-                  <button class="btn position-absolute top-0 end-0 m-2 rounded-circle p-2">
-                    <i class="bi bi-heart text-danger fs-5"></i>
-                  </button>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title fw-bold mb-2">$${Number(prop.price || 0).toLocaleString()}</h5>
-                  <p class="text-muted small mb-2">${prop.address || 'No Address Provided'}, ${prop.city || 'N/A'}, TX ${prop.zip || 'N/A'}</p>
-                  <div class="d-flex justify-content-between text-secondary small mb-2">
-                    <div><i class="bi bi-house-door"></i> ${prop.bedrooms || 'N/A'} Beds</div>
-                    <div><i class="bi bi-bucket"></i> ${prop.bathrooms || 'N/A'} Baths</div>
-                    <div><i class="bi bi-aspect-ratio"></i> ${prop.squareFeet ? prop.squareFeet.toLocaleString() : 'N/A'} SqFt</div>
-                  </div>
-                  <div class="text-muted" style="font-size:13px;">${prop.description || 'No description available.'}</div>
-                  <div class="d-flex gap-2 mt-1">
-                    <button class="btn btn-sm text-muted btn-photos" data-index="${index}" data-bs-toggle="modal" data-bs-target="#photosModal">View Photos</button>
-                    <button class="btn btn-sm text-muted btn-schedule" data-index="${index}" data-bs-toggle="modal" data-bs-target="#scheduleModal">Schedule</button>
-                    <button class="btn btn-sm text-muted btn-details" data-index="${index}" data-bs-toggle="modal" data-bs-target="#detailsModal">Details</button>
-                  </div>
-                </div>
-                <div class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center small text-muted">
-                  <div><i class="bi bi-share me-1"></i> Share</div>
-                  <div>Listed ${prop.listedDaysAgo || 'N/A'} days ago</div>
-                </div>
-              </div>
-            </div>
+<div class="col-md-6 col-lg-4 mb-4">
+  <div class="card property-card border-0 shadow-sm h-100">
+    <div class="position-relative">
+      <img 
+        src="${prop.image || 'placeholder.jpg'}" 
+        class="card-img-top property-image property-click" 
+        data-index="${index}" 
+        alt="${prop.address || 'Property'}">
+      <button class="btn position-absolute top-0 end-0 m-2 rounded-circle p-2">
+        <i class="bi bi-heart text-danger fs-5"></i>
+      </button>
+    </div>
+
+    <div class="card-body">
+      <h5 class="card-title fw-bold mb-2">
+        $${Number(prop.price || 0).toLocaleString()}
+      </h5>
+      <p class="text-muted small mb-2">
+        ${prop.address || 'No Address Provided'}, ${prop.city || 'N/A'}, TX ${prop.zip || 'N/A'}
+      </p>
+
+      <div class="d-flex justify-content-between text-secondary small mb-2">
+        <div><i class="bi bi-house-door"></i> ${prop.bedrooms || 'N/A'} Beds</div>
+        <div><i class="bi bi-bucket"></i> ${prop.bathrooms || 'N/A'} Baths</div>
+        <div><i class="bi bi-aspect-ratio"></i> ${prop.squareFeet ? prop.squareFeet.toLocaleString() : 'N/A'} SqFt</div>
+      </div>
+
+      <div class="text-muted property-description">
+        ${prop.description || 'No description available.'}
+      </div>
+
+      <div class="d-flex gap-2 mt-1">
+        <button class="btn btn-sm text-muted btn-photos" data-index="${index}" data-bs-toggle="modal" data-bs-target="#photosModal">View Photos</button>
+        <button class="btn btn-sm text-muted btn-schedule" data-index="${index}" data-bs-toggle="modal" data-bs-target="#scheduleModal">Schedule</button>
+        <button class="btn btn-sm text-muted btn-details" data-index="${index}" data-bs-toggle="modal" data-bs-target="#detailsModal">Details</button>
+      </div>
+    </div>
+
+    <div class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center small text-muted">
+      <div><i class="bi bi-share me-1"></i> Share</div>
+      <div>Listed ${prop.listedDaysAgo || 'N/A'} days ago</div>
+    </div>
+  </div>
+</div>
+
           `;
           container.insertAdjacentHTML("beforeend", card);
         });

@@ -479,7 +479,7 @@ FAQ
   }
 
   .sliderimages,
-  .carousel-inner {height: 400px !important;}
+  .carousel-inner {height: 500px !important;}
 
   .text-large { font-size: 2rem; }
 
@@ -704,6 +704,10 @@ SELLING
 
 .linktext {
  font-size:  1.25rem;
+}
+
+.companylogo{
+  height: 400px !important;
 }
 
 }  

@@ -39,97 +39,87 @@
 
  <div class="FAQs container my-5">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 faqhandler">
 
-      <!-- Question 1 -->
-      <button class="form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">
-        <p class="text-center mt-1 mb-0">How do I apply for financing?</p>
-      </button>
-      <div class="collapse" id="faq1">
-        <div class="card card-body">
-          Financing typically starts by getting pre-approved through a mortgage lender or bank. We can connect you with trusted loan officers who will guide you through the process and help determine your buying power.
-        </div>
-      </div>
-
-      <!-- Question 2 -->
-      <button class="form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
-        <p class="text-center mt-1 mb-0">What are some home buying tips?</p>
-      </button>
-      <div class="collapse" id="faq2">
-        <div class="card card-body">
-          <ul>
-            <li>Get pre-approved before you start shopping.</li>
-            <li>Work with a licensed real estate agent who understands your market.</li>
-            <li>Always schedule a professional home inspection.</li>
-            <li>Understand your budget and stick to it.</li>
-            <li>Don’t skip reviewing the HOA or deed restrictions, if applicable.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Question 3 -->
-      <button class="form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
-        <p class="text-center mt-1 mb-0">How do I list my property for sale?</p>
-      </button>
-      <div class="collapse" id="faq3">
-        <div class="card card-body">
-          To list your property, fill out our online form or contact us directly. One of our agents will schedule a consultation to discuss pricing, marketing strategy, and walk you through the listing agreement process. From there, we prepare your property for market and coordinate showings, offers, and closing.
-        </div>
-      </div>
-
-      <!-- Question 4 -->
-     <!-- Home Loan Calculator -->
-<button class="form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
-  <p class="text-center mt-1 mb-0">Home Loan Calculator</p>
+<!-- Question 1 -->
+<button class="form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">
+  <p class="faq-question-text text-center mt-1 mb-0">How do I apply for financing?</p>
 </button>
+<div class="collapse" id="faq1">
+  <div class="card card-body faq-card-body">
+    Financing typically starts by getting pre-approved through a mortgage lender or bank. We can connect you with trusted loan officers who will guide you through the process and help determine your buying power.
+  </div>
+</div>
 
+<!-- Question 2 -->
+<button class="form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+  <p class="faq-question-text text-center mt-1 mb-0">What are some home buying tips?</p>
+</button>
+<div class="collapse" id="faq2">
+  <div class="card card-body faq-card-body">
+    <ul class="faq-list">
+      <li class="faq-list-item">Get pre-approved before you start shopping.</li>
+      <li class="faq-list-item">Work with a licensed real estate agent who understands your market.</li>
+      <li class="faq-list-item">Always schedule a professional home inspection.</li>
+      <li class="faq-list-item">Understand your budget and stick to it.</li>
+      <li class="faq-list-item">Don’t skip reviewing the HOA or deed restrictions, if applicable.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Question 3 -->
+<button class="form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+  <p class="faq-question-text text-center mt-1 mb-0">How do I list my property for sale?</p>
+</button>
+<div class="collapse" id="faq3">
+  <div class="card card-body faq-card-body">
+    To list your property, fill out our online form or contact us directly. One of our agents will schedule a consultation to discuss pricing, marketing strategy, and walk you through the listing agreement process. From there, we prepare your property for market and coordinate showings, offers, and closing.
+  </div>
+</div>
+
+<!-- Question 4 -->
+<button class="form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+  <p class="faq-question-text text-center mt-1 mb-0">Home Loan Calculator</p>
+</button>
 <div class="collapse" id="faq4">
-  <div class="card card-body">
+  <div class="card card-body faq-card-body">
     <!-- Loan Amount -->
     <div class="mb-3">
       <label for="loanAmount" class="form-label">Home Price ($)</label>
       <input type="number" class="form-control" id="loanAmount" placeholder="300000">
     </div>
-
     <!-- Down Payment -->
     <div class="mb-3">
       <label for="downPayment" class="form-label">Down Payment ($)</label>
       <input type="number" class="form-control" id="downPayment" placeholder="60000">
     </div>
-
     <!-- Interest Rate -->
     <div class="mb-3">
       <label for="interestRate" class="form-label">Annual Interest Rate (%)</label>
       <input type="number" class="form-control" id="interestRate" placeholder="6.5">
     </div>
-
     <!-- Loan Term -->
     <div class="mb-3">
       <label for="loanTerm" class="form-label">Loan Term (Years)</label>
       <input type="number" class="form-control" id="loanTerm" placeholder="30">
     </div>
-
     <!-- Property Taxes -->
     <div class="mb-3">
       <label for="propertyTax" class="form-label">Annual Property Taxes ($)</label>
       <input type="number" class="form-control" id="propertyTax" placeholder="4500">
     </div>
-
     <!-- Home Insurance -->
     <div class="mb-3">
       <label for="homeInsurance" class="form-label">Annual Homeowners Insurance ($)</label>
       <input type="number" class="form-control" id="homeInsurance" placeholder="1200">
     </div>
-
     <!-- HOA Fees -->
     <div class="mb-3">
       <label for="hoaFees" class="form-label">Monthly HOA Fees ($)</label>
       <input type="number" class="form-control" id="hoaFees" placeholder="150">
     </div>
-
     <!-- Button -->
     <button class="btn w-100" onclick="calculateAdvancedLoan()">Calculate Monthly Payment</button>
-
     <!-- Results -->
     <div class="mt-4 text-center">
       <h5 id="totalMonthly" class="text-success"></h5>
@@ -138,67 +128,18 @@
   </div>
 </div>
 
-<script>
-function calculateAdvancedLoan() {
-  const price = parseFloat(document.getElementById('loanAmount').value);
-  const down = parseFloat(document.getElementById('downPayment').value);
-  const rate = parseFloat(document.getElementById('interestRate').value) / 100;
-  const years = parseFloat(document.getElementById('loanTerm').value);
-  const taxes = parseFloat(document.getElementById('propertyTax').value);
-  const insurance = parseFloat(document.getElementById('homeInsurance').value);
-  const hoa = parseFloat(document.getElementById('hoaFees').value);
-
-  if (isNaN(price) || isNaN(down) || isNaN(rate) || isNaN(years)) {
-    document.getElementById('totalMonthly').textContent = 'Please fill in all required fields.';
-    document.getElementById('breakdown').innerHTML = '';
-    return;
-  }
-
-  const loanAmount = price - down;
-  const monthlyRate = rate / 12;
-  const totalPayments = years * 12;
-
-  const principalInterest = 
-    (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -totalPayments));
-
-  const monthlyTaxes = (isNaN(taxes) ? 0 : taxes) / 12;
-  const monthlyInsurance = (isNaN(insurance) ? 0 : insurance) / 12;
-  const monthlyHOA = isNaN(hoa) ? 0 : hoa;
-
-  const totalMonthly = principalInterest + monthlyTaxes + monthlyInsurance + monthlyHOA;
-
-  document.getElementById('totalMonthly').textContent = 
-    `Estimated Monthly Payment: $${totalMonthly.toFixed(2)}`;
-
-  document.getElementById('breakdown').innerHTML = `
-    <strong>Breakdown:</strong><br>
-    Principal & Interest: $${principalInterest.toFixed(2)}<br>
-    Property Taxes: $${monthlyTaxes.toFixed(2)}<br>
-    Insurance: $${monthlyInsurance.toFixed(2)}<br>
-    HOA Fees: $${monthlyHOA.toFixed(2)}
-  `;
-}
-</script>
-
-
-      <!-- Question 5 -->
-      <button class="form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
-        <p class="text-center mt-1 mb-0">How can I contact your team?</p>
-      </button>
-      <div class="collapse" id="faq5">
-        <div class="card card-body">
-          You can reach us anytime at <a href="mailto:KWrealtysupport.com" style="text-decoration: underline !important;">KWrealtysupport.com</a>or call our office during business hours. We're happy to help with buying, selling, or general inquiries.
-        </div>
-      </div>
-
-    </div>
+<!-- Question 5 -->
+<button class="form-control mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+  <p class="faq-question-text text-center mt-1 mb-0">How can I contact your team?</p>
+</button>
+<div class="collapse" id="faq5">
+  <div class="card card-body faq-card-body">
+    You can reach us anytime at 
+    <a href="mailto:KWrealtysupport.com" class="linktext" style="text-decoration: underline !important;">KWrealtysupport.com</a> 
+    or call our office during business hours. We're happy to help with buying, selling, or general inquiries.
   </div>
 </div>
 
-      </div>
-    </div>
-  </div>
-</main>
 
         <!-- FOOTER -->
       <footer class="text-muted py-5">

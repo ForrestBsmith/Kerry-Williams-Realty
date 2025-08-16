@@ -171,6 +171,7 @@ h6{
   background-color: rgba(106, 142, 35, 0.454);
 }
 
+  .display-4 {font-size: 1.95em !important;}
 
 
 /* modal body*/
@@ -268,6 +269,23 @@ h6{
 }
 
 
+.agent-name { font-size: 2rem !important; }
+.agent-lic { font-size: 1.2rem !important; }
+.agent-stat-value { font-size: 1.75em; }
+.agent-stat-label { font-size: 1em; font-weight: 500; }
+.agent-about-heading { font-size: 1.5rem; }
+.agent-bio,
+.agent-detail { font-size: 1rem; }
+
+.modal-content {min-height: auto !important;}
+
+
+.movingoutjpg{
+ width: 100%; 
+}
+
+
+
 /* =======================
    Responsive Scaling
    ======================= */
@@ -275,11 +293,12 @@ h6{
   .text-large { font-size: 2rem; }
 
   h1 { font-size: 1.75em !important; }
-  h2 { font-size: 2.25em !important; }
+  h2 { font-size: 3em !important; }
   h3 { font-size: 2.75em !important; }
-  h4 { font-size: 2em !important; }
+  h4 { font-size: 1.5em !important; margin-top: 0em !important;} 
   h5 { font-size: 1.25em !important; }
   h6 { font-size: 1.75em !important; }
+  .display-4 {font-size: 2.5em !important;}
 
   p { font-size: 1.5em; }
   .Newsletter { font-size: 1em !important; }
@@ -287,15 +306,16 @@ h6{
   a { font-size: 0.55em; }
   a.btn { font-size: large !important; }
 
-  .word-spacing-medium { word-spacing: 0.75em; }
+  .word-spacing-medium { word-spacing: 0em; }
   body { letter-spacing: 0.085em; }
 
+  .agentcardtitle {font-size: 2em;}
   .bio-text { font-size: 1.25rem; }
   .name-text { font-size: 1.5rem; }
-  .lic-text { font-size: 1rem; }
-  .contact-text { font-size: 1rem; }
-  .stat-text { font-size: 1em; }
-  .price-text { font-size: 1rem; }
+  .lic-text { font-size: 1.1rem; }
+  .contact-text { font-size: 1.2rem; }
+  .stat-text { font-size: 1.2em; }
+  .price-text { font-size: 1.2rem; }
 
   .lead { margin-top: 1em !important; font-size: 2em !important; }
   .list-unstyled { font-size: 1.75em; }
@@ -315,7 +335,14 @@ h6{
   }
 
   a.btn-sm { font-size: 1.55em !important; padding: 0.25em !important; }
+ 
+ 
+  .sliderimages,
+  .carousel-inner {height: 280px !important;}
 
+  .localagentjpg{
+    height: 500px !important;
+  }
 
 /* =======================
    Agents Page
@@ -365,9 +392,9 @@ h6{
 
 .agent-name { font-size: 2.5rem !important; }
 .agent-lic { font-size: 1.75rem !important; }
-.agent-stat-value { font-size: 2em; }
+.agent-stat-value { font-size: 2.5em; }
 .agent-stat-label { font-size: 1.5em; }
-.agent-about-heading { font-size: 2rem; }
+.agent-about-heading { font-size: 2.5rem !important; }
 .agent-bio,
 .agent-detail { font-size: 1.5rem; }
 
@@ -413,9 +440,7 @@ h6{
   margin-bottom: 1rem !important; /* space between each section */
 }
 
-h4{
-  margin-top: 2em !important;
-}
+
 
 /*==================
 Sellings Page
@@ -432,14 +457,253 @@ Sellings Page
 }
 
 
+/*==================
+FAQ
+=================*/
+
+.faqhandler{
+  width: 100% !important;
+}
+
+.linktext {
+ font-size:  1.25rem;
+}
+
+}
+
 @media (min-width: 1024px) {
 
   .word-spacing-medium {
-    word-spacing: .1em;
     font-size: 2em;
   }
 
-  
+  .sliderimages,
+  .carousel-inner {height: 400px !important;}
+
+  .text-large { font-size: 2rem; }
+
+  h1 { font-size: 2.5em !important; }
+  h2 { font-size: 3.25em !important; }
+  h3 { font-size: 3em !important; }
+  h4 { font-size: 2em !important; margin-top: 0em !important; word-spacing: 0em !important;} 
+  h5 { font-size: 1.25em !important; }
+  h6 { font-size: 1.75em !important; }
+  .display-4 {font-size: 2.5em !important;}
+  .form-control {font-size: 1.5em !important;}
+  .localagentjpg {height: 700px !important;}
+
+  p { font-size: 2em; }
+  .Newsletter { font-size: 1em !important; }
+
+  a { font-size: 0.55em; }
+  a.btn { font-size: large !important; }
+
+  .word-spacing-medium { word-spacing: 0em; }
+  body { letter-spacing: 0.085em; }
+
+  .agentcardtitle {font-size: 2em;}
+  .bio-text { font-size: 1.25rem; }
+  .name-text { font-size: 1.5rem; }
+  .lic-text { font-size: 1.1rem; }
+  .contact-text { font-size: 1.2rem; }
+  .stat-text { font-size: 1.2em; }
+  .price-text { font-size: 1.2rem; }
+
+  .lead { margin-top: 1em !important; font-size: 2.5em !important; }
+  .list-unstyled { font-size: 1.75em; }
+
+  .btn {
+    color: #222222;
+    font-weight: 500 !important;
+    font-family: 'Poppins', sans-serif !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 0.25rem !important;
+    transition: background-color 0.3s ease !important;
+  }
+
+  .teamheader {
+    font-size: 3em !important;
+    text-align: center !important;
+  }
+
+  a.btn-sm { font-size: 1.55em !important; padding: 0.25em !important; }
+ 
+ 
+
+  .homepageimage {
+  margin: 0 auto;
+  width: 50%;
+  height: 600px !important;
+  }
+
+/* =======================
+   Agents Page
+   ======================= */
+.realtor-photo {
+  width: 900px;
+  height: 140px;
+  margin-top: 0.75em;
+  object-fit: fill;
+  margin-left: 1em;
 }
 
+/* Three columns stack vertically */
+.three-columns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 }
+
+.three-columns > .col-md-3 {
+  width: 100%;
+  max-width: 100%;
+}
+
+.three-columns > .col-md-3 img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  padding: 1em 1rem;
+}
+
+.three-columns > .col-md-3 h2 { margin-bottom: 0.5rem; }
+.three-columns > .col-md-3 p { margin-bottom: 0.75rem; }
+
+/* =======================
+   Personal Agent Page
+   ======================= */
+.agent-headshot {
+  width: 100%;
+  height: 650px !important;
+  object-fit: fill; /* full image visible */
+  background-color: #f8f9fa;
+  display: block;
+}
+
+.agent-name { font-size: 2.5rem !important; }
+.agent-lic { font-size: 1.75rem !important; }
+.agent-stat-value { font-size: 2.5em; }
+.agent-stat-label { font-size: 1.5em; }
+.agent-about-heading { font-size: 2.5rem !important; }
+.agent-bio,
+.agent-detail { font-size: 1.5rem; }
+
+.modal-content {min-height: auto !important;}
+/* =======================
+   Property Cards
+   ======================= */
+.property-image {
+  object-fit: cover;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.property-description { font-size: 13px; }
+
+.property-btn {
+  font-size: 13px;
+  color: #6c757d;
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.property-btn:hover { color: #343a40; }
+
+.btn-photos, .btn-schedule, .btn-details {
+  font-size: 0.85em !important;
+}
+
+  #property-details,
+  #property-extra {
+    font-size: .85em;
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 2rem; /* spacing between stacked sections */
+  }
+
+
+#property-details h4,
+#property-details p {
+  margin-bottom: 1.25rem !important; /* space between each section */
+}
+
+#property-features h3,
+#property-features p
+ {margin-bottom: .95em !important ;}
+
+
+ #property-features {margin-bottom: 3em;}
+/*==================
+Sellings Page
+=================*/
+
+.selling {
+  width: 100% !important;
+  margin: 2em;
+}
+
+.listingsteps {
+  font-size: 1.25em !important;
+  margin-top: 1.5em !important;
+}
+
+
+/*==================
+FAQ
+=================*/
+
+.faqhandler{
+  width: 100% !important;
+}
+
+/*==================
+SELLING
+=================*/
+
+.movingoutjpg{
+  display: block;
+  margin: 0 auto;
+  max-width: 50%; /* keeps it responsive */
+  height: auto;
+
+}
+
+/* FAQ Question <p> */
+.faq-question-text {
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* FAQ Card Body */
+.faq-card-body {
+  background-color: #f9f9f9;
+  border-left: 4px solid #007bff;
+  padding: 1rem 1.25rem;
+  font-size: 1.25rem;
+  color: #555;
+}
+
+/* FAQ List Styles */
+.faq-list {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.faq-list-item {
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
+}
+
+.linktext {
+ font-size:  1.25rem;
+}
+
+}  
+

@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
                      class="img-fluid mb-0 realtor-photo">
               </div>
 <div class="col-9">
-  <p class="p-1">About Us</p>
+  <p class="p-1 agentcardtitle">About Us</p>
   <p class="text-muted p-1 mb-0 bio-text">${bio}</p>
 </div>
 

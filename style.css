@@ -276,6 +276,7 @@ h6{
 .agent-about-heading { font-size: 1.5rem; }
 .agent-bio,
 .agent-detail { font-size: 1rem; }
+  .display-4 {font-size: 1.75em !important;}
 
 .modal-content {min-height: auto !important;}
 

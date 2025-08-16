@@ -365,12 +365,13 @@ h6{
 
 .agent-name { font-size: 2.5rem !important; }
 .agent-lic { font-size: 1.75rem !important; }
-.agent-stat-value { font-size: 2.5em; }
+.agent-stat-value { font-size: 2em; }
 .agent-stat-label { font-size: 1.5em; }
 .agent-about-heading { font-size: 2rem; }
 .agent-bio,
 .agent-detail { font-size: 1.5rem; }
 
+.modal-content {min-height: auto !important;}
 /* =======================
    Property Cards
    ======================= */
@@ -416,6 +417,19 @@ h4{
   margin-top: 2em !important;
 }
 
+/*==================
+Sellings Page
+=================*/
+
+.selling {
+  width: 100% !important;
+  margin: 2em;
+}
+
+.listingsteps {
+  font-size: 1.25em !important;
+  margin-top: 1.5em !important;
+}
 
 
 @media (min-width: 1024px) {

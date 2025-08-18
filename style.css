@@ -570,6 +570,7 @@ margin-left: 1em;
 .nav-item{
   font-size: 1.25em !important;
   color: grey;
+  margin-left: .5em;
 }
 
   .sliderimages,
@@ -894,8 +895,14 @@ SELLING
   }
   
   .navbar-nav{
-    margin-left: 5em !important;
+    margin-left: 1em !important;
   }
+
+  .nav-item{
+  font-size: 1.25em !important;
+  color: grey;
+  margin-left: 1em;
+}
 
   .agent-stats {
   display: flex;

@@ -188,7 +188,7 @@ p{
 
 .agent-name { font-size: 2rem !important; }
 .agent-lic { font-size: 1.2rem !important; }
-.agent-stat-value { font-size: 2em;font-weight: bold; }
+.agent-stat-value { font-size: 1.5em;font-weight: bold; }
 .agent-stat-label { font-size: 1em; font-weight: bold;  }
 .agent-about-heading { font-size: 1.75rem; }
 .agent-bio,
@@ -935,7 +935,7 @@ SELLING
 
   .homepage-columns > div img {
     width: 100%;
-    height: auto;
+    height: 500px !important;
     display: block;
   }
 

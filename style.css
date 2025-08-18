@@ -173,15 +173,24 @@ p{
 
 .agent-stats {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin: 1.5rem 0;
+  text-align: center;
+  gap: 2rem;
 }
+
+.agent-stats > div {
+  display: flex;
+  flex-direction: column;    /* stack value above label */
+  align-items: center;       /* center horizontally */
+}
+
 
 .agent-name { font-size: 2rem !important; }
 .agent-lic { font-size: 1.2rem !important; }
-.agent-stat-value { font-size: 1.75em; }
-.agent-stat-label { font-size: 1.2em; font-weight: 500; }
-.agent-about-heading { font-size: 1.5rem; }
+.agent-stat-value { font-size: 2em;font-weight: bold; }
+.agent-stat-label { font-size: 1em; font-weight: bold;  }
+.agent-about-heading { font-size: 1.75rem; }
 .agent-bio,
 .agent-detail { font-size: 1rem; }
   .display-4 {font-size: 1.75em !important;}
@@ -329,6 +338,7 @@ h6{
 
 .homepageimage {
   width: 100%;
+
 }
 
 
@@ -388,12 +398,34 @@ h6{
   .carousel-inner {height: 280px !important;}
 
   .localagentjpg{
-    height: 500px !important;
+    height: 400px !important;
   }
+
+  
+.homepageimage {
+  width: 100%;
+  height: 520px !important;
+
+}
 
 /* =======================
    Agents Page
    ======================= */
+.agent-stats {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+  text-align: center;
+  gap: 2rem;
+}
+
+.agent-stats > div {
+  display: flex;
+  flex-direction: column;    /* stack value above label */
+  align-items: center;       /* center horizontally */
+}
+
+
 .realtor-photo {
   width: 900px;
   height: 140px;
@@ -532,12 +564,11 @@ FAQ
   }
 
 .navbar-nav{
-margin-left: em;  
+margin-left: 1em;  
 }
 
 .nav-item{
   font-size: 1.25em !important;
-  margin-left: 1.5em;
   color: grey;
 }
 
@@ -548,7 +579,7 @@ margin-left: em;
 
   h1 { font-size: 2.5em !important; }
   h2 { font-size: 3.25em !important; }
-  h3 { font-size: 3em !important; }
+  h3 { font-size: 2em !important; }
   h4 { font-size: 2em !important; margin-top: 0em !important; word-spacing: 0em !important;} 
   h5 { font-size: 1.25em !important; }
   h6 { font-size: 1.75em !important; }
@@ -556,7 +587,7 @@ margin-left: em;
   .form-control {font-size: 1.5em !important;}
   .localagentjpg {height: 700px !important;}
 
-  p { font-size: 2em; }
+  p { font-size: 1.25em; }
   .Newsletter { font-size: 1em !important; }
 
   a { font-size: 0.55em; }
@@ -599,8 +630,8 @@ margin-left: em;
 
   .homepageimage {
   margin: 0 auto;
-  width: 60%;
-  height: 580px !important;
+  width: 100%;
+  height: 380px !important;
   }
 
    .homepage-columns {
@@ -612,8 +643,8 @@ margin-left: em;
   }
 
   .homepage-columns > div {
-    flex: 1 1 30%;         /* 4 columns across */
-    max-width: 50%;
+    flex: 1 1 40%;         /* 4 columns across */
+    max-width: 40%;
   }
 
   .homepage-columns > div img {
@@ -625,6 +656,21 @@ margin-left: em;
 /* =======================
    Agents Page
    ======================= */
+
+.agent-stats {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+  text-align: center;
+  gap: 2rem;
+}
+
+.agent-stats > div {
+  display: flex;
+  flex-direction: column;    /* stack value above label */
+  align-items: center;       /* center horizontally */
+}
+  
 .realtor-photo {
   width: 900px;
   height: 140px;
@@ -671,9 +717,9 @@ margin-left: em;
 
 .agent-name { font-size: 2.5rem !important; }
 .agent-lic { font-size: 1.75rem !important; }
-.agent-stat-value { font-size: 2.5em; }
-.agent-stat-label { font-size: 1.5em; }
-.agent-about-heading { font-size: 2.5rem !important; }
+.agent-stat-value { font-size: 2.5em; font-weight: bold; }
+.agent-stat-label { font-size: 1.5em; font-weight: bold; }
+.agent-about-heading { font-size: 2.5rem !important; margin-top: 0em !important; }
 .agent-bio,
 .agent-detail { font-size: 1.5rem; }
 
@@ -744,6 +790,7 @@ margin-left: em;
 
 .btn-photos, .btn-schedule, .btn-details {
   font-size: 0.85em !important;
+  padding: 2em !important;
 }
 
   #property-details,
@@ -838,4 +885,59 @@ SELLING
 }
 
 }  
+
+@media (min-width: 1440px) {
+  
+  .homepage-columns > div {
+    flex: 1 1 100%;         /* 4 columns across */
+    max-width: 100%;
+  }
+  
+  .navbar-nav{
+    margin-left: 5em !important;
+  }
+
+  .agent-stats {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+  text-align: center;
+  gap: 2rem;
+}
+
+.agent-stats > div {
+  display: flex;
+  flex-direction: column;    /* stack value above label */
+  align-items: center;       /* center horizontally */
+}
+
+
+.agent-name { font-size: 2.5rem !important; }
+.agent-lic { font-size: 1.75rem !important; }
+.agent-stat-value { font-size: 2.5em; font-weight: bold; }
+.agent-stat-label { font-size: 1.5em; font-weight: bold; }
+.agent-about-heading { font-size: 2.5rem !important; margin-top: 0em !important; }
+.agent-bio,
+.agent-detail { font-size: 1.5rem; }
+
+.homepage-columns {
+    flex-direction: row;   /* side by side */
+    flex-wrap: wrap;       /* allows wrapping if needed */
+    justify-content: center;
+    gap: 1rem;
+    margin: .5em !important;
+  }
+
+  .homepage-columns > div {
+    flex: 1 1 40%;         /* 4 columns across */
+    max-width: 100%;
+  }
+
+  .homepage-columns > div img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+}
 

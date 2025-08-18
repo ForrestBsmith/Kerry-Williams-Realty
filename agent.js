@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
 
         <!-- Bio -->
-        <h4 class="agent-about-heading mt-4">About Us</h4>
+        <h4 class="agent-about-heading">About Us</h4>
         <p class="text-muted mb-2 agent-bio">
           ${agent.sectionbio || 'No bio available for this agent.'}
         </p>

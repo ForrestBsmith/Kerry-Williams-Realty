@@ -57,72 +57,68 @@ document.addEventListener("DOMContentLoaded", () => {
       // Render agent bio if container exists
       if (bioContainer) {
         const bioSection = `
-       <div class="card agent-card shadow-sm p-1 mb-4">
-  <div class="row g-0 align-items-center">
-    <div class="d-flex no-padding">
+  <div class="card agent-card shadow-sm p-1 mb-4">
+    <div class="agent-layout">
+      <!-- Left: Agent Image -->
       <img src="${agent.image || 'placeholder.jpg'}" 
            alt="${agent.name || 'Featured Agent'}" 
-           class="img-fluid mb-1 w-100 agent-headshot">
-    </div>
-  </div>
+           class="img-fluid agent-headshot">
 
-<div class="row p-0">
-  <div class="col-10">
-    <h6 class="card-title mb-1 fw-semibold agent-name">
-      ${agent.name || 'Featured Agent'}
-    </h6>
-    <p class="text-muted mb-1 agent-lic">
-      ${agent.lic || 'N/A'}
-    </p>
-  </div>
+      <!-- Right: Agent Info -->
+      <div class="agent-info">
+        <h6 class="card-title mb-1 fw-semibold agent-name">
+          ${agent.name || 'Featured Agent'}
+        </h6>
+        <p class="text-muted mb-1 agent-lic">
+          ${agent.lic || 'N/A'}
+        </p>
 
-  <div class="row col-12">
-    <div class="gap-0 col-4">
-      <p class="text-center mt-1 agent-stat-value">${agent.totalvalue}</p>
-      <p class="text-center mb-0 agent-stat-label">Total Value</p>
-    </div>
-    <div class="gap-0 col-4">
-      <p class="text-center mt-1 agent-stat-value">${agent.propertiessold}</p>
-      <p class="text-center mb-0 agent-stat-label">Properties Sold</p>
-    </div>
-    <div class="gap-0 col-4">
-      <p class="text-center mt-1 agent-stat-value">${agent.averageprice}</p>
-      <p class="text-center mb-0 agent-stat-label">Average Price</p>
-    </div>
-  </div>
+        <!-- Stats -->
+        <div class="agent-stats">
+          <div>
+            <p class="agent-stat-value">${agent.totalvalue}</p>
+            <p class="agent-stat-label">Total Value</p>
+          </div>
+          <div>
+            <p class="agent-stat-value">${agent.propertiessold}</p>
+            <p class="agent-stat-label">Properties Sold</p>
+          </div>
+          <div>
+            <p class="agent-stat-value">${agent.averageprice}</p>
+            <p class="agent-stat-label">Average Price</p>
+          </div>
+        </div>
 
-  <h4 class="mt-4 agent-about-heading">About Us</h4>
-  <p class="text-muted mb-2 agent-bio">
-    ${agent.sectionbio || 'No bio available for this agent.'}
-  </p>
-  <p class="mb-2 mt-3 agent-detail">
-    Specialty: ${agent.specialties || 'N/A'}
-  </p>                  
-  <p class="mb-2 agent-detail">
-    Years of experience: ${agent.exp}
-  </p>
-  <p class="mb-2 agent-detail">
-    Languages spoken: ${agent.languages || 'N/A'}
-  </p>
-</div>
- 
+        <!-- Bio -->
+        <h4 class="agent-about-heading mt-4">About Us</h4>
+        <p class="text-muted mb-2 agent-bio">
+          ${agent.sectionbio || 'No bio available for this agent.'}
+        </p>
+        <p class="mb-2 mt-3 agent-detail">
+          Specialty: ${agent.specialties || 'N/A'}
+        </p>                  
+        <p class="mb-2 agent-detail">
+          Years of experience: ${agent.exp}
+        </p>
+        <p class="mb-2 agent-detail">
+          Languages spoken: ${agent.languages || 'N/A'}
+        </p>
 
-  <!-- Social Links -->
-  <div class="col-12 d-flex justify-content-center mt-3">
-    <div class="d-flex gap-5">
-      <a href="${agent.facebook || '#'}" class="text-decoration-none text-secondary" target="_blank">
-        <i class="bi bi-facebook fs-4"></i> 
-      </a>
-      <a href="${agent.instagram || '#'}" class="text-decoration-none text-secondary" target="_blank">
-        <i class="bi bi-instagram fs-4"></i>        
-      </a>        
-      <a href="${agent.twitter || '#'}" class="text-decoration-none text-secondary" target="_blank">   
-        <i class="bi bi-twitter fs-4"></i>
-      </a>
+        <!-- Social Links -->
+        <div class="agent-social mt-3">
+          <a href="${agent.facebook || '#'}" class="text-decoration-none text-secondary" target="_blank">
+            <i class="bi bi-facebook fs-4"></i> 
+          </a>
+          <a href="${agent.instagram || '#'}" class="text-decoration-none text-secondary" target="_blank">
+            <i class="bi bi-instagram fs-4"></i>        
+          </a>        
+          <a href="${agent.twitter || '#'}" class="text-decoration-none text-secondary" target="_blank">   
+            <i class="bi bi-twitter fs-4"></i>
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-`;
+  </div>`;
         bioContainer.insertAdjacentHTML("beforeend", bioSection);
       }
 

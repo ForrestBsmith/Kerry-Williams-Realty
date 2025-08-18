@@ -154,9 +154,57 @@ p{
   margin: 0em !important;
 }
 
-.agent-card:hover {
-  transform: scale(1.02);
-  transition: all 0.2s ease-in-out;
+.agent-layout {
+  display: flex;
+  flex-direction: column; /* mobile: stack */
+  gap: 1.5rem;
+}
+
+.agent-headshot {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.agent-info {
+  flex: 1;
+}
+
+.agent-stats {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5rem 0;
+}
+
+.agent-name { font-size: 2rem !important; }
+.agent-lic { font-size: 1.2rem !important; }
+.agent-stat-value { font-size: 1.75em; }
+.agent-stat-label { font-size: 1.2em; font-weight: 500; }
+.agent-about-heading { font-size: 1.5rem; }
+.agent-bio,
+.agent-detail { font-size: 1rem; }
+  .display-4 {font-size: 1.75em !important;}
+
+    .agent-social {
+    margin-top: auto;
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-start;
+  }
+
+  
+/* Mobile-first (default = stacked) */
+.homepage-columns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.homepage-columns > div {
+  width: 100%;
+  max-width: 100%;
 }
 
 
@@ -189,6 +237,7 @@ h6{
     font-weight: 800;
     text-align:start;
   }
+
 
 
   /*proeprty cards*/
@@ -269,14 +318,7 @@ h6{
 }
 
 
-.agent-name { font-size: 2rem !important; }
-.agent-lic { font-size: 1.2rem !important; }
-.agent-stat-value { font-size: 1.75em; }
-.agent-stat-label { font-size: .85em; font-weight: 500; }
-.agent-about-heading { font-size: 1.5rem; }
-.agent-bio,
-.agent-detail { font-size: 1rem; }
-  .display-4 {font-size: 1.75em !important;}
+
 
 .modal-content {min-height: auto !important;}
 
@@ -397,13 +439,20 @@ h6{
 
 .agent-name { font-size: 2.5rem !important; }
 .agent-lic { font-size: 1.75rem !important; }
-.agent-stat-value { font-size: 2.5em; }
-.agent-stat-label { font-size: 1.5em; }
-.agent-about-heading { font-size: 2.5rem !important; }
+.agent-stat-value { font-size: 2.95em; }
+.agent-stat-label { font-size: 1.75em; font-weight: 500; }
+.agent-about-heading { font-size: 2.75rem !important; }
 .agent-bio,
 .agent-detail { font-size: 1.5rem; }
 
 .modal-content {min-height: auto !important;}
+
+  .agent-social {
+    margin-top: auto;
+    display: flex;
+    gap: 3rem;
+    justify-content: flex-start;
+  }
 /* =======================
    Property Cards
    ======================= */
@@ -482,6 +531,16 @@ FAQ
     font-size: 2em;
   }
 
+.navbar-nav{
+margin-left: em;  
+}
+
+.nav-item{
+  font-size: 1.25em !important;
+  margin-left: 1.5em;
+  color: grey;
+}
+
   .sliderimages,
   .carousel-inner {height: 500px !important;}
 
@@ -506,6 +565,7 @@ FAQ
   .word-spacing-medium { word-spacing: 0em; }
   body { letter-spacing: 0.085em; }
 
+  .agent-stats{margin: 1.5em !important;}
   .agentcardtitle {font-size: 2em;}
   .bio-text { font-size: 1.25rem; }
   .name-text { font-size: 1.5rem; }
@@ -533,12 +593,33 @@ FAQ
 
   a.btn-sm { font-size: 1.55em !important; padding: 0.25em !important; }
  
- 
+ /* =======================
+   Homepage
+   ======================= */
 
   .homepageimage {
   margin: 0 auto;
-  width: 50%;
-  height: 600px !important;
+  width: 60%;
+  height: 580px !important;
+  }
+
+   .homepage-columns {
+    flex-direction: row;   /* side by side */
+    flex-wrap: wrap;       /* allows wrapping if needed */
+    justify-content: center;
+    gap: 1rem;
+    margin: .5em !important;
+  }
+
+  .homepage-columns > div {
+    flex: 1 1 30%;         /* 4 columns across */
+    max-width: 50%;
+  }
+
+  .homepage-columns > div img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
 /* =======================
@@ -561,7 +642,7 @@ FAQ
 }
 
 .three-columns > .col-md-3 {
-  width: 100%;
+  width: 70%;
   max-width: 100%;
 }
 
@@ -575,6 +656,7 @@ FAQ
 
 .three-columns > .col-md-3 h2 { margin-bottom: 0.5rem; }
 .three-columns > .col-md-3 p { margin-bottom: 0.75rem; }
+
 
 /* =======================
    Personal Agent Page
@@ -596,6 +678,47 @@ FAQ
 .agent-detail { font-size: 1.5rem; }
 
 .modal-content {min-height: auto !important;}
+
+  /* Agent card layout */
+   .agent-card {
+    display: flex;
+    flex-direction: row;   /* image left, content right */
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 1.5rem !important;
+  }
+
+  .agent-headshot {
+    width:450px !important;
+    height: 870px !important;
+    object-fit: cover;
+    flex-shrink: 0;        /* stops shrinking */
+    border-radius: 0.5rem;
+  }
+
+  .agent-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .agent-stats {
+    display: flex;
+    justify-content: space-between;
+    margin: 1.5rem 0;
+  }
+
+ 
+
+    .agent-layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  .agent-headshot {
+    flex-shrink: 0;
+  }
+
 /* =======================
    Property Cards
    ======================= */

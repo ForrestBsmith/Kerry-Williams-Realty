@@ -847,7 +847,7 @@ margin-left: 1em;
 
 .btn-photos, .btn-schedule, .btn-details {
   font-size: 0.85em !important;
-  padding: 1em !important;
+  padding-left: 0em !important;
   padding-right: 0em !important;
 }
 

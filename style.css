@@ -847,8 +847,8 @@ margin-left: 1em;
 
 .btn-photos, .btn-schedule, .btn-details {
   font-size: 0.85em !important;
-  padding-top: 0em !important;
   padding-bottom: 0em !important;
+  padding-top: 0em !important;
 }
 
   #property-details,
@@ -873,10 +873,6 @@ margin-left: 1em;
  #property-features {margin-bottom: 3em;}
 
 
- button.btn.btn-sm.text-muted.btn-photos {
-        padding-left: 0em !important;
-        padding-right: 0em !important;
-}
 /*==================
 Sellings Page
 =================*/

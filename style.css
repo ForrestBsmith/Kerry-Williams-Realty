@@ -505,9 +505,6 @@ h6{
 
 .property-btn:hover { color: #343a40; }
 
-.btn-photos, .btn-schedule, .btn-details {
-  font-size: 0.85em !important;
-}
 
   #property-details,
   #property-extra {
@@ -849,6 +846,8 @@ margin-left: 1em;
   font-size: 0.85em !important;
   padding-bottom: 0em !important;
   padding-top: 0em !important;
+  padding-left: .5em !important;
+  padding-right: .5em !important;
 }
 
   #property-details,

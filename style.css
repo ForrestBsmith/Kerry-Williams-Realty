@@ -234,10 +234,6 @@ h6{
 /* modal body*/
 
 
-.modal-content{
-  height: 400px !important;
-} 
-
 .photoscarousel{
   height: 500px !important}
 
@@ -271,6 +267,8 @@ h6{
   border: none;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
   min-height: 525px !important;
+  height: 400px !important;
+
 }
 
 /* Modal header and footer with unified background */
@@ -477,7 +475,6 @@ h6{
 .agent-bio,
 .agent-detail { font-size: 1.5rem; }
 
-.modal-content {min-height: auto !important;}
 
   .agent-social {
     margin-top: auto;
@@ -553,6 +550,65 @@ FAQ
 
 .linktext {
  font-size:  1.25rem;
+}
+
+/*==================
+MODAL
+=================*/
+/* modal body*/
+
+
+.photoscarousel{
+  height: 500px !important}
+
+  /*proeprty cards*/
+  .property-card img {
+  object-fit: cover;
+  width: 100%;
+}
+.property-card .card-body {
+  padding: 1rem;
+}
+.property-card .btn i {
+  vertical-align: middle;
+}
+
+/*filter modal*/
+/* Make modal background cover the full modal */
+/* Full background modal content */
+.modal-content {
+  background-color: #f9f9f9; /* Full background color */
+  border-radius: 0.5rem;
+  padding: 0;
+  border: none;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+  height: auto !important;
+}
+
+/* Modal header and footer with unified background */
+.modal-header,
+.modal-footer {
+  background-color: #f9f9f9;
+  padding: 1rem 1.5rem;
+  border: none;
+}
+
+/* Modal body padding */
+.modal-body {
+  padding: 1.5rem;
+}
+
+/* Optional: Button consistency */
+.modal-footer .btn {
+  min-width: 120px;
+}
+
+.carousel-control-prev-icon {
+  margin-bottom: 0em !important;
+}
+
+.carousel-control-next-icon{
+  margin-bottom: 0em !important;
 }
 
 }
@@ -791,7 +847,8 @@ margin-left: 1em;
 
 .btn-photos, .btn-schedule, .btn-details {
   font-size: 0.85em !important;
-  padding: 2em !important;
+  padding: 1em !important;
+  padding-right: 0em !important;
 }
 
   #property-details,
@@ -828,7 +885,9 @@ Sellings Page
   margin-top: 1.5em !important;
 }
 
-
+.modal-content{
+  height: 650px !important;
+}
 /*==================
 FAQ
 =================*/
@@ -945,6 +1004,10 @@ SELLING
     height: 500px !important;
     display: block;
   }
+  .btn-photos, .btn-schedule, .btn-details {
+  font-size: .90em !important;
+  padding: 1.5em !important;
+}
 
 }
 

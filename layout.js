@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
         </button>
         <div class="collapse navbar-collapse" id="mainNav">
           <ul class="navbar-nav gap-lg-3 text-center w-100 justify-content-center justify-content-lg-end">
-            <li class="nav-item"><a class="nav-link" href="buying.html">Listings</a></li>
-            <li class="nav-item"><a class="nav-link" href="agents.html">Agents</a></li>
+            <li class="nav-item"><a class="nav-link" href="Buying.html">Listings</a></li>
+            <li class="nav-item"><a class="nav-link" href="Agents.html">Agents</a></li>
             <li class="nav-item"><a class="nav-link" href="Selling.html">Sell</a></li>
             <li class="nav-item"><a class="nav-link" href="FAQ.html">FAQs</a></li>
           </ul>

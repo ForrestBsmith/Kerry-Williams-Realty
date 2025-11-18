@@ -30,6 +30,7 @@ const listTab = document.getElementById('list-tab');
 const mapTab = document.getElementById('map-tab');
 const listView = document.getElementById('list-view');
 const mapView = document.getElementById('map-view');
+const useLocationBtn = document.getElementById('use-location');
 
 listTab.addEventListener('click', () => {
   listTab.classList.add('active');
@@ -51,6 +52,38 @@ mapTab.addEventListener('click', () => {
     }, 300);
   }
 });
+
+if (useLocationBtn) {
+  useLocationBtn.addEventListener('click', () => {
+    if (!navigator.geolocation) {
+      useLocationBtn.innerText = 'Location unavailable';
+      return;
+    }
+    useLocationBtn.disabled = true;
+    useLocationBtn.innerText = 'Locating...';
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        const { latitude, longitude } = coords;
+        const locInput = document.getElementById('location-input');
+        if (locInput) locInput.value = 'Near me';
+        if (!map) {
+          map = L.map('property-map').setView([latitude, longitude], 12);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+          }).addTo(map);
+        }
+        L.marker([latitude, longitude], { opacity: 0.7 }).addTo(map).bindPopup('You are here').openPopup();
+        map.setView([latitude, longitude], 12);
+        useLocationBtn.innerText = 'Near me';
+        useLocationBtn.disabled = false;
+      },
+      () => {
+        useLocationBtn.innerText = 'Near me';
+        useLocationBtn.disabled = false;
+      }
+    );
+  });
+}
 
 /* === Render Property Cards === */
 function renderProperties(propertyArray) {
@@ -91,10 +124,10 @@ function renderProperties(propertyArray) {
               } SqFt</div>
             </div>
             <div class="text-muted" style="font-size:13px;">${prop.description || 'No description available.'}</div>
-            <div class="d-flex gap-2 mt-1">
-              <button class="btn btn-sm text-muted btn-photos" data-index="${index}" data-bs-toggle="modal" data-bs-target="#photosModal">View Photos</button>
-              <button class="btn btn-sm text-muted btn-schedule" data-index="${index}" data-bs-toggle="modal" data-bs-target="#scheduleModal">Schedule</button>
-              <button class="btn btn-sm text-muted btn-details" data-index="${index}" data-bs-toggle="modal" data-bs-target="#detailsModal">Details</button>
+            <div class="d-flex gap-2 mt-3 property-actions">
+              <button class="btn btn-outline-secondary btn-sm flex-fill btn-photos" data-index="${index}" data-bs-toggle="modal" data-bs-target="#photosModal">View Photos</button>
+              <button class="btn btn-outline-secondary btn-sm flex-fill btn-schedule" data-index="${index}" data-bs-toggle="modal" data-bs-target="#scheduleModal">Schedule</button>
+              <button class="btn btn-outline-secondary btn-sm flex-fill btn-details" data-index="${index}" data-bs-toggle="modal" data-bs-target="#detailsModal">Details</button>
             </div>
           </div>
           <div class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center small text-muted">

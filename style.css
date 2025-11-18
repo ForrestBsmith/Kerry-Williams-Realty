@@ -217,15 +217,10 @@ p{
 }
 
 
-a.btn-sm{
-  background-color: rgba(106, 142, 35, 0.454);
-  border: solid .25px black !important;
-  padding-bottom: .1em !important;
-  padding-top: .1em !important;
-}
 
 h6{
-  background-color: rgba(106, 142, 35, 0.454);
+  background-color: #d6a000;
+  color: white;
 }
 
   .display-4 {font-size: 1.95em !important;}
@@ -340,276 +335,6 @@ h6{
 }
 
 
-
-/* =======================
-   Responsive Scaling
-   ======================= */
-@media (min-width: 768px) {
-  .text-large { font-size: 2rem; }
-
-  h1 { font-size: 1.75em !important; }
-  h2 { font-size: 3em !important; }
-  h3 { font-size: 2.75em !important; }
-  h4 { font-size: 1.5em !important; margin-top: 0em !important;} 
-  h5 { font-size: 1.25em !important; }
-  h6 { font-size: 1.75em !important; }
-  .display-4 {font-size: 2.5em !important;}
-
-  p { font-size: 1.5em; }
-  .Newsletter { font-size: 1em !important; }
-
-  a { font-size: 0.55em; }
-  a.btn { font-size: large !important; }
-
-  .word-spacing-medium { word-spacing: 0em; }
-  body { letter-spacing: 0.085em; }
-
-  .agentcardtitle {font-size: 2em;}
-  .bio-text { font-size: 1.25rem; }
-  .name-text { font-size: 1.5rem; }
-  .lic-text { font-size: 1.1rem; }
-  .contact-text { font-size: 1.2rem; }
-  .stat-text { font-size: 1.2em; }
-  .price-text { font-size: 1.2rem; }
-
-  .lead { margin-top: 1em !important; font-size: 2em !important; }
-  .list-unstyled { font-size: 1.75em; }
-
-  .btn {
-    color: #222222;
-    font-weight: 500 !important;
-    font-family: 'Poppins', sans-serif !important;
-    padding: 0.5rem 1rem !important;
-    border-radius: 0.25rem !important;
-    transition: background-color 0.3s ease !important;
-  }
-
-  .teamheader {
-    font-size: 3em !important;
-    text-align: center !important;
-  }
-
-  a.btn-sm { font-size: 1.55em !important; padding: 0.25em !important; }
- 
- 
-  .sliderimages,
-  .carousel-inner {height: 280px !important;}
-
-  .localagentjpg{
-    height: 400px !important;
-  }
-
-  
-.homepageimage {
-  width: 100%;
-  height: 520px !important;
-
-}
-
-/* =======================
-   Agents Page
-   ======================= */
-.agent-stats {
-  display: flex;
-  justify-content: center;
-  margin: 1.5rem 0;
-  text-align: center;
-  gap: 2rem;
-}
-
-.agent-stats > div {
-  display: flex;
-  flex-direction: column;    /* stack value above label */
-  align-items: center;       /* center horizontally */
-}
-
-
-.realtor-photo {
-  width: 900px;
-  height: 140px;
-  margin-top: 0.75em;
-  object-fit: fill;
-  margin-left: 1em;
-}
-
-/* Three columns stack vertically */
-.three-columns {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-}
-
-.three-columns > .col-md-3 {
-  width: 100%;
-  max-width: 100%;
-}
-
-.three-columns > .col-md-3 img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  padding: 1em 1rem;
-}
-
-.three-columns > .col-md-3 h2 { margin-bottom: 0.5rem; }
-.three-columns > .col-md-3 p { margin-bottom: 0.75rem; }
-
-/* =======================
-   Personal Agent Page
-   ======================= */
-.agent-headshot {
-  width: 100%;
-  height: 500px !important;
-  object-fit: fill; /* full image visible */
-  background-color: #f8f9fa;
-  display: block;
-}
-
-.agent-name { font-size: 2.5rem !important; }
-.agent-lic { font-size: 1.75rem !important; }
-.agent-stat-value { font-size: 2.95em; }
-.agent-stat-label { font-size: 1.75em; font-weight: 500; }
-.agent-about-heading { font-size: 2.75rem !important; }
-.agent-bio,
-.agent-detail { font-size: 1.5rem; }
-
-
-  .agent-social {
-    margin-top: auto;
-    display: flex;
-    gap: 3rem;
-    justify-content: flex-start;
-  }
-/* =======================
-   Property Cards
-   ======================= */
-.property-image {
-  object-fit: cover;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  cursor: pointer;
-}
-
-.property-description { font-size: 13px; }
-
-.property-btn {
-  font-size: 13px;
-  color: #6c757d;
-  background: transparent;
-  border: none;
-  padding: 0.25rem 0.5rem;
-  transition: color 0.2s ease;
-}
-
-.property-btn:hover { color: #343a40; }
-
-
-  #property-details,
-  #property-extra {
-    font-size: 1.25em;
-    flex: 0 0 100%;
-    max-width: 100%;
-    margin-bottom: 2rem; /* spacing between stacked sections */
-  }
-
-
-#property-details h4,
-#property-details p {
-  margin-bottom: 1rem !important; /* space between each section */
-}
-
-
-
-/*==================
-Sellings Page
-=================*/
-
-.selling {
-  width: 100% !important;
-  margin: 2em;
-}
-
-.listingsteps {
-  font-size: 1.25em !important;
-  margin-top: 1.5em !important;
-}
-
-
-/*==================
-FAQ
-=================*/
-
-.faqhandler{
-  width: 100% !important;
-}
-
-.linktext {
- font-size:  1.25rem;
-}
-
-/*==================
-MODAL
-=================*/
-/* modal body*/
-
-
-.photoscarousel{
-  height: 500px !important}
-
-  /*proeprty cards*/
-  .property-card img {
-  object-fit: cover;
-  width: 100%;
-}
-.property-card .card-body {
-  padding: 1rem;
-}
-.property-card .btn i {
-  vertical-align: middle;
-}
-
-/*filter modal*/
-/* Make modal background cover the full modal */
-/* Full background modal content */
-.modal-content {
-  background-color: #f9f9f9; /* Full background color */
-  border-radius: 0.5rem;
-  padding: 0;
-  border: none;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
-  height: auto !important;
-}
-
-/* Modal header and footer with unified background */
-.modal-header,
-.modal-footer {
-  background-color: #f9f9f9;
-  padding: 1rem 1.5rem;
-  border: none;
-}
-
-/* Modal body padding */
-.modal-body {
-  padding: 1.5rem;
-}
-
-/* Optional: Button consistency */
-.modal-footer .btn {
-  min-width: 120px;
-}
-
-.carousel-control-prev-icon {
-  margin-bottom: 0em !important;
-}
-
-.carousel-control-next-icon{
-  margin-bottom: 0em !important;
-}
-
-}
-
 @media (min-width: 1024px) {
 
   .word-spacing-medium {
@@ -638,7 +363,6 @@ margin-left: 1em;
   h5 { font-size: 1.25em !important; }
   h6 { font-size: 1.75em !important; }
   .display-4 {font-size: 2.5em !important;}
-  .form-control {font-size: 1.5em !important;}
   .localagentjpg {height: 700px !important;}
 
   p { font-size: 1.25em; }
@@ -676,7 +400,6 @@ margin-left: 1em;
     text-align: center !important;
   }
 
-  a.btn-sm { font-size: 1.55em !important; padding: 0.25em !important; }
  
  /* =======================
    Homepage
@@ -1014,5 +737,445 @@ SELLING
   padding-right: .5em !important;
 }
 
+}
+
+/* ==================
+Homepage refresh
+================== */
+:root {
+  --kw-dark: #0c0c0f;
+  --kw-accent: #d6a000;
+  --kw-muted: #6c757d;
+  --kw-surface: #ffffff;
+}
+
+.site-nav .navbar {
+  padding: 1rem 1.5rem;
+}
+
+.navbar-brand {
+  font-weight: 700 !important;
+}
+
+.brand-logo {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+
+.navbar-brand span {
+  line-height: 1.1;
+}
+
+.navbar-toggler {
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+@media (max-width: 576px) {
+  .brand-logo {
+    height: 34px;
+  }
+}
+
+.nav-link {
+  font-weight: 600 !important;
+  color: var(--kw-dark) !important;
+}
+
+a.btn {
+  font-size: .70em !important;
+}
+.btn {
+  font-weight: 600 !important;
+  border-radius: 0.6rem !important;
+}
+
+.btn-dark {
+  background: var(--kw-dark) !important;
+  border-color: var(--kw-dark) !important;
+  color: #fff !important;
+}
+
+.btn-outline-secondary {
+  border-color: rgba(12, 12, 15, 0.3) !important;
+  color: var(--kw-dark) !important;
+}
+
+.btn-outline-secondary:hover {
+  background: var(--kw-accent) !important;
+  border-color: var(--kw-dark) !important;
+  color: #0c0c0f !important;
+}
+
+.btn-light {
+  color: var(--kw-dark) !important;
+}
+
+.btn-accent {
+  background: var(--kw-accent);
+  border-color: var(--kw-accent);
+  color: #0c0c0f;
+}
+
+/* Buying page */
+.search-slab .input-group-text {
+  border-radius: 0.75rem 0 0 0.75rem;
+}
+
+.search-slab .form-control {
+  border-radius: 0 0.75rem 0.75rem 0;
+}
+
+.view-toggle-group .btn {
+  border-radius: 999px !important;
+  font-weight: 600;
+}
+
+.view-toggle-group .btn.active {
+  background-color: #d6a000;
+  color: #fff;
+  border-color: var(--kw-dark);
+}
+
+.modern-modal {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+}
+
+.modern-modal .modal-header,
+.modern-modal .modal-footer {
+  border: none;
+  background: #f8f9fb;
+  padding: 1.25rem 1.5rem;
+}
+
+.modern-modal .modal-body {
+  padding: 1.5rem;
+}
+
+.modern-modal .modal-title {
+  font-weight: 700;
+  color: var(--kw-dark);
+}
+
+.modern-modal .form-control,
+.modern-modal .form-select {
+  border-radius: 0.8rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.modern-modal .form-select:focus,
+.modern-modal .form-control:focus {
+  border-color: var(--kw-accent);
+  box-shadow: 0 0 0 0.25rem rgba(214, 160, 0, 0.15);
+}
+
+.modern-modal .btn {
+  border-radius: 0.75rem !important;
+}
+
+.property-actions .btn {
+  min-width: 0;
+  border-radius: 0.5rem !important;
+}
+
+/* Agents page */
+.agents-hero {
+  background: linear-gradient(135deg, rgba(12, 12, 15, 0.82), rgba(12, 12, 15, 0.6)), url('agents.jpg') center/cover no-repeat;
+  padding: 4.5rem 0;
+}
+
+.agents-hero__bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 30%, rgba(214, 160, 0, 0.18), transparent 40%),
+              radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08), transparent 35%);
+}
+
+.stats-tile {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(6px);
+}
+
+.agent-card-modern__image {
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+}
+
+.agent-card-modern h5 {
+  font-weight: 700;
+}
+
+.agent-card-modern {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.sell-hero {
+  background: linear-gradient(135deg, rgba(12, 12, 15, 0.82), rgba(12, 12, 15, 0.55)), url('img/movingout.jpg') center/cover no-repeat;
+  padding: 4.5rem 0;
+}
+
+.sell-hero__bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(214, 160, 0, 0.2), transparent 45%),
+              radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.07), transparent 40%);
+}
+
+.sell-hero-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(6px);
+}
+
+.step-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.step-icon {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  background: var(--kw-accent);
+  color: var(--kw-dark);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faq-hero {
+  background: linear-gradient(135deg, rgba(12, 12, 15, 0.8), rgba(12, 12, 15, 0.55)), url('family.jpeg') center/cover no-repeat;
+  padding: 4.25rem 0;
+}
+
+.faq-hero__bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(214, 160, 0, 0.18), transparent 45%),
+              radial-gradient(circle at 75% 15%, rgba(255, 255, 255, 0.08), transparent 40%);
+}
+
+.faq-hero-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(6px);
+}
+
+.faq-accordion .accordion-button {
+  font-weight: 600;
+  border-radius: 0.75rem;
+}
+
+.faq-accordion .accordion-button:not(.collapsed) {
+  background-color: rgba(214, 160, 0, 0.08);
+  color: var(--kw-dark);
+  box-shadow: none;
+}
+
+.faq-accordion .accordion-item {
+  border: none;
+  margin-bottom: 0.5rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+}
+.hero {
+  background: linear-gradient(120deg, rgba(12, 12, 15, 0.65), rgba(12, 12, 15, 0.05)), url('family.jpeg') center/cover no-repeat;
+  color: #fff;
+  padding: 4.5rem 0 3.5rem;
+  position: relative;
+}
+
+.hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(12, 12, 15, 0.7), rgba(12, 12, 15, 0.2));
+}
+
+.hero h1,
+.hero p,
+.hero form {
+  position: relative;
+  z-index: 1;
+}
+
+.text-accent {
+  color: var(--kw-accent) !important;
+}
+
+.hero-form .form-control,
+.hero-form .form-select {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.hero-pill .badge {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.feature-card {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #fff;
+}
+
+.feature-hero-img {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 1rem;
+}
+
+.stat-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.placeholder-card {
+  background: #f8f9fa;
+}
+
+.property-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.property-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.property-badges {
+  position: absolute;
+  top: .75rem;
+  left: .75rem;
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.agent-card {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.agent-card .agent-meta {
+  flex: 1;
+}
+
+.agent-card .agent-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 120px;
+}
+
+/* Agent heading spacing */
+.agent-card h6 {
+  background: var(--kw-dark);
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+  margin: 0 0 0.4rem;
+}
+
+/* Override legacy small anchor buttons to match gold/black theme */
+a.btn-sm {
+  background-color: var(--kw-accent) !important;
+  border: 1px solid var(--kw-accent) !important;
+  color: var(--kw-dark) !important;
+  font-weight: 600 !important;
+}
+
+.animate-fade {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-fade.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-slide {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.animate-slide.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: 3rem 0 2.5rem;
+  }
+
+  .agent-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .agent-card h6 {
+    width: 100%;
+  }
+}
+
+/* Tablet: 768px–1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .btn {
+    padding: 0.5rem 0.9rem !important;
+    font-size: 0.95rem !important;
+  }
+  .btn-sm {
+    padding: 0.3rem 0.7rem !important;
+    font-size: 0.9rem !important;
+  }
+  .hero {
+    padding: 4rem 0 3rem;
+  }
+  .agent-card {
+    align-items: flex-start;
+  }
+}
+
+/* Laptop/Desktop: 1024px+ */
+@media (min-width: 1024px) {
+  .btn {
+    padding: 0.55rem 1.05rem !important;
+    font-size: 0.98rem !important;
+  }
+  .btn-sm {
+    padding: 0.35rem 0.75rem !important;
+    font-size: 0.9rem !important;
+  }
+  .hero {
+    padding: 4.5rem 0 3.5rem;
+  }
 }
 

@@ -3,37 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agent Profile - Kelly Williams Realty</title>
+  <title>Agent Profile - 44 Realty Group</title>
     <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+  <script src="layout.js" defer></script>
 </head>
 <body>
-<!-- NAVBAR START -->
-<header>
-<nav class="navbar navbar-expand-sm">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html"><h1>Kelly Williams Realty</h1></a>
-    <button class="navbar-toggler bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav text-center mt-3">
-        <li class="nav-item"><a class="nav-link" href="Agents.html">AGENTS</a></li>
-        <li class="nav-item"><a class="nav-link" href="Buying.html">BUYING</a></li>
-        <li class="nav-item"><a class="nav-link" href="Selling.html">SELLING</a></li>
-        <li class="nav-item"><a class="nav-link" href="FAQ.html">FAQs</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-</header>
-<!-- NAVBAR END -->
+  <header class="site-nav shadow-sm"></header>
 
   <main class="container mt-4">
     <h1 id="agent-name" class="text-center mb-4"></h1>
@@ -455,51 +435,7 @@ document.addEventListener("DOMContentLoaded", () => {
   </main>
 
 
-      <!-- FOOTER -->
-      <footer class="text-muted py-5">
-        <div class="container">
-          <hr>
-          <div class="row">
-            <div class="col-6 col-md-3 mb-3">
-              <h5>Services</h5>
-              <ul class="list-unstyled">
-                <li><a href="FAQ.html">Financing</a></li>
-                <li><a href="FAQ.html">Contact Us</a></li>
-                <li><a href="FAQ.html">Loans</a></li>
-                <li><a href="FAQ.html">FAQs</a></li>
-                <li><a href="FAQ.html">About</a></li>
-              </ul>
-            </div>
-            <div class="col-6 col-md-3 mb-3">
-              <h5>Properties</h5>
-              <ul class="list-unstyled">
-                <li><a href="Buying.html">Home</a></li>
-                <li><a href="Buying.html">Apartment</a></li>
-                <li><a href="Buying.html">Condo</a></li>
-                <li><a href="Buying.html">Rental</a></li>
-                <li><a href="Buying.html">Commercial</a></li>
-              </ul>
-            </div>
-            <div class="col-md-6 text-center">
-              <h5 class="text-center">Subscribe to Our Newsletter</h5>
-              <p class="mb-4">Monthly digest of what's new and exciting from us.</p>
-              <form class="d-flex flex-column flex-sm-row gap-2">
-                <input type="email" class="form-control text-center" placeholder="Email address">
-                <button class="btn" type="submit">Subscribe</button>
-              </form>
-            </div>
-          </div>
-
-          <div class="d-flex flex-column flex-sm-row justify-content-between py-4 mt-4 border-top">
-            <p>&copy; 2024 Kelly Williams Realty. All rights reserved.</p>
-            <ul class="list-unstyled d-flex">
-              <li class="ms-3"><a href="#"><i class="bi bi-twitter"></i></a></li>
-              <li class="ms-3"><a href="#"><i class="bi bi-instagram"></i></a></li>
-              <li class="ms-3"><a href="#"><i class="bi bi-facebook"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </footer>
+  <footer class="py-4 bg-white site-footer"></footer>
 
 
 

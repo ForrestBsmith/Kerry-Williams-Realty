@@ -1,12 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in-view");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
   fetch("properties-1.json")
     .then((res) => {
       if (!res.ok) throw new Error("Failed to load JSON");
       return res.json();
     })
     .then((data) => {
-      const container = document.querySelector("#realtor-list .row");
-      const agents = data[0].agents; // access agents array inside first object
+      const container = document.querySelector("#realtor-list");
+      const agents = data[0].agents;
+      container.innerHTML = "";
 
       agents.forEach((agent) => {
         const {
@@ -14,8 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
           lic = "",
           phone = "",
           email = "",
-          image = "default.jpg",
-          profileUrl = "#",
+          image = "agents.jpg",
           numberofproperties = "0",
           propertiessold = "0",
           averageprice = "N/A",
@@ -24,49 +33,39 @@ document.addEventListener("DOMContentLoaded", () => {
         } = agent;
 
         const card = document.createElement("div");
-        card.className = "col-md-3 mb-4";
+        card.className = "col-12 col-md-6 col-lg-4 animate-fade";
         card.innerHTML = `
-          <div class="card agent-card shadow-sm p-0">
-            <div class="row g-2 align-items-center">
-              <!-- Realtor Photo -->
-              <div class="col-3 d-flex justify-content-center" style="padding: 0em;">
-                <img src="${image}" alt="${name}" 
-                     class="img-fluid mb-0 realtor-photo">
+          <article class="agent-card-modern h-100 shadow-sm rounded-4 overflow-hidden bg-white">
+            <div class="agent-card-modern__image" style="background-image:url('${image}')"></div>
+            <div class="p-3 p-md-4 d-flex flex-column gap-2 h-100">
+              <div class="d-flex align-items-center justify-content-between gap-3">
+                <div>
+                  <p class="text-accent text-uppercase small mb-1">Licensed Agent</p>
+                  <h5 class="mb-0">${name}</h5>
+                  <p class="text-muted small mb-0">${lic}</p>
+                </div>
               </div>
-<div class="col-9">
-  <p class="p-1 agentcardtitle">About Us</p>
-  <p class="text-muted p-1 mb-0 bio-text">${bio}</p>
-</div>
-
-<!-- Realtor Info -->
-<div>
-  <div class="row p-1 mt-0">
-    <div class="col-6">
-      <h6 class="card-title mb-1 p-1 ml-1 fw-semibold name-text">${name}</h6>
-      <p class="text-muted mb-0 lic-text">${lic}</p>
-      <p class="mb-0 mt-3 contact-text">📞 ${phone}</p>
-      <p class="mb-0 contact-text">✉️ ${email}</p>
-    </div>
-
-    <div class="col-6">
-      <p class="mb-0 mt-4 stat-text">Available properties: ${numberofproperties}</p>
-      <p class="mb-2 stat-text">Properties sold: ${propertiessold}</p>
-      <p class="mb-0 price-text">Average Price: ${averageprice}</p>
-      <p class="mb-0 price-text">Total Value: ${totalvalue}</p>
-    </div>
-  </div>
-</div>
-
-<!-- View Listings Button -->
-<div class="col-12 listingbutton mt-0">
-  <a href="agent.html?agent=${encodeURIComponent(agent.id)}" class="btn btn-sm w-100">View Listings</a>
-</div>
-
+              <p class="text-muted small mb-1">${bio}</p>
+              <div class="d-flex gap-3 flex-wrap text-muted small">
+                <span><i class="bi bi-check2-circle me-1"></i>${propertiessold} closed</span>
+                <span><i class="bi bi-house-door me-1"></i>${numberofproperties} active</span>
+                <span><i class="bi bi-cash-stack me-1"></i>${averageprice} avg</span>
+              </div>
+              <div class="border-top pt-3 d-flex flex-column gap-2 text-muted small">
+                <span><i class="bi bi-telephone me-2 text-accent"></i>${phone}</span>
+                <span><i class="bi bi-envelope me-2 text-accent"></i>${email}</span>
+                <span><i class="bi bi-currency-dollar me-2 text-accent"></i>Total value: ${totalvalue}</span>
+              </div>
+              <div class="mt-auto d-flex gap-2">
+                <a href="agent.html?agent=${encodeURIComponent(agent.id)}" class="btn btn-dark flex-grow-1">View profile</a>
+                <a href="property.html" class="btn btn-outline-secondary btn-sm">Listings</a>
+              </div>
             </div>
-          </div>
+          </article>
         `;
 
         container.appendChild(card);
+        observer.observe(card);
       });
     })
     .catch((err) => console.error("Error loading agents:", err));

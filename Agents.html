@@ -1,124 +1,104 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kelly Williams Realty</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <script src="agents.js" defer></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-<!-- NAVBAR START -->
-<header>
-<nav class="navbar navbar-expand-sm">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html"><h1>Kelly Williams Realty</h1></a>
-    <button class="navbar-toggler bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav text-center mt-3">
-        <li class="nav-item"><a class="nav-link" href="Agents.html">AGENTS</a></li>
-        <li class="nav-item"><a class="nav-link" href="Buying.html">BUYING</a></li>
-        <li class="nav-item"><a class="nav-link" href="Selling.html">SELLING</a></li>
-        <li class="nav-item"><a class="nav-link" href="FAQ.html">FAQs</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>44 Realty Group</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="layout.js" defer></script>
+  <script src="agents.js" defer></script>
+</head>
+<body>
+  <header class="site-nav shadow-sm"></header>
 
-</header>
-<!-- NAVBAR END -->
-<div class="text-center mt-5">
-  <img src="agents.jpg" alt="Company Logo" class=" companylogo  mb-3 w-75">
-  <h1 class="mb-3 teamheader">Meet Our Team</h1>
-  <p class="lead text-muted mx-auto p-3">
-    Meet our team of dedicated professionals ready to help you find your perfect home. Each agent brings local expertise, personalized service, and a commitment to making your real estate journey smooth and successful.
-  </p>
-</div>
-
-<hr>
-<!-- Realtor LIST -->
-<div class="container mt-5" id="realtor-list">
-  <div class="three-columns row justify-content-center">
-    <h1 class="mb-3">Our Realtors</h1>
-    <!-- Cards will be injected here -->
-  </div>
-</div>
-
-<div class="container mt-5">
-  <hr class="featurette-divider">
-  <div class="row justify-content-center">     
-     <div class="text-center mb-0">
-    <h6 class="mb-1 text-center mt-5" style="font-size: 20px;">Our Core Values as a Team</h6>
-    <div class="col-md-12">      
-
-      <p class="lead text-center text-muted">
-        At the heart of our real estate group lies a commitment to integrity, service, and excellence. These values drive every interaction, every listing, and every transaction.
-      </p> 
-      <img src="corevalue.jpg" alt="core value image" class="img-fluid w-50">
-      </div>
-
-
-      <ul class="mt-0 list-unstyled text-center text-muted">
-        <li class="mb-3 mt-0">We act honestly and transparently in every deal, building trust with our clients and community.</li>
-        <li class="mb-3">We listen before we speak and tailor our services to meet the unique goals of every buyer and seller.</li>
-        <li class="mb-5">We uphold the highest standards of knowledge, responsiveness, and ethical conduct.</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-
-       <!-- FOOTER -->
-      <footer class="text-muted py-5">
-        <div class="container">
-          <hr>
-          <div class="row">
-            <div class="col-6 col-md-3 mb-3">
-              <h5>Services</h5>
-              <ul class="list-unstyled">
-                <li><a href="FAQ.html">Financing</a></li>
-                <li><a href="FAQ.html">Contact Us</a></li>
-                <li><a href="FAQ.html">Loans</a></li>
-                <li><a href="FAQ.html">FAQs</a></li>
-                <li><a href="FAQ.html">About</a></li>
-              </ul>
-            </div>
-            <div class="col-6 col-md-3 mb-3">
-              <h5>Properties</h5>
-              <ul class="list-unstyled">
-                <li><a href="Buying.html">Home</a></li>
-                <li><a href="Buying.html">Apartment</a></li>
-                <li><a href="Buying.html">Condo</a></li>
-                <li><a href="Buying.html">Rental</a></li>
-                <li><a href="Buying.html">Commercial</a></li>
-              </ul>
-            </div>
-            <div class="col-md-6 text-center">
-              <h5 class="text-center">Subscribe to Our Newsletter</h5>
-              <p class="mb-4">Monthly digest of what's new and exciting from us.</p>
-              <form class="d-flex flex-column flex-sm-row gap-2">
-                <input type="email" class="form-control text-center" placeholder="Email address">
-                <button class="btn" type="submit">Subscribe</button>
-              </form>
+  <main>
+    <!-- HERO -->
+    <section class="agents-hero position-relative text-white overflow-hidden">
+      <div class="agents-hero__bg"></div>
+      <div class="container position-relative">
+        <div class="row align-items-center">
+          <div class="col-lg-7">
+            <p class="text-uppercase small text-accent mb-2">Local experts</p>
+            <h1 class="display-5 fw-bold mb-3">Meet the agents who know your market best.</h1>
+            <p class="lead text-white-50 mb-4">From first tours to closing day, our team pairs data-driven pricing with neighborhood insight to get you home.</p>
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn btn-accent" href="#realtor-list">Browse agents</a>
+              <a class="btn btn-outline-light" href="property.html">View listings</a>
             </div>
           </div>
-
-          <div class="d-flex flex-column flex-sm-row justify-content-between py-4 mt-4 border-top">
-            <p>&copy; 2024 Kelly Williams Realty. All rights reserved.</p>
-            <ul class="list-unstyled d-flex">
-              <li class="ms-3"><a href="#"><i class="bi bi-twitter"></i></a></li>
-              <li class="ms-3"><a href="#"><i class="bi bi-instagram"></i></a></li>
-              <li class="ms-3"><a href="#"><i class="bi bi-facebook"></i></a></li>
-            </ul>
+          <div class="col-lg-5 mt-4 mt-lg-0">
+            <div class="stats-tile shadow-sm">
+              <div>
+                <p class="text-uppercase small text-accent mb-1">Markets served</p>
+                <h3 class="fw-bold mb-0">Central Texas + Surrounding</h3>
+              </div>
+              <div class="d-flex gap-4 flex-wrap">
+                <div>
+                  <p class="text-muted small mb-1">Avg. days on market</p>
+                  <h4 class="fw-bold mb-0">12</h4>
+                </div>
+                <div>
+                  <p class="text-muted small mb-1">5-star reviews</p>
+                  <h4 class="fw-bold mb-0">240+</h4>
+                </div>
+                <div>
+                  <p class="text-muted small mb-1">Homes closed</p>
+                  <h4 class="fw-bold mb-0">1,100+</h4>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </footer>
+      </div>
+    </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- OUR REALTORS -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-2">
+          <div>
+            <p class="text-uppercase small text-accent mb-1">Our realtors</p>
+            <h2 class="fw-bold mb-0">People-focused, detail-driven</h2>
+            <p class="text-muted mb-0">Licensed pros with neighborhood knowledge, top-tier negotiation, and modern marketing.</p>
+          </div>
+          <div class="text-muted small">Scroll to explore the team</div>
+        </div>
+
+        <div class="row g-3 g-md-4" id="realtor-list">
+          <div class="col-12">
+            <div class="placeholder-card p-4 border rounded-3 bg-white text-center text-muted">Loading agents...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="py-5">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6">
+            <img src="corevalue.jpg" alt="core values" class="img-fluid rounded-4 shadow-sm">
+          </div>
+          <div class="col-lg-6">
+            <p class="text-uppercase small text-accent mb-2">Our promise</p>
+            <h3 class="fw-bold mb-3">Guided by integrity, service, and excellence.</h3>
+            <ul class="list-unstyled text-muted small mb-4">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-accent me-2"></i>Transparent communication at every step</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-accent me-2"></i>Personalized strategies tailored to your goals</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-accent me-2"></i>Expert negotiation to protect your equity</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-accent me-2"></i>Marketing that showcases your home’s strengths</li>
+            </ul>
+            <a class="btn btn-dark" href="Buying.html">Explore listings</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <footer class="py-4 bg-white site-footer"></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -5,72 +5,231 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sign In | 44 Realty Group</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="style.css">
   <script src="layout.js" defer></script>
+  <script src="user.js" defer></script>
 </head>
 <body>
   <header class="site-nav shadow-sm"></header>
 
   <main class="container my-5">
     <div class="mb-4 text-center">
-      <h1 class="fw-normal">Welcome to 44 Realty Group</h1>
-      <p class="lead text-muted">Your trusted partner in real estate, dedicated to helping you find your dream home or sell your property with confidence.</p>
+      <h1 class="fw-bold">Stay synced with 44 Realty Group</h1>
+      <p class="lead text-muted">Sign in to save homes, message the team, and keep your activity in one place.</p>
     </div>
 
-    <div class="text-center mb-4">
-      <h2>Sign In / Create Account</h2>
-    </div>
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="card shadow-sm border-0 h-100">
+          <div class="card-body">
+            <p class="text-uppercase small text-accent mb-1">Account</p>
+            <h4 class="fw-bold mb-3">Sign in or create an account</h4>
+            <form id="auth-form" class="d-grid gap-3">
+              <div>
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Alex Johnson" required>
+              </div>
+              <div>
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" placeholder="you@example.com" required>
+              </div>
+              <div class="small text-muted">No passwords needed—this stores your activity on this device.</div>
+              <div id="auth-status" class="small text-success d-none"></div>
+              <button type="submit" class="btn btn-dark w-100">Save & Continue</button>
+            </form>
+          </div>
+        </div>
+      </div>
 
-    <form id="login-form" class="d-grid gap-3" style="max-width: 420px; margin: 0 auto;">
-      <input type="email" name="email" class="form-control" required placeholder="Email">
-      <input type="password" name="password" class="form-control" required placeholder="Password">
-      <button type="submit" class="btn btn-dark w-100">Sign In</button>
-    </form>
+      <div class="col-lg-8">
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div>
+                <p class="text-uppercase small text-accent mb-1">Saved homes</p>
+                <h4 class="fw-bold mb-0">Your shortlist</h4>
+              </div>
+              <a href="Buying.html" class="btn btn-outline-secondary btn-sm">Browse listings</a>
+            </div>
+            <div id="saved-homes" class="d-grid gap-2"></div>
+          </div>
+        </div>
+
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div>
+                <p class="text-uppercase small text-accent mb-1">Message portal</p>
+                <h4 class="fw-bold mb-0">Talk with the team</h4>
+              </div>
+              <span class="badge bg-light text-dark" id="message-count">0 messages</span>
+            </div>
+            <form id="message-form" class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Subject</label>
+                <input type="text" class="form-control" name="subject" placeholder="Starting a search in Waco" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Property (optional)</label>
+                <select class="form-select" name="propertyId" id="message-property">
+                  <option value="">General question</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Message</label>
+                <textarea class="form-control" name="body" rows="3" required placeholder="Tell us how we can help"></textarea>
+              </div>
+              <div class="col-12 d-flex justify-content-end gap-2 align-items-center">
+                <div id="message-status" class="small text-muted d-none"></div>
+                <button type="submit" class="btn btn-dark">Send to 44 Realty</button>
+              </div>
+            </form>
+
+            <hr class="my-4">
+
+            <div>
+              <h6 class="fw-bold">History</h6>
+              <div id="message-history" class="d-grid gap-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <footer class="py-4 bg-white site-footer"></footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-  document.querySelector("#login-form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const body = Object.fromEntries(formData.entries());
+    const session = window.UserSession;
+    let propertyIndex = {};
 
-    const res = await fetch("/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
+    const savedList = document.getElementById('saved-homes');
+    const authStatus = document.getElementById('auth-status');
+    const messageStatus = document.getElementById('message-status');
+    const messageHistory = document.getElementById('message-history');
+    const messageCount = document.getElementById('message-count');
+    const propertySelect = document.getElementById('message-property');
+
+    const renderSavedHomes = () => {
+      const user = session?.getUser?.();
+      savedList.innerHTML = '';
+      if (!user) {
+        savedList.innerHTML = '<div class="text-muted">Sign in to begin saving homes.</div>';
+        return;
+      }
+      const savedIds = user.savedHomeIds || [];
+      if (!savedIds.length) {
+        savedList.innerHTML = '<div class="text-muted">No saved homes yet. Tap the heart on any listing.</div>';
+        return;
+      }
+
+      savedIds.forEach((id) => {
+        const prop = propertyIndex[id];
+        savedList.insertAdjacentHTML('beforeend', `
+          <div class="d-flex justify-content-between align-items-center border rounded-3 p-3">
+            <div>
+              <div class="fw-semibold">${prop?.address || 'Saved home'}</div>
+              <div class="small text-muted">${prop?.city || ''} ${prop ? '$' + (prop.price || 0).toLocaleString() : ''}</div>
+            </div>
+            <div class="d-flex gap-2">
+              <a href="${prop ? 'property.html?id=' + encodeURIComponent(prop.id) : '#'}" class="btn btn-outline-secondary btn-sm">Open</a>
+              <button class="btn btn-outline-danger btn-sm" data-remove="${id}">Remove</button>
+            </div>
+          </div>
+        `);
+      });
+    };
+
+    const renderMessages = () => {
+      const user = session?.getUser?.();
+      messageHistory.innerHTML = '';
+      if (!user || !user.messages?.length) {
+        messageHistory.innerHTML = '<div class="text-muted">No messages yet.</div>';
+        messageCount.textContent = '0 messages';
+        return;
+      }
+      messageCount.textContent = `${user.messages.length} message${user.messages.length === 1 ? '' : 's'}`;
+
+      user.messages.forEach((msg) => {
+        const prop = msg.propertyId ? propertyIndex[msg.propertyId] : null;
+        messageHistory.insertAdjacentHTML('beforeend', `
+          <div class="border rounded-3 p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="fw-semibold">${msg.subject || 'Message'}</div>
+              <div class="small text-muted">${new Date(msg.timestamp).toLocaleString()}</div>
+            </div>
+            <p class="mb-1 small text-muted">${msg.body || ''}</p>
+            ${prop ? `<div class="small"><i class="bi bi-house me-1"></i>${prop.address}</div>` : ''}
+          </div>
+        `);
+      });
+    };
+
+    document.addEventListener('click', (e) => {
+      const removeBtn = e.target.closest('[data-remove]');
+      if (!removeBtn) return;
+      const id = removeBtn.getAttribute('data-remove');
+      if (!session?.ensureUser?.()) return;
+      session.toggleSavedHome(id);
+      renderSavedHomes();
     });
 
-    const data = await res.json();
-    if (res.ok) {
-      localStorage.setItem("token", data.token);
-      alert("Logged in as " + data.role);
-      // redirect to dashboard
-    } else {
-      alert(data.error);
-    }
-  });
+    document.getElementById('auth-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const form = new FormData(e.target);
+      const name = form.get('name');
+      const email = form.get('email');
+      session.login({ name, email });
+      authStatus.textContent = 'Profile saved on this device.';
+      authStatus.classList.remove('d-none');
+      renderSavedHomes();
+      renderMessages();
+    });
 
-  function authMiddleware(req, res, next) {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) return res.sendStatus(401);
+    document.getElementById('message-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!session?.ensureUser?.()) {
+        alert('Sign in to send and track your messages.');
+        return;
+      }
+      const form = new FormData(e.target);
+      const entry = session.addMessage({
+        subject: form.get('subject'),
+        body: form.get('body'),
+        propertyId: form.get('propertyId') || undefined,
+      });
+      if (entry) {
+        messageStatus.textContent = 'Saved to your portal. We will reach out shortly.';
+        messageStatus.classList.remove('d-none');
+        messageStatus.classList.remove('text-danger');
+        messageStatus.classList.add('text-success');
+        e.target.reset();
+        renderMessages();
+      } else {
+        messageStatus.textContent = 'Could not save your message.';
+        messageStatus.classList.remove('d-none');
+        messageStatus.classList.remove('text-success');
+        messageStatus.classList.add('text-danger');
+      }
+    });
 
-    const token = authHeader.split(" ")[1];
-    try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = decoded;
-      next();
-    } catch {
-      res.sendStatus(403);
-    }
-  }
-
-  app.get("/api/listings", authMiddleware, (req, res) => {
-    if (req.user.role !== "realtor") return res.sendStatus(403);
-    // show realtor listings
-  });
+    fetch('properties-1.json')
+      .then((res) => res.json())
+      .then((data) => {
+        const props = (Array.isArray(data) ? data[0]?.properties : []) || [];
+        propertyIndex = props.reduce((acc, p) => ({ ...acc, [p.id]: p }), {});
+        propertySelect.innerHTML = '<option value="">General question</option>';
+        props.forEach((p) => {
+          propertySelect.insertAdjacentHTML('beforeend', `<option value="${p.id}">${p.address} (${p.city})</option>`);
+        });
+        renderSavedHomes();
+        renderMessages();
+      })
+      .catch(() => {
+        savedList.innerHTML = '<div class="text-danger">Unable to load saved homes right now.</div>';
+      });
   </script>
 </body>
 </html>

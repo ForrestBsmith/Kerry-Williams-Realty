@@ -1,308 +1,411 @@
-[{
-  "agents": [
-    {
-      "id": "mark-smith",
-      "name": "Mark Smith",
-      "lic": "LIC #123456",
-      "phone": "(123) 456-7890",
-      "email": "KW@example.com",
-      "image": "realtor.jpg",
-      "profileUrl": "/agent/mark-smith",
-      "numberofproperties": "4",
-      "propertiessold": "120",
-      "averageprice": "250k",
-      "totalvalue": "5M",
-      "exp": "12 Years",
-      "languages": ["English", "Spanish"],
-      "specialties": ["Residential", "Commercial"],
-      "bio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
-      "sectionbio":"With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion"
-    },
-        {
-      "id": "janet-smith",
-      "name": "Janet Smith",
-      "lic": "LIC #123456",
-      "phone": "(123) 456-7890",
-      "email": "KW@example.com",
-      "image": "realtor-2.jpg",
-      "profileUrl": "/agent/janet-smith",
-      "numberofproperties": "1",
-      "propertiessold": "10",
-      "averageprice": "250k",
-      "totalvalue": "2.5M",
-      "exp": "5 Years",
-      "languages": ["English", "Spanish"],
-      "specialties": ["Residential", "Commercial"],
-      "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
-      "sectionbio":"With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction"
-    },
-    {
-      "id": "Lance-smith",
-      "name": "Lance Smith",
-      "lic": "LIC #123456",
-      "phone": "(123) 456-7890",
-      "email": "KW@example.com",
-      "image": "realtor-1.jpg",
-      "profileUrl": "/agent/Lance-smith",
-      "numberofproperties": "3",
-      "propertiessold": "75",
-      "averageprice": "250k",
-      "totalvalue": "1M",
-      "exp": "3 Years",
-      "languages": ["English", "Spanish"],
-      "specialties": ["Residential", "Commercial"],
-      "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
-      "sectionbio":"With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction"
-    }
-  ],
-  "properties": [
-    {
-      "agentId": "janet-smith",
-      "id": "janet-smith-property-1",
-      "address": "789 Elm Ave",
-      "city": "Waco",
-      "zip": "76701",
-      "price": 275000,
-      "bedrooms": 4,
-      "bathrooms": 3,
-      "type": "House",
-      "squareFeet": 2200,
-      "yearBuilt": 2017,
-      "lotSize": 0.30,
-      "garage": "2-car attached",
-      "hoaFees": 130,
-      "schoolDistrict": "Waco ISD",
-      "heating": "Central Electric",
-      "cooling": "Central Air",
-      "flooring": "Hardwood, Tile",
-      "roof": "Composition Shingle",
-      "exterior": "Brick",
-      "interiorFeatures": [
-        "Open Floor Plan",
-        "Granite Countertops",
-        "Fireplace",
-        "Walk-in Closets",
-        "Stainless Steel Appliances"
-      ],
-      "exteriorFeatures": [
-        "Covered Porch",
-        "Fenced Backyard",
-        "Sprinkler System"
-      ],
-      "energyFeatures": [
-        "Double Pane Windows",
-        "Energy Star Appliances",
-        "Ceiling Fans"
-      ],
-      "image": "img/janetpropertyimg-1.webp",
-      "listedDaysAgo": 10,
-      "lat": 31.568854,
-      "lng": -97.121261,
-      "images": [
-        "img/janetpropertyimg-1.webp",
-        "img/janetfloorplan-1.avif",
-        "img/janetlivingroom-1.jpg",
-        "img/janetbackyard-1.jpg"
-        
-      ],
-      "description": "Spacious and stylish 4-bedroom family home with modern updates and a great location. Includes beautiful hardwood floors, a large fenced yard, and smart energy-saving features."
-    },
-    {
-      "agentId": "mark-smith",
-      "id": "mark-smith-property-2",
-      "address": "17736 Windflower Way",
-      "city": "dallas",
-      "zip": "75252",
-      "price": 495000,
-      "status": "sold",
-      "soldDate": "2022-05-15",
-      "listingAgentId": "mark-smith",
-      "buyerAgentId": "",
-      "bedrooms": 4,
-      "bathrooms": 3,
-      "type": "Single Family",
-      "squareFeet": 1500,
-      "yearBuilt": 2020,
-      "lotSize": 0.22,
-      "garage": "2-car attached",
-      "hoaFees": 100,
-      "schoolDistrict": "Waco ISD",
-      "heating": "Central Gas",
-      "cooling": "Central Air",
-      "flooring": "Carpet, Tile",
-      "roof": "Asphalt Shingle",
-      "exterior": "Stucco",
-      "interiorFeatures": [
-        "Vaulted Ceilings",
-        "Breakfast Bar",
-        "Walk-in Pantry"
-      ],
-      "exteriorFeatures": [
-        "Covered Patio",
-        "Garden Area"
-      ],
-      "energyFeatures": [
-        "Solar Panels",
-        "Insulated Windows"
-      ],
-      "image": "img/marksmithproperty-1.jpg",
-      "listedDaysAgo": 3,
-      "lat": 32.994675,
-      "lng": -96.801930,
-      "images": [
-        "img/marksmithproperty-1.jpg",
-        "img/marksmithkitchen-1.jpg",
-        "img/marksmithlivingroom-1.jpg",
-        "img/marksmithbackyard-1.jpg"
-      ],
-      "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
-    },
-    {
-      "agentId": "mark-smith",
-      "id": "mark-smith-property-1",
-      "address": "17736 Windflower Way",
-      "city": "dallas",
-      "zip": "75252",
-      "price": 195000,
-      "status": "",
-      "soldDate": "2025-05-15",
-      "listingAgentId": "",
-      "buyerAgentId": "mark-smith",
-      "bedrooms": 3,
-      "bathrooms": 2,
-      "type": "Single Family",
-      "squareFeet": 1500,
-      "yearBuilt": 2015,
-      "lotSize": 0.22,
-      "garage": "2-car attached",
-      "hoaFees": 100,
-      "schoolDistrict": "Waco ISD",
-      "heating": "Central Gas",
-      "cooling": "Central Air",
-      "flooring": "Carpet, Tile",
-      "roof": "Asphalt Shingle",
-      "exterior": "Stucco",
-      "interiorFeatures": [
-        "Vaulted Ceilings",
-        "Breakfast Bar",
-        "Walk-in Pantry"
-      ],
-      "exteriorFeatures": [
-        "Covered Patio",
-        "Garden Area"
-      ],
-      "energyFeatures": [
-        "Solar Panels",
-        "Insulated Windows"
-      ],
-      "image": "img/marksmithproperty-1.jpg",
-      "listedDaysAgo": 3,
-      "lat": 32.994675,
-      "lng": -96.801930,
-      "images": [
-        "img/marksmithproperty-1.jpg",
-        "img/marksmithkitchen-1.jpg",
-        "img/marksmithlivingroom-1.jpg",
-        "img/marksmithbackyard-1.jpg"
-      ],
-      "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
-    },
-    {
-      "agentId": "Lance-smith",
-      "id": "Lance-smith-property-1",
-      "address": "707 S 9th St",
-      "city": "Waco",
-      "zip": "76706",
-      "price": 875000,
-      "status": "for sale",
-      "bedrooms": 4,
-      "bathrooms": 3,
-      "type": "House",
-      "squareFeet": 2200,
-      "yearBuilt": 2020,
-      "lotSize": 0.30,
-      "garage": "2-car attached",
-      "hoaFees": 0,
-      "schoolDistrict": "Waco ISD",
-      "heating": "Central Electric",
-      "cooling": "Central Air",
-      "flooring": "Hardwood, Tile",
-      "roof": "Composition Shingle",
-      "exterior": "Brick",
-      "interiorFeatures": [
-        "Open Floor Plan",
-        "Granite Countertops",
-        "Fireplace",
-        "Walk-in Closets",
-        "Stainless Steel Appliances"
-      ],
-      "exteriorFeatures": [
-        "Covered Porch",
-        "Fenced Backyard",
-        "Sprinkler System"
-      ],
-      "energyFeatures": [
-        "Double Pane Windows",
-        "Energy Star Appliances",
-        "Ceiling Fans"
-      ],
-      "image": "img/featurette 2.jpeg",
-      "listedDaysAgo": 10,
-      "lat":  31.548288,
-      "lng": -97.129509,
-      "images": [
-        "img/featurette 2.jpeg",
-        "img/featurette 2.jpeg",
-        "img/featurette 2.jpeg"
-        
-      ],
-      "description": "Spacious and stylish 4-bedroom family home with modern updates and a great location. Includes beautiful hardwood floors, a large fenced yard, and smart energy-saving features."
-    },
-    {
-      "agentId": "janet-smith",
-      "id": "janet-smith-property-2",
-      "address": "2612 Fort Ave",
-      "city": "Waco",
-      "zip": "76707",
-      "price": 243000,
-      "bedrooms": 3,
-      "bathrooms": 2,
-      "type": "Single Family",
-      "squareFeet": 1290,
-      "yearBuilt": 2015,
-      "lotSize": 0.25,
-      "garage": "2-car attached",
-      "hoaFees": 0,
-      "schoolDistrict": "Waco ISD",
-      "heating": "Central Gas",
-      "cooling": "Central Air",
-      "flooring": "Carpet, Tile",
-      "roof": "Asphalt Shingle",
-      "exterior": "Stucco",
-      "interiorFeatures": [
-        "Vaulted Ceilings",
-        "Breakfast Bar",
-        "Walk-in Pantry"
-      ],
-      "exteriorFeatures": [
-        "Covered Patio",
-        "Garden Area"
-      ],
-      "energyFeatures": [
-        "Solar Panels",
-        "Insulated Windows"
-      ],
-      "image": "img/janetpropertyimg-2.jpg",
-      "listedDaysAgo": 3,
-      "lat": 31.542699,
-      "lng": -97.155711,
-      "images": [
-        "img/janetfloorplan-1.avif",
-        "img/janetpropertyimg-2.jpg",
-        "img/janetlivingroom-2.jpg",
-        "img/janetbackyard-2.jpg"
-      ],
-      "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
-    }
-  ]
-}]
+[
+  {
+    "agents": [
+      {
+        "id": "mark-smith",
+        "name": "Mark Smith",
+        "lic": "LIC #123456",
+        "phone": "(123) 456-7890",
+        "email": "KW@example.com",
+        "image": "realtor.jpg",
+        "profileUrl": "/agent/mark-smith",
+        "numberofproperties": 4,
+        "propertiessold": 120,
+        "averageprice": "250k",
+        "totalvalue": "5M",
+        "exp": "12 Years",
+        "languages": [
+          "English",
+          "Spanish"
+        ],
+        "specialties": [
+          "Residential",
+          "Commercial"
+        ],
+        "bio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
+        "sectionbio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion"
+      },
+      {
+        "id": "janet-smith",
+        "name": "Janet Smith",
+        "lic": "LIC #123456",
+        "phone": "(123) 456-7890",
+        "email": "KW@example.com",
+        "image": "realtor-2.jpg",
+        "profileUrl": "/agent/janet-smith",
+        "numberofproperties": 1,
+        "propertiessold": 10,
+        "averageprice": "250k",
+        "totalvalue": "2.5M",
+        "exp": "5 Years",
+        "languages": [
+          "English",
+          "Spanish"
+        ],
+        "specialties": [
+          "Residential",
+          "Commercial"
+        ],
+        "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
+        "sectionbio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction"
+      },
+      {
+        "id": "Lance-smith",
+        "name": "Lance Smith",
+        "lic": "LIC #123456",
+        "phone": "(123) 456-7890",
+        "email": "KW@example.com",
+        "image": "realtor-1.jpg",
+        "profileUrl": "/agent/Lance-smith",
+        "numberofproperties": 3,
+        "propertiessold": 75,
+        "averageprice": "250k",
+        "totalvalue": "1M",
+        "exp": "3 Years",
+        "languages": [
+          "English",
+          "Spanish"
+        ],
+        "specialties": [
+          "Residential",
+          "Commercial"
+        ],
+        "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
+        "sectionbio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction"
+      },
+      {
+        "id": "Jake-Browning",
+        "name": "Jake Browning",
+        "lic": "LIC #123456",
+        "phone": "(123) 456-7890",
+        "email": "KW@example.com",
+        "image": "realtor-2.jpg",
+        "profileUrl": "/agent/Jake-Browning",
+        "numberofproperties": 1,
+        "propertiessold": 900,
+        "averageprice": "850k",
+        "totalvalue": "850k",
+        "exp": "5 Years",
+        "languages": [
+          "English",
+          "Spanish"
+        ],
+        "specialties": [
+          "Residential",
+          "Commercial"
+        ],
+        "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
+        "sectionbio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction"
+      }
+    ],
+    "properties": [
+      {
+        "id": "janet-smith-property-1",
+        "agentId": "janet-smith",
+        "address": "789 Elm Ave",
+        "city": "Waco",
+        "zip": 76701,
+        "price": 275000,
+        "status": null,
+        "soldDate": null,
+        "listingAgentId": null,
+        "buyerAgentId": null,
+        "bedrooms": 4,
+        "bathrooms": 3,
+        "type": "House",
+        "squareFeet": 2200,
+        "yearBuilt": 2017,
+        "lotSize": 0.3,
+        "garage": "2-car attached",
+        "hoaFees": 130,
+        "schoolDistrict": "Waco ISD",
+        "heating": "Central Electric",
+        "cooling": "Central Air",
+        "flooring": "Hardwood, Tile",
+        "roof": "Composition Shingle",
+        "exterior": "Brick",
+        "interiorFeatures": [
+          "Open Floor Plan",
+          "Granite Countertops",
+          "Fireplace",
+          "Walk-in Closets",
+          "Stainless Steel Appliances"
+        ],
+        "exteriorFeatures": [
+          "Covered Porch",
+          "Fenced Backyard",
+          "Sprinkler System"
+        ],
+        "energyFeatures": [
+          "Double Pane Windows",
+          "Energy Star Appliances",
+          "Ceiling Fans"
+        ],
+        "image": "img/janetpropertyimg-1.webp",
+        "listedDaysAgo": 10,
+        "lat": 31.568854,
+        "lng": -97.121261,
+        "images": [
+          "img/janetpropertyimg-1.webp",
+          "img/janetfloorplan-1.avif",
+          "img/janetlivingroom-1.jpg",
+          "img/janetbackyard-1.jpg"
+        ],
+        "description": "Spacious and stylish 4-bedroom family home with modern updates and a great location. Includes beautiful hardwood floors, a large fenced yard, and smart energy-saving features."
+      },
+      {
+        "id": "mark-smith-property-2",
+        "agentId": "mark-smith",
+        "address": "17736 Windflower Way",
+        "city": "dallas",
+        "zip": 75252,
+        "price": 495000,
+        "status": "sold",
+        "soldDate": "2022-05-15T05:00:00.000Z",
+        "listingAgentId": "mark-smith",
+        "buyerAgentId": null,
+        "bedrooms": 4,
+        "bathrooms": 3,
+        "type": "Single Family",
+        "squareFeet": 1500,
+        "yearBuilt": 2020,
+        "lotSize": 0.22,
+        "garage": "2-car attached",
+        "hoaFees": 100,
+        "schoolDistrict": "Waco ISD",
+        "heating": "Central Gas",
+        "cooling": "Central Air",
+        "flooring": "Carpet, Tile",
+        "roof": "Asphalt Shingle",
+        "exterior": "Stucco",
+        "interiorFeatures": [
+          "Vaulted Ceilings",
+          "Breakfast Bar",
+          "Walk-in Pantry"
+        ],
+        "exteriorFeatures": [
+          "Covered Patio",
+          "Garden Area"
+        ],
+        "energyFeatures": [
+          "Solar Panels",
+          "Insulated Windows"
+        ],
+        "image": "img/marksmithproperty-1.jpg",
+        "listedDaysAgo": 3,
+        "lat": 32.994675,
+        "lng": -96.80193,
+        "images": [
+          "img/marksmithproperty-1.jpg",
+          "img/marksmithkitchen-1.jpg",
+          "img/marksmithlivingroom-1.jpg",
+          "img/marksmithbackyard-1.jpg"
+        ],
+        "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
+      },
+      {
+        "id": "mark-smith-property-1",
+        "agentId": "mark-smith",
+        "address": "17736 Windflower Way",
+        "city": "dallas",
+        "zip": 75252,
+        "price": 195000,
+        "status": null,
+        "soldDate": "2025-05-15T05:00:00.000Z",
+        "listingAgentId": null,
+        "buyerAgentId": "mark-smith",
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "type": "Single Family",
+        "squareFeet": 1500,
+        "yearBuilt": 2015,
+        "lotSize": 0.22,
+        "garage": "2-car attached",
+        "hoaFees": 100,
+        "schoolDistrict": "Waco ISD",
+        "heating": "Central Gas",
+        "cooling": "Central Air",
+        "flooring": "Carpet, Tile",
+        "roof": "Asphalt Shingle",
+        "exterior": "Stucco",
+        "interiorFeatures": [
+          "Vaulted Ceilings",
+          "Breakfast Bar",
+          "Walk-in Pantry"
+        ],
+        "exteriorFeatures": [
+          "Covered Patio",
+          "Garden Area"
+        ],
+        "energyFeatures": [
+          "Solar Panels",
+          "Insulated Windows"
+        ],
+        "image": "img/marksmithproperty-1.jpg",
+        "listedDaysAgo": 3,
+        "lat": 32.994675,
+        "lng": -96.80193,
+        "images": [
+          "img/marksmithproperty-1.jpg",
+          "img/marksmithkitchen-1.jpg",
+          "img/marksmithlivingroom-1.jpg",
+          "img/marksmithbackyard-1.jpg"
+        ],
+        "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
+      },
+      {
+        "id": "Lance-smith-property-1",
+        "agentId": "Lance-smith",
+        "address": "707 S 9th St",
+        "city": "Waco",
+        "zip": 76706,
+        "price": 875000,
+        "status": "for sale",
+        "soldDate": null,
+        "listingAgentId": null,
+        "buyerAgentId": null,
+        "bedrooms": 4,
+        "bathrooms": 3,
+        "type": "House",
+        "squareFeet": 2200,
+        "yearBuilt": 2020,
+        "lotSize": 0.3,
+        "garage": "2-car attached",
+        "hoaFees": 0,
+        "schoolDistrict": "Waco ISD",
+        "heating": "Central Electric",
+        "cooling": "Central Air",
+        "flooring": "Hardwood, Tile",
+        "roof": "Composition Shingle",
+        "exterior": "Brick",
+        "interiorFeatures": [
+          "Open Floor Plan",
+          "Granite Countertops",
+          "Fireplace",
+          "Walk-in Closets",
+          "Stainless Steel Appliances"
+        ],
+        "exteriorFeatures": [
+          "Covered Porch",
+          "Fenced Backyard",
+          "Sprinkler System"
+        ],
+        "energyFeatures": [
+          "Double Pane Windows",
+          "Energy Star Appliances",
+          "Ceiling Fans"
+        ],
+        "image": "img/featurette 2.jpeg",
+        "listedDaysAgo": 10,
+        "lat": 31.548288,
+        "lng": -97.129509,
+        "images": [
+          "img/featurette 2.jpeg",
+          "img/featurette 2.jpeg",
+          "img/featurette 2.jpeg"
+        ],
+        "description": "Spacious and stylish 4-bedroom family home with modern updates and a great location. Includes beautiful hardwood floors, a large fenced yard, and smart energy-saving features."
+      },
+      {
+        "id": "janet-smith-property-2",
+        "agentId": "janet-smith",
+        "address": "2612 Fort Ave",
+        "city": "Waco",
+        "zip": 76707,
+        "price": 243000,
+        "status": null,
+        "soldDate": null,
+        "listingAgentId": null,
+        "buyerAgentId": null,
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "type": "Single Family",
+        "squareFeet": 1290,
+        "yearBuilt": 2015,
+        "lotSize": 0.25,
+        "garage": "2-car attached",
+        "hoaFees": 0,
+        "schoolDistrict": "Waco ISD",
+        "heating": "Central Gas",
+        "cooling": "Central Air",
+        "flooring": "Carpet, Tile",
+        "roof": "Asphalt Shingle",
+        "exterior": "Stucco",
+        "interiorFeatures": [
+          "Vaulted Ceilings",
+          "Breakfast Bar",
+          "Walk-in Pantry"
+        ],
+        "exteriorFeatures": [
+          "Covered Patio",
+          "Garden Area"
+        ],
+        "energyFeatures": [
+          "Solar Panels",
+          "Insulated Windows"
+        ],
+        "image": "img/janetpropertyimg-2.jpg",
+        "listedDaysAgo": 3,
+        "lat": 31.542699,
+        "lng": -97.155711,
+        "images": [
+          "img/janetfloorplan-1.avif",
+          "img/janetpropertyimg-2.jpg",
+          "img/janetlivingroom-2.jpg",
+          "img/janetbackyard-2.jpg"
+        ],
+        "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
+      },
+      {
+        "id": "Jake-Browning-property1",
+        "agentId": "Jake-Browning",
+        "address": "2525 Maple Bend",
+        "city": "Waco",
+        "zip": 76707,
+        "price": 243000,
+        "status": null,
+        "soldDate": null,
+        "listingAgentId": null,
+        "buyerAgentId": null,
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "type": "Single Family",
+        "squareFeet": 1290,
+        "yearBuilt": 2015,
+        "lotSize": 0.25,
+        "garage": "2-car attached",
+        "hoaFees": 0,
+        "schoolDistrict": "Waco ISD",
+        "heating": "Central Gas",
+        "cooling": "Central Air",
+        "flooring": "Carpet, Tile",
+        "roof": "Asphalt Shingle",
+        "exterior": "Stucco",
+        "interiorFeatures": [
+          "Vaulted Ceilings",
+          "Breakfast Bar",
+          "Walk-in Pantry"
+        ],
+        "exteriorFeatures": [
+          "Covered Patio",
+          "Garden Area"
+        ],
+        "energyFeatures": [
+          "Solar Panels",
+          "Insulated Windows"
+        ],
+        "image": "img/janetpropertyimg-2.jpg",
+        "listedDaysAgo": 3,
+        "lat": 31.542699,
+        "lng": -97.155711,
+        "images": [
+          "img/janetfloorplan-1.avif",
+          "img/janetpropertyimg-2.jpg",
+          "img/janetlivingroom-2.jpg",
+          "img/janetbackyard-2.jpg"
+        ],
+        "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
+      }
+    ]
+  }
+]

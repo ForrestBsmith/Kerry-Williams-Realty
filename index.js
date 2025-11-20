@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const DATA_URL = 'https://script.google.com/macros/s/AKfycbyjfqkPK9YLpEKHz9aaSa6RJ2Z1D7JTnx0SgI32kVmsdPAhCUXqoQJyPugVTK9X1ucKIw/exec';
+
   const els = {
     propertyGrid: document.getElementById('property-grid'),
     agentGrid: document.getElementById('agent-grid'),
@@ -40,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function loadData() {
-    const res = await fetch('properties-1.json');
+    const res = await fetch(`${DATA_URL}?ts=${Date.now()}`);
     if (!res.ok) throw new Error('Failed to fetch data');
     const raw = await res.json();
     const data = Array.isArray(raw) ? raw[0] : raw;
@@ -387,6 +389,5 @@ document.addEventListener('DOMContentLoaded', () => {
     return R * c;
   }
 });
-
 
 

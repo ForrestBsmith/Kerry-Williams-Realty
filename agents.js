@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const card = document.createElement("div");
         card.className = "col-12 col-md-6 col-lg-4 animate-fade";
+        card.dataset.agentId = agent.id;
         card.innerHTML = `
           <article class="agent-card-modern h-100 shadow-sm rounded-4 overflow-hidden bg-white">
             <div class="agent-card-modern__image" style="background-image:url('${image}')"></div>
@@ -65,6 +66,13 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
 
         container.appendChild(card);
+        card.addEventListener("click", (e) => {
+          if (e.target.closest("a")) return;
+          const id = card.dataset.agentId;
+          if (id) {
+            window.location.href = `agent.html?agent=${encodeURIComponent(id)}`;
+          }
+        });
         observer.observe(card);
       });
     })

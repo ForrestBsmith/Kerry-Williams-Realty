@@ -11,10 +11,21 @@ document.addEventListener('DOMContentLoaded', () => {
         </button>
         <div class="collapse navbar-collapse" id="mainNav">
           <ul class="navbar-nav gap-lg-3 text-center w-100 justify-content-center justify-content-lg-end">
-            <li class="nav-item"><a class="nav-link" href="Buying.html">Listings</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Listings</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="Buying.html">All listings</a></li>
+                <li><a class="dropdown-item" href="Buying.html?type=House">Houses</a></li>
+                <li><a class="dropdown-item" href="Buying.html?type=Condo">Condos</a></li>
+                <li><a class="dropdown-item" href="Buying.html?type=Apartment">Apartments</a></li>
+                <li><a class="dropdown-item" href="Buying.html?type=Commercial">Commercial</a></li>
+                <li><a class="dropdown-item" href="Buying.html?type=Rental">Rentals</a></li>
+              </ul> 
+            </li>
             <li class="nav-item"><a class="nav-link" href="Agents.html">Agents</a></li>
             <li class="nav-item"><a class="nav-link" href="Selling.html">Sell</a></li>
             <li class="nav-item"><a class="nav-link" href="FAQ.html">FAQs</a></li>
+            <li class="nav-item"><a class="nav-link" href="Sign-In.html">Sign In</a></li>
           </ul>
         </div>
       </div>

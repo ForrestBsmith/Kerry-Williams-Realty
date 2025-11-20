@@ -817,6 +817,24 @@ a.btn {
   color: #0c0c0f;
 }
 
+/* Let the navbar dropdown float on desktop instead of squashing inside the nav */
+@media (min-width: 992px) {
+  .site-nav,
+  .site-nav .navbar,
+  .site-nav .container-fluid,
+  .site-nav .navbar-nav {
+    overflow: visible;
+  }
+
+  .site-nav .navbar-nav .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    left: 0;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
 /* Buying page */
 .search-slab .input-group-text {
   border-radius: 0.75rem 0 0 0.75rem;
@@ -1177,5 +1195,34 @@ a.btn-sm {
   .hero {
     padding: 4.5rem 0 3.5rem;
   }
+}
+
+/* --- Additions for agent profile + portal --- */
+.placeholder-card {
+  border: 1px dashed rgba(0, 0, 0, 0.08);
+  background: #f8f9fa;
+  border-radius: 1rem;
+}
+
+.property-card .btn-save-home {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.property-card .btn-save-home.btn-success {
+  color: #fff !important;
+  border-color: transparent;
+}
+
+#mainNav .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+#agent-hero img.object-fit-cover {
+  object-fit: cover;
+}
+
+#message-history .border {
+  border-color: rgba(0, 0, 0, 0.08) !important;
 }
 

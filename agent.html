@@ -1,445 +1,183 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agent Profile - 44 Realty Group</title>
-    <link rel="stylesheet" href="style.css">
+  <title>Agent Profile | 44 Realty Group</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
   <script src="layout.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+  <script src="user.js" defer></script>
+  <script src="agent.js" defer></script>
 </head>
 <body>
   <header class="site-nav shadow-sm"></header>
 
-  <main class="container mt-4">
-    <h1 id="agent-name" class="text-center mb-4"></h1>
-    <div id="agent-bio" class=""></div>    <!-- Features get inserted here -->
-
-
-<div class="col-md-12 mt-4 mb-5">      
- <div id="property-map" style="height: 400px;"></div>
-</div>
-
-
-    <div id="property-list" class="row"></div>
-</div>
-<div id="agent-details"></div>
-<!-- Floating Contact Button -->
-<div id="floating-contact">
-  <button id="floating-contact-btn">📞 Contact Agent</button>
-</div>
-
-
-
-<!-- Photos Modal -->
-<div class="modal fade" id="photosModal" tabindex="-1" aria-labelledby="photosModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="photosModalLabel">Home Address</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <main class="bg-light">
+    <section id="agent-hero" class="py-5">
+      <div class="container">
+        <div class="placeholder-card p-4 border rounded-3 bg-white text-center text-muted">Loading agent...</div>
       </div>
-      <div class="modal-body" id="photosModalBody">
-        <!-- Carousel will be injected here -->
+    </section>
+
+    <section id="agent-metrics" class="pb-4 d-none">
+      <div class="container">
+        <div class="row g-3" id="agent-metrics-cards"></div>
       </div>
-    </div>
-  </div>
-</div>
+    </section>
 
-<!-- Schedule Modal -->
-<div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="scheduleModalLabel">Schedule a Viewing</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="scheduleModalBody">
-        <!-- Form will be injected here -->
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Details Modal -->
-<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="detailsModalLabel">Property Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="detailsModalBody">
-        <!-- Details will be injected here -->
-      </div>
-    </div>
-  </div>
-
-
-
-
-<!-- Contact Panel -->
-<div id="contact-panel">
-  <span id="close-panel">×</span>
-  <h4 id="agent-name"></h4>
-  <p id="agent-phone"></p>
-  <p id="agent-email"></p>
-</div>
-
-<style>
-  /* Force floating contact button to be visible on all devices */
-#floating-contact-btn {
-  display: block !important; 
-  background: linear-gradient(135deg,  rgba(106, 142, 35, 0.954), #075308) !important;
-  color: #fff !important;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
-  position: fixed !important; 
-  cursor: pointer !important;
-  font-size: 16px !important; 
-  border-radius: 25px !important;
-  bottom: calc(20px + env(safe-area-inset-bottom)) !important;
-  right: 20px !important;
-  z-index: 999999 !important;
-  padding: 12px 18px !important; /* restore if overwritten */
-  border: none !important;
-}
-
-
-#floating-contact-btn:hover {
-  background: linear-gradient(135deg, #feb47b, #ff7e5f) !important;
-}
-
-/* Overlay */
-#contact-popup-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000000;
-}
-
-/* Popup box */
-#contact-popup {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  max-width: 520px;
-  width: 100%;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-#contact-popup h2 {
-  margin-top: 0;
-  font-size: 1rem;
-  text-align: center;
-}
-
-/* Contact rows */
-.contact-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f8f8f8;
-  padding: 8px 10px;
-  margin: 8px 0;
-  border-radius: 8px;
-  font-size: 0.85rem !important;
-}
-
-.contact-row span {
-  word-break: break-word;
-}
-
-.copy-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #5d666f;
-  font-size: .75rem !important;
-  display: flex;
-  align-items: center;
-}
-
-.copy-btn:hover {
-  text-decoration: underline;
-}
-
-#close-popup {
-  margin-top: 15px;
-  display: block;
-  width: 100%;
-  background: #56595c;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-#close-popup:hover {
-  background: #0056b3;
-}
-
-/* === Professional Seller & Buyer Cards === */
-#details-section .card {
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 20px;
-  transition: transform 0.2s, box-shadow 0.2s;
-  background-color: #ffffff;
-  width: 100%;
-}
-
-#details-section .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-#details-section h5 {
-  font-size: 1.25rem;
-  color: #343a40;
-  margin-bottom: 15px;
-}
-
-#details-section p {
-  font-size: 0.95rem;
-  color: #6c757d;
-  margin-bottom: 8px;
-}
-
-#details-section p strong {
-  color: #495057;
-}
-
-#details-section .col-md-6 {
-  display: flex;
-  align-items: stretch;
-}
-
-#details-section p {
-  font-size: 0.95rem;
-  color: #6c757d;
-  margin-bottom: 8px;
-  display: flex;
-  justify-content: space-between; /* label left, value right */
-  align-items: center;
-}
-
-#details-section p strong {
-  color: #495057;
-}
-
-
-</style>
-
-
-
-<!-- Chart.js CDN -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const agentId = urlParams.get("agent")?.toLowerCase();
-
-  const contactBtn = document.getElementById("floating-contact-btn");
-
-  // Create overlay dynamically
-  let overlay = document.getElementById("contact-popup-overlay");
-  if (!overlay) {
-    overlay = document.createElement("div");
-    overlay.id = "contact-popup-overlay";
-    document.body.appendChild(overlay);
-  }
-
-  fetch("properties-1.json")
-    .then(res => res.json())
-    .then(data => {
-      const agents = data[0].agents;
-      const properties = data[0].properties;
-      const agent = agents.find(a => a.id.toLowerCase() === agentId);
-      if (!agent) return;
-
-      // ===== Filter sold properties where agent is involved =====
-      const soldProperties = properties.filter(
-        p => p.status === "sold" && p.soldDate &&
-             (p.listingAgentId?.toLowerCase() === agentId || p.buyerAgentId?.toLowerCase() === agentId)
-      );
-
-      // ==== SALES HISTORY SECTION ====
-      const totalSoldValue = soldProperties.reduce((sum, p) => sum + (p.price || 0), 0);
-      const totalSoldCount = soldProperties.length;
-      const avgSoldPrice = totalSoldCount > 0 ? totalSoldValue / totalSoldCount : 0;
-
-      const minPrice = totalSoldCount > 0 ? Math.min(...soldProperties.map(p => p.price)) : 0;
-      const maxPrice = totalSoldCount > 0 ? Math.max(...soldProperties.map(p => p.price)) : 0;
-
-      const historySection = document.createElement("div");
-      historySection.id = "history-section";
-      historySection.className = "card shadow-sm p-3 mb-5";
-      historySection.innerHTML = `
-        <h4 class="fw-bold mb-3">Recent Listing History</h4>
-        <div class="row mb-3">
-          <div class="col text-center">
-            <h5 id="history-total-sales">$${totalSoldValue.toLocaleString()}</h5>
-            <p class="mb-0 text-muted">Total Sales</p>
+    <section id="agent-performance" class="pb-5 d-none">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+          <div>
+            <p class="text-uppercase small text-accent mb-1">Performance</p>
+            <h3 class="fw-bold mb-0">Sales & listing trends</h3>
           </div>
-          <div class="col text-center">
-            <h5 id="history-total-listings">${totalSoldCount}</h5>
-            <p class="mb-0 text-muted">Total Listings</p>
-          </div>
-          <div class="col text-center">
-            <h5 id="history-average-price">$${avgSoldPrice.toLocaleString()}</h5>
-            <p class="mb-0 text-muted">Average Price</p>
-          </div>
+          <button class="btn btn-outline-secondary btn-sm" id="agent-message-btn">
+            <i class="bi bi-chat-dots me-2"></i>Message this agent
+          </button>
         </div>
-        <canvas id="history-chart" height="120"></canvas>
-      `;
-
-      // ==== SELLER & BUYER DETAILS SECTION ====
-      const detailsSection = document.createElement("div");
-      detailsSection.id = "details-section";
-      detailsSection.className = "row mb-5";
-
-      const sellerDeals = soldProperties.filter(p => p.listingAgentId?.toLowerCase() === agentId);
-      const buyerDeals = soldProperties.filter(p => p.buyerAgentId?.toLowerCase() === agentId);
-
-      function getDealStats(deals) {
-        const totalDeals = deals.length;
-        const totalSales = deals.reduce((sum, p) => sum + (p.price || 0), 0);
-        const avgPrice = totalDeals > 0 ? totalSales / totalDeals : 0;
-        const prices = deals.map(p => p.price);
-        const minPrice = prices.length ? Math.min(...prices) : 0;
-        const maxPrice = prices.length ? Math.max(...prices) : 0;
-        return { totalDeals, avgPrice, minPrice, maxPrice };
-      }
-
-      const sellerStats = getDealStats(sellerDeals);
-      const buyerStats = getDealStats(buyerDeals);
-
-      detailsSection.innerHTML = `
-        <div class="col-md-6 mb-3">
-          <div class="card shadow-sm p-3 h-100">
-            <h5 class="fw-bold mb-3">Seller Deals</h5>
-            <p><strong>Total Deals:</strong> ${sellerStats.totalDeals}</p>
-            <p><strong>Average Sale Price:</strong> $${sellerStats.avgPrice.toLocaleString()}</p>
-            <p><strong>Price Range:</strong> $${sellerStats.minPrice.toLocaleString()} - $${sellerStats.maxPrice.toLocaleString()}</p>
-          </div>
-        </div>
-        <div class="col-md-6 mb-3">
-          <div class="card shadow-sm p-3 h-100">
-            <h5 class="fw-bold mb-3">Buyer Deals</h5>
-            <p><strong>Total Deals:</strong> ${buyerStats.totalDeals}</p>
-            <p><strong>Average Purchase Price:</strong> $${buyerStats.avgPrice.toLocaleString()}</p>
-            <p><strong>Price Range:</strong> $${buyerStats.minPrice.toLocaleString()} - $${buyerStats.maxPrice.toLocaleString()}</p>
-          </div>
-        </div>
-      `;
-
-      // Insert sections above map
-      const mapElement = document.getElementById("property-map");
-      if (mapElement) {
-        mapElement.parentNode.insertBefore(detailsSection, mapElement);
-        mapElement.parentNode.insertBefore(historySection, detailsSection);
-      }
-
-      // ==== RENDER SALES HISTORY CHART ====
-      const monthlyData = {};
-      soldProperties.forEach(p => {
-        const date = new Date(p.soldDate);
-        const monthYear = `${date.toLocaleString("default", { month: "short" })} ${date.getFullYear()}`;
-        monthlyData[monthYear] = (monthlyData[monthYear] || 0) + (p.price || 0);
-      });
-
-      const ctx = document.getElementById("history-chart").getContext("2d");
-      if (window.historyChart) window.historyChart.destroy();
-      window.historyChart = new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: Object.keys(monthlyData),
-          datasets: [{
-            label: "Total Sold Value ($)",
-            data: Object.values(monthlyData),
-            borderColor: "#007bff",
-            backgroundColor: "rgba(0, 123, 255, 0.2)",
-            fill: false,
-            tension: 0.3
-          }]
-        },
-        options: { responsive: true, plugins: { legend: { display: true } }, scales: { y: { beginAtZero: true } } }
-      });
-
-      // ==== CONTACT BUTTON POPUP ====
-      if (contactBtn) {
-        contactBtn.addEventListener("click", () => {
-          overlay.innerHTML = `
-            <div id="contact-popup" style="background:#fff; padding:20px; max-width:300px; margin:auto; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.25);">
-              <h2>${agent.name}</h2>
-              <div class="contact-row" style="margin-bottom:10px;">
-                <strong>Email:</strong> <span>${agent.email}</span>
-                <button class="copy-btn" data-copy="${agent.email}" style="margin-left:10px;">📋 Copy</button>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h5 class="mb-0">Monthly sold volume</h5>
+                  <span class="badge bg-light text-dark" id="sold-count-pill"></span>
+                </div>
+                <canvas id="sold-chart" height="180"></canvas>
+                <p class="small text-muted mb-0 mt-2" id="sold-chart-empty"></p>
               </div>
-              <div class="contact-row" style="margin-bottom:10px;">
-                <strong>Phone:</strong> <span>${agent.phone}</span>
-                <button class="copy-btn" data-copy="${agent.phone}" style="margin-left:10px;">📋 Copy</button>
-              </div>
-              <button id="close-popup" style="margin-top:15px;">Close</button>
             </div>
-          `;
-          overlay.style.display = "flex";
-          overlay.style.position = "fixed";
-          overlay.style.top = "0";
-          overlay.style.left = "0";
-          overlay.style.width = "100%";
-          overlay.style.height = "100%";
-          overlay.style.justifyContent = "center";
-          overlay.style.alignItems = "center";
-          overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
-        });
+          </div>
+          <div class="col-md-6">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h5 class="mb-0">Active listing prices</h5>
+                  <span class="badge bg-light text-dark" id="active-count-pill"></span>
+                </div>
+                <canvas id="active-chart" height="180"></canvas>
+                <p class="small text-muted mb-0 mt-2" id="active-chart-empty"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        overlay.addEventListener("click", (e) => {
-          if (e.target.id === "contact-popup-overlay" || e.target.id === "close-popup") {
-            overlay.style.display = "none";
-          }
-        });
+    <section class="pb-5">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+          <div>
+            <p class="text-uppercase small text-accent mb-1">Active listings</p>
+            <h3 class="fw-bold mb-0">Homes represented</h3>
+          </div>
+          <a href="Buying.html" class="btn btn-outline-secondary btn-sm">View all homes</a>
+        </div>
+        <div class="row g-3" id="agent-listings">
+          <div class="col-12">
+            <div class="placeholder-card p-4 border rounded-3 bg-white text-center text-muted">Fetching listings...</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        overlay.addEventListener("click", (e) => {
-          if (e.target.classList.contains("copy-btn")) {
-            const textToCopy = e.target.getAttribute("data-copy");
-            navigator.clipboard.writeText(textToCopy).then(() => {
-              e.target.textContent = "✅ Copied!";
-              setTimeout(() => { e.target.textContent = "📋 Copy"; }, 1500);
-            });
-          }
-        });
-      }
-    })
-    .catch(err => {
-      console.error(err);
-      if (contactBtn) {
-        contactBtn.disabled = true;
-        contactBtn.textContent = "Failed to load agent info";
-      }
-    });
-});
-</script>
-
-
-
+    <section class="pb-5">
+      <div class="container">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+              <div>
+                <p class="text-uppercase small text-accent mb-1">On the map</p>
+                <h4 class="fw-bold mb-0">Where this agent is working</h4>
+              </div>
+              <span class="badge bg-light text-dark" id="map-count-pill">0 listings mapped</span>
+            </div>
+            <div id="agent-map" style="height: 420px;" class="rounded-4 overflow-hidden"></div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
-
 
   <footer class="py-4 bg-white site-footer"></footer>
 
+  <!-- Photos Modal -->
+  <div class="modal fade" id="photosModal" tabindex="-1" aria-labelledby="photosModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="photosModalLabel">Home Address</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="photosModalBody"></div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Schedule Modal -->
+  <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="scheduleModalLabel">Schedule a Viewing</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="scheduleModalBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Details Modal -->
+  <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detailsModalLabel">Property Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="detailsModalBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message Modal -->
+  <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="messageModalLabel">Message this agent</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="agent-message-form" class="d-grid gap-3">
+            <div>
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" name="name" required>
+            </div>
+            <div>
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" name="email" required>
+            </div>
+            <div>
+              <label class="form-label">Message</label>
+              <textarea class="form-control" name="message" rows="3" required placeholder="Tell us how we can help"></textarea>
+            </div>
+            <input type="hidden" name="agentName">
+            <input type="hidden" name="agentId">
+            <div id="message-status" class="small text-muted d-none"></div>
+            <button type="submit" class="btn btn-dark w-100">Send message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="agent.js"></script>
 </body>
 </html>

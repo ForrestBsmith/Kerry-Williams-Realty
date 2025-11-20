@@ -1,6 +1,7 @@
 /* === Global Variables === */
 let map;
 let allProperties = [];
+const session = window.UserSession;
 
 /* === Map Rendering === */
 function renderMapMarkers(properties) {
@@ -96,6 +97,10 @@ function renderProperties(propertyArray) {
   }
 
   propertyArray.forEach((prop, index) => {
+    const saved = session?.isSaved?.(prop.id);
+    const saveIcon = saved ? 'bi-heart-fill text-danger' : 'bi-heart';
+    const saveLabel = saved ? 'Saved' : 'Save';
+
     const card = `
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="card property-card border-0 shadow-sm h-100">
@@ -107,8 +112,8 @@ function renderProperties(propertyArray) {
               style="height: 220px; cursor: pointer; border-top-left-radius: .5rem; border-top-right-radius: .5rem;"
               alt="${prop.address || 'Property'}"
             >
-            <button class="btn position-absolute top-0 end-0 m-2 rounded-circle p-2">
-              <i class="bi bi-heart text-danger fs-5"></i>
+            <button class="btn btn-light border position-absolute top-0 end-0 m-2 rounded-circle p-2 btn-save-home" data-id="${prop.id}">
+              <i class="bi ${saveIcon} fs-5"></i>
             </button>
           </div>
           <div class="card-body">
@@ -145,6 +150,28 @@ function renderProperties(propertyArray) {
 
 /* === Share Link Logic === */
 document.addEventListener('click', (e) => {
+  const saveBtn = e.target.closest('.btn-save-home');
+  if (saveBtn) {
+    const propertyId = saveBtn.getAttribute('data-id');
+    if (!session?.ensureUser?.()) {
+      alert('Sign in to save homes to your portal.');
+      window.location.href = 'Sign-In.html';
+      return;
+    }
+    const result = session.toggleSavedHome(propertyId);
+    const icon = saveBtn.querySelector('i');
+    if (result.saved) {
+      icon.className = 'bi bi-heart-fill fs-5 text-white';
+      saveBtn.classList.add('btn-success');
+      saveBtn.setAttribute('aria-pressed', 'true');
+    } else {
+      icon.className = 'bi bi-heart fs-5';
+      saveBtn.classList.remove('btn-success');
+      saveBtn.removeAttribute('aria-pressed');
+    }
+    return;
+  }
+
   const shareBtn = e.target.closest('.btn-share');
   if (shareBtn) {
     const index = shareBtn.getAttribute('data-index');
@@ -326,7 +353,9 @@ function getURLParam(name) {
   return params.get(name);
 }
 
-fetch('properties-1.json')
+const DATA_URL = 'https://script.google.com/macros/s/AKfycbyjfqkPK9YLpEKHz9aaSa6RJ2Z1D7JTnx0SgI32kVmsdPAhCUXqoQJyPugVTK9X1ucKIw/exec';
+
+fetch(`${DATA_URL}?ts=${Date.now()}`)
   .then(res => {
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     return res.json();
@@ -335,10 +364,15 @@ fetch('properties-1.json')
     allProperties = data[0].properties || [];
 
     const locationParam = getURLParam('location')?.toLowerCase() || '';
+    const typeParam = getURLParam('type') || '';
 
     if (locationParam) {
       const locInput = document.getElementById('location-input');
       if (locInput) locInput.value = locationParam;
+    }
+    if (typeParam) {
+      const typeSelect = document.getElementById('propertyType');
+      if (typeSelect) typeSelect.value = typeParam;
     }
 
     let initialFiltered = allProperties;
@@ -348,6 +382,9 @@ fetch('properties-1.json')
         (p.city && p.city.toLowerCase().includes(locationParam)) ||
         (p.zip && p.zip.includes(locationParam))
       );
+    }
+    if (typeParam) {
+      initialFiltered = initialFiltered.filter(p => (p.type || '').toLowerCase() === typeParam.toLowerCase());
     }
 
     renderProperties(initialFiltered);

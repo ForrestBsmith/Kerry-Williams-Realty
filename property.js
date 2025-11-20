@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const id = params.get('id')?.toLowerCase(); // Get string ID, e.g., "property-1"
   const session = window.UserSession;
 
-  const DATA_URL = 'https://script.google.com/macros/s/AKfycbyjfqkPK9YLpEKHz9aaSa6RJ2Z1D7JTnx0SgI32kVmsdPAhCUXqoQJyPugVTK9X1ucKIw/exec';
+  const DATA_URL = window.DATA_URL || 'https://script.google.com/macros/s/AKfycbyjfqkPK9YLpEKHz9aaSa6RJ2Z1D7JTnx0SgI32kVmsdPAhCUXqoQJyPugVTK9X1ucKIw/exec';
 
   fetch(`${DATA_URL}?ts=${Date.now()}`)
     .then(res => {
@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      const isSaved = session?.isSaved?.(prop.id) || false;
+
       // Set property title
       const title = document.getElementById('property-title');
       if (title) title.textContent = `${prop.address}, ${prop.city}, TX ${prop.zip}`;
@@ -27,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Render property details
       const details = document.getElementById('property-details');
       if (details) {
-        const isSaved = session?.isSaved?.(prop.id);
         const saveIcon = isSaved ? 'bi-heart-fill' : 'bi-heart';
         const saveLabel = isSaved ? 'Saved' : 'Save home';
         details.innerHTML = `

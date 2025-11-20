@@ -353,7 +353,7 @@ function getURLParam(name) {
   return params.get(name);
 }
 
-const DATA_URL = 'https://script.google.com/macros/s/AKfycbyjfqkPK9YLpEKHz9aaSa6RJ2Z1D7JTnx0SgI32kVmsdPAhCUXqoQJyPugVTK9X1ucKIw/exec';
+const DATA_URL = window.DATA_URL || 'https://script.google.com/macros/s/AKfycbyjfqkPK9YLpEKHz9aaSa6RJ2Z1D7JTnx0SgI32kVmsdPAhCUXqoQJyPugVTK9X1ucKIw/exec';
 
 fetch(`${DATA_URL}?ts=${Date.now()}`)
   .then(res => {

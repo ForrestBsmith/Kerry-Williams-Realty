@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const DATA_URL = window.DATA_URL || 'https://script.google.com/macros/s/AKfycbyjfqkPK9YLpEKHz9aaSa6RJ2Z1D7JTnx0SgI32kVmsdPAhCUXqoQJyPugVTK9X1ucKIw/exec';
+  const DATA_CACHE_KEY = 'kw-data-v1';
+  const CACHE_TTL = 5 * 60 * 1000;
 
   const els = {
     propertyGrid: document.getElementById('property-grid'),
@@ -22,23 +24,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let payload = { properties: [], agents: [] };
   let statsAnimated = false;
+  let filtersInitialized = false;
 
   init();
 
   async function init() {
+    const cached = getCachedPayload();
+    if (cached) {
+      applyPayload(cached);
+    }
+
     try {
-      payload = await loadData();
-      hydrateCities(payload.properties);
-      renderHeroFeature(selectFeatured(payload.properties));
-      renderProperties(payload.properties);
-      renderAgents(payload.agents);
-      setupFilters();
-      setupStatsObserver(payload);
-      setupAnimations();
+      const fresh = await loadData();
+      applyPayload(fresh);
     } catch (error) {
       console.error(error);
-      showError('Unable to load listings right now.');
+      if (!cached) showError('Unable to load listings right now.');
     }
+  }
+
+  function applyPayload(data) {
+    payload = data;
+    hydrateCities(payload.properties);
+    renderHeroFeature(selectFeatured(payload.properties));
+    renderProperties(payload.properties);
+    renderAgents(payload.agents);
+    if (!filtersInitialized) {
+      setupFilters();
+      filtersInitialized = true;
+    }
+    setupStatsObserver(payload);
+    setupAnimations();
   }
 
   async function loadData() {
@@ -46,10 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!res.ok) throw new Error('Failed to fetch data');
     const raw = await res.json();
     const data = Array.isArray(raw) ? raw[0] : raw;
-    return {
+    const formatted = {
       properties: data.properties || [],
       agents: data.agents || []
     };
+    setCachedPayload(formatted);
+    return formatted;
   }
 
   function setupFilters() {
@@ -62,7 +80,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     els.form?.addEventListener('submit', (e) => {
       e.preventDefault();
-      filterAndRender();
+      const params = new URLSearchParams();
+      const location = els.location?.value.trim();
+      const city = els.city?.value;
+      const type = els.type?.value;
+      const min = els.min?.value;
+      const max = els.max?.value;
+      const beds = els.beds?.value;
+
+      if (location) params.set('location', location);
+      if (city) params.set('city', city);
+      if (type) params.set('type', type);
+      if (min) params.set('min', min);
+      if (max) params.set('max', max);
+      if (beds) params.set('beds', beds);
+
+      const query = params.toString();
+      window.location.href = `Buying.html${query ? `?${query}` : ''}`;
     });
 
     els.clear?.addEventListener('click', () => {
@@ -74,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function hydrateCities(properties) {
-    if (!els.city) return;
+    if (!els.city || els.city.dataset.hydrated === 'true') return;
     const cities = Array.from(new Set(properties.map(p => p.city))).sort();
     cities.forEach(city => {
       const option = document.createElement('option');
@@ -82,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
       option.textContent = city;
       els.city.appendChild(option);
     });
+    els.city.dataset.hydrated = 'true';
   }
 
   function filterAndRender() {
@@ -388,5 +423,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
-});
 
+  function getCachedPayload() {
+    try {
+      const cached = sessionStorage.getItem(DATA_CACHE_KEY);
+      if (!cached) return null;
+      const parsed = JSON.parse(cached);
+      if (!parsed?.data || !parsed?.timestamp) return null;
+      if (Date.now() - parsed.timestamp > CACHE_TTL) {
+        sessionStorage.removeItem(DATA_CACHE_KEY);
+        return null;
+      }
+      return parsed.data;
+    } catch {
+      return null;
+    }
+  }
+
+  function setCachedPayload(data) {
+    try {
+      sessionStorage.setItem(
+        DATA_CACHE_KEY,
+        JSON.stringify({ timestamp: Date.now(), data })
+      );
+    } catch {
+      // ignore storage errors
+    }
+  }
+});

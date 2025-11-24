@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let soldProperties = [];
   let soldChart;
   let activeChart;
+  let agentLoaded = false;
 
   const session = window.UserSession;
 
@@ -423,49 +424,101 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const DATA_URL = window.DATA_URL || "https://script.google.com/macros/s/AKfycbyjfqkPK9YLpEKHz9aaSa6RJ2Z1D7JTnx0SgI32kVmsdPAhCUXqoQJyPugVTK9X1ucKIw/exec";
+  const DATA_CACHE_KEY = 'kw-data-v1';
+  const CACHE_TTL = 5 * 60 * 1000;
 
-  fetch(`${DATA_URL}?ts=${Date.now()}`)
-    .then((res) => res.json())
-    .then((data) => {
-      const jsonData = Array.isArray(data) ? data[0] : null;
-      const agents = jsonData?.agents || [];
-      const properties = jsonData?.properties || [];
-      const agent = agents.find((a) => String(a.id).toLowerCase() === agentId);
+  const cachedPayload = getCachedPayload();
+  if (cachedPayload) {
+    renderAgentPayload(cachedPayload);
+  }
 
-      if (!agent) {
-        heroSection.innerHTML = `<div class="alert alert-warning">Agent not found. <a href="Agents.html" class="alert-link">Back to all agents</a>.</div>`;
-        return;
-      }
-
-      agentProperties = properties.filter((p) => String(p.agentId).toLowerCase() === agentId);
-      soldProperties = properties.filter(
-        (p) =>
-          p.status === "sold" &&
-          (String(p.listingAgentId || "").toLowerCase() === agentId ||
-            String(p.buyerAgentId || "").toLowerCase() === agentId)
-      );
-
-      const stats = {
-        activeCount: agentProperties.length,
-        soldCount: soldProperties.length,
-        totalSoldValue: soldProperties.reduce((sum, p) => sum + (p.price || 0), 0),
-        averageActivePrice:
-          agentProperties.length > 0
-            ? Math.round(agentProperties.reduce((sum, p) => sum + (p.price || 0), 0) / agentProperties.length)
-            : 0,
-      };
-
-      renderHero(agent, stats);
-      renderMetrics(stats);
-      renderListings(agentProperties);
-      renderMap(agentProperties);
-      renderCharts(soldProperties, agentProperties);
-      bindSaveHandler();
-      bindMessageModal(agent);
-      bindModalActions();
-    })
+  fetchRemoteData()
+    .then(renderAgentPayload)
     .catch((err) => {
       console.error(err);
-      heroSection.innerHTML = `<div class="alert alert-danger">Failed to load agent profile.</div>`;
+      if (!agentLoaded) {
+        heroSection.innerHTML = `<div class="alert alert-danger">Failed to load agent profile.</div>`;
+      }
     });
+
+  function renderAgentPayload(data) {
+    if (!data) return;
+    const agents = data.agents || [];
+    const properties = data.properties || [];
+    const agent = agents.find((a) => String(a.id).toLowerCase() === agentId);
+
+    if (!agent) {
+      heroSection.innerHTML = `<div class="alert alert-warning">Agent not found. <a href="Agents.html" class="alert-link">Back to all agents</a>.</div>`;
+      return;
+    }
+
+    agentProperties = properties.filter((p) => String(p.agentId).toLowerCase() === agentId);
+    soldProperties = properties.filter(
+      (p) =>
+        p.status === "sold" &&
+        (String(p.listingAgentId || "").toLowerCase() === agentId ||
+          String(p.buyerAgentId || "").toLowerCase() === agentId)
+    );
+
+    const stats = {
+      activeCount: agentProperties.length,
+      soldCount: soldProperties.length,
+      totalSoldValue: soldProperties.reduce((sum, p) => sum + (p.price || 0), 0),
+      averageActivePrice:
+        agentProperties.length > 0
+          ? Math.round(agentProperties.reduce((sum, p) => sum + (p.price || 0), 0) / agentProperties.length)
+          : 0,
+    };
+
+    renderHero(agent, stats);
+    renderMetrics(stats);
+    renderListings(agentProperties);
+    renderMap(agentProperties);
+    renderCharts(soldProperties, agentProperties);
+    bindSaveHandler();
+    bindMessageModal(agent);
+    bindModalActions();
+    agentLoaded = true;
+  }
+
+  function fetchRemoteData() {
+    return fetch(`${DATA_URL}?ts=${Date.now()}`)
+      .then((res) => res.json())
+      .then((raw) => {
+        const data = Array.isArray(raw) ? raw[0] : raw;
+        const formatted = {
+          properties: data?.properties || [],
+          agents: data?.agents || []
+        };
+        setCachedPayload(formatted);
+        return formatted;
+      });
+  }
+
+  function getCachedPayload() {
+    try {
+      const cached = sessionStorage.getItem(DATA_CACHE_KEY);
+      if (!cached) return null;
+      const parsed = JSON.parse(cached);
+      if (!parsed?.data || !parsed?.timestamp) return null;
+      if (Date.now() - parsed.timestamp > CACHE_TTL) {
+        sessionStorage.removeItem(DATA_CACHE_KEY);
+        return null;
+      }
+      return parsed.data;
+    } catch {
+      return null;
+    }
+  }
+
+  function setCachedPayload(data) {
+    try {
+      sessionStorage.setItem(
+        DATA_CACHE_KEY,
+        JSON.stringify({ timestamp: Date.now(), data })
+      );
+    } catch {
+      // ignore storage errors
+    }
+  }
 });

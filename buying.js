@@ -341,57 +341,148 @@ document.addEventListener('DOMContentLoaded', () => {
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const location = document.getElementById('location-input').value.trim();
-      window.location.href = `Buying.html?location=${encodeURIComponent(location)}`;
+      const params = new URLSearchParams();
+      const location = document.getElementById('location-input')?.value.trim();
+      if (location) params.set('location', location);
+      window.location.href = `Buying.html${params.toString() ? `?${params}` : ''}`;
     });
   }
 });
 
-/* === Initial Load: Fetch Properties JSON and Render === */
-function getURLParam(name) {
-  const params = new URLSearchParams(window.location.search);
-  return params.get(name);
+const DATA_URL = window.DATA_URL || 'https://script.google.com/macros/s/AKfycbyjfqkPK9YLpEKHz9aaSa6RJ2Z1D7JTnx0SgI32kVmsdPAhCUXqoQJyPugVTK9X1ucKIw/exec';
+const DATA_CACHE_KEY = 'kw-data-v1';
+const CACHE_TTL = 5 * 60 * 1000;
+const QUERY_FILTERS = parseQueryFilters();
+let filtersPrefilled = false;
+
+const cachedPayload = getCachedPayload();
+if (cachedPayload) {
+  renderInitial(cachedPayload);
 }
 
-const DATA_URL = window.DATA_URL || 'https://script.google.com/macros/s/AKfycbyjfqkPK9YLpEKHz9aaSa6RJ2Z1D7JTnx0SgI32kVmsdPAhCUXqoQJyPugVTK9X1ucKIw/exec';
-
-fetch(`${DATA_URL}?ts=${Date.now()}`)
-  .then(res => {
-    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-    return res.json();
-  })
-  .then(data => {
-    allProperties = data[0].properties || [];
-
-    const locationParam = getURLParam('location')?.toLowerCase() || '';
-    const typeParam = getURLParam('type') || '';
-
-    if (locationParam) {
-      const locInput = document.getElementById('location-input');
-      if (locInput) locInput.value = locationParam;
-    }
-    if (typeParam) {
-      const typeSelect = document.getElementById('propertyType');
-      if (typeSelect) typeSelect.value = typeParam;
-    }
-
-    let initialFiltered = allProperties;
-    if (locationParam) {
-      initialFiltered = allProperties.filter(p =>
-        (p.address && p.address.toLowerCase().includes(locationParam)) ||
-        (p.city && p.city.toLowerCase().includes(locationParam)) ||
-        (p.zip && p.zip.includes(locationParam))
-      );
-    }
-    if (typeParam) {
-      initialFiltered = initialFiltered.filter(p => (p.type || '').toLowerCase() === typeParam.toLowerCase());
-    }
-
-    renderProperties(initialFiltered);
-    renderMapMarkers(initialFiltered);
-  })
+fetchRemoteData()
+  .then(renderInitial)
   .catch(err => {
     console.error('Failed to load properties:', err);
-    const container = document.getElementById('property-list');
-    container.innerHTML = `<div class="col-12 text-danger">Failed to load properties: ${err.message}</div>`;
+    if (!cachedPayload) {
+      const container = document.getElementById('property-list');
+      container.innerHTML = `<div class="col-12 text-danger">Failed to load properties: ${err.message}</div>`;
+    }
   });
+
+function renderInitial(data) {
+  if (!data) return;
+  allProperties = data.properties || [];
+  if (!filtersPrefilled) {
+    prefillFiltersFromQuery(QUERY_FILTERS);
+    filtersPrefilled = true;
+  }
+  const initialFiltered = applyQueryFilters(allProperties, QUERY_FILTERS);
+  renderProperties(initialFiltered);
+  renderMapMarkers(initialFiltered);
+}
+
+function parseQueryFilters() {
+  const params = new URLSearchParams(window.location.search);
+  const parseNumber = (key) => {
+    const val = params.get(key);
+    return val !== null && val !== '' && !Number.isNaN(Number(val)) ? Number(val) : null;
+  };
+  return {
+    location: params.get('location') || '',
+    city: params.get('city') || '',
+    type: params.get('type') || '',
+    min: parseNumber('min'),
+    max: parseNumber('max'),
+    beds: parseNumber('beds')
+  };
+}
+
+function prefillFiltersFromQuery(filters) {
+  const locInput = document.getElementById('location-input');
+  if (locInput && (filters.location || filters.city)) {
+    locInput.value = filters.location || filters.city;
+  }
+  const typeSelect = document.getElementById('propertyType');
+  if (typeSelect && filters.type) typeSelect.value = filters.type;
+  const bedsSelect = document.getElementById('bedrooms');
+  if (bedsSelect && filters.beds) bedsSelect.value = String(filters.beds);
+  const maxPriceInput = document.getElementById('maxPrice');
+  if (maxPriceInput && typeof filters.max === 'number') maxPriceInput.value = filters.max;
+}
+
+function applyQueryFilters(properties, filters) {
+  const hasFilters =
+    (filters.location && filters.location.trim()) ||
+    (filters.city && filters.city.trim()) ||
+    (filters.type && filters.type.trim()) ||
+    (typeof filters.min === 'number') ||
+    (typeof filters.max === 'number') ||
+    (typeof filters.beds === 'number');
+
+  if (!hasFilters) return properties;
+
+  const locationValue = (filters.location || '').toLowerCase();
+  const cityValue = (filters.city || '').toLowerCase();
+  const typeValue = (filters.type || '').toLowerCase();
+  const minPrice = typeof filters.min === 'number' ? filters.min : null;
+  const maxPrice = typeof filters.max === 'number' ? filters.max : null;
+  const minBeds = typeof filters.beds === 'number' ? filters.beds : null;
+
+  return properties.filter((prop) => {
+    const price = Number(prop.price || 0);
+    const matchesLocation = locationValue
+      ? [prop.address, prop.city, prop.zip].join(' ').toLowerCase().includes(locationValue)
+      : true;
+    const matchesCity = cityValue ? (prop.city || '').toLowerCase() === cityValue : true;
+    const matchesType = typeValue ? (prop.type || '').toLowerCase() === typeValue : true;
+    const matchesMin = minPrice !== null ? price >= minPrice : true;
+    const matchesMax = maxPrice !== null ? price <= maxPrice : true;
+    const matchesBeds = minBeds !== null ? Number(prop.bedrooms || 0) >= minBeds : true;
+    return matchesLocation && matchesCity && matchesType && matchesMin && matchesMax && matchesBeds;
+  });
+}
+
+function fetchRemoteData() {
+  return fetch(`${DATA_URL}?ts=${Date.now()}`)
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      return res.json();
+    })
+    .then(raw => {
+      const data = Array.isArray(raw) ? raw[0] : raw;
+      const formatted = {
+        properties: data?.properties || [],
+        agents: data?.agents || []
+      };
+      setCachedPayload(formatted);
+      return formatted;
+    });
+}
+
+function getCachedPayload() {
+  try {
+    const cached = sessionStorage.getItem(DATA_CACHE_KEY);
+    if (!cached) return null;
+    const parsed = JSON.parse(cached);
+    if (!parsed?.data || !parsed?.timestamp) return null;
+    if (Date.now() - parsed.timestamp > CACHE_TTL) {
+      sessionStorage.removeItem(DATA_CACHE_KEY);
+      return null;
+    }
+    return parsed.data;
+  } catch {
+    return null;
+  }
+}
+
+function setCachedPayload(data) {
+  try {
+    sessionStorage.setItem(
+      DATA_CACHE_KEY,
+      JSON.stringify({ timestamp: Date.now(), data })
+    );
+  } catch {
+    // ignore storage errors
+  }
+}

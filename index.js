@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>
         <div class="agent-actions">
-          <a class="btn btn-sm btn-dark w-100" href="agent.html?id=${encodeURIComponent(agent.id)}">View profile</a>
+          <a class="btn btn-sm btn-dark w-100" href="agent.html?agent=${encodeURIComponent(agent.id)}">View profile</a>
           <a class="btn btn-sm btn-outline-secondary w-100" href="tel:${agent.phone?.replace(/[^0-9]/g, '') || ''}" aria-label="Call ${agent.name}"><i class="bi bi-telephone me-1"></i> Call</a>
         </div>
       </article>

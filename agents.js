@@ -8,14 +8,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, { threshold: 0.2 });
 
-  fetch("properties-1.json")
+  const DATA_URL = window.DATA_URL || "https://script.google.com/macros/s/AKfycbz1y92nUxaYyW_Zngv-9iMu0eGbyTwXOmIPOQFH_ZhQx0k6RW4H1Vfx9xACMsJuxrMJ/exec";
+
+  const requestUrl = new URL(DATA_URL);
+  requestUrl.searchParams.set('ts', Date.now());
+  requestUrl.searchParams.set('origin', window.location.origin);
+
+  fetch(requestUrl.toString())
     .then((res) => {
-      if (!res.ok) throw new Error("Failed to load JSON");
+      if (!res.ok) throw new Error(`Failed to load JSON: ${res.status}`);
       return res.json();
     })
-    .then((data) => {
+    .then((raw) => {
+      const data = Array.isArray(raw) ? raw[0] : raw;
       const container = document.querySelector("#realtor-list");
-      const agents = data[0].agents;
+      const agents = data?.agents || [];
       container.innerHTML = "";
 
       agents.forEach((agent) => {

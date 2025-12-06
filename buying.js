@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-const DATA_URL = window.DATA_URL || 'https://script.google.com/macros/s/AKfycbyjfqkPK9YLpEKHz9aaSa6RJ2Z1D7JTnx0SgI32kVmsdPAhCUXqoQJyPugVTK9X1ucKIw/exec';
+const DATA_URL = window.DATA_URL || 'https://script.google.com/macros/s/AKfycbz1y92nUxaYyW_Zngv-9iMu0eGbyTwXOmIPOQFH_ZhQx0k6RW4H1Vfx9xACMsJuxrMJ/exec';
 const DATA_CACHE_KEY = 'kw-data-v1';
 const CACHE_TTL = 5 * 60 * 1000;
 const QUERY_FILTERS = parseQueryFilters();
@@ -444,7 +444,10 @@ function applyQueryFilters(properties, filters) {
 }
 
 function fetchRemoteData() {
-  return fetch(`${DATA_URL}?ts=${Date.now()}`)
+  const requestUrl = new URL(DATA_URL);
+  requestUrl.searchParams.set('ts', Date.now());
+  requestUrl.searchParams.set('origin', window.location.origin);
+  return fetch(requestUrl.toString())
     .then(res => {
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       return res.json();

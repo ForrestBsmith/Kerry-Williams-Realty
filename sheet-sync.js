@@ -13,7 +13,6 @@
     try {
       const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         mode: 'cors',
         body: JSON.stringify(payload),
       });

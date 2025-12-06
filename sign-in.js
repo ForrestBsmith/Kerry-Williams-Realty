@@ -1,0 +1,197 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const savedList = document.getElementById('saved-homes');
+  const authStatus = document.getElementById('auth-status');
+  const messageStatus = document.getElementById('message-status');
+  const messageHistory = document.getElementById('message-history');
+  const messageCount = document.getElementById('message-count');
+  const propertySelect = document.getElementById('message-property');
+
+  const waitForSession = (timeoutMs = 5000, interval = 50) => new Promise((resolve, reject) => {
+    const start = Date.now();
+    const check = () => {
+      const session = window.UserSession;
+      if (session?.login) {
+        resolve(session);
+        return;
+      }
+      if (Date.now() - start >= timeoutMs) {
+        reject(new Error('UserSession not available'));
+        return;
+      }
+      setTimeout(check, interval);
+    };
+    check();
+  });
+
+  const init = (session) => {
+    let propertyIndex = {};
+
+    const setAuthStatus = (message, tone = 'success') => {
+      if (!authStatus) return;
+      authStatus.textContent = message;
+      authStatus.classList.remove('d-none', 'text-success', 'text-danger', 'text-warning');
+      authStatus.classList.add(`text-${tone}`);
+    };
+
+    const syncAccountToSheet = (user) => {
+      if (!user) return Promise.resolve({ ok: false, skipped: true });
+      const sender = window.SheetSync?.sendAccount;
+      if (typeof sender !== 'function') {
+        return Promise.resolve({ ok: false, skipped: true });
+      }
+      const payload = {
+        timestamp: new Date().toISOString(),
+        name: user.name || '',
+        email: user.email || '',
+        saved_home_count: user.savedHomeIds?.length || 0,
+        saved_home_ids: (user.savedHomeIds || []).join(', '),
+        message_count: user.messages?.length || 0,
+        source: 'Sign-In.html',
+      };
+      return sender(payload);
+    };
+
+    const renderSavedHomes = () => {
+      const user = session?.getUser?.();
+      savedList.innerHTML = '';
+      if (!user) {
+        savedList.innerHTML = '<div class="text-muted">Sign in to begin saving homes.</div>';
+        return;
+      }
+      const savedIds = user.savedHomeIds || [];
+      if (!savedIds.length) {
+        savedList.innerHTML = '<div class="text-muted">No saved homes yet. Tap the heart on any listing.</div>';
+        return;
+      }
+
+      savedIds.forEach((id) => {
+        const prop = propertyIndex[id];
+        savedList.insertAdjacentHTML('beforeend', `
+          <div class="d-flex justify-content-between align-items-center border rounded-3 p-3">
+            <div>
+              <div class="fw-semibold">${prop?.address || 'Saved home'}</div>
+              <div class="small text-muted">${prop?.city || ''} ${prop ? '$' + (prop.price || 0).toLocaleString() : ''}</div>
+            </div>
+            <div class="d-flex gap-2">
+              <a href="${prop ? 'property.html?id=' + encodeURIComponent(prop.id) : '#'}" class="btn btn-outline-secondary btn-sm">Open</a>
+              <button class="btn btn-outline-danger btn-sm" data-remove="${id}">Remove</button>
+            </div>
+          </div>
+        `);
+      });
+    };
+
+    const renderMessages = () => {
+      const user = session?.getUser?.();
+      messageHistory.innerHTML = '';
+      if (!user || !user.messages?.length) {
+        messageHistory.innerHTML = '<div class="text-muted">No messages yet.</div>';
+        messageCount.textContent = '0 messages';
+        return;
+      }
+      messageCount.textContent = `${user.messages.length} message${user.messages.length === 1 ? '' : 's'}`;
+
+      user.messages.forEach((msg) => {
+        const prop = msg.propertyId ? propertyIndex[msg.propertyId] : null;
+        messageHistory.insertAdjacentHTML('beforeend', `
+          <div class="border rounded-3 p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="fw-semibold">${msg.subject || 'Message'}</div>
+              <div class="small text-muted">${new Date(msg.timestamp).toLocaleString()}</div>
+            </div>
+            <p class="mb-1 small text-muted">${msg.body || ''}</p>
+            ${prop ? `<div class="small"><i class="bi bi-house me-1"></i>${prop.address}</div>` : ''}
+          </div>
+        `);
+      });
+    };
+
+    document.addEventListener('click', (e) => {
+      const removeBtn = e.target.closest('[data-remove]');
+      if (!removeBtn) return;
+      const id = removeBtn.getAttribute('data-remove');
+      if (!session?.ensureUser?.()) return;
+      session.toggleSavedHome(id);
+      renderSavedHomes();
+    });
+
+    document.getElementById('auth-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const form = new FormData(e.target);
+      const name = form.get('name');
+      const email = form.get('email');
+      const updatedUser = session.login({ name, email });
+      setAuthStatus('Profile saved on this device. Syncing to your sheet...');
+      renderSavedHomes();
+      renderMessages();
+      syncAccountToSheet(updatedUser)
+        .then((result) => {
+          if (result.ok) {
+            setAuthStatus('Saved locally + logged to the Google Sheet.');
+          } else if (result.skipped) {
+            setAuthStatus('Profile saved. Add your sheet webhook URL in sheet-config.js to sync it.', 'warning');
+          } else {
+            setAuthStatus('Profile saved locally, but we could not reach the Google Sheet.', 'warning');
+          }
+        })
+        .catch((err) => {
+          console.error('Sheet sync error', err);
+          setAuthStatus('Profile saved locally, but we could not reach the Google Sheet.', 'warning');
+        });
+    });
+
+    document.getElementById('message-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!session?.ensureUser?.()) {
+        alert('Sign in to send and track your messages.');
+        return;
+      }
+      const form = new FormData(e.target);
+      const entry = session.addMessage({
+        subject: form.get('subject'),
+        body: form.get('body'),
+        propertyId: form.get('propertyId') || undefined,
+      });
+      if (entry) {
+        messageStatus.textContent = 'Saved to your portal. We will reach out shortly.';
+        messageStatus.classList.remove('d-none');
+        messageStatus.classList.remove('text-danger');
+        messageStatus.classList.add('text-success');
+        e.target.reset();
+        renderMessages();
+      } else {
+        messageStatus.textContent = 'Could not save your message.';
+        messageStatus.classList.remove('d-none');
+        messageStatus.classList.remove('text-success');
+        messageStatus.classList.add('text-danger');
+      }
+    });
+
+    fetch('properties-1.json')
+      .then((res) => res.json())
+      .then((data) => {
+        const props = (Array.isArray(data) ? data[0]?.properties : []) || [];
+        propertyIndex = props.reduce((acc, p) => ({ ...acc, [p.id]: p }), {});
+        propertySelect.innerHTML = '<option value="">General question</option>';
+        props.forEach((p) => {
+          propertySelect.insertAdjacentHTML('beforeend', `<option value="${p.id}">${p.address} (${p.city})</option>`);
+        });
+        renderSavedHomes();
+        renderMessages();
+      })
+      .catch(() => {
+        savedList.innerHTML = '<div class="text-danger">Unable to load saved homes right now.</div>';
+      });
+  };
+
+  waitForSession()
+    .then((session) => init(session))
+    .catch((err) => {
+      console.error('UserSession is not available. Ensure user.js is loaded before sign-in.js.', err);
+      if (authStatus) {
+        authStatus.textContent = 'We could not load your saved activity. Please refresh.';
+        authStatus.classList.remove('d-none');
+        authStatus.classList.add('text-danger');
+      }
+    });
+});

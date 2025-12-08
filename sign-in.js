@@ -59,6 +59,61 @@ document.addEventListener('DOMContentLoaded', () => {
       return msgs.map((msg) => msg.subject || 'Message');
     };
 
+    const applyUserToAuthForm = (user) => {
+      if (!authForm || !user) return;
+      const setValue = (selector, value) => {
+        const field = authForm.querySelector(selector);
+        if (field) field.value = value || '';
+      };
+      setValue('input[name="email"]', user.email || '');
+      setValue('input[name="phone"]', user.phone || '');
+      setValue('[name="notes"]', user.notes || '');
+      setValue('input[name="interests"]', user.interests || '');
+    };
+
+    const setModalFields = (user = {}) => {
+      if (!modalElement) return;
+      const setValue = (selector, value) => {
+        const field = modalElement.querySelector(selector);
+        if (field) field.value = value || '';
+      };
+      setValue('input[name="modalName"]', user.name || '');
+      setValue('input[name="modalEmail"]', user.email || '');
+      setValue('input[name="modalPhone"]', user.phone || '');
+      setValue('textarea[name="modalNotes"]', user.notes || '');
+      const interestInputs = modalElement.querySelectorAll('input[name="modalInterests"]');
+      const interestSet = new Set((user.interests || '')
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean));
+      interestInputs.forEach((input) => {
+        input.checked = interestSet.has(input.value);
+      });
+    };
+
+    const showCreateAccountModal = (user = null) => {
+      if (!modalElement || typeof bootstrap === 'undefined') return;
+      if (user) {
+        modalElement.dataset.prefill = 'existing';
+        setModalFields(user);
+      } else {
+        modalElement.dataset.prefill = '';
+        setModalFields({});
+      }
+      const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement);
+      modalInstance.show();
+    };
+
+    if (modalElement) {
+      modalElement.addEventListener('show.bs.modal', () => {
+        if (modalElement.dataset.prefill === 'existing') return;
+        setModalFields({});
+      });
+      modalElement.addEventListener('hidden.bs.modal', () => {
+        modalElement.dataset.prefill = '';
+      });
+    }
+
     const updateProfileStats = () => {
       if (!accountProfileSection) return;
       const user = getCurrentUser();
@@ -124,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (phoneInput) phoneInput.value = user.phone || '';
         if (notesInput) notesInput.value = user.notes || '';
         if (interestsInput) interestsInput.value = user.interests || '';
+        applyUserToAuthForm(user);
       } else if (authForm) {
         const nameInput = authForm.querySelector('input[name="name"]');
         const emailInput = authForm.querySelector('input[name="email"]');
@@ -245,29 +301,24 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const form = new FormData(e.target);
       const name = form.get('name');
-      const email = form.get('email');
-      const phone = form.get('phone');
-      const notes = form.get('notes');
-      const interestsValue = form.get('interests');
-      const updatedUser = session.login({ name, email, phone, interests: interestsValue, notes });
-      setAuthStatus('Profile saved on this device. Syncing to your sheet...');
+      const currentUser = session.ensureUser?.();
+      if (!currentUser?.email) {
+        setAuthStatus('Create an account first to add your contact info.', 'warning');
+        showCreateAccountModal();
+        return;
+      }
+      const updatedUser = session.login({
+        name: name?.trim() || currentUser.name || currentUser.email,
+        email: currentUser.email,
+        phone: currentUser.phone,
+        interests: currentUser.interests,
+        notes: currentUser.notes,
+      });
+      applyUserToAuthForm(updatedUser);
+      setAuthStatus('Signed in on this device. Your saved info has been loaded.');
       showProfileView();
       renderSavedHomes();
       renderMessages();
-      syncAccountToSheet(updatedUser)
-        .then((result) => {
-          if (result.ok) {
-            setAuthStatus('Saved locally + logged to the Google Sheet.');
-          } else if (result.skipped) {
-            setAuthStatus('Profile saved. Add your sheet webhook URL in sheet-config.js to sync it.', 'warning');
-          } else {
-            setAuthStatus('Profile saved locally, but we could not reach the Google Sheet.', 'warning');
-          }
-        })
-        .catch((err) => {
-          console.error('Sheet sync error', err);
-          setAuthStatus('Profile saved locally, but we could not reach the Google Sheet.', 'warning');
-        });
     });
 
     messageForm?.addEventListener('submit', (e) => {
@@ -299,8 +350,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     editProfileBtn?.addEventListener('click', () => {
       const currentUser = getCurrentUser();
-      showFormView(currentUser);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (!currentUser) {
+        showCreateAccountModal();
+        return;
+      }
+      showCreateAccountModal(currentUser);
     });
 
     logoutProfileBtn?.addEventListener('click', () => {
@@ -319,20 +373,36 @@ document.addEventListener('DOMContentLoaded', () => {
       const modalPhone = formData.get('modalPhone');
       const modalNotes = formData.get('modalNotes');
       const modalInterests = formData.getAll('modalInterests').join(', ');
-      if (authForm) {
-        const nameInput = authForm.querySelector('input[name="name"]');
-        const emailInput = authForm.querySelector('input[name="email"]');
-        if (nameInput) nameInput.value = modalName || '';
-        if (emailInput) emailInput.value = modalEmail || '';
-        if (phoneInput) phoneInput.value = modalPhone || '';
-        if (notesInput) notesInput.value = modalNotes || '';
-        if (interestsInput) interestsInput.value = modalInterests;
-      }
+      const updatedUser = session.login({
+        name: modalName,
+        email: modalEmail,
+        phone: modalPhone,
+        notes: modalNotes,
+        interests: modalInterests,
+      });
+      applyUserToAuthForm(updatedUser);
       const modalInstance = modalElement && typeof bootstrap !== 'undefined'
         ? bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement)
         : null;
       modalInstance?.hide();
-      authForm?.requestSubmit();
+      setAuthStatus('Profile saved on this device. Syncing to your sheet...');
+      showProfileView();
+      renderSavedHomes();
+      renderMessages();
+      syncAccountToSheet(updatedUser)
+        .then((result) => {
+          if (result.ok) {
+            setAuthStatus('Saved locally + logged to the Google Sheet.');
+          } else if (result.skipped) {
+            setAuthStatus('Profile saved. Add your sheet webhook URL in sheet-config.js to sync it.', 'warning');
+          } else {
+            setAuthStatus('Profile saved locally, but we could not reach the Google Sheet.', 'warning');
+          }
+        })
+        .catch((err) => {
+          console.error('Sheet sync error', err);
+          setAuthStatus('Profile saved locally, but we could not reach the Google Sheet.', 'warning');
+        });
     });
 
     fetch('properties-1.json')

@@ -5,6 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const messageHistory = document.getElementById('message-history');
   const messageCount = document.getElementById('message-count');
   const propertySelect = document.getElementById('message-property');
+  const authForm = document.getElementById('auth-form');
+  const messageForm = document.getElementById('message-form');
+  const accountFormSection = document.getElementById('account-form-section');
+  const accountProfileSection = document.getElementById('account-profile-section');
+  const profileNameEl = document.getElementById('profile-name');
+  const profileEmailEl = document.getElementById('profile-email');
+  const profileInitialsEl = document.getElementById('profile-initials');
+  const profileFavoritePreview = document.getElementById('profile-favorite-preview');
+  const statFavoritesEl = document.getElementById('stat-favorites');
+  const statMessagesEl = document.getElementById('stat-messages');
+  const editProfileBtn = document.getElementById('edit-profile');
+  const logoutProfileBtn = document.getElementById('logout-profile');
 
   const waitForSession = (timeoutMs = 5000, interval = 50) => new Promise((resolve, reject) => {
     const start = Date.now();
@@ -25,6 +37,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const init = (session) => {
     let propertyIndex = {};
+    const getCurrentUser = () => session?.getUser?.();
+
+    const getSavedHomeAddresses = (user) => {
+      const ids = user?.savedHomeIds || [];
+      return ids.map((id) => propertyIndex[id]?.address || `Listing #${id}`).filter(Boolean);
+    };
+
+    const getMessageSubjects = (user) => {
+      const msgs = user?.messages || [];
+      return msgs.map((msg) => msg.subject || 'Message');
+    };
+
+    const updateProfileStats = () => {
+      if (!accountProfileSection) return;
+      const user = getCurrentUser();
+      if (!user) return;
+      if (statFavoritesEl) statFavoritesEl.textContent = user.savedHomeIds?.length || 0;
+      if (statMessagesEl) statMessagesEl.textContent = user.messages?.length || 0;
+      if (profileNameEl) profileNameEl.textContent = user.name || 'New member';
+      if (profileEmailEl) profileEmailEl.textContent = user.email || '';
+      const initials = (user.name || user.email || 'User')
+        .split(' ')
+        .map((part) => part.charAt(0))
+        .join('')
+        .slice(0, 2)
+        .toUpperCase();
+      if (profileInitialsEl) profileInitialsEl.textContent = initials || 'ME';
+      const addresses = getSavedHomeAddresses(user);
+      if (addresses.length) {
+        if (profileFavoritePreview) profileFavoritePreview.textContent = addresses.slice(0, 3).join(', ');
+      } else {
+        if (profileFavoritePreview) profileFavoritePreview.textContent = 'No saved homes yet.';
+      }
+    };
+
+    const showProfileView = () => {
+      if (!accountProfileSection || !accountFormSection) return;
+      if (!getCurrentUser()) {
+        showFormView();
+        return;
+      }
+      accountFormSection.classList.add('d-none');
+      accountProfileSection.classList.remove('d-none');
+      updateProfileStats();
+    };
+
+    const showFormView = (user) => {
+      if (!accountProfileSection || !accountFormSection) return;
+      accountProfileSection.classList.add('d-none');
+      accountFormSection.classList.remove('d-none');
+      if (authForm && user) {
+        const nameInput = authForm.querySelector('input[name="name"]');
+        const emailInput = authForm.querySelector('input[name="email"]');
+        if (nameInput) nameInput.value = user.name || '';
+        if (emailInput) emailInput.value = user.email || '';
+      }
+    };
+
+    if (getCurrentUser()) {
+      showProfileView();
+    } else {
+      showFormView();
+    }
 
     const setAuthStatus = (message, tone = 'success') => {
       if (!authStatus) return;
@@ -39,13 +114,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (typeof sender !== 'function') {
         return Promise.resolve({ ok: false, skipped: true });
       }
+      const savedAddresses = getSavedHomeAddresses(user).join(' | ');
+      const messageSubjects = getMessageSubjects(user).slice(0, 5).join(' | ');
       const payload = {
         timestamp: new Date().toISOString(),
         name: user.name || '',
         email: user.email || '',
         saved_home_count: user.savedHomeIds?.length || 0,
+        saved_home_addresses: savedAddresses,
         saved_home_ids: (user.savedHomeIds || []).join(', '),
         message_count: user.messages?.length || 0,
+        message_subjects: messageSubjects,
         source: 'Sign-In.html',
       };
       return sender(payload);
@@ -61,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const savedIds = user.savedHomeIds || [];
       if (!savedIds.length) {
         savedList.innerHTML = '<div class="text-muted">No saved homes yet. Tap the heart on any listing.</div>';
+        updateProfileStats();
         return;
       }
 
@@ -69,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         savedList.insertAdjacentHTML('beforeend', `
           <div class="d-flex justify-content-between align-items-center border rounded-3 p-3">
             <div>
-              <div class="fw-semibold">${prop?.address || 'Saved home'}</div>
+              <div class="fw-semibold">${prop?.address || `Listing #${id}`}</div>
               <div class="small text-muted">${prop?.city || ''} ${prop ? '$' + (prop.price || 0).toLocaleString() : ''}</div>
             </div>
             <div class="d-flex gap-2">
@@ -79,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         `);
       });
+      updateProfileStats();
     };
 
     const renderMessages = () => {
@@ -87,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!user || !user.messages?.length) {
         messageHistory.innerHTML = '<div class="text-muted">No messages yet.</div>';
         messageCount.textContent = '0 messages';
+        updateProfileStats();
         return;
       }
       messageCount.textContent = `${user.messages.length} message${user.messages.length === 1 ? '' : 's'}`;
@@ -104,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         `);
       });
+      updateProfileStats();
     };
 
     document.addEventListener('click', (e) => {
@@ -115,13 +198,14 @@ document.addEventListener('DOMContentLoaded', () => {
       renderSavedHomes();
     });
 
-    document.getElementById('auth-form').addEventListener('submit', (e) => {
+    authForm?.addEventListener('submit', (e) => {
       e.preventDefault();
       const form = new FormData(e.target);
       const name = form.get('name');
       const email = form.get('email');
       const updatedUser = session.login({ name, email });
       setAuthStatus('Profile saved on this device. Syncing to your sheet...');
+      showProfileView();
       renderSavedHomes();
       renderMessages();
       syncAccountToSheet(updatedUser)
@@ -140,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    document.getElementById('message-form').addEventListener('submit', (e) => {
+    messageForm?.addEventListener('submit', (e) => {
       e.preventDefault();
       if (!session?.ensureUser?.()) {
         alert('Sign in to send and track your messages.');
@@ -167,6 +251,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    editProfileBtn?.addEventListener('click', () => {
+      const currentUser = getCurrentUser();
+      showFormView(currentUser);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    logoutProfileBtn?.addEventListener('click', () => {
+      session.logout();
+      showFormView();
+      renderSavedHomes();
+      renderMessages();
+      setAuthStatus('Signed out on this device.', 'warning');
+    });
+
     fetch('properties-1.json')
       .then((res) => res.json())
       .then((data) => {
@@ -178,6 +276,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         renderSavedHomes();
         renderMessages();
+        if (getCurrentUser()) {
+          updateProfileStats();
+        }
       })
       .catch(() => {
         savedList.innerHTML = '<div class="text-danger">Unable to load saved homes right now.</div>';

@@ -28,19 +28,65 @@
           <div class="card-body">
             <p class="text-uppercase small text-accent mb-1">Account</p>
             <h4 class="fw-bold mb-3">Sign in or create an account</h4>
-            <form id="auth-form" class="d-grid gap-3">
-              <div>
-                <label class="form-label">Name</label>
-                <input type="text" class="form-control" name="name" placeholder="Alex Johnson" required>
+
+            <div id="account-form-section" class="d-grid gap-3">
+              <form id="auth-form" class="d-grid gap-3">
+                <div>
+                  <label class="form-label">Name</label>
+                  <input type="text" class="form-control" name="name" placeholder="Alex Johnson" required>
+                </div>
+                <div>
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" name="email" placeholder="you@example.com" required>
+                </div>
+                <div class="small text-muted">No passwords needed—this stores your activity on this device.</div>
+                <div id="auth-status" class="small text-success d-none"></div>
+                <button type="submit" class="btn btn-dark w-100">Save & Continue</button>
+              </form>
+
+              <div class="bg-light rounded-3 p-3 small">
+                <div class="fw-semibold mb-2">Creating an account lets you:</div>
+                <ul class="list-unstyled mb-0">
+                  <li class="d-flex align-items-center gap-2 mb-1"><i class="bi bi-heart text-danger"></i><span>Save your favorite listings</span></li>
+                  <li class="d-flex align-items-center gap-2 mb-1"><i class="bi bi-chat-square-text text-primary"></i><span>Track conversations with the team</span></li>
+                  <li class="d-flex align-items-center gap-2"><i class="bi bi-phone text-success"></i><span>Pick up where you left off on any device</span></li>
+                </ul>
               </div>
-              <div>
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" placeholder="you@example.com" required>
+            </div>
+
+            <div id="account-profile-section" class="d-none">
+              <div class="d-flex align-items-center gap-3">
+                <div class="rounded-circle bg-dark text-white d-flex align-items-center justify-content-center" style="width:56px;height:56px;">
+                  <span id="profile-initials" class="fw-bold"></span>
+                </div>
+                <div>
+                  <div id="profile-name" class="fw-bold"></div>
+                  <div id="profile-email" class="text-muted small"></div>
+                </div>
               </div>
-              <div class="small text-muted">No passwords needed—this stores your activity on this device.</div>
-              <div id="auth-status" class="small text-success d-none"></div>
-              <button type="submit" class="btn btn-dark w-100">Save & Continue</button>
-            </form>
+              <div class="row g-2 text-center mt-3">
+                <div class="col">
+                  <div class="border rounded-3 py-2">
+                    <div id="stat-favorites" class="fw-bold">0</div>
+                    <div class="small text-muted">Saved homes</div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="border rounded-3 py-2">
+                    <div id="stat-messages" class="fw-bold">0</div>
+                    <div class="small text-muted">Messages</div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-3 border rounded-3 p-3 small bg-light" id="profile-favorite-list">
+                <div class="fw-semibold mb-1">Recent favorites</div>
+                <div class="text-muted" id="profile-favorite-preview">No saved homes yet.</div>
+              </div>
+              <div class="mt-3 d-flex gap-2">
+                <button class="btn btn-outline-secondary btn-sm" id="edit-profile">Update Info</button>
+                <button class="btn btn-outline-danger btn-sm" id="logout-profile">Sign out</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

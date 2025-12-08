@@ -36,12 +36,16 @@
                   <input type="text" class="form-control" name="name" placeholder="Alex Johnson" required>
                 </div>
                 <div>
-                  <label class="form-label">Email</label>
-                  <input type="email" class="form-control" name="email" placeholder="you@example.com" required>
+                  <label class="form-label">Password</label>
+                  <input type="password" class="form-control" name="password" placeholder="••••••••" required>
                 </div>
-                <div class="small text-muted">No passwords needed—this stores your activity on this device.</div>
+                <input type="hidden" name="email" value="">
+                <input type="hidden" name="phone" value="">
+                <input type="hidden" name="notes" value="">
+                <input type="hidden" name="interests" value="">
+                <div class="small text-muted">No passwords needed—your info stays securely on this device.</div>
                 <div id="auth-status" class="small text-success d-none"></div>
-                <button type="submit" class="btn btn-dark w-100">Save & Continue</button>
+                <button type="submit" class="btn btn-dark w-100">sign-in</button>
               </form>
 
               <div class="bg-light rounded-3 p-3 small">
@@ -51,6 +55,9 @@
                   <li class="d-flex align-items-center gap-2 mb-1"><i class="bi bi-chat-square-text text-primary"></i><span>Track conversations with the team</span></li>
                   <li class="d-flex align-items-center gap-2"><i class="bi bi-phone text-success"></i><span>Pick up where you left off on any device</span></li>
                 </ul>
+                <div class="mt-2 text-end">
+                  <button class="btn btn-link btn-sm p-0" type="button" data-bs-toggle="modal" data-bs-target="#createAccountModal">Create an account</button>
+                </div>
               </div>
             </div>
 
@@ -62,6 +69,7 @@
                 <div>
                   <div id="profile-name" class="fw-bold"></div>
                   <div id="profile-email" class="text-muted small"></div>
+                  <div id="profile-phone" class="text-muted small"></div>
                 </div>
               </div>
               <div class="row g-2 text-center mt-3">
@@ -81,6 +89,14 @@
               <div class="mt-3 border rounded-3 p-3 small bg-light" id="profile-favorite-list">
                 <div class="fw-semibold mb-1">Recent favorites</div>
                 <div class="text-muted" id="profile-favorite-preview">No saved homes yet.</div>
+              </div>
+              <div class="mt-3 small" id="profile-interests-row">
+                <div class="fw-semibold mb-1">Interests</div>
+                <div class="text-muted" id="profile-interests">Tell us what you're planning.</div>
+              </div>
+              <div class="mt-3 small" id="profile-notes-row">
+                <div class="fw-semibold mb-1">Preferences</div>
+                <div class="text-muted" id="profile-notes">Share your goals to personalize updates.</div>
               </div>
               <div class="mt-3 d-flex gap-2">
                 <button class="btn btn-outline-secondary btn-sm" id="edit-profile">Update Info</button>
@@ -148,6 +164,76 @@
   </main>
 
   <footer class="py-4 bg-white site-footer"></footer>
+
+  <div class="modal fade" id="createAccountModal" tabindex="-1" aria-labelledby="createAccountLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content bg-light">
+        <form id="modal-create-form">
+          <div class="modal-body">
+            <div class="row g-4">
+              <div class="col-md-5">
+                <h5 class="fw-bold">Create an account</h5>
+                <p class="text-muted small">Save favorites, sync conversations, and pick up your search on any device.</p>
+                <ul class="list-unstyled small mb-0">
+                  <li class="d-flex gap-2 mb-2"><i class="bi bi-check-circle text-success"></i><span>Auto-synced favorites</span></li>
+                  <li class="d-flex gap-2 mb-2"><i class="bi bi-check-circle text-success"></i><span>Conversation tracking</span></li>
+                  <li class="d-flex gap-2"><i class="bi bi-check-circle text-success"></i><span>Personalized alerts</span></li>
+                </ul>
+              </div>
+              <div class="col-md-7">
+                <div class="mb-3">
+                  <label class="form-label">Full name</label>
+                  <input type="text" class="form-control" name="modalName" placeholder="Alex Johnson" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" name="modalEmail" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Phone <span class="text-muted small">(optional)</span></label>
+                  <input type="tel" class="form-control" name="modalPhone" placeholder="(555) 123-4567">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">What are you planning?</label>
+                  <div class="d-flex flex-wrap gap-2">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="Buying" id="modalCheckBuy" name="modalInterests">
+                      <label class="form-check-label" for="modalCheckBuy">Buying</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="Selling" id="modalCheckSell" name="modalInterests">
+                      <label class="form-check-label" for="modalCheckSell">Selling</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="Investment" id="modalCheckInvest" name="modalInterests">
+                      <label class="form-check-label" for="modalCheckInvest">Investment</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="Relocation" id="modalCheckRelocate" name="modalInterests">
+                      <label class="form-check-label" for="modalCheckRelocate">Relocation</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="Renting" id="modalCheckRent" name="modalInterests">
+                      <label class="form-check-label" for="modalCheckRent">Renting</label>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <label class="form-label">Anything else?</label>
+                  <textarea class="form-control" name="modalNotes" rows="2" placeholder="Budget, neighborhoods, timeline..."></textarea>
+                </div>
+                <p class="small text-muted mt-3 mb-0">No passwords required. We simply keep your preferences tied to your device.</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer border-0">
+            <button type="button" class="btn btn-link text-muted" data-bs-dismiss="modal">Maybe later</button>
+            <button type="submit" class="btn btn-dark" id="modal-start-account">Create account</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

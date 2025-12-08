@@ -5,11 +5,14 @@ const CONTACT_HEADERS = [
   'Timestamp',
   'Name',
   'Email',
+  'Phone',
   'Saved Homes Count',
   'Saved Home Addresses',
   'Saved Home IDs',
   'Message Count',
   'Message Subjects',
+  'Interests',
+  'Notes',
   'Source',
 ];
 
@@ -46,11 +49,14 @@ function appendContactRow(body = {}) {
     new Date(),
     body.name || '',
     body.email || '',
+    body.phone || '',
     body.saved_home_count || 0,
     body.saved_home_addresses || '',
     body.saved_home_ids || '',
     body.message_count || 0,
     body.message_subjects || '',
+    body.interests || '',
+    body.notes || '',
     body.source || 'Sign-In.html',
   ]);
 }

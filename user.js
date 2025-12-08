@@ -9,6 +9,9 @@
       return {
         name: parsed.name || "",
         email: parsed.email || "",
+        phone: parsed.phone || "",
+        interests: parsed.interests || "",
+        notes: parsed.notes || "",
         savedHomeIds: parsed.savedHomeIds || [],
         messages: parsed.messages || [],
       };
@@ -28,12 +31,15 @@
     }
   };
 
-  const login = ({ name, email }) => {
+  const login = ({ name, email, phone, interests, notes }) => {
     const user = getUser() || { savedHomeIds: [], messages: [] };
     const nextUser = {
       ...user,
       name: name?.trim() || email,
       email: email?.trim() || "",
+      phone: phone?.trim() || "",
+      interests: interests?.trim() || user.interests || "",
+      notes: notes?.trim() || user.notes || "",
       savedHomeIds: Array.isArray(user.savedHomeIds) ? user.savedHomeIds : [],
       messages: Array.isArray(user.messages) ? user.messages : [],
     };

@@ -6,17 +6,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const messageCount = document.getElementById('message-count');
   const propertySelect = document.getElementById('message-property');
   const authForm = document.getElementById('auth-form');
+  const phoneInput = authForm ? authForm.querySelector('input[name="phone"]') : null;
+  const interestsInput = authForm ? authForm.querySelector('input[name="interests"]') : null;
+  const notesInput = authForm ? authForm.querySelector('[name="notes"]') : null;
   const messageForm = document.getElementById('message-form');
   const accountFormSection = document.getElementById('account-form-section');
   const accountProfileSection = document.getElementById('account-profile-section');
   const profileNameEl = document.getElementById('profile-name');
   const profileEmailEl = document.getElementById('profile-email');
+  const profilePhoneEl = document.getElementById('profile-phone');
   const profileInitialsEl = document.getElementById('profile-initials');
   const profileFavoritePreview = document.getElementById('profile-favorite-preview');
+  const profileInterestsRow = document.getElementById('profile-interests-row');
+  const profileInterestsEl = document.getElementById('profile-interests');
+  const profileNotesRow = document.getElementById('profile-notes-row');
+  const profileNotesEl = document.getElementById('profile-notes');
   const statFavoritesEl = document.getElementById('stat-favorites');
   const statMessagesEl = document.getElementById('stat-messages');
   const editProfileBtn = document.getElementById('edit-profile');
   const logoutProfileBtn = document.getElementById('logout-profile');
+  const modalCreateForm = document.getElementById('modal-create-form');
+  const modalElement = document.getElementById('createAccountModal');
 
   const waitForSession = (timeoutMs = 5000, interval = 50) => new Promise((resolve, reject) => {
     const start = Date.now();
@@ -57,6 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (statMessagesEl) statMessagesEl.textContent = user.messages?.length || 0;
       if (profileNameEl) profileNameEl.textContent = user.name || 'New member';
       if (profileEmailEl) profileEmailEl.textContent = user.email || '';
+      if (profilePhoneEl) profilePhoneEl.textContent = user.phone ? `📞 ${user.phone}` : '';
+      if (profileInterestsRow && profileInterestsEl) {
+        if (user.interests) {
+          profileInterestsRow.classList.remove('d-none');
+          profileInterestsEl.textContent = user.interests;
+        } else {
+          profileInterestsRow.classList.add('d-none');
+          profileInterestsEl.textContent = 'Tell us what you are planning.';
+        }
+      }
       const initials = (user.name || user.email || 'User')
         .split(' ')
         .map((part) => part.charAt(0))
@@ -69,6 +89,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (profileFavoritePreview) profileFavoritePreview.textContent = addresses.slice(0, 3).join(', ');
       } else {
         if (profileFavoritePreview) profileFavoritePreview.textContent = 'No saved homes yet.';
+      }
+      if (profileNotesRow && profileNotesEl) {
+        if (user.notes) {
+          profileNotesRow.classList.remove('d-none');
+          profileNotesEl.textContent = user.notes;
+        } else {
+          profileNotesRow.classList.add('d-none');
+          profileNotesEl.textContent = 'Share your goals to personalize updates.';
+        }
       }
     };
 
@@ -92,6 +121,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const emailInput = authForm.querySelector('input[name="email"]');
         if (nameInput) nameInput.value = user.name || '';
         if (emailInput) emailInput.value = user.email || '';
+        if (phoneInput) phoneInput.value = user.phone || '';
+        if (notesInput) notesInput.value = user.notes || '';
+        if (interestsInput) interestsInput.value = user.interests || '';
+      } else if (authForm) {
+        const nameInput = authForm.querySelector('input[name="name"]');
+        const emailInput = authForm.querySelector('input[name="email"]');
+        if (nameInput) nameInput.value = '';
+        if (emailInput) emailInput.value = '';
+        if (phoneInput) phoneInput.value = '';
+        if (notesInput) notesInput.value = '';
+        if (interestsInput) interestsInput.value = '';
       }
     };
 
@@ -120,6 +160,9 @@ document.addEventListener('DOMContentLoaded', () => {
         timestamp: new Date().toISOString(),
         name: user.name || '',
         email: user.email || '',
+        phone: user.phone || '',
+        interests: user.interests || '',
+        notes: user.notes || '',
         saved_home_count: user.savedHomeIds?.length || 0,
         saved_home_addresses: savedAddresses,
         saved_home_ids: (user.savedHomeIds || []).join(', '),
@@ -203,7 +246,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const form = new FormData(e.target);
       const name = form.get('name');
       const email = form.get('email');
-      const updatedUser = session.login({ name, email });
+      const phone = form.get('phone');
+      const notes = form.get('notes');
+      const interestsValue = form.get('interests');
+      const updatedUser = session.login({ name, email, phone, interests: interestsValue, notes });
       setAuthStatus('Profile saved on this device. Syncing to your sheet...');
       showProfileView();
       renderSavedHomes();
@@ -263,6 +309,30 @@ document.addEventListener('DOMContentLoaded', () => {
       renderSavedHomes();
       renderMessages();
       setAuthStatus('Signed out on this device.', 'warning');
+    });
+
+    modalCreateForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const modalName = formData.get('modalName');
+      const modalEmail = formData.get('modalEmail');
+      const modalPhone = formData.get('modalPhone');
+      const modalNotes = formData.get('modalNotes');
+      const modalInterests = formData.getAll('modalInterests').join(', ');
+      if (authForm) {
+        const nameInput = authForm.querySelector('input[name="name"]');
+        const emailInput = authForm.querySelector('input[name="email"]');
+        if (nameInput) nameInput.value = modalName || '';
+        if (emailInput) emailInput.value = modalEmail || '';
+        if (phoneInput) phoneInput.value = modalPhone || '';
+        if (notesInput) notesInput.value = modalNotes || '';
+        if (interestsInput) interestsInput.value = modalInterests;
+      }
+      const modalInstance = modalElement && typeof bootstrap !== 'undefined'
+        ? bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement)
+        : null;
+      modalInstance?.hide();
+      authForm?.requestSubmit();
     });
 
     fetch('properties-1.json')

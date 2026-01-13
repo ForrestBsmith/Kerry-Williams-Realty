@@ -303,7 +303,7 @@ document.getElementById('property-filter-form').addEventListener('submit', funct
       (p.city && p.city.toLowerCase().includes(location)) ||
       (p.zip && p.zip.includes(location));
 
-    const matchesType = type === '' || (p.type && p.type.toLowerCase() === type);
+    const matchesType = type === '' || (p.type && p.type.toLowerCase().trim() === type);
     const matchesBedrooms = p.bedrooms >= bedrooms;
     const matchesBathrooms = p.bathrooms >= bathrooms;
 
@@ -404,7 +404,7 @@ function prefillFiltersFromQuery(filters) {
     locInput.value = filters.location || filters.city;
   }
   const typeSelect = document.getElementById('propertyType');
-  if (typeSelect && filters.type) typeSelect.value = filters.type;
+  if (typeSelect && filters.type) typeSelect.value = filters.type.trim();
   const bedsSelect = document.getElementById('bedrooms');
   if (bedsSelect && filters.beds) bedsSelect.value = String(filters.beds);
   const maxPriceInput = document.getElementById('maxPrice');
@@ -424,7 +424,7 @@ function applyQueryFilters(properties, filters) {
 
   const locationValue = (filters.location || '').toLowerCase();
   const cityValue = (filters.city || '').toLowerCase();
-  const typeValue = (filters.type || '').toLowerCase();
+  const typeValue = (filters.type || '').toLowerCase().trim();
   const minPrice = typeof filters.min === 'number' ? filters.min : null;
   const maxPrice = typeof filters.max === 'number' ? filters.max : null;
   const minBeds = typeof filters.beds === 'number' ? filters.beds : null;
@@ -435,7 +435,8 @@ function applyQueryFilters(properties, filters) {
       ? [prop.address, prop.city, prop.zip].join(' ').toLowerCase().includes(locationValue)
       : true;
     const matchesCity = cityValue ? (prop.city || '').toLowerCase() === cityValue : true;
-    const matchesType = typeValue ? (prop.type || '').toLowerCase() === typeValue : true;
+    const propType = (prop.type || '').toLowerCase().trim();
+    const matchesType = typeValue ? propType === typeValue : true;
     const matchesMin = minPrice !== null ? price >= minPrice : true;
     const matchesMax = maxPrice !== null ? price <= maxPrice : true;
     const matchesBeds = minBeds !== null ? Number(prop.bedrooms || 0) >= minBeds : true;

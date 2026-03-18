@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   requestUrl.searchParams.set('ts', Date.now());
   requestUrl.searchParams.set('origin', window.location.origin);
 
-  fetch(requestUrl.toString())
+  fetch(requestUrl.toString(), { cache: "no-store" })
     .then((res) => {
       if (!res.ok) throw new Error(`Failed to load JSON: ${res.status}`);
       return res.json();
@@ -31,20 +31,29 @@ document.addEventListener("DOMContentLoaded", () => {
           lic = "",
           phone = "",
           email = "",
-          image = "agents.jpg",
           numberofproperties = "0",
           propertiessold = "0",
           averageprice = "N/A",
           totalvalue = "N/A",
           bio = "No bio available"
         } = agent;
+        const imageUrl = normalizeImageUrl(agent.image) || "agents.jpg";
+        const agentRouteId = String(agent.id || normalizeKey(agent.name) || "").trim();
 
         const card = document.createElement("div");
         card.className = "col-12 col-md-6 col-lg-4 animate-fade";
-        card.dataset.agentId = agent.id;
+        card.dataset.agentId = agentRouteId;
         card.innerHTML = `
           <article class="agent-card-modern h-100 shadow-sm rounded-4 overflow-hidden bg-white">
-            <div class="agent-card-modern__image" style="background-image:url('${image}')"></div>
+            <div class="agent-card-modern__image">
+              <img
+                src="${imageUrl}"
+                onerror="this.onerror=null;this.src='agents.jpg';"
+                alt="${name}"
+                class="agent-card-modern__image-img"
+                loading="lazy"
+              >
+            </div>
             <div class="p-3 p-md-4 d-flex flex-column gap-2 h-100">
               <div class="d-flex align-items-center justify-content-between gap-3">
                 <div>
@@ -65,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span><i class="bi bi-currency-dollar me-2 text-accent"></i>Total value: ${totalvalue}</span>
               </div>
               <div class="mt-auto d-flex gap-2">
-                <a href="agent.html?agent=${encodeURIComponent(agent.id)}" class="btn btn-dark flex-grow-1">View profile</a>
+                <a href="agent.html?agent=${encodeURIComponent(agentRouteId)}" class="btn btn-dark flex-grow-1">View profile</a>
                 <a href="property.html" class="btn btn-outline-secondary btn-sm">Listings</a>
               </div>
             </div>
@@ -84,4 +93,34 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     })
     .catch((err) => console.error("Error loading agents:", err));
+
+  function normalizeImageUrl(value) {
+    const input = String(value || "").trim();
+    if (!input) return "";
+    const fileId = extractDriveFileId(input);
+    return fileId ? `https://drive.google.com/thumbnail?id=${fileId}&sz=w2000` : input;
+  }
+
+  function normalizeKey(value) {
+    return String(value || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+  }
+
+  function extractDriveFileId(input) {
+    if (/^[a-zA-Z0-9_-]{20,}$/.test(input) && !/^https?:\/\//i.test(input)) return input;
+    const patterns = [
+      /\/d\/([a-zA-Z0-9_-]{20,})/,
+      /[?&]id=([a-zA-Z0-9_-]{20,})/,
+      /\/uc\?(?:[^#]*&)?id=([a-zA-Z0-9_-]{20,})/,
+      /\/file\/d\/([a-zA-Z0-9_-]{20,})/,
+    ];
+    for (let i = 0; i < patterns.length; i += 1) {
+      const match = input.match(patterns[i]);
+      if (match?.[1]) return match[1];
+    }
+    return "";
+  }
 });

@@ -43,7 +43,7 @@
                 <input type="hidden" name="phone" value="">
                 <input type="hidden" name="notes" value="">
                 <input type="hidden" name="interests" value="">
-                <div class="small text-muted">No passwords needed—your info stays securely on this device.</div>
+                <div class="small text-muted">Use your saved password to sign in on this device.</div>
                 <div id="auth-status" class="small text-success d-none"></div>
                 <button type="submit" class="btn btn-dark w-100">sign-in</button>
               </form>
@@ -194,6 +194,10 @@
                   <input type="tel" class="form-control" name="modalPhone" placeholder="(555) 123-4567">
                 </div>
                 <div class="mb-3">
+                  <label class="form-label">Password</label>
+                  <input type="password" class="form-control" name="modalPassword" placeholder="Create a password" required minlength="6">
+                </div>
+                <div class="mb-3">
                   <label class="form-label">What are you planning?</label>
                   <div class="d-flex flex-wrap gap-2">
                     <div class="form-check">
@@ -222,7 +226,7 @@
                   <label class="form-label">Anything else?</label>
                   <textarea class="form-control" name="modalNotes" rows="2" placeholder="Budget, neighborhoods, timeline..."></textarea>
                 </div>
-                <p class="small text-muted mt-3 mb-0">No passwords required. We simply keep your preferences tied to your device.</p>
+                <p class="small text-muted mt-3 mb-0">Your password is stored on this device only and is not sent to the contact leads sheet.</p>
               </div>
             </div>
           </div>

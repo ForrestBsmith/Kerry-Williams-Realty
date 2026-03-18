@@ -37,6 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     propertyRendered = true;
+    prop.image = normalizeImageUrl(prop.image) || prop.image;
+    if (Array.isArray(prop.images)) {
+      prop.images = prop.images.map((img) => normalizeImageUrl(img) || img);
+    }
+
     const isSaved = session?.isSaved?.(prop.id) || false;
 
     const title = document.getElementById('property-title');
@@ -119,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ${prop.images.map(img => `
               <div class="col-4">
                 <a href="${img}" data-fancybox="gallery" data-caption="Property photo">
-                  <img src="${img}" class="img-fluid rounded" alt="Property photo">
+                  <img src="${img}" onerror="this.onerror=null;this.src='placeholder.jpg';" class="img-fluid rounded" alt="Property photo">
                 </a>
               </div>
             `).join('')}
@@ -234,5 +239,35 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch {
       // ignore storage errors
     }
+  }
+
+  function normalizeImageUrl(value) {
+    const input = String(value || '').trim();
+    if (!input) return '';
+
+    const id = extractDriveFileId(input);
+    if (id) return `https://drive.google.com/thumbnail?id=${id}&sz=w2000`;
+    return input;
+  }
+
+  function extractDriveFileId(input) {
+    if (!input) return '';
+
+    if (/^[a-zA-Z0-9_-]{20,}$/.test(input) && !/^https?:\/\//i.test(input)) {
+      return input;
+    }
+
+    const patterns = [
+      /\/d\/([a-zA-Z0-9_-]{20,})/,
+      /[?&]id=([a-zA-Z0-9_-]{20,})/,
+      /\/uc\?(?:[^#]*&)?id=([a-zA-Z0-9_-]{20,})/,
+      /\/file\/d\/([a-zA-Z0-9_-]{20,})/,
+    ];
+
+    for (let i = 0; i < patterns.length; i += 1) {
+      const match = input.match(patterns[i]);
+      if (match?.[1]) return match[1];
+    }
+    return '';
   }
 });

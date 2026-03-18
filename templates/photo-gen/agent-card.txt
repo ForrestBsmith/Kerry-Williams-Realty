@@ -1,0 +1,5 @@
+{{badgeLabel}}
+{{agentName}}
+{{subtitle}}
+{{title}}
+{{ctaLabel}}: {{ctaUrl}}

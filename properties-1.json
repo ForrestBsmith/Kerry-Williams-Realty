@@ -2,76 +2,131 @@
   {
     "agents": [
       {
-        "id": "mark-smith",
+        "id": "Mark-Smith",
         "name": "Mark Smith",
         "lic": "LIC #123456",
         "phone": "(123) 456-7890",
         "email": "KW@example.com",
-        "image": "realtor.jpg",
         "profileUrl": "/agent/mark-smith",
-        "numberofproperties": 4,
+        "numberofproperties": 5,
         "propertiessold": 120,
-        "averageprice": "250k",
+        "averageprice": "548k",
         "totalvalue": "5M",
-        "exp": "12 Years",
+        "exp": "5 Years",
+        "languages": [
+          "English"
+        ],
+        "specialties": [
+          "Residential"
+        ],
+        "bio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
+        "sectionbio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion",
+        "image": "https://drive.google.com/thumbnail?id=1bwXiGaP9kpXPtS0TC_iQl0Lam-LpMSkw&sz=w2000",
+        "images": [
+          "https://drive.google.com/thumbnail?id=1bwXiGaP9kpXPtS0TC_iQl0Lam-LpMSkw&sz=w2000"
+        ]
+      },
+      {
+        "id": "Xavier-Woods",
+        "name": "Xavier Woods",
+        "lic": "LIC #123456",
+        "phone": "(123) 456-7890",
+        "email": "KW@example.com",
+        "profileUrl": "/agent/xavier-woods",
+        "numberofproperties": 3,
+        "propertiessold": 120,
+        "averageprice": "2.5M",
+        "totalvalue": "5M",
+        "exp": "15+ Years",
         "languages": [
           "English",
           "Spanish"
         ],
         "specialties": [
-          "Residential",
           "Commercial"
         ],
         "bio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
-        "sectionbio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion"
+        "sectionbio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion",
+        "image": "https://drive.google.com/thumbnail?id=1NasGPO9zCXdMhdJuOSN1_MDB7kofz6uN&sz=w2000",
+        "images": [
+          "https://drive.google.com/thumbnail?id=1NasGPO9zCXdMhdJuOSN1_MDB7kofz6uN&sz=w2000"
+        ]
       },
       {
-        "id": "janet-smith",
-        "name": "Janet Smith",
+        "id": "John-Doe",
+        "name": "John-Doe",
         "lic": "LIC #123456",
         "phone": "(123) 456-7890",
         "email": "KW@example.com",
-        "image": "realtor-2.jpg",
-        "profileUrl": "/agent/janet-smith",
-        "numberofproperties": 1,
-        "propertiessold": 10,
-        "averageprice": "250k",
-        "totalvalue": "2.5M",
-        "exp": "5 Years",
-        "languages": [
-          "English",
-          "Spanish"
-        ],
-        "specialties": [
-          "Residential",
-          "Commercial"
-        ],
-        "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
-        "sectionbio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction"
-      },
-      {
-        "id": "Lance-smith",
-        "name": "Lance Smith",
-        "lic": "LIC #123456",
-        "phone": "(123) 456-7890",
-        "email": "KW@example.com",
-        "image": "realtor-1.jpg",
-        "profileUrl": "/agent/Lance-smith",
-        "numberofproperties": 3,
-        "propertiessold": 75,
-        "averageprice": "250k",
-        "totalvalue": "1M",
+        "profileUrl": "/agent/John-Doe",
+        "numberofproperties": 7,
+        "propertiessold": 120,
+        "averageprice": "585k",
+        "totalvalue": "5M",
         "exp": "3 Years",
         "languages": [
+          "English"
+        ],
+        "specialties": [
+          "Residential"
+        ],
+        "bio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
+        "sectionbio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion",
+        "image": "https://drive.google.com/thumbnail?id=11UmXz4uHSZiM5iaXiAbgxjRsLBvKEQVR&sz=w2000",
+        "images": [
+          "https://drive.google.com/thumbnail?id=11UmXz4uHSZiM5iaXiAbgxjRsLBvKEQVR&sz=w2000"
+        ]
+      },
+      {
+        "id": "Lance-Sheilds",
+        "name": "Lance-Sheilds",
+        "lic": "LIC #123456",
+        "phone": "(123) 456-7890",
+        "email": "KW@example.com",
+        "profileUrl": "/agent/Lance-Sheilds",
+        "numberofproperties": 4,
+        "propertiessold": 120,
+        "averageprice": "447k",
+        "totalvalue": "5M",
+        "exp": "12 Years",
+        "languages": [
+          "English"
+        ],
+        "specialties": [
+          "Residential"
+        ],
+        "bio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
+        "sectionbio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion",
+        "image": "https://drive.google.com/thumbnail?id=1bJpNP26bbngMuRIN7Rk9KPi_LXc2TuWJ&sz=w2000",
+        "images": [
+          "https://drive.google.com/thumbnail?id=1bJpNP26bbngMuRIN7Rk9KPi_LXc2TuWJ&sz=w2000"
+        ]
+      },
+      {
+        "id": "Janet-Yabara",
+        "name": "Janet-Yabara",
+        "lic": "LIC #123456",
+        "phone": "(123) 456-7890",
+        "email": "KW@example.com",
+        "profileUrl": "/agent/janet-Yabara",
+        "numberofproperties": 4,
+        "propertiessold": 120,
+        "averageprice": "688k",
+        "totalvalue": "5M",
+        "exp": "2 Years",
+        "languages": [
           "English",
           "Spanish"
         ],
         "specialties": [
-          "Residential",
-          "Commercial"
+          "Luxury"
         ],
-        "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
-        "sectionbio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction"
+        "bio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
+        "sectionbio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
+        "image": "https://drive.google.com/thumbnail?id=1YWG2lTvH97zvRlcGsQIWblhQLhycucok&sz=w2000",
+        "images": [
+          "https://drive.google.com/thumbnail?id=1YWG2lTvH97zvRlcGsQIWblhQLhycucok&sz=w2000"
+        ]
       },
       {
         "id": "Jake-Browning",
@@ -79,333 +134,1585 @@
         "lic": "LIC #123456",
         "phone": "(123) 456-7890",
         "email": "KW@example.com",
-        "image": "realtor-2.jpg",
         "profileUrl": "/agent/Jake-Browning",
-        "numberofproperties": 1,
-        "propertiessold": 900,
-        "averageprice": "850k",
-        "totalvalue": "850k",
-        "exp": "5 Years",
+        "numberofproperties": 0,
+        "propertiessold": 120,
+        "averageprice": "0",
+        "totalvalue": "5M",
+        "exp": "10 Years",
         "languages": [
-          "English",
-          "Spanish"
+          "English"
         ],
         "specialties": [
-          "Residential",
           "Commercial"
         ],
-        "bio": "With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
-        "sectionbio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction"
+        "bio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
+        "sectionbio": "With a passion for helping clientsWith a passion for helping clients With a passion for helping clients find their dream home, Mark Smith brings years of local market knowledge and dedicated service to every transaction.",
+        "image": "https://drive.google.com/thumbnail?id=1W_xm41iSGDS2aQPysEOVsh6tTIm-J2kt&sz=w2000",
+        "images": [
+          "https://drive.google.com/thumbnail?id=1W_xm41iSGDS2aQPysEOVsh6tTIm-J2kt&sz=w2000"
+        ]
       }
     ],
     "properties": [
       {
-        "id": "janet-smith-property-1",
-        "agentId": "janet-smith",
-        "address": "789 Elm Ave",
-        "city": "Waco",
-        "zip": 76701,
-        "price": 275000,
-        "status": null,
-        "soldDate": null,
-        "listingAgentId": null,
-        "buyerAgentId": null,
-        "bedrooms": 4,
-        "bathrooms": 3,
-        "type": "House",
-        "squareFeet": 2200,
-        "yearBuilt": 2017,
-        "lotSize": 0.3,
-        "garage": "2-car attached",
-        "hoaFees": 130,
-        "schoolDistrict": "Waco ISD",
-        "heating": "Central Electric",
-        "cooling": "Central Air",
-        "flooring": "Hardwood, Tile",
-        "roof": "Composition Shingle",
-        "exterior": "Brick",
-        "interiorFeatures": [
-          "Open Floor Plan",
-          "Granite Countertops",
-          "Fireplace",
-          "Walk-in Closets",
-          "Stainless Steel Appliances"
-        ],
-        "exteriorFeatures": [
-          "Covered Porch",
-          "Fenced Backyard",
-          "Sprinkler System"
-        ],
-        "energyFeatures": [
-          "Double Pane Windows",
-          "Energy Star Appliances",
-          "Ceiling Fans"
-        ],
-        "image": "img/janetpropertyimg-1.webp",
-        "listedDaysAgo": 10,
-        "lat": 31.568854,
-        "lng": -97.121261,
-        "images": [
-          "img/janetpropertyimg-1.webp",
-          "img/janetfloorplan-1.avif",
-          "img/janetlivingroom-1.jpg",
-          "img/janetbackyard-1.jpg"
-        ],
-        "description": "Spacious and stylish 4-bedroom family home with modern updates and a great location. Includes beautiful hardwood floors, a large fenced yard, and smart energy-saving features."
-      },
-      {
-        "id": "mark-smith-property-2",
-        "agentId": "mark-smith",
+        "id": "property-1",
+        "agentId": "Mark-Smith",
         "address": "17736 Windflower Way",
-        "city": "dallas",
+        "city": "Dallas",
         "zip": 75252,
         "price": 495000,
-        "status": "sold",
+        "status": "Sold",
         "soldDate": "2022-05-15T05:00:00.000Z",
-        "listingAgentId": "mark-smith",
-        "buyerAgentId": null,
+        "listingAgentId": "Mark-Smith",
+        "buyerAgentId": "Mark-Smith",
         "bedrooms": 4,
         "bathrooms": 3,
-        "type": "Single Family",
+        "type": "House",
         "squareFeet": 1500,
         "yearBuilt": 2020,
         "lotSize": 0.22,
-        "garage": "2-car attached",
+        "garage": "2 Car",
         "hoaFees": 100,
         "schoolDistrict": "Waco ISD",
-        "heating": "Central Gas",
+        "heating": "Central",
         "cooling": "Central Air",
-        "flooring": "Carpet, Tile",
-        "roof": "Asphalt Shingle",
-        "exterior": "Stucco",
+        "flooring": "Tile",
+        "roof": "Shingle",
+        "exterior": "Brick",
         "interiorFeatures": [
-          "Vaulted Ceilings",
-          "Breakfast Bar",
-          "Walk-in Pantry"
+          "Open Floor Plan;Granite Countertops;Fireplace;Walk-in Closets;Stainless Steel Appliances"
         ],
         "exteriorFeatures": [
-          "Covered Patio",
-          "Garden Area"
+          "Covered Porch;Fenced Backyard;Sprinkler System\""
         ],
         "energyFeatures": [
-          "Solar Panels",
-          "Insulated Windows"
+          "Ceiling Fans"
         ],
-        "image": "img/marksmithproperty-1.jpg",
+        "image": "https://drive.google.com/thumbnail?id=1cf5KyHAycMYT_wE6zRx1bBuvrN1XmMhv&sz=w2000",
         "listedDaysAgo": 3,
         "lat": 32.994675,
         "lng": -96.80193,
         "images": [
           "img/marksmithproperty-1.jpg",
-          "img/marksmithkitchen-1.jpg",
-          "img/marksmithlivingroom-1.jpg",
-          "img/marksmithbackyard-1.jpg"
+          "https://drive.google.com/thumbnail?id=1BaKS1rjC-VhFYoWaSejNafcTA1lxVkI0&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1TtGsrbJ6OGTwyzO6T7sJ_MhZfcn6gOTr&sz=w2000",
+          "https://drive.google.com/thumbnail?id=11cl9dORqyIs9yS2r-6_fJKfamkxiJxvN&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1J3jqHv8zDGG5sz_eZbqtZU0E24V4pXIE&sz=w2000",
+          "https://drive.google.com/thumbnail?id=14daH5EQ0aufcdhC5vosqjWapKTTtgEAP&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1DyvA7K5UjEswF4-WqVHLcthOWl5vGMpL&sz=w2000"
         ],
         "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
       },
       {
-        "id": "mark-smith-property-1",
-        "agentId": "mark-smith",
-        "address": "17736 Windflower Way",
-        "city": "dallas",
+        "id": "property-2",
+        "agentId": "Xavier-Woods",
+        "address": "1009 Dawn Cr",
+        "city": "Dallas",
         "zip": 75252,
-        "price": 195000,
-        "status": null,
-        "soldDate": "2025-05-15T05:00:00.000Z",
-        "listingAgentId": null,
-        "buyerAgentId": "mark-smith",
-        "bedrooms": 3,
-        "bathrooms": 2,
-        "type": "Single Family",
-        "squareFeet": 1500,
-        "yearBuilt": 2015,
-        "lotSize": 0.22,
-        "garage": "2-car attached",
-        "hoaFees": 100,
-        "schoolDistrict": "Waco ISD",
-        "heating": "Central Gas",
-        "cooling": "Central Air",
-        "flooring": "Carpet, Tile",
-        "roof": "Asphalt Shingle",
-        "exterior": "Stucco",
-        "interiorFeatures": [
-          "Vaulted Ceilings",
-          "Breakfast Bar",
-          "Walk-in Pantry"
-        ],
-        "exteriorFeatures": [
-          "Covered Patio",
-          "Garden Area"
-        ],
-        "energyFeatures": [
-          "Solar Panels",
-          "Insulated Windows"
-        ],
-        "image": "img/marksmithproperty-1.jpg",
-        "listedDaysAgo": 3,
-        "lat": 32.994675,
-        "lng": -96.80193,
-        "images": [
-          "img/marksmithproperty-1.jpg",
-          "img/marksmithkitchen-1.jpg",
-          "img/marksmithlivingroom-1.jpg",
-          "img/marksmithbackyard-1.jpg"
-        ],
-        "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
-      },
-      {
-        "id": "Lance-smith-property-1",
-        "agentId": "Lance-smith",
-        "address": "707 S 9th St",
-        "city": "Waco",
-        "zip": 76706,
-        "price": 875000,
-        "status": "for sale",
+        "price": 4950000,
+        "status": "For Sale",
         "soldDate": null,
-        "listingAgentId": null,
+        "listingAgentId": "Xavier-Woods",
         "buyerAgentId": null,
         "bedrooms": 4,
         "bathrooms": 3,
         "type": "House",
-        "squareFeet": 2200,
+        "squareFeet": 1500,
         "yearBuilt": 2020,
-        "lotSize": 0.3,
-        "garage": "2-car attached",
-        "hoaFees": 0,
+        "lotSize": 0.22,
+        "garage": "2 Car",
+        "hoaFees": 100,
         "schoolDistrict": "Waco ISD",
-        "heating": "Central Electric",
+        "heating": "Central",
         "cooling": "Central Air",
-        "flooring": "Hardwood, Tile",
-        "roof": "Composition Shingle",
+        "flooring": "Tile",
+        "roof": "Shingle",
         "exterior": "Brick",
         "interiorFeatures": [
-          "Open Floor Plan",
-          "Granite Countertops",
-          "Fireplace",
-          "Walk-in Closets",
-          "Stainless Steel Appliances"
+          "Open Floor Plan;Granite Countertops;Fireplace;Walk-in Closets;Stainless Steel Appliances"
         ],
         "exteriorFeatures": [
-          "Covered Porch",
-          "Fenced Backyard",
+          "Covered Porch;Fenced Backyard;Sprinkler System\""
+        ],
+        "energyFeatures": [
+          "Ceiling Fans"
+        ],
+        "image": "https://drive.google.com/thumbnail?id=1r2pZ0x9tglOlOlBTHXNtXgwCxF3Ko-nW&sz=w2000",
+        "listedDaysAgo": 3,
+        "lat": 32.994675,
+        "lng": -96.80193,
+        "images": [
+          "img/marksmithproperty-1.jpg",
+          "https://drive.google.com/thumbnail?id=1Rgf558zL4YRb4EI-crnfwF7vZFxSUbtA&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1L5U0GID34FAlJCZWhjX2w35_DLFelthv&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1ANZ3u31TWHtWv7ODXukls8i05_JYu7gF&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1kfNbwRNpzN66bd9HN_o5UatJiWcjdMZv&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1ogQRwVntxL9JNlA6ZZhLUZ7_dBDO8-kT&sz=w2000"
+        ],
+        "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
+      },
+      {
+        "id": "property-3",
+        "agentId": "Lance-Sheilds",
+        "address": "903 Baylor Avenue",
+        "city": "Waco",
+        "zip": 76706,
+        "price": 229000,
+        "status": "For Sale",
+        "soldDate": null,
+        "listingAgentId": "Lance-Sheilds",
+        "buyerAgentId": null,
+        "bedrooms": 4,
+        "bathrooms": 3,
+        "type": "House",
+        "squareFeet": 1500,
+        "yearBuilt": 2026,
+        "lotSize": 0.35,
+        "garage": "2 Car",
+        "hoaFees": 0,
+        "schoolDistrict": "Waco ISD",
+        "heating": "Central",
+        "cooling": "Central Air",
+        "flooring": "Tile",
+        "roof": "Shingle",
+        "exterior": "Brick",
+        "interiorFeatures": [
+          "Open Floor Plan;Granite Countertops;Fireplace;Walk-in Closets;Stainless Steel Appliances"
+        ],
+        "exteriorFeatures": [
+          "Covered Porch;Fenced Backyard;Sprinkler System\""
+        ],
+        "energyFeatures": [
+          "Ceiling Fans"
+        ],
+        "image": "https://drive.google.com/thumbnail?id=1g1AZR_4-OiJTJ0Tj8K7omQxvWhm5LLVi&sz=w2000",
+        "listedDaysAgo": 1,
+        "lat": 32.994675,
+        "lng": -96.80193,
+        "images": [
+          "img/marksmithproperty-1.jpg",
+          "https://drive.google.com/thumbnail?id=1g1AZR_4-OiJTJ0Tj8K7omQxvWhm5LLVi&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1om7lFe25lWAJ2f_td7lI1huMpZi7jTdZ&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1X_y38VJQRMDzT1-a8rvQx08ZYCFSO99E&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1kyRwgw0NKnksNtysbTApqVCRsmXUO86-&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1-m9R0uSC-LN5Yn8pqtzW2_2CqBUVieGl&sz=w2000"
+        ],
+        "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
+      },
+      {
+        "id": "property-4",
+        "agentId": "Mark-Smith",
+        "address": "8430 Willow Dr",
+        "city": "Austin",
+        "zip": 78704,
+        "price": 631427,
+        "status": "For Sale",
+        "soldDate": null,
+        "listingAgentId": "Mark-Smith",
+        "buyerAgentId": null,
+        "bedrooms": 5,
+        "bathrooms": 4,
+        "type": "Single Family",
+        "squareFeet": 4249,
+        "yearBuilt": 2017,
+        "lotSize": 0.71,
+        "garage": "Detached",
+        "hoaFees": 215,
+        "schoolDistrict": "Austin ISD",
+        "heating": "Central",
+        "cooling": "Electric",
+        "flooring": "Mixed",
+        "roof": "Metal",
+        "exterior": "Siding",
+        "interiorFeatures": [
+          "Walk-In Closet",
+          "Fireplace",
+          "Granite Counters",
+          "Island Kitchen"
+        ],
+        "exteriorFeatures": [
+          "Covered Patio",
+          "Fenced Yard",
+          "Storage Shed"
+        ],
+        "energyFeatures": [
+          "Ceiling Fans"
+        ],
+        "image": "https://drive.google.com/thumbnail?id=1_gpMVDh3rWWr9aJRpOQYFP1ADc5DvaWV&sz=w2000",
+        "listedDaysAgo": 81,
+        "lat": 30.225019,
+        "lng": -97.677228,
+        "images": [
+          "https://drive.google.com/thumbnail?id=1JwDaOLq55LFqYL3XpGOfYx-OEgjA6Dys&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1dwk2MPABc59LnbyjaIpCDuaHnFQwE5M7&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1FeZ_rakCCCRg_DFra4f_udTcE1qDXRA5&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1vEa-vpW39COUmrYe5I-QPwbjeFJYOcqY&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1UM80zTSZ05KrbCdGiOFy2P45_ZNUI6z8&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1PsmVCazcfXhQuz4SuJY88MqW5wd1ZUpc&sz=w2000"
+        ],
+        "description": "Single Family in Austin with 5 bedrooms, 4 bathrooms, and approx. 4,249 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-5",
+        "agentId": "Janet-Yabara",
+        "address": "2658 Cedar Ave",
+        "city": "Austin",
+        "zip": 78745,
+        "price": 480960,
+        "status": "For Sale",
+        "soldDate": null,
+        "listingAgentId": "Janet-Yabara",
+        "buyerAgentId": null,
+        "bedrooms": 3,
+        "bathrooms": 5,
+        "type": "Condo",
+        "squareFeet": 1069,
+        "yearBuilt": 1992,
+        "lotSize": 0.76,
+        "garage": "1 Car",
+        "hoaFees": 74,
+        "schoolDistrict": "Austin ISD",
+        "heating": "Gas",
+        "cooling": "Electric",
+        "flooring": "Mixed",
+        "roof": "Tile",
+        "exterior": "Stone",
+        "interiorFeatures": [
+          "Island Kitchen",
+          "Fireplace",
+          "Granite Counters"
+        ],
+        "exteriorFeatures": [
+          "Covered Patio",
           "Sprinkler System"
         ],
         "energyFeatures": [
-          "Double Pane Windows",
-          "Energy Star Appliances",
           "Ceiling Fans"
         ],
-        "image": "img/featurette 2.jpeg",
-        "listedDaysAgo": 10,
-        "lat": 31.548288,
-        "lng": -97.129509,
+        "image": "https://drive.google.com/thumbnail?id=1jVxt3mA0pLK0lkRq5jyE17ln1Hu_39-g&sz=w2000",
+        "listedDaysAgo": 4,
+        "lat": 30.189073,
+        "lng": -97.71941,
         "images": [
-          "img/featurette 2.jpeg",
-          "img/featurette 2.jpeg",
-          "img/featurette 2.jpeg"
+          "https://drive.google.com/thumbnail?id=1jVxt3mA0pLK0lkRq5jyE17ln1Hu_39-g&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1oeMCdjHp4iy8O5rr5j4NxpgTRxvMhYoL&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1LBPYbP1jbr9fjqRZqi_-1XZo7ZBDddoL&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1LdqPT5fvjra0C7hGuNwxYnawTbSb6EgA&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1X088aj2WSpGpKT5NwC5NuCgFzRMKOeOq&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1BEPBuvzip2tWTpgVpeIM0B8Ozv_YDGVX&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1Cxj_v59J1qqXGiGtxGNUpHcpqRyQZeS-&sz=w2000"
         ],
-        "description": "Spacious and stylish 4-bedroom family home with modern updates and a great location. Includes beautiful hardwood floors, a large fenced yard, and smart energy-saving features."
+        "description": "Condo in Austin with 3 bedrooms, 5 bathrooms, and approx. 1,069 sqft. Move-in ready and priced to sell."
       },
       {
-        "id": "janet-smith-property-2",
-        "agentId": "janet-smith",
-        "address": "2612 Fort Ave",
-        "city": "Waco",
-        "zip": 76707,
-        "price": 243000,
-        "status": null,
+        "id": "property-6",
+        "agentId": "John-Doe",
+        "address": "7146 Maple Ave",
+        "city": "Austin",
+        "zip": 78745,
+        "price": 663536,
+        "status": "For Sale",
         "soldDate": null,
-        "listingAgentId": null,
+        "listingAgentId": "John-Doe",
         "buyerAgentId": null,
-        "bedrooms": 3,
-        "bathrooms": 2,
-        "type": "Single Family",
-        "squareFeet": 1290,
-        "yearBuilt": 2015,
-        "lotSize": 0.25,
-        "garage": "2-car attached",
-        "hoaFees": 0,
-        "schoolDistrict": "Waco ISD",
-        "heating": "Central Gas",
-        "cooling": "Central Air",
-        "flooring": "Carpet, Tile",
-        "roof": "Asphalt Shingle",
-        "exterior": "Stucco",
+        "bedrooms": 6,
+        "bathrooms": 3,
+        "type": "House",
+        "squareFeet": 4024,
+        "yearBuilt": 1995,
+        "lotSize": 0.5,
+        "garage": "3 Car",
+        "hoaFees": 219,
+        "schoolDistrict": "Austin ISD",
+        "heating": "Gas",
+        "cooling": "Electric",
+        "flooring": "Vinyl",
+        "roof": "Shingle",
+        "exterior": "Siding",
         "interiorFeatures": [
-          "Vaulted Ceilings",
-          "Breakfast Bar",
-          "Walk-in Pantry"
+          "Island Kitchen",
+          "Hardwood Floors",
+          "Walk-In Closet"
         ],
         "exteriorFeatures": [
-          "Covered Patio",
-          "Garden Area"
+          "Sprinkler System",
+          "Fenced Yard",
+          "Pool"
         ],
         "energyFeatures": [
           "Solar Panels",
-          "Insulated Windows"
+          "Low-E Windows"
         ],
-        "image": "img/janetpropertyimg-2.jpg",
-        "listedDaysAgo": 3,
-        "lat": 31.542699,
-        "lng": -97.155711,
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 65,
+        "lat": 30.266895,
+        "lng": -97.705585,
         "images": [
-          "img/janetfloorplan-1.avif",
-          "img/janetpropertyimg-2.jpg",
-          "img/janetlivingroom-2.jpg",
-          "img/janetbackyard-2.jpg"
+          "placeholder.jpg"
         ],
-        "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
+        "description": "House in Austin with 6 bedrooms, 3 bathrooms, and approx. 4,024 sqft. Move-in ready and priced to sell."
       },
       {
-        "id": "Jake-Browning-property1",
-        "agentId": "Jake-Browning",
-        "address": "2525 Maple Bend",
-        "city": "Waco",
-        "zip": 76707,
-        "price": 243000,
-        "status": null,
+        "id": "property-7",
+        "agentId": "Mark-Smith",
+        "address": "3438 Maple Ave",
+        "city": "Dallas",
+        "zip": 75204,
+        "price": 771670,
+        "status": "For Sale",
         "soldDate": null,
-        "listingAgentId": null,
+        "listingAgentId": "Mark-Smith",
         "buyerAgentId": null,
-        "bedrooms": 3,
-        "bathrooms": 2,
+        "bedrooms": 6,
+        "bathrooms": 4,
         "type": "Single Family",
-        "squareFeet": 1290,
-        "yearBuilt": 2015,
-        "lotSize": 0.25,
-        "garage": "2-car attached",
-        "hoaFees": 0,
-        "schoolDistrict": "Waco ISD",
-        "heating": "Central Gas",
-        "cooling": "Central Air",
-        "flooring": "Carpet, Tile",
-        "roof": "Asphalt Shingle",
-        "exterior": "Stucco",
+        "squareFeet": 2678,
+        "yearBuilt": 1980,
+        "lotSize": 0.57,
+        "garage": "2 Car",
+        "hoaFees": 60,
+        "schoolDistrict": "Dallas ISD",
+        "heating": "Gas",
+        "cooling": "Electric",
+        "flooring": "Laminate",
+        "roof": "Shingle",
+        "exterior": "Stone",
         "interiorFeatures": [
-          "Vaulted Ceilings",
-          "Breakfast Bar",
-          "Walk-in Pantry"
+          "Island Kitchen",
+          "Fireplace",
+          "Walk-In Closet"
         ],
         "exteriorFeatures": [
+          "Storage Shed",
           "Covered Patio",
-          "Garden Area"
+          "Sprinkler System"
+        ],
+        "energyFeatures": [
+          "Ceiling Fans"
+        ],
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 58,
+        "lat": 32.730708,
+        "lng": -96.754448,
+        "images": [
+          "placeholder.jpg"
+        ],
+        "description": "Single Family in Dallas with 6 bedrooms, 4 bathrooms, and approx. 2,678 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-8",
+        "agentId": "Janet-Yabara",
+        "address": "5033 Pecan St",
+        "city": "Austin",
+        "zip": 78701,
+        "price": 609431,
+        "status": "Sold",
+        "soldDate": "2025-11-21T06:00:00.000Z",
+        "listingAgentId": "Janet-Yabara",
+        "buyerAgentId": "Mark-Smith",
+        "bedrooms": 6,
+        "bathrooms": 3.5,
+        "type": "Apartment",
+        "squareFeet": 1877,
+        "yearBuilt": 1997,
+        "lotSize": 0.78,
+        "garage": "2 Car",
+        "hoaFees": 126,
+        "schoolDistrict": "Austin ISD",
+        "heating": "Central",
+        "cooling": "Electric",
+        "flooring": "Tile",
+        "roof": "Metal",
+        "exterior": "Brick",
+        "interiorFeatures": [
+          "Fireplace",
+          "Island Kitchen",
+          "Walk-In Closet"
+        ],
+        "exteriorFeatures": [
+          "Covered Patio"
+        ],
+        "energyFeatures": [
+          "Solar Panels"
+        ],
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 90,
+        "lat": 30.346693,
+        "lng": -97.804622,
+        "images": [
+          "placeholder.jpg"
+        ],
+        "description": "Apartment in Austin with 6 bedrooms, 3.5 bathrooms, and approx. 1,877 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-9",
+        "agentId": "John-Doe",
+        "address": "777 Park Ave",
+        "city": "Houston",
+        "zip": 77002,
+        "price": 285106,
+        "status": "For Sale",
+        "soldDate": null,
+        "listingAgentId": "John-Doe",
+        "buyerAgentId": null,
+        "bedrooms": 6,
+        "bathrooms": 1.5,
+        "type": "Condo",
+        "squareFeet": 1829,
+        "yearBuilt": 1960,
+        "lotSize": 0.65,
+        "garage": "Attached",
+        "hoaFees": 114,
+        "schoolDistrict": "Houston ISD",
+        "heating": "Gas",
+        "cooling": "Central Air",
+        "flooring": "Tile",
+        "roof": "Shingle",
+        "exterior": "Brick",
+        "interiorFeatures": [
+          "Granite Counters",
+          "Walk-In Closet",
+          "Fireplace"
+        ],
+        "exteriorFeatures": [
+          "Storage Shed",
+          "Pool",
+          "Fenced Yard"
+        ],
+        "energyFeatures": [
+          "Low-E Windows"
+        ],
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 45,
+        "lat": 29.731186,
+        "lng": -95.359911,
+        "images": [
+          "placeholder.jpg"
+        ],
+        "description": "Condo in Houston with 6 bedrooms, 1.5 bathrooms, and approx. 1,829 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-10",
+        "agentId": "John-Doe",
+        "address": "6114 Park Way",
+        "city": "Dallas",
+        "zip": 75201,
+        "price": 397144,
+        "status": "For Sale",
+        "soldDate": null,
+        "listingAgentId": "John-Doe",
+        "buyerAgentId": null,
+        "bedrooms": 1,
+        "bathrooms": 3.5,
+        "type": "House",
+        "squareFeet": 1390,
+        "yearBuilt": 2010,
+        "lotSize": 0.86,
+        "garage": "Detached",
+        "hoaFees": 219,
+        "schoolDistrict": "Dallas ISD",
+        "heating": "Electric",
+        "cooling": "Central Air",
+        "flooring": "Tile",
+        "roof": "Tile",
+        "exterior": "Wood",
+        "interiorFeatures": [
+          "Island Kitchen",
+          "Granite Counters",
+          "Fireplace",
+          "Walk-In Closet"
+        ],
+        "exteriorFeatures": [
+          "Storage Shed"
+        ],
+        "energyFeatures": [
+          "Programmable Thermostat"
+        ],
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 24,
+        "lat": 32.85654,
+        "lng": -96.793652,
+        "images": [
+          "placeholder.jpg"
+        ],
+        "description": "House in Dallas with 1 bedrooms, 3.5 bathrooms, and approx. 1,390 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-11",
+        "agentId": "Lance-Sheilds",
+        "address": "387 Cedar Dr",
+        "city": "Houston",
+        "zip": 77007,
+        "price": 439907,
+        "status": "For Sale",
+        "soldDate": null,
+        "listingAgentId": "Lance-Sheilds",
+        "buyerAgentId": null,
+        "bedrooms": 1,
+        "bathrooms": 1.5,
+        "type": "Condo",
+        "squareFeet": 3330,
+        "yearBuilt": 2018,
+        "lotSize": 0.53,
+        "garage": "Attached",
+        "hoaFees": 104,
+        "schoolDistrict": "Houston ISD",
+        "heating": "Electric",
+        "cooling": "Electric",
+        "flooring": "Laminate",
+        "roof": "Shingle",
+        "exterior": "Stucco",
+        "interiorFeatures": [
+          "Granite Counters",
+          "Hardwood Floors",
+          "Walk-In Closet",
+          "Island Kitchen"
+        ],
+        "exteriorFeatures": [
+          "Fenced Yard"
+        ],
+        "energyFeatures": [
+          "Programmable Thermostat"
+        ],
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 83,
+        "lat": 29.740476,
+        "lng": -95.298685,
+        "images": [
+          "placeholder.jpg"
+        ],
+        "description": "Condo in Houston with 1 bedrooms, 1.5 bathrooms, and approx. 3,330 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-12",
+        "agentId": "John-Doe",
+        "address": "469 Briar Ln",
+        "city": "Waco",
+        "zip": 76701,
+        "price": 932895,
+        "status": "For Sale",
+        "soldDate": null,
+        "listingAgentId": "John-Doe",
+        "buyerAgentId": null,
+        "bedrooms": 1,
+        "bathrooms": 4,
+        "type": "Apartment",
+        "squareFeet": 2515,
+        "yearBuilt": 1994,
+        "lotSize": 0.81,
+        "garage": "Attached",
+        "hoaFees": 176,
+        "schoolDistrict": "Midway ISD",
+        "heating": "Electric",
+        "cooling": "Central Air",
+        "flooring": "Mixed",
+        "roof": "Tile",
+        "exterior": "Stone",
+        "interiorFeatures": [
+          "Walk-In Closet",
+          "Granite Counters"
+        ],
+        "exteriorFeatures": [
+          "Fenced Yard",
+          "Covered Patio"
+        ],
+        "energyFeatures": [
+          "Low-E Windows"
+        ],
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 15,
+        "lat": 31.620196,
+        "lng": -97.084792,
+        "images": [
+          "placeholder.jpg"
+        ],
+        "description": "Apartment in Waco with 1 bedrooms, 4 bathrooms, and approx. 2,515 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-13",
+        "agentId": "Lance-Sheilds",
+        "address": "1767 Maple St",
+        "city": "Waco",
+        "zip": 76708,
+        "price": 501211,
+        "status": "Pending",
+        "soldDate": null,
+        "listingAgentId": "Lance-Sheilds",
+        "buyerAgentId": null,
+        "bedrooms": 3,
+        "bathrooms": 1,
+        "type": "House",
+        "squareFeet": 1907,
+        "yearBuilt": 1975,
+        "lotSize": 0.22,
+        "garage": "2 Car",
+        "hoaFees": 225,
+        "schoolDistrict": "Waco ISD",
+        "heating": "Gas",
+        "cooling": "Electric",
+        "flooring": "Vinyl",
+        "roof": "Tile",
+        "exterior": "Siding",
+        "interiorFeatures": [
+          "Fireplace",
+          "Granite Counters"
+        ],
+        "exteriorFeatures": [
+          "Sprinkler System",
+          "Pool",
+          "Covered Patio"
+        ],
+        "energyFeatures": [
+          "Ceiling Fans"
+        ],
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 79,
+        "lat": 31.471574,
+        "lng": -97.068373,
+        "images": [
+          "placeholder.jpg"
+        ],
+        "description": "House in Waco with 3 bedrooms, 1 bathrooms, and approx. 1,907 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-14",
+        "agentId": "Xavier-Woods",
+        "address": "617 Maple Ln",
+        "city": "Waco",
+        "zip": 76701,
+        "price": 643009,
+        "status": "For Sale",
+        "soldDate": null,
+        "listingAgentId": "Xavier-Woods",
+        "buyerAgentId": null,
+        "bedrooms": 0,
+        "bathrooms": 1,
+        "type": "Commercial",
+        "squareFeet": 8838,
+        "yearBuilt": 1970,
+        "lotSize": 2.31,
+        "garage": "None",
+        "hoaFees": 0,
+        "schoolDistrict": "Midway ISD",
+        "heating": "Gas",
+        "cooling": "Central Air",
+        "flooring": "Carpet",
+        "roof": "Metal",
+        "exterior": "Wood",
+        "interiorFeatures": [
+          "Open Floorplan",
+          "Conference Room",
+          "Reception Area"
+        ],
+        "exteriorFeatures": [
+          "Corner Lot",
+          "Large Parking Area"
+        ],
+        "energyFeatures": [
+          "Ceiling Fans",
+          "Solar Panels"
+        ],
+        "image": "https://drive.google.com/thumbnail?id=13FsG3-oGtoP5DHRA2ZExH8DjvNqx8m8Z&sz=w2000",
+        "listedDaysAgo": 37,
+        "lat": 31.543416,
+        "lng": -97.156798,
+        "images": [
+          "https://drive.google.com/thumbnail?id=19smnBID12IySJ3-aQ6GskMvEd_Hzrspy&sz=w2000",
+          "https://drive.google.com/thumbnail?id=19drxfuL_tU-LNU-Wr31MnNvRPJ4JWELc&sz=w2000"
+        ],
+        "description": "Commercial opportunity in Waco featuring approx. 8,838 sqft with flexible layout and strong visibility."
+      },
+      {
+        "id": "property-15",
+        "agentId": "John-Doe",
+        "address": "428 Park Dr",
+        "city": "Dallas",
+        "zip": 75214,
+        "price": 347650,
+        "status": "For Sale",
+        "soldDate": null,
+        "listingAgentId": "John-Doe",
+        "buyerAgentId": null,
+        "bedrooms": 5,
+        "bathrooms": 3,
+        "type": "Condo",
+        "squareFeet": 2443,
+        "yearBuilt": 2000,
+        "lotSize": 0.36,
+        "garage": "1 Car",
+        "hoaFees": 238,
+        "schoolDistrict": "Dallas ISD",
+        "heating": "Gas",
+        "cooling": "Central Air",
+        "flooring": "Vinyl",
+        "roof": "Shingle",
+        "exterior": "Stucco",
+        "interiorFeatures": [
+          "Fireplace",
+          "Island Kitchen"
+        ],
+        "exteriorFeatures": [
+          "Storage Shed",
+          "Covered Patio",
+          "Pool"
+        ],
+        "energyFeatures": [
+          "Ceiling Fans",
+          "Low-E Windows"
+        ],
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 51,
+        "lat": 32.729287,
+        "lng": -96.756487,
+        "images": [
+          "placeholder.jpg"
+        ],
+        "description": "Condo in Dallas with 5 bedrooms, 3 bathrooms, and approx. 2,443 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-16",
+        "agentId": "Mark-Smith",
+        "address": "5512 Oak Way",
+        "city": "Houston",
+        "zip": 77002,
+        "price": 646330,
+        "status": "For Sale",
+        "soldDate": null,
+        "listingAgentId": "Mark-Smith",
+        "buyerAgentId": null,
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "type": "Condo",
+        "squareFeet": 1632,
+        "yearBuilt": 1977,
+        "lotSize": 0.59,
+        "garage": "3 Car",
+        "hoaFees": 78,
+        "schoolDistrict": "Houston ISD",
+        "heating": "Gas",
+        "cooling": "Central Air",
+        "flooring": "Laminate",
+        "roof": "Shingle",
+        "exterior": "Wood",
+        "interiorFeatures": [
+          "Walk-In Closet",
+          "Hardwood Floors"
+        ],
+        "exteriorFeatures": [
+          "Covered Patio"
+        ],
+        "energyFeatures": [
+          "Programmable Thermostat"
+        ],
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 89,
+        "lat": 29.797897,
+        "lng": -95.341551,
+        "images": [
+          "placeholder.jpg"
+        ],
+        "description": "Condo in Houston with 4 bedrooms, 4 bathrooms, and approx. 1,632 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-17",
+        "agentId": "Janet-Yabara",
+        "address": "4549 Pecan Ave",
+        "city": "Austin",
+        "zip": 78745,
+        "price": 746153,
+        "status": "Pending",
+        "soldDate": null,
+        "listingAgentId": "Janet-Yabara",
+        "buyerAgentId": null,
+        "bedrooms": 6,
+        "bathrooms": 4.5,
+        "type": "House",
+        "squareFeet": 1393,
+        "yearBuilt": 1950,
+        "lotSize": 0.19,
+        "garage": "2 Car",
+        "hoaFees": 146,
+        "schoolDistrict": "Austin ISD",
+        "heating": "Electric",
+        "cooling": "Central Air",
+        "flooring": "Vinyl",
+        "roof": "Shingle",
+        "exterior": "Wood",
+        "interiorFeatures": [
+          "Hardwood Floors",
+          "Granite Counters"
+        ],
+        "exteriorFeatures": [
+          "Sprinkler System",
+          "Covered Patio",
+          "Storage Shed"
         ],
         "energyFeatures": [
           "Solar Panels",
-          "Insulated Windows"
+          "Ceiling Fans"
         ],
-        "image": "img/janetpropertyimg-2.jpg",
-        "listedDaysAgo": 3,
-        "lat": 31.542699,
-        "lng": -97.155711,
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 49,
+        "lat": 30.345089,
+        "lng": -97.706208,
         "images": [
-          "img/janetfloorplan-1.avif",
-          "img/janetpropertyimg-2.jpg",
-          "img/janetlivingroom-2.jpg",
-          "img/janetbackyard-2.jpg"
+          "placeholder.jpg"
         ],
-        "description": "Charming and energy-efficient 3-bedroom home with solar panels and a garden. Perfect for families looking for comfort and sustainability."
+        "description": "House in Austin with 6 bedrooms, 4.5 bathrooms, and approx. 1,393 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-18",
+        "agentId": "Mark-Smith",
+        "address": "310 Magnolia Way",
+        "city": "Austin",
+        "zip": 78701,
+        "price": 193261,
+        "status": "For Sale",
+        "soldDate": null,
+        "listingAgentId": "Mark-Smith",
+        "buyerAgentId": null,
+        "bedrooms": 5,
+        "bathrooms": 5,
+        "type": "Single Family",
+        "squareFeet": 2435,
+        "yearBuilt": 1977,
+        "lotSize": 0.14,
+        "garage": "1 Car",
+        "hoaFees": 199,
+        "schoolDistrict": "Austin ISD",
+        "heating": "Central",
+        "cooling": "Central Air",
+        "flooring": "Tile",
+        "roof": "Tile",
+        "exterior": "Siding",
+        "interiorFeatures": [
+          "Fireplace",
+          "Hardwood Floors",
+          "Island Kitchen",
+          "Granite Counters"
+        ],
+        "exteriorFeatures": [
+          "Storage Shed"
+        ],
+        "energyFeatures": [
+          "Solar Panels",
+          "Ceiling Fans"
+        ],
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 35,
+        "lat": 30.249189,
+        "lng": -97.739451,
+        "images": [
+          "placeholder.jpg"
+        ],
+        "description": "Single Family in Austin with 5 bedrooms, 5 bathrooms, and approx. 2,435 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-19",
+        "agentId": "John-Doe",
+        "address": "1592 Park St",
+        "city": "Austin",
+        "zip": 78745,
+        "price": 527592,
+        "status": "Sold",
+        "soldDate": "2025-08-14T05:00:00.000Z",
+        "listingAgentId": "John-Doe",
+        "buyerAgentId": "John-Doe",
+        "bedrooms": 4,
+        "bathrooms": 3.5,
+        "type": "Apartment",
+        "squareFeet": 1744,
+        "yearBuilt": 1951,
+        "lotSize": 0.11,
+        "garage": "2 Car",
+        "hoaFees": 17,
+        "schoolDistrict": "Austin ISD",
+        "heating": "Electric",
+        "cooling": "Electric",
+        "flooring": "Tile",
+        "roof": "Metal",
+        "exterior": "Wood",
+        "interiorFeatures": [
+          "Fireplace",
+          "Granite Counters",
+          "Island Kitchen"
+        ],
+        "exteriorFeatures": [
+          "Fenced Yard",
+          "Storage Shed"
+        ],
+        "energyFeatures": [
+          "Programmable Thermostat"
+        ],
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 61,
+        "lat": 30.205587,
+        "lng": -97.794521,
+        "images": [
+          "placeholder.jpg"
+        ],
+        "description": "Apartment in Austin with 4 bedrooms, 3.5 bathrooms, and approx. 1,744 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-20",
+        "agentId": "Janet-Yabara",
+        "address": "3259 Briar Ln",
+        "city": "Austin",
+        "zip": 78745,
+        "price": 913492,
+        "status": "For Sale",
+        "soldDate": null,
+        "listingAgentId": "Janet-Yabara",
+        "buyerAgentId": null,
+        "bedrooms": 1,
+        "bathrooms": 1,
+        "type": "House",
+        "squareFeet": 4148,
+        "yearBuilt": 2015,
+        "lotSize": 0.78,
+        "garage": "2 Car",
+        "hoaFees": 84,
+        "schoolDistrict": "Austin ISD",
+        "heating": "Electric",
+        "cooling": "Central Air",
+        "flooring": "Vinyl",
+        "roof": "Metal",
+        "exterior": "Wood",
+        "interiorFeatures": [
+          "Fireplace",
+          "Granite Counters",
+          "Hardwood Floors",
+          "Walk-In Closet"
+        ],
+        "exteriorFeatures": [
+          "Covered Patio",
+          "Storage Shed"
+        ],
+        "energyFeatures": [
+          "Low-E Windows",
+          "Programmable Thermostat"
+        ],
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 67,
+        "lat": 30.340784,
+        "lng": -97.713417,
+        "images": [
+          "placeholder.jpg"
+        ],
+        "description": "House in Austin with 1 bedrooms, 1 bathrooms, and approx. 4,148 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-21",
+        "agentId": "Lance-Sheilds",
+        "address": "2742 Magnolia Ln",
+        "city": "Dallas",
+        "zip": 75214,
+        "price": 619232,
+        "status": "For Sale",
+        "soldDate": null,
+        "listingAgentId": "Lance-Sheilds",
+        "buyerAgentId": null,
+        "bedrooms": 2,
+        "bathrooms": 4,
+        "type": "Condo",
+        "squareFeet": 1259,
+        "yearBuilt": 2021,
+        "lotSize": 0.7,
+        "garage": "3 Car",
+        "hoaFees": 132,
+        "schoolDistrict": "Dallas ISD",
+        "heating": "Gas",
+        "cooling": "Electric",
+        "flooring": "Mixed",
+        "roof": "Tile",
+        "exterior": "Wood",
+        "interiorFeatures": [
+          "Hardwood Floors",
+          "Granite Counters",
+          "Fireplace",
+          "Island Kitchen"
+        ],
+        "exteriorFeatures": [
+          "Pool",
+          "Sprinkler System",
+          "Storage Shed"
+        ],
+        "energyFeatures": [
+          "Ceiling Fans"
+        ],
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 26,
+        "lat": 32.856213,
+        "lng": -96.858288,
+        "images": [
+          "placeholder.jpg"
+        ],
+        "description": "Condo in Dallas with 2 bedrooms, 4 bathrooms, and approx. 1,259 sqft. Move-in ready and priced to sell."
+      },
+      {
+        "id": "property-22",
+        "agentId": "Xavier-Woods",
+        "address": "5311 Cedar Dr",
+        "city": "Waco",
+        "zip": 76701,
+        "price": 1893430,
+        "status": "Sold",
+        "soldDate": "2025-10-05T05:00:00.000Z",
+        "listingAgentId": "Xavier-Woods",
+        "buyerAgentId": "Mark-Smith",
+        "bedrooms": 0,
+        "bathrooms": 1,
+        "type": "Commercial",
+        "squareFeet": 7661,
+        "yearBuilt": 2004,
+        "lotSize": 0.63,
+        "garage": "None",
+        "hoaFees": 0,
+        "schoolDistrict": "Midway ISD",
+        "heating": "Electric",
+        "cooling": "Central Air",
+        "flooring": "Carpet",
+        "roof": "Metal",
+        "exterior": "Siding",
+        "interiorFeatures": [
+          "Open Floorplan",
+          "Conference Room",
+          "Reception Area"
+        ],
+        "exteriorFeatures": [
+          "Corner Lot",
+          "Large Parking Area"
+        ],
+        "energyFeatures": [
+          "Programmable Thermostat",
+          "Low-E Windows"
+        ],
+        "image": "https://drive.google.com/thumbnail?id=1KsCc-Rv3H0WkDooKIyTfVrl9a-9oCBHn&sz=w2000",
+        "listedDaysAgo": 83,
+        "lat": 31.543251,
+        "lng": -97.218601,
+        "images": [
+          "https://drive.google.com/thumbnail?id=1jLGBOTgYMRFw0pSgSqgAIDKuO_yeiOLn&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1Wf7rxEHD2Yp1NY0KYmXJqxrsDha-7Yhl&sz=w2000",
+          "https://drive.google.com/thumbnail?id=1tGwaF011B3gO_LR0eBvaJqG9mKkMkOuA&sz=w2000"
+        ],
+        "description": "Commercial opportunity in Waco featuring approx. 7,661 sqft with flexible layout and strong visibility."
+      },
+      {
+        "id": "property-23",
+        "agentId": "John-Doe",
+        "address": "4045 Oak Dr",
+        "city": "Austin",
+        "zip": 78701,
+        "price": 944242,
+        "status": "For Sale",
+        "soldDate": null,
+        "listingAgentId": "John-Doe",
+        "buyerAgentId": null,
+        "bedrooms": 1,
+        "bathrooms": 5,
+        "type": "Apartment",
+        "squareFeet": 5050,
+        "yearBuilt": 1969,
+        "lotSize": 0.21,
+        "garage": "3 Car",
+        "hoaFees": 106,
+        "schoolDistrict": "Austin ISD",
+        "heating": "Central",
+        "cooling": "Electric",
+        "flooring": "Laminate",
+        "roof": "Shingle",
+        "exterior": "Stucco",
+        "interiorFeatures": [
+          "Hardwood Floors",
+          "Granite Counters",
+          "Island Kitchen"
+        ],
+        "exteriorFeatures": [
+          "Pool",
+          "Storage Shed"
+        ],
+        "energyFeatures": [
+          "Programmable Thermostat"
+        ],
+        "image": "placeholder.jpg",
+        "listedDaysAgo": 49,
+        "lat": 30.255929,
+        "lng": -97.761649,
+        "images": [
+          "placeholder.jpg"
+        ],
+        "description": "Apartment in Austin with 1 bedrooms, 5 bathrooms, and approx. 5,050 sqft. Move-in ready and priced to sell."
       }
-    ]
+    ],
+    "photoGen": [
+      {
+        "targetType": "property",
+        "targetId": "property-5",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 2410,
+        "driveFileId": "1jVxt3mA0pLK0lkRq5jyE17ln1Hu_39-g",
+        "active": true,
+        "alt": "2410-s-2nd-st-waco-tx-unit-309-20"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-5",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 2410,
+        "driveFileId": "1oeMCdjHp4iy8O5rr5j4NxpgTRxvMhYoL",
+        "active": true,
+        "alt": "2410-s-2nd-st-waco-tx-unit-309-12"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-5",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 2410,
+        "driveFileId": "1LBPYbP1jbr9fjqRZqi_-1XZo7ZBDddoL",
+        "active": true,
+        "alt": "2410-s-2nd-st-waco-tx-unit-309-10"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-5",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 2410,
+        "driveFileId": "1LdqPT5fvjra0C7hGuNwxYnawTbSb6EgA",
+        "active": true,
+        "alt": "2410-s-2nd-st-waco-tx-unit-309-6"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-5",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 2410,
+        "driveFileId": "1X088aj2WSpGpKT5NwC5NuCgFzRMKOeOq",
+        "active": true,
+        "alt": "2410-s-2nd-st-waco-tx-unit-309-4"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-5",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 2410,
+        "driveFileId": "1BEPBuvzip2tWTpgVpeIM0B8Ozv_YDGVX",
+        "active": true,
+        "alt": "2410-s-2nd-st-waco-tx-unit-309-2"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-5",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 2410,
+        "driveFileId": "1Cxj_v59J1qqXGiGtxGNUpHcpqRyQZeS-",
+        "active": true,
+        "alt": "2410-s-2nd-st-waco-tx-unit-309"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-4",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 7,
+        "driveFileId": "1PsmVCazcfXhQuz4SuJY88MqW5wd1ZUpc",
+        "active": true,
+        "alt": "Image-7"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-4",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 6,
+        "driveFileId": "1UM80zTSZ05KrbCdGiOFy2P45_ZNUI6z8",
+        "active": true,
+        "alt": "Image-6"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-4",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 5,
+        "driveFileId": "1vEa-vpW39COUmrYe5I-QPwbjeFJYOcqY",
+        "active": true,
+        "alt": "Image-5"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-4",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 4,
+        "driveFileId": "1FeZ_rakCCCRg_DFra4f_udTcE1qDXRA5",
+        "active": true,
+        "alt": "Image-4"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-4",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 3,
+        "driveFileId": "1dwk2MPABc59LnbyjaIpCDuaHnFQwE5M7",
+        "active": true,
+        "alt": "Image-3"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-4",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 2,
+        "driveFileId": "1JwDaOLq55LFqYL3XpGOfYx-OEgjA6Dys",
+        "active": true,
+        "alt": "Image-2"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-4",
+        "slot": "primary",
+        "templateSelector": "default",
+        "sortOrder": 1,
+        "driveFileId": "1_gpMVDh3rWWr9aJRpOQYFP1ADc5DvaWV",
+        "active": true,
+        "alt": "Image-1"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-14",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 3,
+        "driveFileId": "19drxfuL_tU-LNU-Wr31MnNvRPJ4JWELc",
+        "active": true,
+        "alt": "Image-3"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-14",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 2,
+        "driveFileId": "19smnBID12IySJ3-aQ6GskMvEd_Hzrspy",
+        "active": true,
+        "alt": "Image-2"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-14",
+        "slot": "primary",
+        "templateSelector": "default",
+        "sortOrder": 1,
+        "driveFileId": "13FsG3-oGtoP5DHRA2ZExH8DjvNqx8m8Z",
+        "active": true,
+        "alt": "Image-1"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-22",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 4,
+        "driveFileId": "1tGwaF011B3gO_LR0eBvaJqG9mKkMkOuA",
+        "active": true,
+        "alt": "Image-4"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-22",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 3,
+        "driveFileId": "1Wf7rxEHD2Yp1NY0KYmXJqxrsDha-7Yhl",
+        "active": true,
+        "alt": "Image-3"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-22",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 2,
+        "driveFileId": "1jLGBOTgYMRFw0pSgSqgAIDKuO_yeiOLn",
+        "active": true,
+        "alt": "image-2"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-22",
+        "slot": "primary",
+        "templateSelector": "default",
+        "sortOrder": 1,
+        "driveFileId": "1KsCc-Rv3H0WkDooKIyTfVrl9a-9oCBHn",
+        "active": true,
+        "alt": "image-1"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-3",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 5,
+        "driveFileId": "1-m9R0uSC-LN5Yn8pqtzW2_2CqBUVieGl",
+        "active": true,
+        "alt": "janetfloorplan-5"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-3",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 4,
+        "driveFileId": "1kyRwgw0NKnksNtysbTApqVCRsmXUO86-",
+        "active": true,
+        "alt": "janetlivingroom-4"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-3",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 3,
+        "driveFileId": "1X_y38VJQRMDzT1-a8rvQx08ZYCFSO99E",
+        "active": true,
+        "alt": "janetlivingroom-3"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-3",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 2,
+        "driveFileId": "1om7lFe25lWAJ2f_td7lI1huMpZi7jTdZ",
+        "active": true,
+        "alt": "janetbackyard-2"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-3",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 1,
+        "driveFileId": "1g1AZR_4-OiJTJ0Tj8K7omQxvWhm5LLVi",
+        "active": true,
+        "alt": "janetpropertyimg-1"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-2",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 6,
+        "driveFileId": "1ogQRwVntxL9JNlA6ZZhLUZ7_dBDO8-kT",
+        "active": true,
+        "alt": "Image-6"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-2",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 5,
+        "driveFileId": "1kfNbwRNpzN66bd9HN_o5UatJiWcjdMZv",
+        "active": true,
+        "alt": "Image-5"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-2",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 4,
+        "driveFileId": "1ANZ3u31TWHtWv7ODXukls8i05_JYu7gF",
+        "active": true,
+        "alt": "Image-4"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-2",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 3,
+        "driveFileId": "1L5U0GID34FAlJCZWhjX2w35_DLFelthv",
+        "active": true,
+        "alt": "Image-3"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-2",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 2,
+        "driveFileId": "1Rgf558zL4YRb4EI-crnfwF7vZFxSUbtA",
+        "active": true,
+        "alt": "Image-2"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-2",
+        "slot": "primary",
+        "templateSelector": "default",
+        "sortOrder": 1,
+        "driveFileId": "1r2pZ0x9tglOlOlBTHXNtXgwCxF3Ko-nW",
+        "active": true,
+        "alt": "image-1"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-1",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 7,
+        "driveFileId": "1DyvA7K5UjEswF4-WqVHLcthOWl5vGMpL",
+        "active": true,
+        "alt": "image-7"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-1",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 6,
+        "driveFileId": "14daH5EQ0aufcdhC5vosqjWapKTTtgEAP",
+        "active": true,
+        "alt": "image-6"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-1",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 5,
+        "driveFileId": "1J3jqHv8zDGG5sz_eZbqtZU0E24V4pXIE",
+        "active": true,
+        "alt": "image-5"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-1",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 4,
+        "driveFileId": "11cl9dORqyIs9yS2r-6_fJKfamkxiJxvN",
+        "active": true,
+        "alt": "image-4"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-1",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 3,
+        "driveFileId": "1TtGsrbJ6OGTwyzO6T7sJ_MhZfcn6gOTr",
+        "active": true,
+        "alt": "image-3"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-1",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 2,
+        "driveFileId": "1BaKS1rjC-VhFYoWaSejNafcTA1lxVkI0",
+        "active": true,
+        "alt": "Image-2"
+      },
+      {
+        "targetType": "property",
+        "targetId": "property-1",
+        "slot": "primary",
+        "templateSelector": "default",
+        "sortOrder": 1,
+        "driveFileId": "1cf5KyHAycMYT_wE6zRx1bBuvrN1XmMhv",
+        "active": true,
+        "alt": "Image-1"
+      },
+      {
+        "targetType": "agent",
+        "targetId": "Jake-Browning",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 9999,
+        "driveFileId": "1W_xm41iSGDS2aQPysEOVsh6tTIm-J2kt",
+        "active": true,
+        "alt": "Realtor+Headshot+at+415Headshots"
+      },
+      {
+        "targetType": "agent",
+        "targetId": "Janet-Yabara",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 2,
+        "driveFileId": "1YWG2lTvH97zvRlcGsQIWblhQLhycucok",
+        "active": true,
+        "alt": "realtor-2"
+      },
+      {
+        "targetType": "agent",
+        "targetId": "Lance-Sheilds",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 1,
+        "driveFileId": "1bJpNP26bbngMuRIN7Rk9KPi_LXc2TuWJ",
+        "active": true,
+        "alt": "realtor-1"
+      },
+      {
+        "targetType": "agent",
+        "targetId": "John-Doe",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 9999,
+        "driveFileId": "11UmXz4uHSZiM5iaXiAbgxjRsLBvKEQVR",
+        "active": true,
+        "alt": "atlanta-top-realtors-headshots-photographer"
+      },
+      {
+        "targetType": "agent",
+        "targetId": "Xavier-Woods",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 9999,
+        "driveFileId": "1NasGPO9zCXdMhdJuOSN1_MDB7kofz6uN",
+        "active": true,
+        "alt": "male+real+estate"
+      },
+      {
+        "targetType": "agent",
+        "targetId": "Mark-Smith",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 9999,
+        "driveFileId": "1bwXiGaP9kpXPtS0TC_iQl0Lam-LpMSkw",
+        "active": true,
+        "alt": "realtor"
+      },
+      {
+        "targetType": "agent",
+        "targetId": "Jake-Browning",
+        "slot": "gallery",
+        "templateSelector": "default",
+        "sortOrder": 9999,
+        "driveFileId": "1W_xm41iSGDS2aQPysEOVsh6tTIm-J2kt",
+        "active": true,
+        "alt": "Realtor+Headshot+at+415Headshots"
+      }
+    ],
+    "debug": {
+      "driveRowsFound": 46,
+      "photoRowsTotal": 46,
+      "explicitAgentOverridesApplied": 1,
+      "explicitPropertyOverridesApplied": 0
+    }
   }
 ]

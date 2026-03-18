@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setValue('input[name="modalName"]', user.name || '');
       setValue('input[name="modalEmail"]', user.email || '');
       setValue('input[name="modalPhone"]', user.phone || '');
+      setValue('input[name="modalPassword"]', '');
       setValue('textarea[name="modalNotes"]', user.notes || '');
       const interestInputs = modalElement.querySelectorAll('input[name="modalInterests"]');
       const interestSet = new Set((user.interests || '')
@@ -301,16 +302,26 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const form = new FormData(e.target);
       const name = form.get('name');
+      const password = String(form.get('password') || '').trim();
       const currentUser = session.ensureUser?.();
       if (!currentUser?.email) {
         setAuthStatus('Create an account first to add your contact info.', 'warning');
         showCreateAccountModal();
         return;
       }
+      if (!password) {
+        setAuthStatus('Enter your password to sign in.', 'warning');
+        return;
+      }
+      if (currentUser.password && password !== currentUser.password) {
+        setAuthStatus('Incorrect password. Please try again.', 'danger');
+        return;
+      }
       const updatedUser = session.login({
         name: name?.trim() || currentUser.name || currentUser.email,
         email: currentUser.email,
         phone: currentUser.phone,
+        password: currentUser.password || password,
         interests: currentUser.interests,
         notes: currentUser.notes,
       });
@@ -371,12 +382,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const modalName = formData.get('modalName');
       const modalEmail = formData.get('modalEmail');
       const modalPhone = formData.get('modalPhone');
+      const modalPassword = String(formData.get('modalPassword') || '').trim();
       const modalNotes = formData.get('modalNotes');
       const modalInterests = formData.getAll('modalInterests').join(', ');
+      if (!modalPassword) {
+        setAuthStatus('Password is required to create an account.', 'warning');
+        return;
+      }
       const updatedUser = session.login({
         name: modalName,
         email: modalEmail,
         phone: modalPhone,
+        password: modalPassword,
         notes: modalNotes,
         interests: modalInterests,
       });

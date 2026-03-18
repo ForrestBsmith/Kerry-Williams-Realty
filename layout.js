@@ -82,4 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const footerEl = document.querySelector('footer.site-footer');
   if (footerEl) footerEl.innerHTML = footerTpl;
+
+  if (!document.querySelector('script[src="chatbot.js"]')) {
+    const chatScript = document.createElement('script');
+    chatScript.src = 'chatbot.js';
+    chatScript.defer = true;
+    document.body.appendChild(chatScript);
+  }
 });

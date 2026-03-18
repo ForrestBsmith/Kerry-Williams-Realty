@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     return `<div class="col-12 col-md-6 col-lg-4 animate-fade">
       <article class="property-card h-100 shadow-sm rounded-4 overflow-hidden">
-        <div class="property-image" style="background-image:url('${image || 'agents.jpg'}');">
+        <div class="property-image" style="${backgroundImageStyle(normalizeImageUrl(image), 'placeholder.jpg')}">
           <div class="property-badges">
             <span class="badge text-bg-dark">${status || 'For Sale'}</span>
             <span class="badge text-bg-light">${type || 'Property'}</span>
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const agent = payload.agents.find(a => a.id === property.agentId);
 
     els.heroFeature.innerHTML = `
-      <div class="feature-hero-img rounded-4 mb-3" style="background-image:url('${property.image || 'agents.jpg'}');"></div>
+      <div class="feature-hero-img rounded-4 mb-3" style="${backgroundImageStyle(normalizeImageUrl(property.image), 'placeholder.jpg')}"></div>
       <h4 class="mb-1">${formatCurrency(property.price)}</h4>
       <p class="mb-2 text-muted small">${property.address || ''}, ${property.city || ''} ${property.zip || ''}</p>
       <div class="d-flex gap-2 flex-wrap mb-3">
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="badge text-bg-light"><i class="bi bi-aspect-ratio me-1"></i>${property.squareFeet ? `${property.squareFeet.toLocaleString()} sqft` : '-'}</span>
       </div>
       <div class="d-flex align-items-center gap-3">
-        <img src="${agent?.image || 'agents.jpg'}" class="rounded-circle" width="52" height="52" alt="${agent?.name || 'Agent'}">
+        <img src="${normalizeImageUrl(agent?.image) || 'agents.jpg'}" onerror="this.onerror=null;this.src='agents.jpg';" class="rounded-circle" width="52" height="52" alt="${agent?.name || 'Agent'}">
         <div>
           <p class="mb-0 fw-semibold text-black">${agent?.name || 'Local expert'}</p>
           <p class="mb-0 text-muted small">${agent?.phone || ''}</p>
@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function agentCard(agent) {
     return `<div class="col-12 animate-slide">
       <article class="agent-card h-100 shadow-sm rounded-4 p-3 p-md-4 bg-white">
-        <img src="${agent.image || 'agents.jpg'}" alt="${agent.name}" class="rounded-circle" width="80" height="80">
+        <img src="${normalizeImageUrl(agent.image) || 'agents.jpg'}" onerror="this.onerror=null;this.src='agents.jpg';" alt="${agent.name}" class="rounded-circle" width="100" height="100">
         <div class="agent-meta">
           <h6 class="mb-1">${agent.name}</h6>
           <p class="text-muted small mb-1">${agent.lic || ''}</p>
@@ -368,6 +368,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function toNumber(value) {
     return Number(String(value || '').replace(/[^0-9.]/g, '')) || 0;
+  }
+
+  function normalizeImageUrl(value) {
+    const input = String(value || '').trim();
+    if (!input) return '';
+
+    const id = extractDriveFileId(input);
+    if (id) return `https://drive.google.com/thumbnail?id=${id}&sz=w2000`;
+    return input;
+  }
+
+  function backgroundImageStyle(image, fallback) {
+    const primary = image || fallback;
+    return `background-image:url('${primary}'),url('${fallback}');`;
+  }
+
+  function extractDriveFileId(input) {
+    if (!input) return '';
+
+    if (/^[a-zA-Z0-9_-]{20,}$/.test(input) && !/^https?:\/\//i.test(input)) {
+      return input;
+    }
+
+    const patterns = [
+      /\/d\/([a-zA-Z0-9_-]{20,})/,
+      /[?&]id=([a-zA-Z0-9_-]{20,})/,
+      /\/uc\?(?:[^#]*&)?id=([a-zA-Z0-9_-]{20,})/,
+      /\/file\/d\/([a-zA-Z0-9_-]{20,})/,
+    ];
+
+    for (let i = 0; i < patterns.length; i += 1) {
+      const match = input.match(patterns[i]);
+      if (match?.[1]) return match[1];
+    }
+    return '';
   }
 
   function showError(message) {

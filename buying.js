@@ -107,6 +107,7 @@ function renderProperties(propertyArray) {
           <div class="position-relative">
             <img 
               src="${prop.image || 'placeholder.jpg'}" 
+              onerror="this.onerror=null;this.src='placeholder.jpg';"
               class="card-img-top object-fit-cover property-click" 
               data-index="${index}"
               style="height: 220px; cursor: pointer; border-top-left-radius: .5rem; border-top-right-radius: .5rem;"
@@ -214,7 +215,7 @@ document.addEventListener('click', (e) => {
           ${(prop.images || [prop.image]).map(
             (img, i) => `
               <div class="carousel-item ${i === 0 ? 'active' : ''}">
-                <img src="${img}" class="d-block w-100" alt="Photo ${i + 1}">
+                <img src="${img}" onerror="this.onerror=null;this.src='placeholder.jpg';" class="d-block w-100" alt="Photo ${i + 1}">
               </div>
             `
           ).join('')}
@@ -372,7 +373,13 @@ fetchRemoteData()
 
 function renderInitial(data) {
   if (!data) return;
-  allProperties = data.properties || [];
+  allProperties = (data.properties || []).map((property) => ({
+    ...property,
+    image: normalizeImageUrl(property.image) || property.image,
+    images: Array.isArray(property.images)
+      ? property.images.map((img) => normalizeImageUrl(img) || img)
+      : property.images,
+  }));
   if (!filtersPrefilled) {
     prefillFiltersFromQuery(QUERY_FILTERS);
     filtersPrefilled = true;
@@ -489,4 +496,26 @@ function setCachedPayload(data) {
   } catch {
     // ignore storage errors
   }
+}
+
+function normalizeImageUrl(value) {
+  const input = String(value || '').trim();
+  if (!input) return '';
+  const fileId = extractDriveFileId(input);
+  return fileId ? `https://drive.google.com/thumbnail?id=${fileId}&sz=w2000` : input;
+}
+
+function extractDriveFileId(input) {
+  if (/^[a-zA-Z0-9_-]{20,}$/.test(input) && !/^https?:\/\//i.test(input)) return input;
+  const patterns = [
+    /\/d\/([a-zA-Z0-9_-]{20,})/,
+    /[?&]id=([a-zA-Z0-9_-]{20,})/,
+    /\/uc\?(?:[^#]*&)?id=([a-zA-Z0-9_-]{20,})/,
+    /\/file\/d\/([a-zA-Z0-9_-]{20,})/,
+  ];
+  for (let i = 0; i < patterns.length; i += 1) {
+    const match = input.match(patterns[i]);
+    if (match?.[1]) return match[1];
+  }
+  return '';
 }

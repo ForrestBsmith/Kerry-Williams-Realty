@@ -1,0 +1,5 @@
+{{badgeLabel}}
+{{title}}
+{{propertyAddress}} {{city}}
+{{price}}
+{{ctaLabel}}: {{ctaUrl}}

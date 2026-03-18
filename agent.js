@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="row g-4 align-items-center">
           <div class="col-lg-4">
             <div class="ratio ratio-1x1 rounded-4 overflow-hidden">
-              <img src="${agent.image || "realtor.jpg"}" alt="${agent.name}" class="w-100 h-100 object-fit-cover">
+              <img src="${agent.image || "realtor.jpg"}" onerror="this.onerror=null;this.src='realtor.jpg';" alt="${agent.name}" class="w-100 h-100 object-fit-cover">
             </div>
           </div>
           <div class="col-lg-8">
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="col-md-6 col-lg-4">
           <div class="card property-card border-0 shadow-sm h-100">
             <div class="position-relative">
-              <img src="${prop.image || "placeholder.jpg"}" class="card-img-top object-fit-cover property-click" data-index="${index}" alt="${prop.address || "Property"}" style="height: 220px; cursor: pointer;">
+              <img src="${prop.image || "placeholder.jpg"}" onerror="this.onerror=null;this.src='placeholder.jpg';" class="card-img-top object-fit-cover property-click" data-index="${index}" alt="${prop.address || "Property"}" style="height: 220px; cursor: pointer;">
               <button class="btn btn-light border position-absolute top-0 end-0 m-2 rounded-circle p-2 btn-save-home" data-id="${prop.id}">
                 <i class="bi ${saveIcon} fs-5"></i>
               </button>
@@ -297,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .map(
                   (img, i) => `
                     <div class="carousel-item ${i === 0 ? "active" : ""}">
-                      <img src="${img}" class="d-block w-100" alt="Photo ${i + 1}">
+                      <img src="${img}" onerror="this.onerror=null;this.src='placeholder.jpg';" class="d-block w-100" alt="Photo ${i + 1}">
                     </div>
                   `
                 )
@@ -445,12 +445,33 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!data) return;
     const agents = data.agents || [];
     const properties = data.properties || [];
-    const agent = agents.find((a) => String(a.id).toLowerCase() === agentId);
+    const normalizeKey = (value) =>
+      String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+    const routeKey = normalizeKey(agentId);
+    const agent = agents.find((a) => {
+      const byId = String(a.id || "").toLowerCase() === agentId;
+      const byIdNormalized = normalizeKey(a.id) === routeKey;
+      const byName = normalizeKey(a.name) === agentId;
+      const byNameNormalized = normalizeKey(a.name) === routeKey;
+      return byId || byIdNormalized || byName || byNameNormalized;
+    });
 
     if (!agent) {
       heroSection.innerHTML = `<div class="alert alert-warning">Agent not found. <a href="Agents.html" class="alert-link">Back to all agents</a>.</div>`;
       return;
     }
+
+    agent.image = normalizeImageUrl(agent.image) || agent.image;
+    properties.forEach((property) => {
+      property.image = normalizeImageUrl(property.image) || property.image;
+      if (Array.isArray(property.images)) {
+        property.images = property.images.map((img) => normalizeImageUrl(img) || img);
+      }
+    });
 
     agentProperties = properties.filter((p) => String(p.agentId).toLowerCase() === agentId);
     soldProperties = properties.filter(
@@ -523,5 +544,27 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch {
       // ignore storage errors
     }
+  }
+
+  function normalizeImageUrl(value) {
+    const input = String(value || "").trim();
+    if (!input) return "";
+    const fileId = extractDriveFileId(input);
+    return fileId ? `https://drive.google.com/thumbnail?id=${fileId}&sz=w2000` : input;
+  }
+
+  function extractDriveFileId(input) {
+    if (/^[a-zA-Z0-9_-]{20,}$/.test(input) && !/^https?:\/\//i.test(input)) return input;
+    const patterns = [
+      /\/d\/([a-zA-Z0-9_-]{20,})/,
+      /[?&]id=([a-zA-Z0-9_-]{20,})/,
+      /\/uc\?(?:[^#]*&)?id=([a-zA-Z0-9_-]{20,})/,
+      /\/file\/d\/([a-zA-Z0-9_-]{20,})/,
+    ];
+    for (let i = 0; i < patterns.length; i += 1) {
+      const match = input.match(patterns[i]);
+      if (match?.[1]) return match[1];
+    }
+    return "";
   }
 });

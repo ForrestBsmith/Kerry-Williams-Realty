@@ -1,0 +1,5 @@
+[
+  {"selector":"for-sale","targetType":"property","templateName":"Property List Base","htmlFile":"for-sale.html","textFile":"for-sale.txt"},
+  {"selector":"for-sale-card","targetType":"property","templateName":"Property Card Base","htmlFile":"for-sale-card.html","textFile":"for-sale-card.txt"},
+  {"selector":"agent-card","targetType":"agent","templateName":"Agent Card Base","htmlFile":"agent-card.html","textFile":"agent-card.txt"}
+]

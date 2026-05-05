@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../Social Media Templates/templates/tiktok"
+		},
+		{
+			"path": "../../Social Media Templates/templates/instagram"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Onward"
+	}
+}

@@ -16,7 +16,7 @@
       if (renderApi) {
         const join = renderApi.includes('?') ? '&' : '?';
         const url = `${renderApi}${join}action=render-photo-gen-from-sheets&selector=${encodeURIComponent(selector)}&limit=${encodeURIComponent(limit)}`;
-        document.body.innerHTML = `<iframe src="${url}" title="Photo Gen Preview" style="display:block;width:100%;min-height:100vh;border:0;background:#f4f6f8;"></iframe>`;
+        document.body.innerHTML = `<iframe src="${url}" title="Photo Gen Preview" style="display:block;width:100%;min-height:100vh;border:0;background:#eef1f4;"></iframe>`;
         return;
       }
 
@@ -26,12 +26,20 @@
         '{{brandDark}}': '#0c0c0f',
         '{{textureUrl}}': '../../grass.jpg',
         '{{logoUrl}}': '../../44realty.png',
-        '{{title}}': 'Trusted local real estate guidance.',
+        '{{title}}': 'Trusted local real estate guidance with local market precision and concierge-level service.',
         '{{agentName}}': 'Sample Agent',
-        '{{subtitle}}': 'Residential Specialist',
+        '{{subtitle}}': 'Residential + Luxury Specialist',
+        '{{propertiesCount}}': '18',
+        '{{totalValue}}': '$7,920,000',
+        '{{exp}}': '7 Years',
+        '{{languages}}': 'English, Spanish',
+        '{{phone}}': '(254) 555-0108',
+        '{{email}}': 'agent@kerrywilliamsrealty.com',
+        '{{licenseId}}': 'LIC #987654',
         '{{ctaUrl}}': '#',
-        '{{imageUrl}}': 'https://placehold.co/1200x800/e9edf2/5f6670?text=Agent+Photo',
-        '{{badgeLabel}}': 'Agent Profile',
+        '{{propertyImageUrl}}': 'https://placehold.co/1600x1000/4d5f72/ffffff?text=Featured+Property',
+        '{{agentImageUrl}}': 'https://placehold.co/900x1200/e9edf2/5f6670?text=Agent+Headshot',
+        '{{badgeLabel}}': '44 Realty Agent Card',
         '{{ctaLabel}}': 'Contact Agent',
         '{{footerLabel}}': 'AGENT PROFILE'
       };
@@ -43,39 +51,86 @@
     });
   </script>
 </head>
-<body style="margin:0;padding:24px;background:#f4f6f8;">
-<table width="100%" cellpadding="0" cellspacing="0" style="max-width:760px;margin:0 auto;border:1px solid #d6dcd2;border-radius:12px;overflow:hidden;box-shadow:0 8px 20px rgba(16,24,16,0.12);font-family:Georgia,'Times New Roman',serif;background:#ffffff;background-image:linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url('{{textureUrl}}');background-size:cover;background-position:center;">
+<body style="margin:0;padding:20px;background:#eef1f4;">
+<table width="100%" cellpadding="0" cellspacing="0" style="max-width:1056px;margin:0 auto;border:1px solid #c9d0c7;border-radius:14px;overflow:hidden;box-shadow:0 12px 28px rgba(12,12,15,0.18);font-family:Georgia,'Times New Roman',serif;background:#ffffff;">
   <tr>
-    <td style="background:linear-gradient(120deg, #f2dd96, {{brandPrimary}});padding:18px 20px 16px;color:#111111;">
-      <div style="font-size:28px;line-height:1.15;font-weight:700;letter-spacing:.01em;margin-top:6px;font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;color:#000000;">{{agentName}}</div>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="{{imageUrl}}" alt="{{agentName}}" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e9edf2/5f6670?text=Agent+Photo';" style="width:100%;height:420px;display:block;object-fit:cover;background:#0f1318;">
-    </td>
-  </tr>
-  <tr>
-    <td style="padding:4px 12px 0;background:#ffffff;background-image:linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url('{{textureUrl}}');background-size:cover;background-position:center;">
-      <div style="margin:0 0 4px;">
-        <span style="display:inline-block;background:{{brandPrimary}};color:{{brandDark}};font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:8px 12px;border-radius:999px;">{{badgeLabel}}</span>
-      </div>
-      <div style="font-size:23px;color:#000000;line-height:1.25;margin:0 0 6px;font-weight:800;letter-spacing:.01em;font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;">{{subtitle}}</div>
-      <div style="font-size:18px;line-height:1.5;color:{{brandDark}};font-weight:600;margin:0 0 8px;letter-spacing:.005em;font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;">{{title}}</div>
-      <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:0;">
+    <td style="padding:0;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="position:relative;background-image:linear-gradient(135deg, rgba(12,12,15,0.78), rgba(12,12,15,0.28)), url('{{propertyImageUrl}}');background-size:cover;background-position:center;">
         <tr>
-          <td align="left" valign="middle" style="padding-top:3px;">
-            <a href="{{ctaUrl}}" style="display:inline-block;padding:6px 10px;background:{{brandPrimary}};border:1px solid {{brandPrimary}};color:{{brandDark}};text-decoration:none;border-radius:8px;font-weight:800;font-size:12px;letter-spacing:.03em;">{{ctaLabel}}</a>
+          <td width="100%" valign="top" style="padding:28px 28px 22px 28px;">
+            <span style="display:inline-block;background:{{brandPrimary}};color:{{brandDark}};font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:8px 14px;border-radius:999px;">{{badgeLabel}}</span>
+            <div style="padding-top:22px;font-size:52px;line-height:1.06;font-weight:800;color:#ffffff;letter-spacing:.01em;">{{agentName}}</div>
+            <div style="padding-top:12px;font-size:21px;line-height:1.35;font-weight:600;color:#f0e7cf;">{{subtitle}}</div>
+            <div style="padding-top:18px;max-width:74%;font-size:18px;line-height:1.5;color:#f5f7f8;font-weight:500;">{{bioText}}</div>
           </td>
-          <td align="right" valign="middle" style="font-size:18px;color:#4f5660;letter-spacing:.015em;font-weight:800;text-transform:none;line-height:1;">
-            <table cellpadding="0" cellspacing="0" border="0" align="right" style="border-collapse:collapse;">
+        </tr>
+        <tr>
+          <td width="100%" valign="bottom" style="padding:0 6px 4px 28px;">
+            <table width="100%" cellpadding="0" cellspacing="0">
               <tr>
-                <td style="padding-right:8px;white-space:nowrap;color:{{brandDark}};">{{footerLabel}}</td>
-                <td style="white-space:nowrap;">
-                  <img src="{{logoUrl}}" alt="44 Realty" style="height:64px;display:block;">
+                <td width="74%" align="left" valign="bottom" style="padding-right:10px;">
+                  <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 2px;border-collapse:separate;border-spacing:0;background:rgba(8,8,10,0.48);border:1px solid rgba(255,255,255,0.26);border-radius:14px;overflow:hidden;">
+                    <tr>
+                      <td width="33.33%" style="padding:12px 14px;border-right:1px solid rgba(255,255,255,0.2);border-bottom:1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#d6a000;font-weight:800;">Listings</div>
+                        <div style="padding-top:4px;font-size:22px;line-height:1.1;color:#ffffff;font-weight:800;">{{propertiesCount}}</div>
+                      </td>
+                      <td width="33.33%" style="padding:12px 14px;border-right:1px solid rgba(255,255,255,0.2);border-bottom:1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#d6a000;font-weight:800;">Total Value</div>
+                        <div style="padding-top:4px;font-size:22px;line-height:1.1;color:#ffffff;font-weight:800;">{{totalValue}}</div>
+                      </td>
+                      <td width="33.33%" style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#d6a000;font-weight:800;">Experience</div>
+                        <div style="padding-top:4px;font-size:22px;line-height:1.1;color:#ffffff;font-weight:800;">{{exp}}</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width="50%" colspan="2" style="padding:12px 14px;border-right:1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#d6a000;font-weight:800;">Specialty</div>
+                        <div style="padding-top:4px;font-size:16px;line-height:1.25;color:#ffffff;font-weight:700;">{{subtitle}}</div>
+                      </td>
+                      <td width="50%" style="padding:12px 14px;">
+                        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#d6a000;font-weight:800;">Languages</div>
+                        <div style="padding-top:4px;font-size:16px;line-height:1.25;color:#ffffff;font-weight:700;">{{languages}}</div>
+                      </td>
+                    </tr>
+                  </table>
+                  <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 2px;border-collapse:separate;border-spacing:0;background:rgba(8,8,10,0.62);border:1px solid rgba(255,255,255,0.26);border-radius:12px;overflow:hidden;">
+                    <tr>
+                      <td width="42%" style="padding:10px 14px;border-right:1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#d6a000;font-weight:800;">Phone</div>
+                        <div style="padding-top:4px;font-size:15px;line-height:1.3;color:#ffffff;font-weight:700;word-break:break-word;">{{phone}}</div>
+                      </td>
+                      <td width="58%" style="padding:10px 14px;">
+                        <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#d6a000;font-weight:800;">Email</div>
+                        <div style="padding-top:4px;font-size:15px;line-height:1.3;color:#ffffff;font-weight:700;word-break:break-word;">{{email}}</div>
+                      </td>
+                    </tr>
+                  </table>
+                  <img src="{{logoUrl}}" alt="44 Realty" style="height:84px;display:block;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.35));">
+                </td>
+                <td width="26%" align="right" valign="bottom">
+                  <img src="{{agentImageUrl}}" alt="{{agentName}}" onerror="this.onerror=null;this.src='https://placehold.co/900x1200/e9edf2/5f6670?text=Agent+Headshot';" style="width:206px;height:272px;display:block;object-fit:contain;object-position:right bottom;background:transparent;margin-bottom:2px;filter:drop-shadow(0 12px 20px rgba(0,0,0,0.42));">
                 </td>
               </tr>
             </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:14px 22px;background:{{brandDark}};border-top:2px solid {{brandPrimary}};">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td align="left" valign="middle" style="font-size:14px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:#f4f5f6;white-space:nowrap;">
+            {{footerLabel}}
+          </td>
+          <td align="center" valign="middle">
+            <a href="{{ctaUrl}}" style="display:inline-block;padding:10px 18px;background:{{brandPrimary}};border:1px solid {{brandPrimary}};color:{{brandDark}};text-decoration:none;border-radius:10px;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;">{{ctaLabel}}</a>
+          </td>
+          <td align="right" valign="middle" style="white-space:nowrap;position:relative;left:-16px;">
+            <span style="padding-right:10px;font-size:18px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#f4f5f6;white-space:nowrap;">44 Realty</span>
           </td>
         </tr>
       </table>

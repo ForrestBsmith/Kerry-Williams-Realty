@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    :root {
+      --deep-teal: #062633;
+      --teal: #0b3c4a;
+      --sand: #d9b26c;
+      --bg: #0e1a20;
+      --muted: #9fb0b9;
+      --page-max-width: 1400px;
+      --page-max-height: 1080px;
+      --padding: clamp(16px, 3vw, 32px);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Source Sans Pro', Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+    }
+
+    .page {
+      width: 100%;
+      height: 100vh;
+      max-width: none;
+      max-height: none;
+      background: #0f1f26;
+      border: 3px solid #0b1418;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.24);
+      display: flex;
+      flex-direction: column;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    header {
+      padding: clamp(18px, 3vw, 40px);
+      background: linear-gradient(135deg, rgba(6,38,51,0.95), rgba(8,48,62,0.95));
+      position: relative;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.05) 20%, transparent 21%);
+      background-size: 32px 32px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .map-subtitle {
+      margin-top: 10px;
+      font-size: clamp(1rem, 2.2vw, 1.4rem);
+      color: rgba(255, 255, 255, 0.85);
+      letter-spacing: 0.04em;
+    }
+
+    .map-badge {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: rgba(217, 178, 108, 0.15);
+      color: #f7d9a1;
+      border: 1px solid rgba(217, 178, 108, 0.65);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .map-wrapper {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .lot-highlight {
+      position: absolute;
+      border: 6px solid var(--sand);
+      pointer-events: none;
+    }
+
+    .label {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .footer-bar {
+      background: #071219;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(12px, 2vw, 20px) clamp(20px, 3vw, 36px);
+      font-size: 0.95rem;
+    }
+
+    .footer-bar strong {
+      color: #fff;
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        aspect-ratio: auto;
+        max-height: none;
+      }
+
+      header {
+        text-align: center;
+      }
+
+      .label {
+        font-size: 0.8rem;
+      }
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: #fff;
+      }
+
+      .page {
+        border: none;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <h1>
+        {{#if MAP_PAGE.title}}
+          {{MAP_PAGE.title}}
+        {{else}}
+          {{#if BOUNDARY_TITLE}}
+            {{BOUNDARY_TITLE}}
+          {{else}}
+            Property Map
+          {{/if}}
+        {{/if}}
+      </h1>
+      {{#if MAP_PAGE.subtitle}}
+        <div class="map-subtitle">{{MAP_PAGE.subtitle}}</div>
+      {{/if}}
+      {{#if MAP_PAGE.badge}}
+        <div class="map-badge">{{MAP_PAGE.badge}}</div>
+      {{/if}}
+    </header>
+
+    <div class="map-wrapper">
+      <img
+        src="{{#if MAP_PAGE.imageUrl}}{{{MAP_PAGE.imageUrl}}}{{else}}{{{BOUNDARY_MAP_URL}}}{{/if}}"
+        alt="Property map"
+        class="map-image">
+      {{#if LOT_HIGHLIGHT}}
+        <div class="lot-highlight" style="{{LOT_HIGHLIGHT}}"></div>
+      {{/if}}
+      {{#each MAP_LABELS}}
+        <div class="label" style="top: {{top}}; left: {{left}};">{{text}}</div>
+      {{/each}}
+    </div>
+
+    <div class="footer-bar">
+      <span>
+        {{#if MAP_PAGE.footerLeft}}
+          {{MAP_PAGE.footerLeft}}
+        {{else}}
+          <strong>ONWARDCRE</strong> | ONWARDRET.COM
+        {{/if}}
+      </span>
+      <span>
+        {{#if MAP_PAGE.footerRight}}
+          {{MAP_PAGE.footerRight}}
+        {{else}}
+          {{BOUNDARY_FOOTER_NOTE}}
+        {{/if}}
+      </span>
+    </div>
+  </div>
+</body>
+</html>

@@ -99,6 +99,7 @@ const PHOTO_GEN_TEMPLATE_LIBRARY = [
   ['lease-email', 'property', 'Lease Email', 'Email-first list layout for lease inventory.', 'cover,gallery,detail,social', 'TRUE'],
   ['lease-card', 'property', 'Lease Card Variant', 'Single listing lease property card variant.', 'cover,gallery,detail,social', 'TRUE'],
   ['agent-card', 'agent', 'Agent Card Base', 'Base template for all agent profile media.', 'primary,cover,hero,social', 'TRUE'],
+  ['agent-preview', 'agent', 'Agent Property Preview', 'Agent-first card that spotlights an assigned property listing.', 'cover,hero,gallery,detail,social', 'TRUE'],
   ['bio-card', 'agent', 'Agent Bio Card Variant', 'Single profile agent bio card variant.', 'primary,cover,hero,social', 'TRUE'],
   ['commercial', 'property', 'Commercial Listing', 'Retail, office, and mixed-use properties.', 'hero,cover,gallery,detail', 'TRUE'],
   ['new-construction', 'property', 'New Construction', 'Builder inventory and staged progress imagery.', 'hero,cover,gallery,detail', 'TRUE'],
@@ -145,6 +146,7 @@ const DROPDOWN_CONFIG = {
       'lease-email',
       'lease-card',
       'agent-card',
+      'agent-preview',
       'bio-card',
       'commercial',
       'new-construction',
@@ -1500,6 +1502,7 @@ function setupBrandedPhotoGenTemplates() {
       'lease-email',
       'lease-card',
       'agent-card',
+      'agent-preview',
       'bio-card',
     ],
   };
@@ -1620,7 +1623,7 @@ function getPhotoGenTemplatePreset(selectorInput, targetTypeInput) {
   const rawSelector = normalizeTemplateSelector(selectorInput);
   const inferredTargetType =
     normalizeTargetType(targetTypeInput)
-    || (['agent-card', 'bio', 'bio-card', 'headshot', 'agent-brand', 'agent-social'].includes(rawSelector)
+    || (['agent-card', 'agent-preview', 'bio', 'bio-card', 'headshot', 'agent-brand', 'agent-social'].includes(rawSelector)
       ? 'agent'
       : 'property');
 
@@ -1779,6 +1782,12 @@ function getPhotoGenTemplatePreset(selectorInput, targetTypeInput) {
       ctaLabel: 'Follow Agent',
       footerLabel: 'SOCIAL PROFILE',
     },
+    'agent-preview': {
+      baseSelector: 'agent-preview',
+      badgeLabel: 'Featured Property',
+      ctaLabel: 'View Listing',
+      footerLabel: 'AGENT PREVIEW',
+    },
   };
 
   const defaultPreset = inferredTargetType === 'agent'
@@ -1812,6 +1821,8 @@ function renderPhotoGenHtmlTemplate(selectorInput, data = {}, targetTypeInput) {
   const defaultLogoUrl = getBrandLogoUrl();
   const defaultHeaderImageUrl = getBrandHeaderImageUrl();
   const defaultTextureUrl = getBrandTextureUrl();
+  const defaultPropertyImageUrl = 'https://placehold.co/1600x1000/4d5f72/ffffff?text=Featured+Property';
+  const defaultAgentImageUrl = 'https://placehold.co/900x1200/e9edf2/5f6670?text=Agent+Headshot';
   const selectorKey = normalizeTemplateSelector(preset.selector);
   const statusKey = normalizeKey(data.status || data.statusLabel || '');
   let listingPhrase = String(data.listingPhrase || preset.listingPhrase || '').trim().toLowerCase();
@@ -1842,7 +1853,16 @@ function renderPhotoGenHtmlTemplate(selectorInput, data = {}, targetTypeInput) {
     '{{textureUrl}}': String(data.textureUrl || defaultTextureUrl).trim(),
     '{{logoUrl}}': String(data.logoUrl || defaultLogoUrl).trim(),
     '{{title}}': String(data.title || data.headline || 'New Listing').trim(),
+    '{{bioText}}': String(data.bioText || data.bio || data.description || data.title || '').trim(),
     '{{subtitle}}': String(data.subtitle || '').trim(),
+    '{{propertiesCount}}': String(data.propertiesCount || data.numberofproperties || '-').trim(),
+    '{{avgPrice}}': String(data.avgPrice || data.averageprice || '-').trim(),
+    '{{totalValue}}': String(data.totalValue || data.totalvalue || '-').trim(),
+    '{{exp}}': String(data.exp || '-').trim(),
+    '{{languages}}': toDisplayList(data.languages) || '-',
+    '{{phone}}': String(data.phone || '-').trim(),
+    '{{email}}': String(data.email || '-').trim(),
+    '{{licenseId}}': String(data.licenseId || data.lic || '').trim(),
     '{{badgeLabel}}': String(data.badgeLabel || preset.badgeLabel || 'Featured Listing').trim(),
     '{{ctaLabel}}': String(data.ctaLabel || preset.ctaLabel || 'See Details').trim(),
     '{{footerLabel}}': String(data.footerLabel || preset.footerLabel || 'PROPERTY PICKS').trim(),
@@ -1859,6 +1879,8 @@ function renderPhotoGenHtmlTemplate(selectorInput, data = {}, targetTypeInput) {
     '{{agentName}}': String(data.agentName || '').trim(),
     '{{ctaUrl}}': String(data.ctaUrl || '#').trim() || '#',
     '{{imageUrl}}': String(data.imageUrl || '').trim(),
+    '{{propertyImageUrl}}': String(data.propertyImageUrl || data.imageUrl || defaultPropertyImageUrl).trim(),
+    '{{agentImageUrl}}': String(data.agentImageUrl || data.imageUrl || data.propertyImageUrl || defaultAgentImageUrl).trim(),
   };
 
   const apply = (input) => {
@@ -2002,7 +2024,7 @@ function extractForSaleListSectionsFallback(inputHtml) {
 
 function renderPhotoGenTemplateFromSheets(options = {}) {
   const selector = normalizeTemplateSelector(options.selector || 'for-sale') || 'for-sale';
-  const inferredTargetType = ['agent-card', 'bio', 'bio-card', 'headshot', 'agent-brand', 'agent-social'].includes(selector) ? 'agent' : 'property';
+  const inferredTargetType = ['agent-card', 'agent-preview', 'bio', 'bio-card', 'headshot', 'agent-brand', 'agent-social'].includes(selector) ? 'agent' : 'property';
   const targetType = normalizeTargetType(options.targetType) || inferredTargetType;
   const limit = Math.max(1, Math.min(20, Number(options.limit || 5) || 5));
   const clientName = String(options.clientName || '').trim() || getLatestContactLeadName();
@@ -2140,18 +2162,56 @@ function buildAgentTemplateRowsFromSheet(agents, properties, selector, limit, op
   return filteredAgents.slice(0, limit).map((a, idx) => {
     const propertyMedia = selectAgentPropertyMedia(a, props, selector, { statusFocus, typeFocus });
     const agentImage = toDriveDirectUrl(a?.image) || '';
-    const imageUrl = propertyMedia.coverUrl || agentImage;
-    const statusTag = propertyMedia.status ? ` | ${propertyMedia.status}` : '';
+    const propertyImageUrl = propertyMedia.coverUrl || agentImage;
+    const imageUrl = propertyImageUrl;
+    const specialtyText = toDisplayList(a?.specialties) || '-';
+    const languagesText = toDisplayList(a?.languages) || '-';
+    const totalValue = formatCurrencyFull(sumAgentPropertyValue(a, props));
     return {
       title: String(a?.bio || a?.description || 'Trusted local real estate guidance.').trim(),
-      subtitle: String(a?.specialties || '').trim() + statusTag,
+      bioText: String(a?.bio || a?.description || 'Trusted local real estate guidance.').trim(),
+      subtitle: specialtyText,
       agentName: String(a?.name || `Agent ${idx + 1}`).trim(),
       ctaUrl: String(a?.url || a?.profileUrl || '#').trim() || '#',
       imageUrl,
+      propertyImageUrl,
+      agentImageUrl: agentImage || propertyImageUrl,
+      propertiesCount: String(a?.numberofproperties || ''),
+      avgPrice: String(a?.averageprice || ''),
+      totalValue,
+      exp: String(a?.exp || '-').trim(),
+      languages: languagesText,
+      phone: String(a?.phone || '-').trim(),
+      email: String(a?.email || '-').trim(),
+      licenseId: String(a?.lic || ''),
       headerImageUrl,
       logoUrl,
     };
   });
+}
+
+function toDisplayList(value) {
+  if (Array.isArray(value)) {
+    return value.map((item) => String(item || '').trim()).filter(Boolean).join(', ');
+  }
+  return String(value || '').trim();
+}
+
+function sumAgentPropertyValue(agent, properties) {
+  const agentKeys = [normalizeKey(agent?.id), normalizeKey(agent?.name), normalizeKey(agent?.email)].filter(Boolean);
+  if (!agentKeys.length) return 0;
+  return (Array.isArray(properties) ? properties : []).reduce((sum, property) => {
+    if (!agentKeys.some((key) => propertyBelongsToAgent(property, key))) return sum;
+    const price = toNumber(property?.price);
+    if (price <= 0) return sum;
+    return sum + price;
+  }, 0);
+}
+
+function formatCurrencyFull(value) {
+  const amount = toNumber(value);
+  if (!amount) return '-';
+  return `$${Math.round(amount).toLocaleString()}`;
 }
 
 function propertyMatchesTemplateSelector(property, selectorInput) {
@@ -2315,7 +2375,11 @@ function syncPhotoGenTabFromDrive(options = {}) {
 
   if (!normalized.length) {
     setupDataEntryDropdowns();
-    return { replaced: replace, importedRows: 0, totalRowsInTab: Math.max(0, sheet.getLastRow() - 1) };
+    return {
+      replaced: replace,
+      importedRows: 0,
+      totalRowsInTab: Math.max(0, sheet.getLastRow() - 1),
+    };
   }
 
   const startRow = sheet.getLastRow() + 1;
@@ -3515,8 +3579,8 @@ function listFolderNames(folder, limit) {
 function hydrateEntityImages(entity, rows) {
   const sorted = [...rows].sort((a, b) => a.sortOrder - b.sortOrder);
   const primary =
-    sorted.find((row) => row.slot === 'primary' || row.slot === 'cover' || row.slot === 'hero') ||
-    sorted[0];
+    sorted.find((row) => row.slot === 'primary' || row.slot === 'cover' || row.slot === 'hero')
+    || sorted[0];
 
   if (primary?.image) {
     entity.image = primary.image;

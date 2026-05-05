@@ -1,0 +1,11 @@
+{{statusLabel}} | {{propertyType}}
+{{title}}
+{{propertyAddress}} {{city}}
+{{price}}
+{{beds}} Beds | {{baths}} Baths | {{sqft}} Sq Ft | Built {{yearBuilt}} | Lot {{lotSize}}
+{{description}}
+Main Photo: {{imageUrl}}
+Alt Photo 1: {{altImage1Url}}
+Alt Photo 2: {{altImage2Url}}
+Alt Photo 3: {{altImage3Url}}
+{{ctaLabel}}: {{ctaUrl}}

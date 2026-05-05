@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Buyer Guide Flipbook</title>
+    <link rel="stylesheet" href="./styles.css?v=20260317-20" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand-row">
+        <div class="logo-mark" id="logoMark">O</div>
+        <div>
+          <p class="eyebrow" id="brandName">ONWARD RESIDENTIAL</p>
+          <h1 id="bookTitle">Residential Buyer Guide</h1>
+        </div>
+      </div>
+      <div class="controls">
+        <label for="bookSelect">Book Template</label>
+        <select id="bookSelect" aria-label="Select branded guide"></select>
+      </div>
+    </header>
+
+    <main>
+      <section class="stage" aria-label="Flipbook viewer">
+        <button class="nav-btn" id="prevBtn" aria-label="Previous spread">&#10094;</button>
+
+        <div class="book-shell">
+          <div class="book-shadow"></div>
+          <div class="book" id="book">
+            <div id="flipbookPages"></div>
+          </div>
+        </div>
+
+        <button class="nav-btn" id="nextBtn" aria-label="Next spread">&#10095;</button>
+      </section>
+
+      <section class="meta">
+        <p id="pageMeta">Spread 1 of 1</p>
+      </section>
+
+      <section id="utilityDock" class="utility-dock" aria-label="Reader tools">
+        <button id="toolsToggleBtn" class="tool-fab" type="button" aria-expanded="false" aria-controls="utilityControls">
+          &#9650; Tools
+        </button>
+        <div id="utilityControls" class="utility-controls">
+          <button id="singlePageToggle" class="tool-btn" type="button" aria-pressed="false">Single Page View</button>
+          <div class="zoom-tools" role="group" aria-label="Zoom controls">
+            <button id="zoomOutBtn" class="tool-btn" type="button" aria-label="Zoom out">-</button>
+            <span id="zoomValue">100%</span>
+            <button id="zoomInBtn" class="tool-btn" type="button" aria-label="Zoom in">+</button>
+            <button id="zoomResetBtn" class="tool-btn" type="button">Reset Zoom</button>
+          </div>
+          <button id="viewAllBtn" class="tool-btn" type="button">View All Pages</button>
+        </div>
+      </section>
+    </main>
+
+    <div id="pageOverviewModal" class="overview-modal" aria-hidden="true">
+      <div class="overview-card" role="dialog" aria-modal="true" aria-label="All pages">
+        <div class="overview-header">
+          <h2>All Pages</h2>
+          <button id="closeOverviewBtn" class="tool-btn" type="button">Close</button>
+        </div>
+        <div id="overviewGrid" class="overview-grid"></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+    <script type="module" src="./app.js?v=20260317-15"></script>
+  </body>
+</html>

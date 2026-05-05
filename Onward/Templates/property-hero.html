@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    :root {
+      --max-width: 1920px;
+      --max-height: 1080px;
+      --canvas-padding: clamp(16px, 3vw, 32px);
+      --border-color: #333;
+      --text-light: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #0b0b0b;
+    }
+
+    body[data-format="square"] {
+      --max-width: 1080px;
+      --max-height: 1080px;
+    }
+
+    body[data-format="story"] {
+      --max-width: 1080px;
+      --max-height: 1920px;
+    }
+
+    .canvas {
+      width: 100vw;
+      height: 100vh;
+      max-width: none;
+      max-height: none;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border: 3px solid var(--border-color);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+    }
+
+    /************************************
+     SQ FT BOX
+    *************************************/
+    .sf-badge {
+      position: absolute;
+      top: clamp(12px, 2vw, 28px);
+      right: clamp(12px, 2vw, 28px);
+      background: rgba(0, 0, 0, 0.65);
+      color: #fff;
+      padding: clamp(8px, 1vw, 18px) clamp(12px, 1.4vw, 26px);
+      border-radius: 0.6vw;
+      font-size: clamp(0.9rem, 1.6vw, 1.8rem);
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      z-index: 50;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+    }
+
+    /************************************
+     HERO SECTION
+    *************************************/
+    .hero {
+      width: 100%;
+      flex: 1 1 auto;
+      min-height: 0;
+      background-size: cover, cover, cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-bottom: 3px solid var(--border-color);
+    }
+
+    body[data-format="story"] .hero,
+    body[data-format="square"] .hero {
+      background-size: contain, cover, cover;
+      background-color: #050505;
+    }
+
+    /************************************
+     FOOTER (2-COLUMN)
+    *************************************/
+    .footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(8px, 1.6vw, 18px);
+      background-image: url("{{{FOOTER_BG_PATH}}}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-top: 3px solid var(--border-color);
+      gap: clamp(16px, 3vw, 40px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.60),
+        rgba(0, 0, 0, 0.25)
+      );
+      z-index: 0;
+    }
+
+    .footer-left,
+    .footer-right,
+    .footer .left-details,
+    .create-qr-code {
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-left {
+      flex: 0 0 24%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-right: clamp(4px, 1vw, 12px);
+      border-right: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .company-logo {
+      max-width: 80%;
+      max-height: clamp(60px, 9vw, 110px);
+      object-fit: contain;
+    }
+
+    .footer-right {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: clamp(8px, 1.6vw, 28px);
+      min-width: 0;
+    }
+
+    .left-details {
+      display: flex;
+      flex-direction: column;
+      color: var(--text-light);
+      line-height: 1.1;
+      gap: clamp(4px, 0.8vw, 14px);
+    }
+
+    .left-details .status {
+      font-size: clamp(1.6rem, 3.8vw, 4.2rem);
+      font-weight: bold;
+      letter-spacing: 0.08em;
+    }
+
+    .left-details div:not(.status) {
+      font-size: clamp(1rem, 2.2vw, 2rem);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /************************************
+     QR CALL-TO-ACTION CARD
+    *************************************/
+    .create-qr-code {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: clamp(6px, 1.2vw, 14px);
+      background: #fafafa;
+      box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.15);
+      min-width: clamp(120px, 14vw, 200px);
+    }
+
+    .qr-label {
+      text-align: center;
+      margin-bottom: clamp(4px, 0.9vw, 12px);
+      font-weight: bold;
+      color: #333;
+      letter-spacing: 0.5px;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .qr-label span:first-child {
+      font-size: clamp(0.8rem, 1vw, 1.4rem);
+      opacity: 0.8;
+    }
+
+    .qr-label span:last-child {
+      font-size: clamp(1rem, 1.2vw, 1.6rem);
+    }
+
+    .qr-box {
+      width: clamp(90px, 12vw, 100px);
+      height: clamp(90px, 12vw, 130px);
+      border-radius: 0.8vw;
+      overflow: hidden;
+    }
+
+    .qr-box img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /************************************
+     RESPONSIVE TWEAKS
+    *************************************/
+    @media (max-width: 1024px) {
+      body {
+        padding: clamp(12px, 4vw, 32px);
+      }
+
+      .footer {
+        flex-wrap: wrap;
+      }
+
+      .footer-left {
+        flex: 1 1 45%;
+      }
+
+      .footer-right {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .create-qr-code {
+        flex: 1 1 220px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .canvas {
+        aspect-ratio: auto;
+        max-height: none;
+        height: auto;
+      }
+
+      .hero {
+        min-height: clamp(260px, 50vh, 520px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .canvas {
+        border-width: 2px;
+      }
+
+      .hero {
+        min-height: clamp(220px, 45vh, 520px);
+      }
+
+      .footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: clamp(20px, 4vw, 32px);
+      }
+
+      .footer-left {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        padding-bottom: clamp(12px, 2vw, 18px);
+        margin-bottom: clamp(12px, 2vw, 18px);
+      }
+
+      .footer-right {
+        flex-direction: column;
+        align-items: stretch;
+        gap: clamp(16px, 3vw, 32px);
+      }
+
+      .left-details {
+        text-align: center;
+      }
+
+      .create-qr-code {
+        align-self: center;
+        min-width: min(240px, 70vw);
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .sf-badge {
+        letter-spacing: 0.1px;
+        padding: 10px 14px;
+      }
+
+      .hero {
+        min-height: clamp(200px, 42vh, 400px);
+      }
+
+      .left-details div {
+        font-size: clamp(0.9rem, 4vw, 1.4rem);
+      }
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: #fff;
+      }
+
+      .canvas {
+        box-shadow: none;
+        border-color: #000;
+      }
+
+      .footer::before {
+        opacity: 0.75;
+      }
+    }
+  </style>
+</head>
+
+<body data-format="{{CURRENT_FORMAT_KEY}}">
+  <div class="canvas">
+    <div class="sf-badge">{{SQFT}} SF</div>
+
+    <div class="hero"
+      style="background-image: url('{{PHOTO_URL}}'), linear-gradient(180deg, rgba(5, 5, 5, 0.85), rgba(5, 5, 5, 0.85)), url('{{BRIDGE_BG_PATH}}');">
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">
+        <img src="{{LOGO_PATH}}" class="company-logo" alt="Company Logo">
+      </div>
+
+      <div class="footer-right">
+        <div class="left-details">
+          <div class="status">{{STATUS}}</div>
+          <div>{{ADDRESS_LINE_1}}</div>
+          <div>{{ADDRESS_LINE_2}}</div>
+        </div>
+
+        <div class="create-qr-code">
+          <div class="qr-label">
+            <span>SCAN FOR</span>
+            <span>PROPERTY LISTING</span>
+          </div>
+
+          <div class="qr-box">
+            <img src="{{QR_CODE_URL}}" alt="QR Code">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

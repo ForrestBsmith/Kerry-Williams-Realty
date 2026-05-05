@@ -1,0 +1,6 @@
+MONTHLY TOP 5 HOMES {{listingPhraseUpper}}
+Hi {{clientName}}, we handpicked this month's top 5 homes {{listingPhrase}} based on value, location, and buyer demand.
+{{title}}
+{{propertyAddress}} {{city}}
+{{price}}
+{{ctaLabel}}: {{ctaUrl}}

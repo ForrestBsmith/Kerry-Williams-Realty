@@ -1,18 +1,24 @@
 import json
 import os
 import re
+import subprocess
 import time
+import uuid
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import httpx
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from openai import OpenAI
+from fastapi.responses import FileResponse, Response
 from pydantic import BaseModel, Field
 
 
 load_dotenv()
+BASE_DIR = Path(__file__).resolve().parent
+ONWARD_DIR = Path(os.getenv("ONWARD_DIR", str(BASE_DIR.parent / "Onward"))).resolve()
+load_dotenv(ONWARD_DIR / ".env")
 
 
 SHEET_WEBHOOK_URL = os.getenv(
@@ -22,6 +28,9 @@ SHEET_WEBHOOK_URL = os.getenv(
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 DATA_CACHE_TTL_SECONDS = int(os.getenv("DATA_CACHE_TTL_SECONDS", "300"))
 MAX_CANDIDATES = int(os.getenv("MAX_CANDIDATES", "6"))
+DRIVE_PREVIEW_LIMIT = int(os.getenv("DRIVE_PREVIEW_LIMIT", "8"))
+SHEET_ID = os.getenv("SHEET_ID") or os.getenv("SHEETS_SPREADSHEET_ID") or ""
+SHEET_RANGE = os.getenv("LISTINGS_SHEET_RANGE") or os.getenv("SHEETS_LISTINGS_RANGE") or os.getenv("SHEET_RANGE") or os.getenv("SHEETS_RANGE") or ""
 
 app = FastAPI(title="44 Realty AI Assistant")
 
@@ -32,10 +41,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-client = OpenAI()
-
 _cached_data: Optional[Dict[str, Any]] = None
 _cached_at: float = 0.0
+_drive_service = None
+_sheets_service = None
 
 
 class ChatMessage(BaseModel):
@@ -54,6 +63,14 @@ class LeadRequest(BaseModel):
     phone: str = Field(..., min_length=6)
     property_inquired: str = Field(..., min_length=1)
     notes: Optional[str] = None
+
+
+class RenderRequest(BaseModel):
+    listing_id: Optional[str] = None
+    scope: str = "single"  # single | batch-ready
+    outputs: List[str] = Field(default_factory=list)
+    brochure: bool = False
+    verbose: bool = False
 
 
 def _normalize_text(value: Any) -> str:
@@ -188,7 +205,6 @@ def _property_score(property_data: Dict[str, Any], criteria: Dict[str, Any], tex
     if criteria.get("city") and property_data.get("city"):
         score += 1
 
-    # Keyword scoring across all property fields
     text_lower = text.lower()
     keywords = [kw for kw in re.split(r"\W+", text_lower) if len(kw) > 3]
     haystack = " ".join(_normalize_text(v).lower() for v in property_data.values())
@@ -215,7 +231,7 @@ async def _fetch_sheet_data() -> Dict[str, Any]:
     if _cached_data and (time.time() - _cached_at) < DATA_CACHE_TTL_SECONDS:
         return _cached_data
 
-    async with httpx.AsyncClient(timeout=20) as client_http:
+    async with httpx.AsyncClient(timeout=20, follow_redirects=True) as client_http:
         try:
             response = await client_http.get(SHEET_WEBHOOK_URL)
             response.raise_for_status()
@@ -230,6 +246,118 @@ async def _fetch_sheet_data() -> Dict[str, Any]:
     _cached_data = data_block
     _cached_at = time.time()
     return data_block
+
+
+def _normalize_header(header: str = "") -> str:
+    return re.sub(r"[^A-Z0-9]+", "_", (header or "").strip().upper()).strip("_")
+
+
+def _rows_with_headers(values: List[List[Any]]) -> List[Dict[str, Any]]:
+    if not values:
+        return []
+
+    headers = [_normalize_header(str(header)) for header in values[0]]
+    rows = []
+    for row in values[1:]:
+        item = {}
+        for idx, header in enumerate(headers):
+            if not header:
+                continue
+            item[header] = row[idx] if idx < len(row) else ""
+        rows.append(item)
+    return rows
+
+
+def _build_sheets_service():
+    global _sheets_service
+    if _sheets_service is not None:
+        return _sheets_service
+
+    try:
+        from google.oauth2 import service_account
+        from googleapiclient.discovery import build
+    except ImportError as exc:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Google Sheets dependencies are not installed: {exc}",
+        )
+
+    private_key = os.getenv("GOOGLE_PRIVATE_KEY", "").replace("\\n", "\n")
+    client_email = os.getenv("GOOGLE_CLIENT_EMAIL", "")
+    project_id = os.getenv("GOOGLE_PROJECT_ID", "")
+
+    if not private_key or not client_email:
+        raise HTTPException(
+            status_code=500,
+            detail="Missing GOOGLE_CLIENT_EMAIL/GOOGLE_PRIVATE_KEY for Sheets access",
+        )
+
+    creds_info = {
+        "type": "service_account",
+        "project_id": project_id,
+        "private_key": private_key,
+        "client_email": client_email,
+        "token_uri": "https://oauth2.googleapis.com/token",
+    }
+    creds = service_account.Credentials.from_service_account_info(
+        creds_info,
+        scopes=["https://www.googleapis.com/auth/spreadsheets.readonly"],
+    )
+    _sheets_service = build("sheets", "v4", credentials=creds)
+    return _sheets_service
+
+
+def _get_listing_rows_from_google_sheet() -> List[Dict[str, Any]]:
+    if not SHEET_ID or not SHEET_RANGE:
+        return []
+
+    sheets = _build_sheets_service()
+    response = (
+        sheets.spreadsheets()
+        .values()
+        .get(spreadsheetId=SHEET_ID, range=SHEET_RANGE)
+        .execute()
+    )
+    return _rows_with_headers(response.get("values", []))
+
+
+def _property_to_listing(property_row: Dict[str, Any], index: int) -> Dict[str, Any]:
+    def is_previewable_url(url: str) -> bool:
+        value = str(url or "").strip()
+        if not value:
+            return False
+        if value.startswith(("http://", "https://", "/")):
+            return True
+        # The website payload contains some relative placeholders like
+        # img/marksmithproperty-1.jpg that are not served by the intranet app.
+        return False
+
+    image_urls = []
+    if property_row.get("image"):
+        image_urls.append(property_row["image"])
+    if isinstance(property_row.get("images"), list):
+        image_urls.extend(property_row["images"])
+
+    preview_assets = [
+        {
+            "label": f"Photo {photo_index + 1}",
+            "outputKey": "photo",
+            "url": url,
+            "webViewLink": url,
+        }
+        for photo_index, url in enumerate(url for url in dict.fromkeys(image_urls) if is_previewable_url(url))
+    ]
+
+    return {
+        **property_row,
+        "listingId": property_row.get("id") or f"property-{index + 1}",
+        "address": property_row.get("address") or "",
+        "status": property_row.get("status") or "draft",
+        "agent": property_row.get("agentId") or property_row.get("listingAgentId") or "",
+        "assetSetId": property_row.get("assetSetId") or "",
+        "folderId": property_row.get("folderId") or property_row.get("FOLDER_ID") or "",
+        "previewAssets": preview_assets,
+    }
 
 
 def _build_system_prompt(properties: List[Dict[str, Any]], agents: List[Dict[str, Any]]) -> str:
@@ -250,9 +378,248 @@ def _build_system_prompt(properties: List[Dict[str, Any]], agents: List[Dict[str
     )
 
 
+def _build_drive_service():
+    global _drive_service
+    if _drive_service is not None:
+        return _drive_service
+
+    try:
+        from google.oauth2 import service_account
+        from googleapiclient.discovery import build
+    except ImportError as exc:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Google Drive dependencies are not installed: {exc}",
+        )
+
+    private_key = os.getenv("GOOGLE_PRIVATE_KEY", "").replace("\\n", "\n")
+    client_email = os.getenv("GOOGLE_CLIENT_EMAIL", "")
+    project_id = os.getenv("GOOGLE_PROJECT_ID", "")
+
+    if not private_key or not client_email:
+        raise HTTPException(
+            status_code=500,
+            detail="Missing GOOGLE_CLIENT_EMAIL/GOOGLE_PRIVATE_KEY for Drive preview access",
+        )
+
+    creds_info = {
+        "type": "service_account",
+        "project_id": project_id,
+        "private_key": private_key,
+        "client_email": client_email,
+        "token_uri": "https://oauth2.googleapis.com/token",
+    }
+    creds = service_account.Credentials.from_service_account_info(
+        creds_info,
+        scopes=["https://www.googleapis.com/auth/drive.readonly"],
+    )
+    _drive_service = build("drive", "v3", credentials=creds)
+    return _drive_service
+
+
+def _output_key_from_name(name: str) -> str:
+    low = (name or "").strip().lower()
+    if any(k in low for k in ["hero", "cover"]):
+        return "hero"
+    if any(k in low for k in ["story", "vertical"]):
+        return "story"
+    if "square" in low:
+        return "square"
+    if any(k in low for k in ["tiktok", "video", "reel"]):
+        return "video"
+    if any(k in low for k in ["floor", "map", "retailer", "zoning", "fema", "flood", "boundary"]):
+        return "brochure"
+    return "social-cards"
+
+
+def _preview_record_from_drive_file(file_item: Dict[str, Any]) -> Dict[str, str]:
+    name = file_item.get("name", "Asset")
+    mime_type = file_item.get("mimeType", "")
+    thumbnail_url = file_item.get("thumbnailLink", "")
+    if not thumbnail_url and mime_type.startswith("image/"):
+        thumbnail_url = file_item.get("webContentLink", "")
+    return {
+        "fileId": file_item.get("id", ""),
+        "label": name,
+        "outputKey": _output_key_from_name(name),
+        "url": thumbnail_url or "",
+        "webViewLink": file_item.get("webViewLink", "") or file_item.get("webContentLink", "") or "",
+        "mimeType": mime_type,
+    }
+
+
+def _list_folder_images_for_preview(folder_id: str, limit: int) -> List[Dict[str, str]]:
+    drive = _build_drive_service()
+    files = []
+
+    def query_images(parent_id: str) -> List[Dict[str, Any]]:
+        response = (
+            drive.files()
+            .list(
+                q=(
+                    f"'{parent_id}' in parents and "
+                    "mimeType contains 'image/' and trashed = false"
+                ),
+                fields="files(id,name,mimeType,thumbnailLink,webViewLink)",
+                pageSize=50,
+            )
+            .execute()
+        )
+        return response.get("files", [])
+
+    files.extend(query_images(folder_id))
+
+    if not files:
+        nested = (
+            drive.files()
+            .list(
+                q=(
+                    f"'{folder_id}' in parents and "
+                    "mimeType = 'application/vnd.google-apps.folder' and trashed = false"
+                ),
+                fields="files(id,name)",
+                pageSize=30,
+            )
+            .execute()
+            .get("files", [])
+        )
+        for item in nested:
+            if item.get("name", "").strip().lower() in {"photo_upload", "photo upload"}:
+                files.extend(query_images(item["id"]))
+                if files:
+                    break
+
+    files.sort(key=lambda f: (f.get("name") or "").lower())
+    return [_preview_record_from_drive_file(file_item) for file_item in files[: max(1, limit)]]
+
+
+def _build_render_command(req: RenderRequest) -> List[str]:
+    script_path = ONWARD_DIR / "src" / "index.js"
+    if not script_path.exists():
+        raise HTTPException(status_code=500, detail=f"Onward script not found: {script_path}")
+
+    cmd = ["node", "src/index.js"]
+    mode = "all" if req.scope == "batch-ready" else "one"
+    cmd.append(f"--mode={mode}")
+
+    if req.listing_id and req.scope != "batch-ready":
+        cmd.append(f"--listing-id={req.listing_id}")
+
+    if req.outputs:
+        normalized = [x.strip().lower() for x in req.outputs if x and x.strip()]
+        if normalized:
+            cmd.append(f"--outputs={','.join(normalized)}")
+
+    if req.brochure:
+        cmd.append("--brochure")
+
+    if req.verbose:
+        cmd.append("--verbose")
+
+    return cmd
+
+
 @app.get("/health")
 async def health_check() -> Dict[str, str]:
     return {"status": "ok"}
+
+
+@app.get("/api/listings")
+async def listings() -> List[Dict[str, Any]]:
+    try:
+        rows = _get_listing_rows_from_google_sheet()
+        if rows:
+            return rows
+    except Exception as exc:
+        print(f"Google Sheets listing fetch failed, falling back to webhook: {exc}")
+
+    sheet_data = await _fetch_sheet_data()
+    properties = sheet_data.get("properties", [])
+    if not isinstance(properties, list):
+        return []
+    return [_property_to_listing(row, idx) for idx, row in enumerate(properties)]
+
+
+@app.get("/api/asset-preview")
+async def asset_preview(
+    folder_id: str,
+    limit: int = DRIVE_PREVIEW_LIMIT,
+) -> Dict[str, Any]:
+    folder_id = (folder_id or "").strip()
+    if not folder_id:
+        raise HTTPException(status_code=400, detail="folder_id is required")
+
+    try:
+        previews = _list_folder_images_for_preview(folder_id, limit)
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=f"Drive preview failed: {exc}")
+
+    return {"folderId": folder_id, "assets": previews}
+
+
+@app.get("/api/image-proxy")
+async def image_proxy(url: str) -> Response:
+    if not url.startswith(("http://", "https://")):
+        raise HTTPException(status_code=400, detail="Only http(s) image URLs are supported")
+
+    async with httpx.AsyncClient(timeout=20, follow_redirects=True) as client_http:
+        try:
+            response = await client_http.get(url)
+            response.raise_for_status()
+        except Exception as exc:
+            raise HTTPException(status_code=502, detail=f"Image proxy failed: {exc}")
+
+    content_type = response.headers.get("content-type", "application/octet-stream")
+    return Response(
+        content=response.content,
+        media_type=content_type,
+        headers={"Cache-Control": "public, max-age=3600"},
+    )
+
+
+@app.get("/api/render-sample/{filename}")
+async def render_sample(filename: str) -> FileResponse:
+    safe_name = Path(filename).name
+    sample_path = ONWARD_DIR / "output" / safe_name
+    if not sample_path.exists() or not sample_path.is_file():
+        raise HTTPException(status_code=404, detail="Render sample not found")
+    return FileResponse(sample_path)
+
+
+@app.post("/api/render/run")
+async def run_render(payload: RenderRequest) -> Dict[str, Any]:
+    cmd = _build_render_command(payload)
+    run_id = str(uuid.uuid4())
+    started_at = time.time()
+
+    try:
+        proc = subprocess.run(
+            cmd,
+            cwd=str(ONWARD_DIR),
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=f"Render execution failed: {exc}")
+
+    duration_ms = int((time.time() - started_at) * 1000)
+    ok = proc.returncode == 0
+
+    return {
+        "runId": run_id,
+        "ok": ok,
+        "command": cmd,
+        "scope": payload.scope,
+        "listingId": payload.listing_id,
+        "outputs": payload.outputs,
+        "durationMs": duration_ms,
+        "exitCode": proc.returncode,
+        "stdout": (proc.stdout or "")[-4000:],
+        "stderr": (proc.stderr or "")[-4000:],
+    }
 
 
 @app.post("/api/chat")
@@ -285,6 +652,9 @@ async def chat(request: ChatRequest) -> Dict[str, Any]:
     ]
 
     try:
+        from openai import OpenAI
+
+        client = OpenAI()
         response = client.responses.create(
             model=OPENAI_MODEL,
             input=messages,

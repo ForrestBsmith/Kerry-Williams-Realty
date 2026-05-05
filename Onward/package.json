@@ -1,0 +1,28 @@
+{
+  "name": "onward-property-renderer",
+  "version": "1.0.0",
+  "description": "Generate real estate listing graphics from Google Sheets and Google Drive using Puppeteer and Handlebars.",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "render:sample": "node src/index.js --limit=1 --verbose",
+    "render:one": "node src/index.js --mode=one --index=0",
+    "render:all": "node src/index.js --mode=all",
+    "render:brochure": "node src/index.js --mode=one --brochure"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "googleapis": "^128.0.0",
+    "googleapis-common": "^7.2.0",
+    "handlebars": "^4.7.8",
+    "minimist": "^1.2.8",
+    "pdf-lib": "^1.17.1",
+    "puppeteer": "^23.0.0",
+    "sharp": "^0.34.5",
+    "slugify": "^1.6.6"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

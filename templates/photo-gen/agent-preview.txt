@@ -1,0 +1,8 @@
+{{statusLabel}}
+{{title}}
+{{propertyAddress}} {{city}}
+{{price}}
+Agent: {{agentName}} ({{subtitle}})
+Phone: {{phone}}
+Email: {{email}}
+{{ctaLabel}}: {{ctaUrl}}

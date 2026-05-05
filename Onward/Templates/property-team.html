@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    :root {
+      --deep-teal: #062633;
+      --cream: #f4eee6;
+      --text: #19262d;
+      --muted: #5c6c75;
+      --accent: #0c3f4d;
+      --page-max-width: 1400px;
+      --page-max-height: 1080px;
+      --padding: clamp(20px, 4vw, 48px);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Source Sans Pro', Arial, sans-serif;
+    }
+
+    html {
+      font-size: 32px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--deep-teal);
+      min-height: 100vh;
+    }
+
+    .page {
+      width: 100%;
+      height: 100vh;
+      max-width: none;
+      max-height: none;
+      background: #fff;
+      border: 3px solid #101c22;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .intro-block {
+      flex: 0 0 36%;
+      background: var(--cream);
+      padding: clamp(40px, 6vw, 96px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .intro-block h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 4.6vw, 3.6rem);
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .team-list {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(22px, 3.4vw, 40px);
+      padding: clamp(32px, 5vw, 80px);
+      background: #fff;
+    }
+
+    .member {
+      display: grid;
+      grid-template-columns: minmax(240px, 450px) 1fr;
+      gap: clamp(40px, 6vw, 120px);
+      align-items: center;
+    }
+
+    .member img {
+      width: clamp(280px, 32vw, 500px);
+      height: clamp(200px, 20vw, 450px);
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+    }
+
+    .member h3 {
+      margin: 0;
+      font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+
+    .member .role {
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-size: clamp(1rem, 1.6vw, 1.3rem);
+    }
+
+    .member .contact {
+      color: var(--text);
+      line-height: 1.6;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+    }
+
+    .footer-bar {
+      background: var(--deep-teal);
+      color: #fff;
+      padding: 18px 36px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+    }
+
+    .page-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+    }
+
+    @media (max-width: 1024px) {
+      .page {
+        aspect-ratio: auto;
+        flex-direction: column;
+      }
+
+      .intro-block {
+        flex: none;
+        width: 100%;
+        text-align: center;
+      }
+
+      .team-list {
+        padding-bottom: 80px;
+      }
+
+      .member {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .member img {
+        margin: 0 auto;
+      }
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: #fff;
+      }
+
+      .page {
+        border: none;
+        box-shadow: none;
+      }
+
+      .footer-bar {
+        position: static;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="page-wrapper">
+      <section class="intro-block">
+        <h1>Presented by</h1>
+      </section>
+
+      <section class="team-list">
+        <article class="member">
+          <img src="../assets/realtor-2.jpg" alt="Brad Harrell">
+          <div>
+            <h3>Brad Harrell, CCIM</h3>
+            <div class="role">Associate Broker</div>
+            <div class="contact">
+              254.870.0050<br>
+              bharrell@OnwardRET.com<br>
+              License #363789 (TX)
+            </div>
+          </div>
+        </article>
+
+        <article class="member">
+          <img src="../assets/realtor-2.jpg" alt="Adam Voight">
+          <div>
+            <h3>Adam Voight</h3>
+            <div class="role">Director of Commercial Operations</div>
+            <div class="contact">
+              254.870.1421<br>
+              avoight@OnwardRET.com<br>
+              License #650810 (TX)
+            </div>
+          </div>
+        </article>
+
+        <article class="member">
+          <img src="../assets/realtor-2.jpg" alt="Xavier Rosas">
+          <div>
+            <h3>Xavier Rosas</h3>
+            <div class="role">Commercial Specialist</div>
+            <div class="contact">
+              254.870.1426<br>
+              xrosas@OnwardRET.com<br>
+              License #794462 (TX)
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <div class="footer-bar">
+        <span>ONWARDCRE · COMMERCIAL REAL ESTATE</span>
+        <span>PROPERTY BROCHURE · PAGE 13</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

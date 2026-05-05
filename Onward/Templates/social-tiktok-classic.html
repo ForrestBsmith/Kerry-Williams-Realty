@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    :root {
+      font-family: 'Source Sans Pro', Arial, sans-serif;
+      --deep-teal: #02131b;
+      --teal: #033244;
+      --accent: #d6b26b;
+      --text-muted: #b2c6d3;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      color: #fff;
+    }
+
+    .story {
+      width: 1080px;
+      height: 1920px;
+      background: radial-gradient(circle at top, rgba(4, 73, 110, 0.85), rgba(2, 20, 27, 0.95)),
+        url('{{FOOTER_BG_PATH}}') center/cover;
+      border-radius: 48px;
+      border: 3px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55);
+      padding: clamp(32px, 4vw, 64px);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .brand-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .brand-bar img {
+      width: 140px;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+    }
+
+    .hero-title {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .location {
+      margin: 0;
+      font-size: 1.2rem;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .carousel {
+      position: relative;
+      flex: 1;
+      border-radius: 32px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .carousel-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      animation: slideTrack var(--carousel-duration, 8s) linear infinite;
+      animation-fill-mode: both;
+      will-change: transform;
+      animation-delay: var(--carousel-delay, 0s);
+    }
+
+    body.carousel-paused .carousel-track {
+      animation-play-state: paused;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      flex: 0 0 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide img,
+    .single-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: saturate(1.05);
+      position: relative;
+      z-index: 1;
+    }
+
+    .slide-final img {
+      width: 70%;
+      height: auto;
+    }
+
+    .slide::before,
+    .single-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(3, 18, 25, 0.85), rgba(1, 10, 15, 0.95)),
+        var(--photo-bg, radial-gradient(circle at top, rgba(4, 73, 110, 0.6), rgba(2, 15, 22, 0.95)));
+      filter: blur(18px) saturate(1.2);
+      transform: scale(1.2);
+      opacity: 0.6;
+      z-index: 0;
+    }
+
+    .carousel-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(1, 10, 15, 0.65) 100%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 32px;
+      font-size: 1rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+      pointer-events: none;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+    }
+
+    .stat {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(4, 20, 28, 0.55);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .stat .value {
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+
+    .highlights {
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 20px;
+      background: rgba(3, 18, 25, 0.65);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .highlights h3 {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .highlights ul {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      color: #fff;
+      display: grid;
+      gap: 6px;
+    }
+
+    .cta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 18px;
+    }
+
+    @keyframes slideTrack {
+      {{#each CAROUSEL_TRACK_KEYFRAMES}}
+        {{this.percent}}% {
+          transform: translateX({{this.translate}});
+        }
+      {{/each}}
+    }
+  </style>
+</head>
+
+<body class="{{#if CAROUSEL_AUTO_PLAY}}carousel-running{{else}}carousel-paused{{/if}}" data-carousel-autoplay="{{CAROUSEL_AUTO_PLAY}}">
+  <div class="story" style="--slide-count: {{CAROUSEL_COUNT}}; --carousel-duration: {{CAROUSEL_DURATION}}s; --carousel-delay: {{CAROUSEL_START_DELAY}}s;">
+    <div class="brand-bar">
+      <img src="{{LOGO_PATH}}" alt="OnwardCRE">
+      <span>OnwardCRE Media</span>
+    </div>
+
+    <div>
+      <p class="location">{{STATUS}}</p>
+      <h1 class="hero-title">{{PROPERTY_TITLE}}</h1>
+      <p class="location">{{LOCATION}}</p>
+    </div>
+
+    <div class="carousel">
+      {{#if HAS_CAROUSEL}}
+        <div class="carousel-track">
+          {{#each CAROUSEL_PHOTOS}}
+            <div class="slide {{#if this.isFinal}}slide-final{{/if}}" style="--photo-bg: url('{{this.backgroundUrl}}');">
+              <img src="{{this.url}}" alt="Property photo {{this.index}}">
+            </div>
+          {{/each}}
+        </div>
+      {{else}}
+        <div class="single-photo" style="--photo-bg: url('{{HERO_PHOTO_URL}}');">
+          <img src="{{HERO_PHOTO_URL}}" alt="Property photo">
+        </div>
+      {{/if}}
+
+      <div class="carousel-overlay">
+        <span>Learn More</span>
+        <span>Explore</span>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <span>Lease Rate</span>
+        <span class="value">{{LEASE_RATE}}</span>
+      </div>
+      <div class="stat">
+        <span>Square Feet</span>
+        <span class="value">{{SQFT}}</span>
+      </div>
+      <div class="stat">
+        <span>Sale Price</span>
+        <span class="value">{{SALES_PRICE}}</span>
+      </div>
+    </div>
+
+    <div class="highlights">
+      <h3>Highlights</h3>
+      <ul>
+        {{#each PROPERTY_HIGHLIGHTS_LIST}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    </div>
+
+    <div class="cta">
+      <span>@OnwardCRE</span>
+      <span>onwardCRE.com</span>
+    </div>
+  </div>
+  <script>
+    (function() {
+      function startCarousel() {
+        document.body.classList.remove('carousel-paused');
+        document.body.classList.add('carousel-running');
+      }
+      window.__startCarousel = startCarousel;
+      const shouldAutoPlay = document.body.getAttribute('data-carousel-autoplay') !== 'false';
+      if (shouldAutoPlay) {
+        startCarousel();
+      }
+    })();
+  </script>
+</body>
+</html>

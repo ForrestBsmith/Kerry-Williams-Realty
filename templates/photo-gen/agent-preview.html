@@ -3,84 +3,287 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Agent Brand Template Preview</title>
+  <link rel="icon" href="data:,">
+  <title>Agent Property Preview</title>
   <script>
-    // Preview-only hydration for local HTML viewers.
-    // Runtime Apps Script rendering ignores <head> and only uses <body>.
     document.addEventListener('DOMContentLoaded', async () => {
       const params = new URLSearchParams(window.location.search);
       const renderApi = params.get('renderApi') || '';
-      const selector = params.get('selector') || 'bio';
-      const limit = params.get('limit') || '1';
-
-      if (renderApi) {
-        const join = renderApi.includes('?') ? '&' : '?';
-        const url = `${renderApi}${join}action=render-photo-gen-from-sheets&selector=${encodeURIComponent(selector)}&limit=${encodeURIComponent(limit)}`;
-        document.body.innerHTML = `<iframe src="${url}" title="Photo Gen Preview" style="display:block;width:100%;min-height:100vh;border:0;background:#f4f6f8;"></iframe>`;
-        return;
-      }
+      const agentIdParam = String(params.get('agentId') || '').trim().toLowerCase();
 
       const defaults = {
         '{{brandName}}': 'Kerry Williams Realty',
         '{{brandPrimary}}': '#d6a000',
         '{{brandDark}}': '#0c0c0f',
-        '{{headerImageUrl}}': '../../slide2.jpeg',
-        '{{textureUrl}}': '../../grass.jpg',
         '{{logoUrl}}': '../../44realty.png',
-        '{{title}}': 'Sample Listing',
+        '{{title}}': 'Charming Corner-Lot Home with Designer Updates',
         '{{agentName}}': 'Sample Agent',
-        '{{subtitle}}': 'Residential Specialist',
+        '{{subtitle}}': 'Residential + Luxury Specialist',
+        '{{bioText}}': 'Local market expertise with concierge-level client service from tour to close.',
         '{{propertyAddress}}': '1234 Oak Ridge Dr',
         '{{city}}': 'Waco, TX 76710',
         '{{price}}': '$489,000',
-        '{{statusLabel}}': 'Sold for $475,000',
         '{{beds}}': '4',
         '{{baths}}': '3',
         '{{sqft}}': '2,460',
         '{{propertyType}}': 'Single Family',
-        '{{yearBuilt}}': '2019',
-        '{{lotSize}}': '0.24 ac',
+        '{{statusLabel}}': 'For Sale',
         '{{ctaUrl}}': '#',
-        '{{imageUrl}}': 'https://placehold.co/1200x800/e9edf2/5f6670?text=Listing+Photo'
+        '{{ctaLabel}}': 'View Listing',
+        '{{imageUrl}}': '../../family.jpeg',
+        '{{agentImageUrl}}': '../../realtor.jpg',
+        '{{phone}}': '(254) 555-0108',
+        '{{email}}': 'agent@kerrywilliamsrealty.com'
       };
-      let html = document.body.innerHTML;
-      Object.keys(defaults).forEach((token) => {
-        html = html.split(token).join(defaults[token]);
-      });
-      document.body.innerHTML = html;
+
+      const applyTokens = (tokens) => {
+        let html = document.body.innerHTML;
+        Object.keys(tokens).forEach((token) => {
+          html = html.split(token).join(String(tokens[token] || ''));
+        });
+        document.body.innerHTML = html;
+      };
+      const extractDriveId = (input) => {
+        const raw = String(input || '').trim();
+        if (!raw) return '';
+        if (/^[a-zA-Z0-9_-]{20,}$/.test(raw) && !/^https?:\/\//i.test(raw)) return raw;
+        const patterns = [
+          /\/d\/([a-zA-Z0-9_-]{20,})/,
+          /[?&]id=([a-zA-Z0-9_-]{20,})/,
+          /\/uc\?(?:[^#]*&)?id=([a-zA-Z0-9_-]{20,})/,
+          /\/file\/d\/([a-zA-Z0-9_-]{20,})/
+        ];
+        for (let i = 0; i < patterns.length; i += 1) {
+          const match = raw.match(patterns[i]);
+          if (match && match[1]) return match[1];
+        }
+        return '';
+      };
+      const buildImageCandidates = (rawValue, localFallback) => {
+        const raw = String(rawValue || '').trim();
+        const out = [];
+        const push = (url) => {
+          const clean = String(url || '').trim();
+          if (!clean || out.includes(clean)) return;
+          out.push(clean);
+        };
+
+        push(raw);
+        const driveId = extractDriveId(raw);
+        if (driveId) {
+          push(`https://lh3.googleusercontent.com/d/${driveId}=w2000`);
+          push(`https://lh3.googleusercontent.com/d/${driveId}=s2000`);
+          push(`https://drive.google.com/thumbnail?id=${driveId}&sz=w2000`);
+          push(`https://drive.google.com/uc?export=view&id=${driveId}`);
+        }
+        push(localFallback);
+        return out;
+      };
+      const applyChainedImageSrc = (imgEl, candidates, placeholderUrl, logLabel) => {
+        if (!imgEl) return;
+        const list = Array.isArray(candidates) ? candidates.filter(Boolean) : [];
+        if (!list.length) {
+          imgEl.src = placeholderUrl;
+          return;
+        }
+        let index = 0;
+        imgEl.onerror = function onImageError() {
+          index += 1;
+          if (index < list.length) {
+            this.src = list[index];
+            return;
+          }
+          this.onerror = null;
+          this.src = placeholderUrl;
+        };
+        console.log(`[agent-preview] ${logLabel} image candidate:`, list[0]);
+        imgEl.src = list[0];
+      };
+      const applyImageSources = (tokens) => {
+        const propImg = document.getElementById('previewPropertyImage');
+        const agentImg = document.getElementById('previewAgentImage');
+        const logoImg = document.getElementById('previewLogoImage');
+        if (propImg && tokens['{{imageUrl}}']) {
+          applyChainedImageSrc(
+            propImg,
+            buildImageCandidates(tokens['{{imageUrl}}'], '../../family.jpeg'),
+            'https://placehold.co/1600x1000/e9edf2/5f6670?text=Listing+Photo',
+            'property'
+          );
+        }
+        if (agentImg && tokens['{{agentImageUrl}}']) {
+          applyChainedImageSrc(
+            agentImg,
+            buildImageCandidates(tokens['{{agentImageUrl}}'], '../../realtor.jpg'),
+            'https://placehold.co/900x1200/e9edf2/5f6670?text=Agent+Headshot',
+            'agent'
+          );
+        }
+        if (logoImg && tokens['{{logoUrl}}']) logoImg.src = String(tokens['{{logoUrl}}']);
+      };
+
+      const normalize = (value) =>
+        String(value || '')
+          .trim()
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, '');
+
+      const toNumber = (value) => {
+        const n = Number(value);
+        return Number.isFinite(n) ? n : 0;
+      };
+
+      const toMoney = (value) => {
+        const amount = toNumber(value);
+        if (!amount) return 'Call for price';
+        return `$${Math.round(amount).toLocaleString()}`;
+      };
+
+      const toDirectImageUrl = (value) => {
+        const raw = String(value || '').trim();
+        if (!raw) return '';
+        if (/^https?:\/\//i.test(raw)) return raw;
+        // Support local project-relative assets from payload (e.g. "img/foo.jpg", "agents.jpg").
+        if (/^(img\/|assets\/|photos\/)/i.test(raw)) return `../../${raw.replace(/^\/+/, '')}`;
+        if (/^[^/]+\.(jpg|jpeg|png|webp|avif|gif)$/i.test(raw)) return `../../${raw}`;
+        const driveId = extractDriveId(raw);
+        if (driveId) return `https://lh3.googleusercontent.com/d/${driveId}=w2000`;
+        return '';
+      };
+
+      const firstImage = (record, fallbackUrl) => {
+        const candidates = [record?.image, ...(Array.isArray(record?.images) ? record.images : [])]
+          .map((x) => toDirectImageUrl(x))
+          .filter((x) => {
+            const u = String(x || '').trim();
+            return /^https?:\/\//i.test(u) || /^\.\.\/\.\.\//.test(u);
+          });
+        return candidates[0] || fallbackUrl;
+      };
+
+      try {
+        if (!renderApi) {
+          applyTokens(defaults);
+          applyImageSources(defaults);
+          return;
+        }
+
+        const join = renderApi.includes('?') ? '&' : '?';
+        const payloadUrl = `${renderApi}${join}debug=0`;
+        const response = await fetch(payloadUrl, { method: 'GET', mode: 'cors' });
+        if (!response.ok) throw new Error(`Data fetch failed (${response.status})`);
+        const payload = await response.json();
+        const root = Array.isArray(payload) ? payload[0] : payload;
+        const agents = Array.isArray(root?.agents) ? root.agents : [];
+        const properties = Array.isArray(root?.properties) ? root.properties : [];
+        if (!agents.length) throw new Error('No agents returned');
+
+        const pickedAgent = agents.find((agent) => {
+          if (!agentIdParam) return false;
+          const keys = [normalize(agent?.id), normalize(agent?.name), normalize(agent?.email)];
+          return keys.includes(agentIdParam);
+        }) || agents[0];
+
+        const pickedAgentKey = normalize(pickedAgent?.id);
+        const agentProperties = properties.filter((property) => {
+          const keys = [normalize(property?.agentId), normalize(property?.listingAgentId), normalize(property?.buyerAgentId)];
+          return pickedAgentKey && keys.includes(pickedAgentKey);
+        });
+        const featuredProperty =
+          agentProperties.find((property) => normalize(property?.status) !== 'sold')
+          || agentProperties[0]
+          || properties.find((property) => normalize(property?.status) !== 'sold')
+          || properties[0]
+          || {};
+
+        const totalValue = agentProperties.reduce((sum, property) => sum + toNumber(property?.price), 0);
+        const subtitleRaw = Array.isArray(pickedAgent?.specialties)
+          ? pickedAgent.specialties.join(', ')
+          : String(pickedAgent?.specialties || '').trim();
+        const languageRaw = Array.isArray(pickedAgent?.languages)
+          ? pickedAgent.languages.join(', ')
+          : String(pickedAgent?.languages || '').trim();
+
+        const live = {
+          ...defaults,
+          '{{title}}': String(featuredProperty?.title || featuredProperty?.address || defaults['{{title}}']).trim(),
+          '{{agentName}}': String(pickedAgent?.name || defaults['{{agentName}}']).trim(),
+          '{{subtitle}}': subtitleRaw || defaults['{{subtitle}}'],
+          '{{bioText}}': String(pickedAgent?.bio || pickedAgent?.description || defaults['{{bioText}}']).trim(),
+          '{{propertyAddress}}': String(featuredProperty?.address || defaults['{{propertyAddress}}']).trim(),
+          '{{city}}': [String(featuredProperty?.city || '').trim(), String(featuredProperty?.zip || '').trim()].filter(Boolean).join(' ') || defaults['{{city}}'],
+          '{{price}}': toMoney(featuredProperty?.price),
+          '{{beds}}': String(featuredProperty?.bedrooms ?? defaults['{{beds}}']).trim(),
+          '{{baths}}': String(featuredProperty?.bathrooms ?? defaults['{{baths}}']).trim(),
+          '{{sqft}}': featuredProperty?.squareFeet ? Number(featuredProperty.squareFeet).toLocaleString() : defaults['{{sqft}}'],
+          '{{propertyType}}': String(featuredProperty?.type || defaults['{{propertyType}}']).trim(),
+          '{{statusLabel}}': String(featuredProperty?.status || defaults['{{statusLabel}}']).trim(),
+          '{{ctaUrl}}': String(featuredProperty?.url || featuredProperty?.listingUrl || featuredProperty?.permalink || '#').trim() || '#',
+          '{{imageUrl}}': firstImage(featuredProperty, defaults['{{imageUrl}}']),
+          '{{agentImageUrl}}': firstImage(pickedAgent, defaults['{{agentImageUrl}}']),
+          '{{phone}}': String(pickedAgent?.phone || defaults['{{phone}}']).trim(),
+          '{{email}}': String(pickedAgent?.email || defaults['{{email}}']).trim(),
+          '{{totalValue}}': totalValue > 0 ? `$${Math.round(totalValue).toLocaleString()}` : defaults['{{totalValue}}'],
+          '{{languages}}': languageRaw || defaults['{{languages}}']
+        };
+
+        applyTokens(live);
+        applyImageSources(live);
+      } catch (err) {
+        console.error('agent-preview live hydration failed, using defaults', err);
+        applyTokens(defaults);
+        applyImageSources(defaults);
+      }
     });
   </script>
 </head>
-<body style="margin:0;padding:24px;background:#f4f6f8;">
-<table width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;margin:0 auto;border:1px solid #d6dcd2;border-radius:12px;overflow:hidden;box-shadow:0 8px 20px rgba(16,24,16,0.12);font-family:Georgia,'Times New Roman',serif;background:#ffffff;background-image:linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url('{{textureUrl}}');background-size:cover;background-position:center;">
+<body style="margin:0;padding:20px;background:#eef1f4;">
+<table width="100%" cellpadding="0" cellspacing="0" style="max-width:1120px;margin:0 auto;border:1px solid #c9d0c7;border-radius:14px;overflow:hidden;box-shadow:0 12px 28px rgba(12,12,15,0.18);font-family:Georgia,'Times New Roman',serif;background:#ffffff;">
   <tr>
-    <td style="background:linear-gradient(120deg, #f2dd96, {{brandPrimary}});padding:18px 20px 16px;color:#111111;">
-      <div style="font-size:28px;line-height:1.15;font-weight:700;letter-spacing:.01em;margin-top:6px;font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;color:#000000;">{{agentName}}</div>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="{{imageUrl}}" alt="{{agentName}}" onerror="this.onerror=null;this.src='https://placehold.co/1200x800/e9edf2/5f6670?text=Agent+Photo';" style="width:100%;height:370px;display:block;object-fit:cover;background:#0f1318;">
-    </td>
-  </tr>
-  <tr>
-    <td style="padding:4px 12px 0;background:#ffffff;background-image:linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url('{{textureUrl}}');background-size:cover;background-position:center;">
-      <div style="margin:0 0 4px;">
-        <span style="display:inline-block;background:{{brandPrimary}};color:{{brandDark}};font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:8px 12px;border-radius:999px;">Agent Brand</span>
-      </div>
-      <div style="font-size:23px;color:#000000;line-height:1.25;margin:0 0 6px;font-weight:800;letter-spacing:.01em;font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;">{{subtitle}}</div>
-      <div style="font-size:18px;line-height:1.5;color:{{brandDark}};font-weight:600;margin:0 0 8px;letter-spacing:.005em;font-family:'Palatino Linotype','Book Antiqua',Palatino,serif;">{{title}}</div>
-      <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:0;">
+    <td style="padding:0;background:linear-gradient(180deg,#111419,#0c0c0f);">
+      <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
-          <td align="left" valign="middle" style="padding-top:6px;">
-            <a href="{{ctaUrl}}" style="display:inline-block;padding:7px 11px;background:{{brandPrimary}};border:1px solid {{brandPrimary}};color:{{brandDark}};text-decoration:none;border-radius:8px;font-weight:800;font-size:13px;letter-spacing:.03em;">View Brand Kit</a>
-          </td>
-          <td align="right" valign="middle" style="font-size:20px;color:#4f5660;letter-spacing:.02em;font-weight:800;text-transform:none;line-height:1;">
-            <table cellpadding="0" cellspacing="0" border="0" align="right" style="border-collapse:collapse;">
+          <td width="74%" valign="top" style="padding:0;">
+            <img id="previewPropertyImage" src="../../family.jpeg" alt="{{title}}" onerror="this.onerror=null;this.src='https://placehold.co/1600x1000/e9edf2/5f6670?text=Listing+Photo';" style="width:100%;height:500px;display:block;object-fit:cover;background:#0f1318;">
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;">
               <tr>
-                <td style="padding-right:10px;white-space:nowrap;color:{{brandDark}};">AGENT BRAND</td>
-                <td style="white-space:nowrap;">
-                  <img src="{{logoUrl}}" alt="44 Realty" style="height:72px;display:block;">
+                <td style="padding:10px 16px 9px;">
+                  <span style="display:inline-block;background:{{brandPrimary}};color:{{brandDark}};font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:7px 11px;border-radius:999px;">{{statusLabel}}</span>
+                  <div style="padding-top:7px;font-size:29px;line-height:1.12;font-weight:800;color:#111419;">{{title}}</div>
+                  <div style="padding-top:4px;font-size:20px;line-height:1.25;color:#39424d;font-weight:700;">{{propertyAddress}} | {{city}}</div>
+                  <div style="padding-top:5px;font-size:33px;line-height:1.08;color:#0c0c0f;font-weight:900;">{{price}}</div>
+                  <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:6px;">
+                    <tr>
+                      <td valign="middle" style="font-size:15px;line-height:1.35;color:#2a3038;">
+                        <strong>{{beds}}</strong> Beds &nbsp;|&nbsp; <strong>{{baths}}</strong> Baths &nbsp;|&nbsp; <strong>{{sqft}}</strong> Sq Ft &nbsp;|&nbsp; <strong>{{propertyType}}</strong>
+                      </td>
+                      <td align="right" valign="middle" style="padding-left:10px;white-space:nowrap;">
+                        <img id="previewLogoImage" src="../../44realty.png" alt="44 Realty" style="height:58px;display:block;">
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td width="26%" valign="top" style="padding:10px 10px 10px 8px;">
+            <table width="100%" cellpadding="0" cellspacing="0" style="height:100%;min-height:700px;border:1px solid rgba(255,255,255,0.25);border-radius:12px;overflow:hidden;background:rgba(255,255,255,0.06);">
+              <tr>
+                <td align="center" style="padding:12px 12px 0;">
+                  <img id="previewAgentImage" src="../../realtor.jpg" alt="{{agentName}}" onerror="this.onerror=null;this.src='https://placehold.co/900x1200/e9edf2/5f6670?text=Agent+Headshot';" style="width:220px;height:320px;display:block;object-fit:contain;object-position:center bottom;background:transparent;filter:drop-shadow(0 12px 20px rgba(0,0,0,0.42));">
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:12px 14px 14px;">
+                  <div style="font-size:24px;line-height:1.1;font-weight:800;color:#ffffff;">{{agentName}}</div>
+                  <div style="padding-top:5px;font-size:14px;line-height:1.3;color:#f0e7cf;font-weight:700;">{{subtitle}}</div>
+                  <div style="padding-top:7px;font-size:13px;line-height:1.4;color:#e5e7ea;">{{bioText}}</div>
+                  <div style="padding-top:8px;font-size:13px;line-height:1.35;color:#ffffff;"><strong>Phone:</strong> {{phone}}</div>
+                  <div style="padding-top:2px;font-size:13px;line-height:1.35;color:#ffffff;"><strong>Email:</strong> {{email}}</div>
+                  <div style="padding-top:12px;">
+                    <a href="{{ctaUrl}}" style="display:inline-block;padding:9px 13px;background:{{brandPrimary}};border:1px solid {{brandPrimary}};color:{{brandDark}};text-decoration:none;border-radius:9px;font-weight:800;font-size:12px;letter-spacing:.04em;text-transform:uppercase;">{{ctaLabel}}</a>
+                  </div>
                 </td>
               </tr>
             </table>

@@ -106,8 +106,8 @@ function renderProperties(propertyArray) {
         <div class="card property-card border-0 shadow-sm h-100">
           <div class="position-relative">
             <img 
-              src="${prop.image || 'placeholder.jpg'}" 
-              onerror="this.onerror=null;this.src='placeholder.jpg';"
+              src="${prop.image || 'commercial.jpg'}" 
+              onerror="this.onerror=null;this.src='commercial.jpg';"
               class="card-img-top object-fit-cover property-click" 
               data-index="${index}"
               style="height: 220px; cursor: pointer; border-top-left-radius: .5rem; border-top-right-radius: .5rem;"
@@ -215,7 +215,7 @@ document.addEventListener('click', (e) => {
           ${(prop.images || [prop.image]).map(
             (img, i) => `
               <div class="carousel-item ${i === 0 ? 'active' : ''}">
-                <img src="${img}" onerror="this.onerror=null;this.src='placeholder.jpg';" class="d-block w-100" alt="Photo ${i + 1}">
+                <img src="${img}" onerror="this.onerror=null;this.src='commercial.jpg';" class="d-block w-100" alt="Photo ${i + 1}">
               </div>
             `
           ).join('')}
@@ -351,7 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const DATA_URL = window.DATA_URL || 'https://script.google.com/macros/s/AKfycbz1y92nUxaYyW_Zngv-9iMu0eGbyTwXOmIPOQFH_ZhQx0k6RW4H1Vfx9xACMsJuxrMJ/exec';
-const DATA_CACHE_KEY = 'kw-data-v1';
+const DATA_CACHE_KEY = 'kw-data-v3';
 const CACHE_TTL = 5 * 60 * 1000;
 const QUERY_FILTERS = parseQueryFilters();
 let filtersPrefilled = false;
@@ -452,20 +452,8 @@ function applyQueryFilters(properties, filters) {
 }
 
 function fetchRemoteData() {
-  const requestUrl = new URL(DATA_URL);
-  requestUrl.searchParams.set('ts', Date.now());
-  requestUrl.searchParams.set('origin', window.location.origin);
-  return fetch(requestUrl.toString())
-    .then(res => {
-      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-      return res.json();
-    })
-    .then(raw => {
-      const data = Array.isArray(raw) ? raw[0] : raw;
-      const formatted = {
-        properties: data?.properties || [],
-        agents: data?.agents || []
-      };
+  return window.KWData.load({ remoteUrl: DATA_URL })
+    .then(formatted => {
       setCachedPayload(formatted);
       return formatted;
     });

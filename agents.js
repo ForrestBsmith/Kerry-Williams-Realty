@@ -10,17 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const DATA_URL = window.DATA_URL || "https://script.google.com/macros/s/AKfycbz1y92nUxaYyW_Zngv-9iMu0eGbyTwXOmIPOQFH_ZhQx0k6RW4H1Vfx9xACMsJuxrMJ/exec";
 
-  const requestUrl = new URL(DATA_URL);
-  requestUrl.searchParams.set('ts', Date.now());
-  requestUrl.searchParams.set('origin', window.location.origin);
-
-  fetch(requestUrl.toString(), { cache: "no-store" })
-    .then((res) => {
-      if (!res.ok) throw new Error(`Failed to load JSON: ${res.status}`);
-      return res.json();
-    })
-    .then((raw) => {
-      const data = Array.isArray(raw) ? raw[0] : raw;
+  window.KWData.load({ remoteUrl: DATA_URL })
+    .then((data) => {
       const container = document.querySelector("#realtor-list");
       const agents = data?.agents || [];
       container.innerHTML = "";

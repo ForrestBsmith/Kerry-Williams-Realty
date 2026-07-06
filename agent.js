@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let soldProperties = [];
   let soldChart;
   let activeChart;
+  let agentMap;
   let agentLoaded = false;
 
   const session = window.UserSession;
@@ -131,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="col-md-6 col-lg-4">
           <div class="card property-card border-0 shadow-sm h-100">
             <div class="position-relative">
-              <img src="${prop.image || "placeholder.jpg"}" onerror="this.onerror=null;this.src='placeholder.jpg';" class="card-img-top object-fit-cover property-click" data-index="${index}" alt="${prop.address || "Property"}" style="height: 220px; cursor: pointer;">
+              <img src="${prop.image || "commercial.jpg"}" onerror="this.onerror=null;this.src='commercial.jpg';" class="card-img-top object-fit-cover property-click" data-index="${index}" alt="${prop.address || "Property"}" style="height: 220px; cursor: pointer;">
               <button class="btn btn-light border position-absolute top-0 end-0 m-2 rounded-circle p-2 btn-save-home" data-id="${prop.id}">
                 <i class="bi ${saveIcon} fs-5"></i>
               </button>
@@ -163,27 +164,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const renderMap = (properties) => {
     const mapEl = document.getElementById("agent-map");
+    if (agentMap) {
+      agentMap.remove();
+      agentMap = null;
+    }
     if (!mapEl || !properties.length || !window.L) {
       if (mapCountPill) mapCountPill.textContent = "0 listings mapped";
       return;
     }
 
-    const map = L.map(mapEl).setView([31.5, -97.3], 10);
+    mapEl.innerHTML = "";
+    agentMap = L.map(mapEl).setView([31.5, -97.3], 10);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: "&copy; OpenStreetMap contributors",
-    }).addTo(map);
+    }).addTo(agentMap);
 
     const positions = [];
     properties.forEach((prop) => {
       if (prop.lat && prop.lng) {
-        const marker = L.marker([prop.lat, prop.lng]).addTo(map);
+        const marker = L.marker([prop.lat, prop.lng]).addTo(agentMap);
         marker.bindPopup(`<strong>${prop.address || "Listing"}</strong><br>$${Number(prop.price || 0).toLocaleString()}`);
         positions.push(marker.getLatLng());
       }
     });
 
     if (positions.length) {
-      map.fitBounds(positions, { padding: [40, 40] });
+      agentMap.fitBounds(positions, { padding: [40, 40] });
     }
 
     if (mapCountPill) {
@@ -293,11 +299,11 @@ document.addEventListener("DOMContentLoaded", () => {
         photosBody.innerHTML = `
           <div id="carousel-${idx}" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-              ${(property.images || [property.image || "placeholder.jpg"])
+              ${(property.images || [property.image || "commercial.jpg"])
                 .map(
                   (img, i) => `
                     <div class="carousel-item ${i === 0 ? "active" : ""}">
-                      <img src="${img}" onerror="this.onerror=null;this.src='placeholder.jpg';" class="d-block w-100" alt="Photo ${i + 1}">
+                      <img src="${img}" onerror="this.onerror=null;this.src='commercial.jpg';" class="d-block w-100" alt="Photo ${i + 1}">
                     </div>
                   `
                 )
@@ -424,19 +430,18 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const DATA_URL = window.DATA_URL || "https://script.google.com/macros/s/AKfycbz1y92nUxaYyW_Zngv-9iMu0eGbyTwXOmIPOQFH_ZhQx0k6RW4H1Vfx9xACMsJuxrMJ/exec";
-  const DATA_CACHE_KEY = 'kw-data-v1';
+  const DATA_CACHE_KEY = 'kw-data-v3';
   const CACHE_TTL = 5 * 60 * 1000;
 
   const cachedPayload = getCachedPayload();
-  if (cachedPayload) {
-    renderAgentPayload(cachedPayload);
-  }
 
   fetchRemoteData()
     .then(renderAgentPayload)
     .catch((err) => {
       console.error(err);
-      if (!agentLoaded) {
+      if (cachedPayload) {
+        renderAgentPayload(cachedPayload);
+      } else if (!agentLoaded) {
         heroSection.innerHTML = `<div class="alert alert-danger">Failed to load agent profile.</div>`;
       }
     });
@@ -503,17 +508,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function fetchRemoteData() {
-    const requestUrl = new URL(DATA_URL);
-    requestUrl.searchParams.set('ts', Date.now());
-    requestUrl.searchParams.set('origin', window.location.origin);
-    return fetch(requestUrl.toString())
-      .then((res) => res.json())
-      .then((raw) => {
-        const data = Array.isArray(raw) ? raw[0] : raw;
-        const formatted = {
-          properties: data?.properties || [],
-          agents: data?.agents || []
-        };
+    return window.KWData.load({ remoteUrl: DATA_URL })
+      .then((formatted) => {
         setCachedPayload(formatted);
         return formatted;
       });

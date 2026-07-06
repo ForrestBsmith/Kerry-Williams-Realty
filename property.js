@@ -4,20 +4,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const session = window.UserSession;
 
   const DATA_URL = window.DATA_URL || 'https://script.google.com/macros/s/AKfycbz1y92nUxaYyW_Zngv-9iMu0eGbyTwXOmIPOQFH_ZhQx0k6RW4H1Vfx9xACMsJuxrMJ/exec';
-  const DATA_CACHE_KEY = 'kw-data-v1';
+  const DATA_CACHE_KEY = 'kw-data-v3';
   const CACHE_TTL = 5 * 60 * 1000;
   let propertyRendered = false;
+  let propertyMap = null;
 
   const cachedPayload = getCachedPayload();
-  if (cachedPayload) {
-    renderProperty(cachedPayload);
-  }
 
   fetchRemoteData()
     .then(renderProperty)
     .catch(err => {
       console.error('Error loading property:', err);
-      if (!propertyRendered) {
+      if (cachedPayload) {
+        renderProperty(cachedPayload);
+      } else if (!propertyRendered) {
         const title = document.getElementById('property-title');
         if (title) title.textContent = 'Error Loading Property';
         const details = document.getElementById('property-details');
@@ -85,17 +85,24 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }
 
-    if (prop.lat && prop.lng) {
-      const map = L.map('property-map').setView([prop.lat, prop.lng], 15);
+    const mapEl = document.getElementById('property-map');
+    if (propertyMap) {
+      propertyMap.remove();
+      propertyMap = null;
+    }
+    if (mapEl) mapEl.innerHTML = '';
+
+    if (prop.lat && prop.lng && mapEl && window.L) {
+      propertyMap = L.map(mapEl).setView([prop.lat, prop.lng], 15);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
-      }).addTo(map);
+      }).addTo(propertyMap);
       L.marker([prop.lat, prop.lng])
-        .addTo(map)
+        .addTo(propertyMap)
         .bindPopup(`${prop.address}<br>${prop.city}, TX ${prop.zip}`)
         .openPopup();
-    } else {
-      document.getElementById('property-map').innerHTML = '<p class="text-muted">Location information not available for this property.</p>';
+    } else if (mapEl) {
+      mapEl.innerHTML = '<p class="text-muted">Location information not available for this property.</p>';
     }
 
     const extra = document.getElementById('property-extra');
@@ -124,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ${prop.images.map(img => `
               <div class="col-4">
                 <a href="${img}" data-fancybox="gallery" data-caption="Property photo">
-                  <img src="${img}" onerror="this.onerror=null;this.src='placeholder.jpg';" class="img-fluid rounded" alt="Property photo">
+                  <img src="${img}" onerror="this.onerror=null;this.src='commercial.jpg';" class="img-fluid rounded" alt="Property photo">
                 </a>
               </div>
             `).join('')}
@@ -195,20 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function fetchRemoteData() {
-    const requestUrl = new URL(DATA_URL);
-    requestUrl.searchParams.set('ts', Date.now());
-    requestUrl.searchParams.set('origin', window.location.origin);
-    return fetch(requestUrl.toString())
-      .then(res => {
-        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-        return res.json();
-      })
-      .then(raw => {
-        const data = Array.isArray(raw) ? raw[0] : raw;
-        const formatted = {
-          properties: data?.properties || [],
-          agents: data?.agents || []
-        };
+    return window.KWData.load({ remoteUrl: DATA_URL })
+      .then(formatted => {
         setCachedPayload(formatted);
         return formatted;
       });

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const DATA_URL = window.DATA_URL || 'https://script.google.com/macros/s/AKfycbz1y92nUxaYyW_Zngv-9iMu0eGbyTwXOmIPOQFH_ZhQx0k6RW4H1Vfx9xACMsJuxrMJ/exec';
-  const DATA_CACHE_KEY = 'kw-data-v1';
+  const DATA_CACHE_KEY = 'kw-data-v3';
   const CACHE_TTL = 5 * 60 * 1000;
 
   const els = {
@@ -58,17 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function loadData() {
-    const requestUrl = new URL(DATA_URL);
-    requestUrl.searchParams.set('ts', Date.now());
-    requestUrl.searchParams.set('origin', window.location.origin);
-    const res = await fetch(requestUrl.toString());
-    if (!res.ok) throw new Error('Failed to fetch data');
-    const raw = await res.json();
-    const data = Array.isArray(raw) ? raw[0] : raw;
-    const formatted = {
-      properties: data.properties || [],
-      agents: data.agents || []
-    };
+    const formatted = await window.KWData.load({ remoteUrl: DATA_URL });
     setCachedPayload(formatted);
     return formatted;
   }
@@ -181,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     return `<div class="col-12 col-md-6 col-lg-4 animate-fade">
       <article class="property-card h-100 shadow-sm rounded-4 overflow-hidden">
-        <div class="property-image" style="${backgroundImageStyle(normalizeImageUrl(image), 'placeholder.jpg')}">
+        <div class="property-image" style="${backgroundImageStyle(normalizeImageUrl(image), 'commercial.jpg')}">
           <div class="property-badges">
             <span class="badge text-bg-dark">${status || 'For Sale'}</span>
             <span class="badge text-bg-light">${type || 'Property'}</span>
@@ -214,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const agent = payload.agents.find(a => a.id === property.agentId);
 
     els.heroFeature.innerHTML = `
-      <div class="feature-hero-img rounded-4 mb-3" style="${backgroundImageStyle(normalizeImageUrl(property.image), 'placeholder.jpg')}"></div>
+      <div class="feature-hero-img rounded-4 mb-3" style="${backgroundImageStyle(normalizeImageUrl(property.image), 'commercial.jpg')}"></div>
       <h4 class="mb-1">${formatCurrency(property.price)}</h4>
       <p class="mb-2 text-muted small">${property.address || ''}, ${property.city || ''} ${property.zip || ''}</p>
       <div class="d-flex gap-2 flex-wrap mb-3">
